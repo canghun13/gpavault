@@ -30,7 +30,10 @@ body {
   color: var(--slate);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
 }
+footer { margin-top: auto; }
 
 /* ── NAV ── */
 nav {
