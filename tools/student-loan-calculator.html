@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Loan Calculator – Monthly Payment & Total Cost | GPA Vault</title>
+  <meta name="description" content="Calculate your student loan monthly payment, total interest, and payoff timeline. Free student loan calculator for federal and private loans.">
+  <link rel="canonical" href="https://gpavault.com/tools/student-loan-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Tuition & Loans</div>
+    <h1>Student Loan Calculator</h1>
+    <p>See your estimated monthly payment, total interest paid, and full repayment cost for any student loan amount.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+  <div class="calc-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="form-group"><label>Loan Amount ($)</label><input type="number" id="principal" value="30000"></div>
+      <div class="form-group"><label>Annual Interest Rate (%)</label><input type="number" id="rate" value="6.39" step="0.01"></div>
+      <div class="form-group"><label>Repayment Term</label>
+        <select id="term">
+          <option value="10" selected>10 years (Standard)</option>
+          <option value="15">15 years</option>
+          <option value="20">20 years (Extended)</option>
+          <option value="25">25 years</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Grace Period (months)</label><input type="number" id="grace" value="6" min="0" max="12"></div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Calculate Loan Payment</button>
+    <div class="result-box" id="result">
+      <div class="result-num" id="result-payment">—</div>
+      <div class="result-label">Monthly Payment</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>2025–2026 federal loan rates</h2>
+    <p>Undergraduate Direct Subsidized/Unsubsidized: 6.39%. Graduate Unsubsidized: 7.94%. PLUS Loans: 8.94%. These are fixed rates for loans disbursed July 2025–June 2026.</p>
+    <h2>Standard vs extended repayment</h2>
+    <p>The standard 10-year plan minimizes total interest paid. Extended plans (20–25 years) lower your monthly payment but significantly increase total interest. Use this calculator to compare.</p>
+    <h2>Related tools</h2>
+    <p><a href="loan-repayment-calculator.html" style="color:var(--indigo);">→ Loan Repayment Calculator</a> &nbsp;·&nbsp; <a href="student-loan-vs-salary.html" style="color:var(--indigo);">→ Loan vs Salary Calculator</a> &nbsp;·&nbsp; <a href="../blog/how-much-student-loan-debt-is-too-much.html" style="color:var(--indigo);">→ How Much Debt Is Too Much?</a></p>
+  </div>
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+function fmt(n){return'$'+n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
+function calculate(){
+  var P=parseFloat(document.getElementById('principal').value);
+  var r=parseFloat(document.getElementById('rate').value)/100/12;
+  var n=parseInt(document.getElementById('term').value)*12;
+  var grace=parseInt(document.getElementById('grace').value);
+  var graceInterest=P*r*grace;
+  var total=P+graceInterest;
+  var payment=r===0?total/n:total*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+  var totalPaid=payment*n;
+  var totalInterest=totalPaid-P;
+  document.getElementById('result-payment').textContent=fmt(payment);
+  document.getElementById('result-detail').innerHTML=
+    'Total paid: <strong>'+fmt(totalPaid)+'</strong> &nbsp;|&nbsp; Total interest: <strong>'+fmt(totalInterest)+'</strong><br>'
+    +'Grace period interest capitalized: '+fmt(graceInterest)+' &nbsp;|&nbsp; Repayment term: '+document.getElementById('term').options[document.getElementById('term').selectedIndex].text;
+  var res=document.getElementById('result');res.classList.add('show');res.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>

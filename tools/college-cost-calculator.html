@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Cost Calculator – Total 4-Year Cost Estimator | GPA Vault</title>
+  <meta name="description" content="Estimate your total 4-year college cost including tuition, room and board, books, and fees. Free college cost calculator.">
+  <link rel="canonical" href="https://gpavault.com/tools/college-cost-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Tuition & Loans</div>
+    <h1>College Cost Calculator</h1>
+    <p>Estimate your total cost of attendance for 1 to 4 years, including tuition, housing, food, books, and personal expenses.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+  <div class="calc-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="form-group"><label>Annual Tuition & Fees ($)</label><input type="number" id="tuition" value="12000"></div>
+      <div class="form-group"><label>Room & Board ($/year)</label><input type="number" id="room" value="11000"></div>
+      <div class="form-group"><label>Books & Supplies ($/year)</label><input type="number" id="books" value="1200"></div>
+      <div class="form-group"><label>Personal Expenses ($/year)</label><input type="number" id="personal" value="2000"></div>
+      <div class="form-group"><label>Transportation ($/year)</label><input type="number" id="transport" value="1000"></div>
+      <div class="form-group"><label>Annual Cost Increase (%)</label><input type="number" id="inflation" value="3" min="0" max="15"></div>
+      <div class="form-group"><label>Financial Aid ($/year)</label><input type="number" id="aid" value="5000"></div>
+      <div class="form-group"><label>Years in College</label><select id="years"><option value="2">2 years</option><option value="4" selected>4 years</option><option value="6">6 years</option></select></div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Calculate Total Cost</button>
+    <div class="result-box" id="result">
+      <div class="result-num" id="result-total">—</div>
+      <div class="result-label">Estimated Total Cost</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>What's included in cost of attendance?</h2>
+    <p>Cost of attendance (COA) includes tuition, fees, room and board, books, transportation, and personal expenses. This is the number colleges use to calculate financial aid eligibility.</p>
+    <h2>Average costs in 2026</h2>
+    <p>Public in-state: ~$27,000/year. Public out-of-state: ~$44,000/year. Private nonprofit: ~$57,000/year. These are sticker prices before aid.</p>
+    <h2>Related tools</h2>
+    <p><a href="student-loan-calculator.html" style="color:var(--indigo);">→ Student Loan Calculator</a> &nbsp;·&nbsp; <a href="scholarship-savings-calculator.html" style="color:var(--indigo);">→ Scholarship Savings Calculator</a></p>
+  </div>
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+function fmt(n){return'$'+Math.round(n).toLocaleString();}
+function calculate(){
+  var t=parseFloat(document.getElementById('tuition').value)||0;
+  var r=parseFloat(document.getElementById('room').value)||0;
+  var b=parseFloat(document.getElementById('books').value)||0;
+  var p=parseFloat(document.getElementById('personal').value)||0;
+  var tr=parseFloat(document.getElementById('transport').value)||0;
+  var inf=1+parseFloat(document.getElementById('inflation').value)/100;
+  var aid=parseFloat(document.getElementById('aid').value)||0;
+  var yrs=parseInt(document.getElementById('years').value);
+  var base=t+r+b+p+tr;
+  var total=0,netTotal=0;
+  var rows='<table style="width:100%;font-size:0.8rem;margin-top:1rem;border-collapse:collapse;">'
+    +'<tr style="color:var(--slate-light);font-size:0.72rem;"><td>Year</td><td style="text-align:right">Gross Cost</td><td style="text-align:right">After Aid</td></tr>';
+  for(var i=0;i<yrs;i++){
+    var yr=base*Math.pow(inf,i);
+    var net=Math.max(0,yr-aid);
+    total+=yr;netTotal+=net;
+    rows+='<tr style="border-top:1px solid var(--border)"><td>Year '+(i+1)+'</td><td style="text-align:right">'+fmt(yr)+'</td><td style="text-align:right">'+fmt(net)+'</td></tr>';
+  }
+  rows+='</table>';
+  document.getElementById('result-total').textContent=fmt(netTotal);
+  document.getElementById('result-detail').innerHTML='Net cost after '+fmt(aid)+'/yr aid over '+yrs+' years. Gross total: '+fmt(total)+'.'+rows;
+  var res=document.getElementById('result');res.classList.add('show');res.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>

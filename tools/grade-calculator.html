@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade Calculator – What Grade Do I Need? | GPA Vault</title>
+  <meta name="description" content="Find out what grade you need on upcoming assignments or tests to reach your target course grade. Free grade calculator, no signup.">
+  <link rel="canonical" href="https://gpavault.com/tools/grade-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Academics</div>
+    <h1>Grade Calculator</h1>
+    <p>Enter your current grades and weights to find your current average — and what you need on remaining work to hit your target.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+  <div class="calc-card">
+    <div id="grades-container"></div>
+    <button onclick="addGrade()" style="background:none;border:1px dashed var(--border);border-radius:8px;width:100%;padding:0.625rem;color:var(--slate-mid);font-size:0.83rem;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:1.25rem;">+ Add grade</button>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+      <div class="form-group" style="margin:0"><label>Target Grade (%)</label><input type="number" id="target" value="90" min="0" max="100"></div>
+      <div class="form-group" style="margin:0"><label>Remaining Work Weight (%)</label><input type="number" id="remaining" value="30" min="0" max="100"></div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Calculate</button>
+    <div class="result-box" id="result">
+      <div class="result-num" id="result-current">—</div>
+      <div class="result-label">Current Grade</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>How to use this calculator</h2>
+    <p>Enter each graded item with its score and weight (percentage of total grade). Then enter your target grade and how much weight remains in the course. The calculator tells you your current standing and what score you need going forward.</p>
+    <h2>Related tools</h2>
+    <p><a href="final-exam-calculator.html" style="color:var(--indigo);">→ Final Exam Grade Calculator</a> &nbsp;·&nbsp; <a href="gpa-calculator.html" style="color:var(--indigo);">→ GPA Calculator</a></p>
+  </div>
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+var n=0;
+function addGrade(name,score,weight){
+  n++;
+  var c=document.getElementById('grades-container');
+  var row=document.createElement('div');
+  row.id='gr-'+n;
+  row.style.cssText='display:grid;grid-template-columns:1fr 100px 100px auto;gap:0.75rem;align-items:end;margin-bottom:0.75rem;';
+  row.innerHTML='<div class="form-group" style="margin:0"><label>Assignment</label><input type="text" placeholder="e.g. Midterm" value="'+(name||'')+'"></div>'
+    +'<div class="form-group" style="margin:0"><label>Score (%)</label><input type="number" id="sc-'+n+'" value="'+(score||85)+'" min="0" max="100"></div>'
+    +'<div class="form-group" style="margin:0"><label>Weight (%)</label><input type="number" id="wt-'+n+'" value="'+(weight||20)+'" min="0" max="100"></div>'
+    +(n>1?'<button onclick="document.getElementById(\'gr-'+n+'\').remove()" style="background:none;border:none;cursor:pointer;color:var(--slate-light);font-size:1.25rem;margin-top:1.5rem;">×</button>':'<div></div>');
+  c.appendChild(row);
+}
+function calculate(){
+  var earned=0,totalW=0;
+  for(var i=1;i<=n;i++){
+    var s=document.getElementById('sc-'+i);
+    var w=document.getElementById('wt-'+i);
+    if(!s||!w)continue;
+    earned+=parseFloat(s.value)*parseFloat(w.value)/100;
+    totalW+=parseFloat(w.value);
+  }
+  if(!totalW)return;
+  var current=(earned/totalW)*100;
+  var target=parseFloat(document.getElementById('target').value);
+  var rem=parseFloat(document.getElementById('remaining').value);
+  var needed=(target-(current*(100-rem)/100))/(rem/100);
+  document.getElementById('result-current').textContent=current.toFixed(1)+'%';
+  var msg=needed>100?'You would need '+needed.toFixed(1)+'% on remaining work — consider talking to your professor about extra credit.'
+    :needed<0?'You\'ve already secured your target grade. Great work!'
+    :'You need <strong>'+needed.toFixed(1)+'%</strong> on remaining work ('+rem+'% of grade) to reach '+target+'%.';
+  document.getElementById('result-detail').innerHTML=msg;
+  var r=document.getElementById('result');r.classList.add('show');r.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+addGrade('Homework',88,20);addGrade('Midterm',82,30);
+</script>
+</body>
+</html>

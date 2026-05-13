@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree ROI Calculator – Is Your College Degree Worth the Debt? | GPA Vault</title>
+  <meta name="description" content="Calculate the return on investment of your college degree. Compare total cost vs lifetime earnings to see if your degree pays off. Free degree ROI calculator.">
+  <link rel="canonical" href="https://gpavault.com/tools/degree-roi-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Career & ROI</div>
+    <h1>Degree ROI Calculator</h1>
+    <p>Compare the total cost of your degree against expected lifetime earnings to calculate whether college is a worthwhile financial investment.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+  <div class="calc-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="form-group"><label>Total Degree Cost ($)</label><input type="number" id="cost" value="80000"></div>
+      <div class="form-group"><label>Starting Salary ($)</label><input type="number" id="salary" value="52000"></div>
+      <div class="form-group"><label>Without-Degree Salary ($)</label><input type="number" id="nodegree" value="36000"></div>
+      <div class="form-group"><label>Annual Salary Growth (%)</label><input type="number" id="growth" value="3" step="0.5"></div>
+      <div class="form-group"><label>Career Length (years)</label><input type="number" id="career" value="40"></div>
+      <div class="form-group"><label>Student Loan Total Cost ($)</label><input type="number" id="loanCost" value="105000" title="Total repaid including interest"></div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Calculate Degree ROI</button>
+    <div class="result-box" id="result">
+      <div class="result-num" id="result-roi">—</div>
+      <div class="result-label">Lifetime ROI on your degree</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>How this is calculated</h2>
+    <p>We compare lifetime earnings with a degree vs. without a degree, then subtract total loan costs. A positive ROI means the degree pays off financially over your career.</p>
+    <h2>Average earnings premium by degree</h2>
+    <p>On average, bachelor's degree holders earn $1.2M more over their lifetimes than high school graduates. But this varies enormously by major — engineering and computer science majors far outpace arts or humanities majors.</p>
+    <h2>Related tools</h2>
+    <p><a href="student-loan-vs-salary.html" style="color:var(--indigo);">→ Loan vs Salary Calculator</a> &nbsp;·&nbsp; <a href="../blog/is-college-degree-worth-the-debt.html" style="color:var(--indigo);">→ Is Your Degree Worth the Debt?</a></p>
+  </div>
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+function fmt(n){return'$'+Math.round(n).toLocaleString();}
+function calculate(){
+  var cost=parseFloat(document.getElementById('cost').value);
+  var salary=parseFloat(document.getElementById('salary').value);
+  var nodegree=parseFloat(document.getElementById('nodegree').value);
+  var growth=parseFloat(document.getElementById('growth').value)/100;
+  var career=parseInt(document.getElementById('career').value);
+  var loanCost=parseFloat(document.getElementById('loanCost').value);
+  var withDeg=0,withoutDeg=0;
+  for(var i=0;i<career;i++){
+    withDeg+=salary*Math.pow(1+growth,i);
+    withoutDeg+=nodegree*Math.pow(1+growth,i);
+  }
+  var premium=withDeg-withoutDeg;
+  var netROI=premium-loanCost;
+  var roiPct=((netROI/loanCost)*100).toFixed(0);
+  document.getElementById('result-roi').textContent=(netROI>=0?'+':'')+fmt(netROI);
+  document.getElementById('result-detail').innerHTML=
+    'Lifetime earnings with degree: <strong>'+fmt(withDeg)+'</strong><br>'
+    +'Lifetime earnings without degree: <strong>'+fmt(withoutDeg)+'</strong><br>'
+    +'Earnings premium: <strong>'+fmt(premium)+'</strong><br>'
+    +'Total loan cost: <strong>'+fmt(loanCost)+'</strong><br>'
+    +'Net ROI: <strong>'+(netROI>=0?'+':'')+fmt(netROI)+'</strong> ('+roiPct+'%)<br>'
+    +(netROI>0?'Your degree pays off financially over a '+career+'-year career.'
+      :'Based on these numbers, the financial case is tight. Consider your specific major\'s earning potential.');
+  var res=document.getElementById('result');res.classList.add('show');res.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>

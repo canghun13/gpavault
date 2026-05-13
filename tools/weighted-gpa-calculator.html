@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weighted GPA Calculator – AP, IB & Honors Classes | GPA Vault</title>
+  <meta name="description" content="Free weighted GPA calculator for AP, IB, and honors classes. See your weighted GPA on the 5.0 scale instantly. No signup required.">
+  <link rel="canonical" href="https://gpavault.com/tools/weighted-gpa-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Academics</div>
+    <h1>Weighted GPA Calculator</h1>
+    <p>Calculate your weighted GPA including AP, IB, and honors courses. See both weighted (5.0 scale) and unweighted (4.0 scale) GPA side by side.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+  <div class="calc-card">
+    <div id="courses-container"></div>
+    <button onclick="addCourse()" style="background:none;border:1px dashed var(--border);border-radius:8px;width:100%;padding:0.625rem;color:var(--slate-mid);font-size:0.83rem;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:1.25rem;">+ Add another course</button>
+    <button class="calc-btn" onclick="calculateGPA()">Calculate Weighted GPA</button>
+    <div class="result-box" id="result">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;text-align:center;">
+        <div><div class="result-num" id="result-weighted">—</div><div class="result-label">Weighted GPA (5.0 scale)</div></div>
+        <div><div class="result-num" id="result-unweighted" style="color:var(--slate-mid);">—</div><div class="result-label">Unweighted GPA (4.0 scale)</div></div>
+      </div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>How weighted GPA works</h2>
+    <p>A weighted GPA gives extra points for harder courses. AP and IB courses add +1.0, honors courses add +0.5. An A in an AP class = 5.0, an A in a regular class = 4.0.</p>
+    <h2>Which GPA do colleges look at?</h2>
+    <p>Most colleges look at both. Weighted GPA shows course rigor — how hard you challenged yourself. Unweighted GPA gives a standardized baseline across all schools.</p>
+    <h2>Related</h2>
+    <p><a href="gpa-calculator.html" style="color:var(--indigo);">→ GPA Calculator</a> &nbsp;·&nbsp; <a href="../blog/weighted-gpa-calculator-ap-classes.html" style="color:var(--indigo);">→ Weighted GPA Guide for AP Classes</a></p>
+  </div>
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+var gs={'A+':4.3,'A':4.0,'A-':3.7,'B+':3.3,'B':3.0,'B-':2.7,'C+':2.3,'C':2.0,'C-':1.7,'D+':1.3,'D':1.0,'F':0.0};
+var n=0;
+function addCourse(g,t){
+  n++;
+  var c=document.getElementById('courses-container');
+  var row=document.createElement('div');
+  row.id='cr-'+n;
+  row.style.cssText='display:grid;grid-template-columns:1fr 90px 120px auto;gap:0.75rem;align-items:end;margin-bottom:0.75rem;';
+  row.innerHTML='<div class="form-group" style="margin:0"><label>Course '+n+'</label><input type="text" placeholder="e.g. AP Chemistry"></div>'
+    +'<div class="form-group" style="margin:0"><label>Grade</label><select id="g-'+n+'">'+Object.keys(gs).map(function(x){return'<option'+(x===(g||'A')?' selected':'')+'>'+x+'</option>';}).join('')+'</select></div>'
+    +'<div class="form-group" style="margin:0"><label>Type</label><select id="t-'+n+'"><option value="regular"'+((!t||t==='regular')?' selected':'')+'>Regular</option><option value="honors"'+(t==='honors'?' selected':'')+'>Honors (+0.5)</option><option value="ap"'+(t==='ap'?' selected':'')+'>AP / IB (+1.0)</option></select></div>'
+    +(n>1?'<button onclick="document.getElementById(\'cr-'+n+'\').remove()" style="background:none;border:none;cursor:pointer;color:var(--slate-light);font-size:1.25rem;margin-top:1.5rem;">×</button>':'<div></div>');
+  c.appendChild(row);
+}
+function calculateGPA(){
+  var wp=0,up=0,tot=0;
+  for(var i=1;i<=n;i++){
+    var gEl=document.getElementById('g-'+i);
+    var tEl=document.getElementById('t-'+i);
+    if(!gEl||!tEl)continue;
+    var pts=gs[gEl.value];
+    var bonus=tEl.value==='ap'?1.0:tEl.value==='honors'?0.5:0;
+    wp+=(pts+bonus);up+=pts;tot++;
+  }
+  if(!tot)return;
+  document.getElementById('result-weighted').textContent=(wp/tot).toFixed(2);
+  document.getElementById('result-unweighted').textContent=(up/tot).toFixed(2);
+  document.getElementById('result-detail').innerHTML='Based on <strong>'+tot+' courses</strong>.';
+  var r=document.getElementById('result');r.classList.add('show');r.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+addCourse('A','ap');addCourse('A-','honors');addCourse('B+','regular');
+</script>
+</body>
+</html>

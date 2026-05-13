@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACT Score Calculator – Composite Score & Percentile | GPA Vault</title>
+  <meta name="description" content="Calculate your ACT composite score from section scores and see your percentile ranking. Free ACT score calculator.">
+  <link rel="canonical" href="https://gpavault.com/tools/act-score-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Test Scores</div>
+    <h1>ACT Score Calculator</h1>
+    <p>Enter your four section scores to calculate your composite ACT score (1–36) and see your national percentile.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+  <div class="calc-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="form-group"><label>English (1–36)</label><input type="number" id="english" value="22" min="1" max="36"></div>
+      <div class="form-group"><label>Math (1–36)</label><input type="number" id="math" value="21" min="1" max="36"></div>
+      <div class="form-group"><label>Reading (1–36)</label><input type="number" id="reading" value="23" min="1" max="36"></div>
+      <div class="form-group"><label>Science (1–36)</label><input type="number" id="science" value="22" min="1" max="36"></div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Calculate ACT Composite</button>
+    <div class="result-box" id="result">
+      <div class="result-num" id="result-composite">—</div>
+      <div class="result-label">ACT Composite Score</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>How the ACT is scored</h2>
+    <p>Each section (English, Math, Reading, Science) is scored 1–36. Your composite score is the average of all four sections, rounded to the nearest whole number. National average is around 20.</p>
+    <h2>ACT percentiles (approximate)</h2>
+    <p>36: 100th · 34: 99th · 32: 97th · 30: 93rd · 28: 88th · 26: 81st · 24: 73rd · 22: 62nd · 20: 49th · 18: 37th · 16: 24th</p>
+    <h2>Related tools</h2>
+    <p><a href="sat-score-calculator.html" style="color:var(--indigo);">→ SAT Score Calculator</a></p>
+  </div>
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+var pcts={36:100,35:99,34:99,33:98,32:97,31:95,30:93,29:91,28:88,27:85,26:81,25:77,24:73,23:68,22:62,21:56,20:49,19:43,18:37,17:31,16:24,15:18,14:13,13:8,12:5,11:3,10:1};
+function calculate(){
+  var e=parseInt(document.getElementById('english').value);
+  var m=parseInt(document.getElementById('math').value);
+  var r=parseInt(document.getElementById('reading').value);
+  var s=parseInt(document.getElementById('science').value);
+  var composite=Math.round((e+m+r+s)/4);
+  var pct=pcts[composite]||1;
+  document.getElementById('result-composite').textContent=composite;
+  document.getElementById('result-detail').innerHTML=
+    'English: '+e+' &nbsp;·&nbsp; Math: '+m+' &nbsp;·&nbsp; Reading: '+r+' &nbsp;·&nbsp; Science: '+s+'<br>'
+    +'Approximate percentile: <strong>'+pct+'th</strong><br>'
+    +(composite>=30?'Excellent score — competitive for highly selective colleges.'
+      :composite>=24?'Above average — competitive for most 4-year colleges.'
+      :composite>=20?'Around the national average.'
+      :'Below average. Targeted test prep in your weakest sections can help significantly.');
+  var res=document.getElementById('result');res.classList.add('show');res.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>

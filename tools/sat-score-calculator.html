@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAT Score Calculator – Raw Score to Scaled Score | GPA Vault</title>
+  <meta name="description" content="Convert SAT raw scores to scaled scores (200–800) for Math and Evidence-Based Reading & Writing. See your total SAT score and percentile.">
+  <link rel="canonical" href="https://gpavault.com/tools/sat-score-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Test Scores</div>
+    <h1>SAT Score Calculator</h1>
+    <p>Enter your section scores to calculate your total SAT score and see what percentile you're in. Based on College Board scoring scales.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+  <div class="calc-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="form-group"><label>Math Score (200–800)</label><input type="number" id="math" value="600" min="200" max="800" step="10"></div>
+      <div class="form-group"><label>Evidence-Based Reading & Writing (200–800)</label><input type="number" id="ebrw" value="580" min="200" max="800" step="10"></div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Calculate SAT Score</button>
+    <div class="result-box" id="result">
+      <div class="result-num" id="result-total">—</div>
+      <div class="result-label">Total SAT Score (400–1600)</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>SAT score ranges</h2>
+    <p>Each section scores 200–800, for a total of 400–1600. The national average is around 1010. A score of 1200+ is generally considered competitive for most colleges; 1400+ for selective schools.</p>
+    <h2>Approximate percentiles</h2>
+    <p>1600: 99th · 1500: 98th · 1400: 94th · 1300: 87th · 1200: 74th · 1100: 58th · 1000: 40th · 900: 25th · 800: 10th</p>
+    <h2>Related tools</h2>
+    <p><a href="act-score-calculator.html" style="color:var(--indigo);">→ ACT Score Calculator</a></p>
+  </div>
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+var percentiles={1600:99,1550:99,1500:98,1450:96,1400:94,1350:91,1300:87,1250:81,1200:74,1150:66,1100:58,1050:49,1000:40,950:32,900:25,850:18,800:10,750:6,700:3,650:1,600:1};
+function getPercentile(score){
+  var keys=Object.keys(percentiles).map(Number).sort(function(a,b){return b-a;});
+  for(var i=0;i<keys.length;i++){if(score>=keys[i])return percentiles[keys[i]];}
+  return 1;
+}
+function calculate(){
+  var m=parseInt(document.getElementById('math').value);
+  var e=parseInt(document.getElementById('ebrw').value);
+  var total=m+e;
+  var pct=getPercentile(total);
+  document.getElementById('result-total').textContent=total;
+  document.getElementById('result-detail').innerHTML=
+    'Math: <strong>'+m+'</strong> &nbsp;|&nbsp; EBRW: <strong>'+e+'</strong><br>'
+    +'Approximate percentile: <strong>'+pct+'th</strong><br>'
+    +(total>=1400?'Competitive for selective colleges (top 25%).'
+      :total>=1200?'Competitive for most 4-year colleges.'
+      :total>=1000?'Around the national average. Consider test prep to improve.'
+      :'Below average. Focused test prep could significantly improve your score.');
+  var res=document.getElementById('result');res.classList.add('show');res.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>

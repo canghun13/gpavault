@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scholarship Savings Calculator – How Much Does a Scholarship Actually Save? | GPA Vault</title>
+  <meta name="description" content="See exactly how much a scholarship saves you in loans and lifetime interest. Free scholarship savings calculator.">
+  <link rel="canonical" href="https://gpavault.com/tools/scholarship-savings-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Tuition & Loans</div>
+    <h1>Scholarship Savings Calculator</h1>
+    <p>A $5,000 scholarship isn't just $5,000 — it reduces the loan you take out, which means less interest over the life of your loan. See the full picture.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+  <div class="calc-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="form-group"><label>Total Loan Without Scholarship ($)</label><input type="number" id="loan" value="40000"></div>
+      <div class="form-group"><label>Scholarship Amount ($)</label><input type="number" id="scholarship" value="5000"></div>
+      <div class="form-group"><label>Interest Rate (%)</label><input type="number" id="rate" value="6.39" step="0.01"></div>
+      <div class="form-group"><label>Repayment Term (years)</label><select id="term"><option value="10" selected>10 years</option><option value="15">15 years</option><option value="20">20 years</option></select></div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Calculate Scholarship Value</button>
+    <div class="result-box" id="result">
+      <div class="result-num" id="result-saved">—</div>
+      <div class="result-label">Total money saved (scholarship + interest)</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>Why scholarships are worth more than their face value</h2>
+    <p>A $5,000 scholarship reduces your loan by $5,000. On a 6.39% loan over 10 years, that $5,000 saves you an additional ~$1,700 in interest — making the real value closer to $6,700.</p>
+    <h2>Related tools</h2>
+    <p><a href="student-loan-calculator.html" style="color:var(--indigo);">→ Student Loan Calculator</a> &nbsp;·&nbsp; <a href="../blog/how-to-find-scholarships.html" style="color:var(--indigo);">→ How to Find Scholarships</a></p>
+  </div>
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+function totalInterest(P,rate,years){
+  var r=rate/100/12,n=years*12;
+  var pmt=P*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+  return pmt*n-P;
+}
+function fmt(n){return'$'+Math.round(n).toLocaleString();}
+function calculate(){
+  var loan=parseFloat(document.getElementById('loan').value);
+  var sch=parseFloat(document.getElementById('scholarship').value);
+  var rate=parseFloat(document.getElementById('rate').value);
+  var term=parseInt(document.getElementById('term').value);
+  var intWithout=totalInterest(loan,rate,term);
+  var intWith=totalInterest(Math.max(0,loan-sch),rate,term);
+  var interestSaved=intWithout-intWith;
+  var totalSaved=sch+interestSaved;
+  document.getElementById('result-saved').textContent=fmt(totalSaved);
+  document.getElementById('result-detail').innerHTML=
+    'Scholarship amount: <strong>'+fmt(sch)+'</strong><br>'
+    +'Interest saved: <strong>'+fmt(interestSaved)+'</strong><br>'
+    +'Real value of scholarship: <strong>'+fmt(totalSaved)+'</strong> ('+((totalSaved/sch-1)*100).toFixed(0)+'% more than face value)';
+  var res=document.getElementById('result');res.classList.add('show');res.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>

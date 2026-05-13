@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Loan vs Salary Calculator – Is Your Debt Load Manageable? | GPA Vault</title>
+  <meta name="description" content="Compare your student loan balance to your expected starting salary. See if your debt-to-income ratio is manageable after graduation.">
+  <link rel="canonical" href="https://gpavault.com/tools/student-loan-vs-salary.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Career & ROI</div>
+    <h1>Student Loan vs Salary Calculator</h1>
+    <p>The #1 rule of thumb: your total student loan debt shouldn't exceed your first-year salary. See how your debt stacks up and what your monthly payment means for your budget.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+  <div class="calc-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="form-group"><label>Total Student Loan Balance ($)</label><input type="number" id="debt" value="35000"></div>
+      <div class="form-group"><label>Expected Starting Salary ($)</label><input type="number" id="salary" value="52000"></div>
+      <div class="form-group"><label>Interest Rate (%)</label><input type="number" id="rate" value="6.39" step="0.01"></div>
+      <div class="form-group"><label>Repayment Term</label><select id="term"><option value="10" selected>10 years</option><option value="15">15 years</option><option value="20">20 years</option></select></div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Analyze My Debt Load</button>
+    <div class="result-box" id="result">
+      <div class="result-num" id="result-ratio">—</div>
+      <div class="result-label">Debt-to-income ratio</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>The 1x rule</h2>
+    <p>Financial experts recommend keeping total student loan debt below your expected first-year salary. If you plan to earn $50,000, try not to borrow more than $50,000 total.</p>
+    <h2>The 10% rule</h2>
+    <p>Your monthly student loan payment shouldn't exceed 10% of your gross monthly income. Use this calculator to see if you're on track.</p>
+    <h2>Related tools</h2>
+    <p><a href="student-loan-calculator.html" style="color:var(--indigo);">→ Student Loan Calculator</a> &nbsp;·&nbsp; <a href="../blog/how-much-student-loan-debt-is-too-much.html" style="color:var(--indigo);">→ How Much Student Debt Is Too Much?</a></p>
+  </div>
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+function fmt(n){return'$'+Math.round(n).toLocaleString();}
+function calculate(){
+  var debt=parseFloat(document.getElementById('debt').value);
+  var salary=parseFloat(document.getElementById('salary').value);
+  var rate=parseFloat(document.getElementById('rate').value)/100/12;
+  var n=parseInt(document.getElementById('term').value)*12;
+  var payment=rate===0?debt/n:debt*(rate*Math.pow(1+rate,n))/(Math.pow(1+rate,n)-1);
+  var monthlyGross=salary/12;
+  var paymentPct=(payment/monthlyGross*100).toFixed(1);
+  var debtRatio=(debt/salary).toFixed(2);
+  var status=debtRatio<=1?'green':debtRatio<=1.5?'gold':'red';
+  document.getElementById('result-ratio').textContent=debtRatio+'x';
+  document.getElementById('result-detail').innerHTML=
+    'Debt: <strong>'+fmt(debt)+'</strong> &nbsp;|&nbsp; Starting salary: <strong>'+fmt(salary)+'</strong><br>'
+    +'Monthly payment: <strong>'+fmt(payment)+'</strong> ('+paymentPct+'% of gross monthly income)<br><br>'
+    +(status==='green'?'✅ <strong>Manageable.</strong> Your debt is below your annual salary — you should be able to repay within 10 years comfortably.'
+      :status==='gold'?'⚠️ <strong>Borderline.</strong> Your debt exceeds your salary by 50%. Look for ways to increase income or reduce debt before graduating.'
+      :'🔴 <strong>High risk.</strong> Your debt significantly exceeds your starting salary. Consider a more affordable school, more scholarships, or a higher-earning major.');
+  var res=document.getElementById('result');res.classList.add('show');res.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>

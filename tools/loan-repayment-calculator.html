@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Loan Repayment Calculator – Compare Repayment Plans | GPA Vault</title>
+  <meta name="description" content="Compare student loan repayment plans side by side. See monthly payments and total cost for standard, extended, and extra payment scenarios.">
+  <link rel="canonical" href="https://gpavault.com/tools/loan-repayment-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Tuition & Loans</div>
+    <h1>Loan Repayment Calculator</h1>
+    <p>Compare repayment plans and see the impact of making extra payments on your student loan payoff timeline and total interest.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+  <div class="calc-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="form-group"><label>Loan Balance ($)</label><input type="number" id="balance" value="35000"></div>
+      <div class="form-group"><label>Interest Rate (%)</label><input type="number" id="rate" value="6.39" step="0.01"></div>
+      <div class="form-group"><label>Monthly Payment ($)</label><input type="number" id="payment" value="389"></div>
+      <div class="form-group"><label>Extra Monthly Payment ($)</label><input type="number" id="extra" value="100"></div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Compare Repayment Plans</button>
+    <div class="result-box" id="result">
+      <div class="result-num" id="result-savings">—</div>
+      <div class="result-label">Interest saved with extra payments</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>Why extra payments matter so much</h2>
+    <p>Even $50–$100 extra per month on a student loan can save thousands in interest and shave years off your repayment. This is because extra payments reduce your principal faster, meaning less interest accrues over time.</p>
+    <h2>Related tools</h2>
+    <p><a href="student-loan-calculator.html" style="color:var(--indigo);">→ Student Loan Calculator</a> &nbsp;·&nbsp; <a href="../blog/federal-vs-private-student-loans.html" style="color:var(--indigo);">→ Federal vs Private Student Loans</a></p>
+  </div>
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+function payoff(bal,rate,pmt){
+  var r=rate/100/12,months=0,interest=0;
+  while(bal>0&&months<600){var i=bal*r;interest+=i;bal=bal+i-pmt;if(bal<0)bal=0;months++;}
+  return{months:months,interest:interest};
+}
+function fmt(n){return'$'+Math.round(n).toLocaleString();}
+function calculate(){
+  var bal=parseFloat(document.getElementById('balance').value);
+  var rate=parseFloat(document.getElementById('rate').value);
+  var pmt=parseFloat(document.getElementById('payment').value);
+  var extra=parseFloat(document.getElementById('extra').value)||0;
+  var standard=payoff(bal,rate,pmt);
+  var withExtra=payoff(bal,rate,pmt+extra);
+  var saved=standard.interest-withExtra.interest;
+  var monthsSaved=standard.months-withExtra.months;
+  document.getElementById('result-savings').textContent=fmt(saved);
+  document.getElementById('result-detail').innerHTML=
+    '<table style="width:100%;font-size:0.82rem;margin-top:1rem;border-collapse:collapse;">'
+    +'<tr style="color:var(--slate-light);font-size:0.72rem;"><td></td><td style="text-align:right">Standard</td><td style="text-align:right">With Extra</td></tr>'
+    +'<tr style="border-top:1px solid var(--border)"><td>Monthly payment</td><td style="text-align:right">'+fmt(pmt)+'</td><td style="text-align:right">'+fmt(pmt+extra)+'</td></tr>'
+    +'<tr style="border-top:1px solid var(--border)"><td>Payoff time</td><td style="text-align:right">'+Math.floor(standard.months/12)+'y '+standard.months%12+'m</td><td style="text-align:right">'+Math.floor(withExtra.months/12)+'y '+withExtra.months%12+'m</td></tr>'
+    +'<tr style="border-top:1px solid var(--border)"><td>Total interest</td><td style="text-align:right">'+fmt(standard.interest)+'</td><td style="text-align:right">'+fmt(withExtra.interest)+'</td></tr>'
+    +'</table>'
+    +(monthsSaved>0?'<br>Extra payments pay off your loan <strong>'+Math.floor(monthsSaved/12)+' years '+monthsSaved%12+' months early</strong>.':'');
+  var res=document.getElementById('result');res.classList.add('show');res.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>

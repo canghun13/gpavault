@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Exam Grade Calculator – What Do I Need to Pass? | GPA Vault</title>
+  <meta name="description" content="Calculate exactly what score you need on your final exam to pass the class or hit your target grade. Free final exam calculator.">
+  <link rel="canonical" href="https://gpavault.com/tools/final-exam-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Academics</div>
+    <h1>Final Exam Grade Calculator</h1>
+    <p>Enter your current grade, the final exam weight, and your target grade to find out exactly what score you need on the final.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+  <div class="calc-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="form-group"><label>Current Grade (%)</label><input type="number" id="current" value="78" min="0" max="100"></div>
+      <div class="form-group"><label>Final Exam Weight (%)</label><input type="number" id="weight" value="30" min="1" max="100"></div>
+      <div class="form-group"><label>Target Grade (%)</label><input type="number" id="target" value="80" min="0" max="100"></div>
+      <div class="form-group"><label>What does that mean?</label>
+        <select id="grade-ref">
+          <option value="90">A = 90%+</option>
+          <option value="80" selected>B = 80%+</option>
+          <option value="70">C = 70%+</option>
+          <option value="60">D = 60%+</option>
+        </select>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Calculate Final Exam Score Needed</button>
+    <div class="result-box" id="result">
+      <div class="result-num" id="result-score">—</div>
+      <div class="result-label">Score needed on final exam</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>Formula</h2>
+    <p>Required Final Score = (Target Grade − Current Grade × (1 − Final Weight)) ÷ Final Weight</p>
+    <p>For example: current grade 78%, final worth 30%, target 80% → you need (80 − 78 × 0.7) / 0.3 = 84.7% on the final.</p>
+    <h2>Related tools</h2>
+    <p><a href="grade-calculator.html" style="color:var(--indigo);">→ Grade Calculator</a> &nbsp;·&nbsp; <a href="../blog/how-to-calculate-final-exam-grade.html" style="color:var(--indigo);">→ Final Exam Grade Guide</a></p>
+  </div>
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+function calculate(){
+  var cur=parseFloat(document.getElementById('current').value);
+  var w=parseFloat(document.getElementById('weight').value)/100;
+  var tar=parseFloat(document.getElementById('target').value);
+  var needed=(tar-cur*(1-w))/w;
+  document.getElementById('result-score').textContent=needed.toFixed(1)+'%';
+  var msg=needed>100?'You\'d need more than 100% — focus on extra credit or talk to your professor. Even a perfect final gets you '+(cur*(1-w)+100*w).toFixed(1)+'%.'
+    :needed<0?'You\'ve already locked in your target grade — just show up!'
+    :'Score <strong>'+needed.toFixed(1)+'%</strong> or higher on your final (worth '+Math.round(w*100)+'%) to finish with '+tar+'% or better.';
+  document.getElementById('result-detail').innerHTML=msg;
+  var r=document.getElementById('result');r.classList.add('show');r.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>
