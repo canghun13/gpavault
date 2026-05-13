@@ -135,6 +135,7 @@ nav {
   transition: color 0.15s;
 }
 .nav-back:hover { color: var(--indigo); }
+@media (max-width: 768px) { .nav-back { display: none; } }
 
 /* HAMBURGER */
 .nav-hamburger {
