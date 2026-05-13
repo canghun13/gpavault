@@ -8,7 +8,7 @@
   var depth = (path.match(/\//g) || []).length - 1;
   var base = depth >= 1 ? '../' : './';
 
-  var isToolPage = path.indexOf('/tools/') !== -1;
+  var isToolPage = path.indexOf('/tools/') !== -1 || (depth >= 1 && path.indexOf('/blog/') === -1 && path.indexOf('about') === -1 && path.indexOf('privacy') === -1 && path.split('/').pop() !== '' && path.split('/').pop() !== 'index.html');
 
   function loadPartial(placeholderId, file, callback) {
     var el = document.getElementById(placeholderId);
