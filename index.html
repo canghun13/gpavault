@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPA Vault – Free College & Student Calculators</title>
+  <meta name="description" content="Free calculators for GPA, student loans, college costs, SAT/ACT scores, and degree ROI. Built for students from application to graduation.">
+  <meta property="og:title" content="GPA Vault – Free College & Student Calculators">
+  <meta property="og:description" content="Free calculators for GPA, student loans, college costs, SAT/ACT scores, and more.">
+  <meta property="og:url" content="https://gpavault.com/">
+  <link rel="canonical" href="https://gpavault.com/">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- Google tag (GA4) — replace G-XXXXXXXXXX with your Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <!-- Google Search Console verification — replace content value -->
+  <!-- <meta name="google-site-verification" content="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"> -->
+
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    /* ── HOMEPAGE ONLY ── */
+    .tools-section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+    .cat-section { margin-bottom: 3.5rem; }
+    .cat-section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--slate);
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .cat-section-title::after {
+      content: '';
+      flex: 1; height: 1px;
+      background: var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<div id="header-placeholder"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-tag">📚 Free · No signup · Built for students</span>
+  <h1>Every calculator you need,<br><span>from application to graduation</span></h1>
+  <p class="hero-sub">GPA, student loans, college costs, SAT/ACT scores — all in one place. Free, fast, and accurate.</p>
+  <a href="#tools" class="hero-cta">Explore all tools ↓</a>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Free tools</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">No signup needed</div></div>
+  <div class="stat"><div class="stat-num">$0</div><div class="stat-label">Always free</div></div>
+</div>
+
+<!-- AD -->
+<div class="ad-banner">Advertisement · Google AdSense</div>
+
+<!-- TOOLS -->
+<div class="tools-section" id="tools">
+
+  <!-- Academics -->
+  <div class="cat-section">
+    <div class="cat-section-title">📊 Academics</div>
+    <div class="tools-grid">
+      <a href="tools/gpa-calculator.html" class="tool-card featured">
+        <div class="tool-card-top">
+          <div class="tool-icon">📊</div>
+          <span class="tool-badge">Most Popular</span>
+        </div>
+        <h3>GPA Calculator</h3>
+        <p>Calculate your current GPA from your grades and credit hours. Supports letter grades and percentages.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+      <a href="tools/weighted-gpa-calculator.html" class="tool-card">
+        <div class="tool-icon">⭐</div>
+        <h3>Weighted GPA Calculator</h3>
+        <p>Calculate your weighted GPA including AP, IB, and honors courses with the correct scale.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+      <a href="tools/grade-calculator.html" class="tool-card">
+        <div class="tool-icon">🎯</div>
+        <h3>Grade Calculator</h3>
+        <p>Find out what grade you need on upcoming assignments to hit your target course grade.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+      <a href="tools/final-exam-calculator.html" class="tool-card">
+        <div class="tool-icon">📝</div>
+        <h3>Final Exam Grade Calculator</h3>
+        <p>What score do you need on your final exam to pass — or ace — the class? Find out instantly.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Tuition & Loans -->
+  <div class="cat-section">
+    <div class="cat-section-title">💰 Tuition & Loans</div>
+    <div class="tools-grid">
+      <a href="tools/college-cost-calculator.html" class="tool-card">
+        <div class="tool-icon">🏫</div>
+        <h3>College Cost Calculator</h3>
+        <p>Estimate total 4-year college costs including tuition, room & board, and fees.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+      <a href="tools/student-loan-calculator.html" class="tool-card">
+        <div class="tool-icon">💰</div>
+        <h3>Student Loan Calculator</h3>
+        <p>See exactly how much you'll owe at graduation and what your monthly payments will look like.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+      <a href="tools/loan-repayment-calculator.html" class="tool-card">
+        <div class="tool-icon">📅</div>
+        <h3>Loan Repayment Calculator</h3>
+        <p>Plan your repayment timeline. Compare standard, extended, and income-driven plans.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+      <a href="tools/scholarship-savings-calculator.html" class="tool-card">
+        <div class="tool-icon">🎓</div>
+        <h3>Scholarship Savings Calculator</h3>
+        <p>See how scholarships reduce your total loan burden and lifetime interest paid.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Test Scores -->
+  <div class="cat-section">
+    <div class="cat-section-title">📋 Test Scores</div>
+    <div class="tools-grid">
+      <a href="tools/sat-score-calculator.html" class="tool-card">
+        <div class="tool-icon">📋</div>
+        <h3>SAT Score Calculator</h3>
+        <p>Convert raw SAT scores to scaled scores and see your percentile ranking.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+      <a href="tools/act-score-calculator.html" class="tool-card">
+        <div class="tool-icon">📋</div>
+        <h3>ACT Score Calculator</h3>
+        <p>Calculate your composite ACT score from individual section scores and see your percentile.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Career -->
+  <div class="cat-section">
+    <div class="cat-section-title">💼 Career & ROI</div>
+    <div class="tools-grid">
+      <a href="tools/degree-roi-calculator.html" class="tool-card">
+        <div class="tool-icon">📈</div>
+        <h3>Degree ROI Calculator</h3>
+        <p>Is your degree worth it? Calculate the return on investment based on cost and expected earnings.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+      <a href="tools/student-loan-vs-salary.html" class="tool-card">
+        <div class="tool-icon">💼</div>
+        <h3>Student Loan vs Salary Calculator</h3>
+        <p>Compare your student loan balance to your starting salary. See if your debt load is manageable.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- WHY SECTION -->
+<div class="why-section">
+  <div class="why-inner">
+    <div class="why-text">
+      <div class="section-label">Why GPA Vault</div>
+      <h2>Built for students,<br><span>not financial advisors</span></h2>
+      <p>Every calculator here is designed around real decisions students face — not generic finance tools rebranded for college.</p>
+      <ul class="why-list">
+        <li><span class="check">✓</span> Clear formulas based on how schools actually calculate GPA</li>
+        <li><span class="check">✓</span> No account. No email. Results in seconds.</li>
+        <li><span class="check">✓</span> Works on any device — study break friendly</li>
+        <li><span class="check">✓</span> Updated every semester for accuracy</li>
+      </ul>
+    </div>
+    <div class="why-cards">
+      <div class="why-card wide">
+        <div class="why-card-num">15+</div>
+        <div class="why-card-label">Free student calculators</div>
+      </div>
+      <div class="why-card">
+        <div class="why-card-num">100%</div>
+        <div class="why-card-label">Free forever</div>
+      </div>
+      <div class="why-card">
+        <div class="why-card-num">0</div>
+        <div class="why-card-label">Signups required</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AD -->
+<div class="ad-banner">Advertisement · Google AdSense</div>
+
+<!-- BLOG PREVIEW -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">From the blog</div>
+    <h2>Guides for smarter college decisions</h2>
+    <p>Practical advice on loans, GPA, scholarships, and your career after graduation.</p>
+  </div>
+  <div class="blog-grid">
+    <a href="blog/how-to-manage-student-loans.html" class="blog-card">
+      <span class="blog-tag">Loans</span>
+      <h3>How to Manage Student Loans Without the Stress</h3>
+      <p>A practical guide to understanding your loan types, repayment options, and what to do first.</p>
+      <div class="blog-meta">6 min read · May 2026</div>
+    </a>
+    <a href="blog/how-to-find-scholarships.html" class="blog-card">
+      <span class="blog-tag">Scholarships</span>
+      <h3>How to Find Scholarships That Actually Apply to You</h3>
+      <p>Most students leave free money on the table. Here's a systematic approach to finding scholarships.</p>
+      <div class="blog-meta">7 min read · May 2026</div>
+    </a>
+    <a href="blog/how-to-raise-your-gpa.html" class="blog-card">
+      <span class="blog-tag">Academics</span>
+      <h3>How to Raise Your GPA This Semester</h3>
+      <p>Practical, evidence-based strategies to improve your grades — not just study harder, but smarter.</p>
+      <div class="blog-meta">5 min read · May 2026</div>
+    </a>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="assets/js/components.js"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPA Calculator – Calculate Your GPA Instantly | GPA Vault</title>
+  <meta name="description" content="Free GPA calculator. Enter your grades and credit hours to calculate your cumulative or semester GPA instantly. Supports letter grades and percentages.">
+  <meta property="og:title" content="GPA Calculator – GPA Vault">
+  <meta property="og:description" content="Calculate your GPA instantly. Enter grades and credit hours — results in seconds.">
+  <link rel="canonical" href="https://gpavault.com/tools/gpa-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <!-- Google tag (GA4) — replace G-XXXXXXXXXX -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Academics</div>
+    <h1>GPA Calculator</h1>
+    <p>Enter your courses, grades, and credit hours to calculate your GPA. Add as many courses as you need.</p>
+  </div>
+
+  <!-- AD -->
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+
+  <div class="calc-card">
+    <div id="courses-container">
+      <!-- Course rows injected by JS -->
+    </div>
+
+    <button onclick="addCourse()" style="
+      background:none; border:1px dashed var(--border);
+      border-radius:8px; width:100%; padding:0.625rem;
+      color:var(--slate-mid); font-size:0.83rem; font-weight:500;
+      cursor:pointer; font-family:'Inter',sans-serif;
+      transition:all 0.15s; margin-bottom:1.25rem;
+    " onmouseover="this.style.borderColor='var(--indigo-light)';this.style.color='var(--indigo)'"
+       onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--slate-mid)'">
+      + Add another course
+    </button>
+
+    <button class="calc-btn" onclick="calculateGPA()">Calculate GPA</button>
+
+    <div class="result-box" id="result">
+      <div class="result-num" id="result-gpa">—</div>
+      <div class="result-label">Your GPA (4.0 scale)</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+
+  <!-- EXPLAINER -->
+  <div class="explainer">
+    <h2>How GPA is calculated</h2>
+    <p>GPA (Grade Point Average) is calculated by multiplying each course's grade points by its credit hours, summing those totals, then dividing by total credit hours.</p>
+    <p><strong>Formula:</strong> GPA = Σ (Grade Points × Credit Hours) ÷ Total Credit Hours</p>
+
+    <h2>Grade point scale</h2>
+    <p>Most US colleges use a 4.0 scale: A = 4.0, A− = 3.7, B+ = 3.3, B = 3.0, B− = 2.7, C+ = 2.3, C = 2.0, C− = 1.7, D+ = 1.3, D = 1.0, F = 0.0.</p>
+
+    <h2>Semester vs. cumulative GPA</h2>
+    <p>This calculator computes the GPA for the courses you enter. For cumulative GPA across multiple semesters, enter all your courses together.</p>
+  </div>
+
+  <!-- AD -->
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+  var gradeScale = {
+    'A':  4.0, 'A-': 3.7,
+    'B+': 3.3, 'B':  3.0, 'B-': 2.7,
+    'C+': 2.3, 'C':  2.0, 'C-': 1.7,
+    'D+': 1.3, 'D':  1.0, 'D-': 0.7,
+    'F':  0.0
+  };
+
+  var courseCount = 0;
+
+  function addCourse(grade, credits) {
+    courseCount++;
+    var container = document.getElementById('courses-container');
+    var row = document.createElement('div');
+    row.id = 'course-' + courseCount;
+    row.style.cssText = 'display:grid;grid-template-columns:1fr auto auto;gap:0.75rem;align-items:end;margin-bottom:0.75rem;';
+    row.innerHTML = '<div class="form-group" style="margin:0">' +
+      '<label>Course ' + courseCount + '</label>' +
+      '<input type="text" placeholder="e.g. English 101" id="name-' + courseCount + '">' +
+      '</div>' +
+      '<div class="form-group" style="margin:0;min-width:100px">' +
+      '<label>Grade</label>' +
+      '<select id="grade-' + courseCount + '">' +
+      Object.keys(gradeScale).map(function(g) {
+        return '<option value="' + g + '"' + (g === (grade||'B') ? ' selected' : '') + '>' + g + '</option>';
+      }).join('') +
+      '</select></div>' +
+      '<div class="form-group" style="margin:0;min-width:80px">' +
+      '<label>Credits</label>' +
+      '<input type="number" id="credits-' + courseCount + '" value="' + (credits||3) + '" min="0.5" max="12" step="0.5">' +
+      '</div>';
+
+    if (courseCount > 1) {
+      var del = document.createElement('button');
+      del.textContent = '×';
+      del.style.cssText = 'background:none;border:none;cursor:pointer;color:var(--slate-light);font-size:1.2rem;padding:0 0.25rem;align-self:center;margin-top:1.25rem;';
+      del.onclick = (function(id) { return function() {
+        document.getElementById('course-' + id).remove();
+      }; })(courseCount);
+      row.appendChild(del);
+    }
+
+    container.appendChild(row);
+  }
+
+  function calculateGPA() {
+    var totalPoints = 0;
+    var totalCredits = 0;
+    var rows = [];
+
+    for (var i = 1; i <= courseCount; i++) {
+      var gradeEl = document.getElementById('grade-' + i);
+      var creditsEl = document.getElementById('credits-' + i);
+      if (!gradeEl || !creditsEl) continue;
+
+      var grade = gradeEl.value;
+      var credits = parseFloat(creditsEl.value);
+      if (isNaN(credits) || credits <= 0) continue;
+
+      var points = gradeScale[grade];
+      totalPoints += points * credits;
+      totalCredits += credits;
+      rows.push({ grade: grade, credits: credits, points: points });
+    }
+
+    if (totalCredits === 0) return;
+
+    var gpa = totalPoints / totalCredits;
+
+    document.getElementById('result-gpa').textContent = gpa.toFixed(2);
+    document.getElementById('result-detail').innerHTML =
+      'Based on <strong>' + totalCredits + ' credit hours</strong> across <strong>' + rows.length + ' courses</strong>.' +
+      '<br>Total quality points: ' + totalPoints.toFixed(1);
+
+    var resultBox = document.getElementById('result');
+    resultBox.classList.add('show');
+    resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Init with 3 courses
+  addCourse('A', 3);
+  addCourse('B+', 3);
+  addCourse('B', 3);
+</script>
+</body>
+</html>
