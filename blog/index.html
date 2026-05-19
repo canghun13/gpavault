@@ -7,6 +7,47 @@
   <meta name="description" content="Practical guides on GPA, student loans, scholarships, college costs, and career ROI. Built for students making real decisions.">
   <link rel="canonical" href="https://gpavault.com/blog/">
   <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .blog-search-wrap {
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      position: relative;
+    }
+    .blog-search-input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.75rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--slate);
+      background: var(--white);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .blog-search-input:focus {
+      border-color: var(--indigo-light);
+      box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+    }
+    .blog-search-icon {
+      position: absolute;
+      left: 0.875rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--slate-light);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+    .blog-no-results {
+      display: none;
+      text-align: center;
+      color: var(--slate-light);
+      font-size: 0.9rem;
+      padding: 3rem 0;
+    }
+    .blog-card.hidden { display: none; }
+    .cat-section.hidden { display: none; }
+  </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
 </head>
@@ -20,22 +61,50 @@
     <p>Practical, numbers-first advice on GPA, loans, scholarships, and career ROI.</p>
   </div>
 
-  <div class="cat-section" style="margin-bottom:3rem;">
+  <!-- SEARCH -->
+  <div class="blog-search-wrap">
+    <span class="blog-search-icon">🔍</span>
+    <input
+      type="text"
+      class="blog-search-input"
+      id="blog-search"
+      placeholder="Search guides…"
+      oninput="filterBlog(this.value)"
+      autocomplete="off"
+    >
+  </div>
+
+  <div id="no-results" class="blog-no-results">No guides found. Try a different keyword.</div>
+
+  <!-- Academics -->
+  <div class="cat-section" id="cat-academics" style="margin-bottom:3rem;">
     <div class="cat-section-title" style="font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:var(--slate);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;">📊 Academics</div>
     <div class="blog-grid">
-      <a href="weighted-gpa-calculator-ap-classes.html" class="blog-card">
+      <a href="how-to-raise-your-gpa-in-one-semester.html" class="blog-card" data-search="how to raise your gpa in one semester academics grades study">
+        <span class="blog-tag">Academics</span>
+        <h3>How to Raise Your GPA in One Semester (What Actually Works)</h3>
+        <p>The math behind how much you can move your GPA, plus the strategies that give you the best shot.</p>
+        <div class="blog-meta">7 min read · May 2026</div>
+      </a>
+      <a href="how-many-as-to-raise-gpa.html" class="blog-card" data-search="how many as a's needed to raise gpa calculator credits academics">
+        <span class="blog-tag">Academics</span>
+        <h3>How Many A's Do You Need to Raise Your GPA?</h3>
+        <p>It depends on how many credits you've completed. Here's the math — and a calculator to find your exact number.</p>
+        <div class="blog-meta">6 min read · May 2026</div>
+      </a>
+      <a href="weighted-gpa-calculator-ap-classes.html" class="blog-card" data-search="weighted gpa calculator ap ib honors classes 5.0 scale academics">
         <span class="blog-tag">Academics</span>
         <h3>Weighted GPA Calculator for AP, IB & Honors Classes: Complete Guide</h3>
         <p>How the 5.0 scale works, what colleges actually look at, and how to calculate yours.</p>
         <div class="blog-meta">8 min read · May 2026</div>
       </a>
-      <a href="what-gpa-to-keep-scholarship.html" class="blog-card">
+      <a href="what-gpa-to-keep-scholarship.html" class="blog-card" data-search="gpa scholarship keep maintain threshold academics">
         <span class="blog-tag">Academics</span>
         <h3>What GPA Do You Need to Keep Your Scholarship?</h3>
         <p>The GPA thresholds that matter and what to do if you're at risk of losing your award.</p>
         <div class="blog-meta">5 min read · May 2026</div>
       </a>
-      <a href="how-to-calculate-final-exam-grade.html" class="blog-card">
+      <a href="how-to-calculate-final-exam-grade.html" class="blog-card" data-search="final exam grade calculate formula pass academics">
         <span class="blog-tag">Academics</span>
         <h3>How to Calculate Your Final Exam Grade (With Examples)</h3>
         <p>The exact formula for finding out what you need on your final — with worked examples.</p>
@@ -44,40 +113,42 @@
     </div>
   </div>
 
-  <div class="cat-section" style="margin-bottom:3rem;">
+  <!-- Student Loans -->
+  <div class="cat-section" id="cat-loans" style="margin-bottom:3rem;">
     <div class="cat-section-title" style="font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:var(--slate);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;">💰 Student Loans</div>
     <div class="blog-grid">
-      <a href="how-much-student-loan-debt-is-too-much.html" class="blog-card">
-        <span class="blog-tag">Loans</span>
-        <h3>How Much Student Loan Debt Is Too Much? The 1x Rule Explained</h3>
-        <p>The benchmark every student should know before borrowing another dollar.</p>
-        <div class="blog-meta">6 min read · May 2026</div>
-      </a>
-      <a href="federal-vs-private-student-loans.html" class="blog-card">
-        <span class="blog-tag">Loans</span>
-        <h3>Federal vs Private Student Loans: Which Should You Borrow First?</h3>
-        <p>Federal loans almost always win. Here's exactly why — and the exceptions.</p>
-        <div class="blog-meta">6 min read · May 2026</div>
-      </a>
-      <a href="student-loan-repayment-plans-2026.html" class="blog-card">
+      <a href="student-loan-repayment-plans-2026.html" class="blog-card" data-search="student loan repayment plans 2026 ibr rap save federal loans">
         <span class="blog-tag">Loans</span>
         <h3>Student Loan Repayment Plans Explained: Standard, IBR, RAP (2026)</h3>
         <p>The new RAP plan replaces SAVE in July 2026. What it means for your payments.</p>
         <div class="blog-meta">7 min read · May 2026</div>
       </a>
+      <a href="how-much-student-loan-debt-is-too-much.html" class="blog-card" data-search="student loan debt too much 1x rule borrow federal loans">
+        <span class="blog-tag">Loans</span>
+        <h3>How Much Student Loan Debt Is Too Much? The 1x Rule Explained</h3>
+        <p>The benchmark every student should know before borrowing another dollar.</p>
+        <div class="blog-meta">6 min read · May 2026</div>
+      </a>
+      <a href="federal-vs-private-student-loans.html" class="blog-card" data-search="federal private student loans difference which borrow first interest rate">
+        <span class="blog-tag">Loans</span>
+        <h3>Federal vs Private Student Loans: Which Should You Borrow First?</h3>
+        <p>Federal loans almost always win. Here's exactly why — and the exceptions.</p>
+        <div class="blog-meta">6 min read · May 2026</div>
+      </a>
     </div>
   </div>
 
-  <div class="cat-section" style="margin-bottom:3rem;">
+  <!-- College Costs -->
+  <div class="cat-section" id="cat-costs" style="margin-bottom:3rem;">
     <div class="cat-section-title" style="font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:var(--slate);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;">🎓 College Costs</div>
     <div class="blog-grid">
-      <a href="how-to-find-scholarships.html" class="blog-card">
+      <a href="how-to-find-scholarships.html" class="blog-card" data-search="scholarships find qualify niche local free money college costs">
         <span class="blog-tag">Scholarships</span>
         <h3>How to Find Scholarships You Actually Qualify For</h3>
         <p>Local and niche scholarships have far less competition. Here's the systematic approach.</p>
         <div class="blog-meta">7 min read · May 2026</div>
       </a>
-      <a href="room-board-vs-off-campus.html" class="blog-card">
+      <a href="room-board-vs-off-campus.html" class="blog-card" data-search="room board off campus living cost cheaper college">
         <span class="blog-tag">College Costs</span>
         <h3>Room and Board vs Off-Campus Living: What's Actually Cheaper?</h3>
         <p>On-campus isn't always the expensive option. Here's how to do the real comparison.</p>
@@ -86,16 +157,17 @@
     </div>
   </div>
 
-  <div class="cat-section">
+  <!-- Career & ROI -->
+  <div class="cat-section" id="cat-career">
     <div class="cat-section-title" style="font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:var(--slate);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;">📈 Career & ROI</div>
     <div class="blog-grid">
-      <a href="is-college-degree-worth-the-debt.html" class="blog-card">
+      <a href="is-college-degree-worth-the-debt.html" class="blog-card" data-search="college degree worth debt roi return investment career">
         <span class="blog-tag">Career & ROI</span>
         <h3>Is a College Degree Worth the Debt? How to Calculate Your ROI</h3>
         <p>The average degree pays off — but not for every major. Here's how to run your numbers.</p>
         <div class="blog-meta">7 min read · May 2026</div>
       </a>
-      <a href="average-starting-salary-by-major.html" class="blog-card">
+      <a href="average-starting-salary-by-major.html" class="blog-card" data-search="average starting salary major stem business health 2026 career roi">
         <span class="blog-tag">Career & ROI</span>
         <h3>Average Starting Salary by Major (2026): Is Your Degree Paying Off?</h3>
         <p>2026 salary data across STEM, business, health, and liberal arts majors.</p>
@@ -103,9 +175,42 @@
       </a>
     </div>
   </div>
+
 </section>
 
 <div id="footer-placeholder"></div>
 <script src="../assets/js/components.js"></script>
+<script>
+  function filterBlog(query) {
+    var q = query.trim().toLowerCase();
+    var cards = document.querySelectorAll('.blog-card');
+    var categories = ['cat-academics', 'cat-loans', 'cat-costs', 'cat-career'];
+    var totalVisible = 0;
+
+    cards.forEach(function(card) {
+      var text = (card.getAttribute('data-search') || '') + ' ' + (card.textContent || '');
+      if (!q || text.toLowerCase().indexOf(q) !== -1) {
+        card.classList.remove('hidden');
+        totalVisible++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    categories.forEach(function(catId) {
+      var cat = document.getElementById(catId);
+      if (!cat) return;
+      var visibleCards = cat.querySelectorAll('.blog-card:not(.hidden)');
+      if (visibleCards.length === 0) {
+        cat.classList.add('hidden');
+      } else {
+        cat.classList.remove('hidden');
+      }
+    });
+
+    var noResults = document.getElementById('no-results');
+    noResults.style.display = totalVisible === 0 ? 'block' : 'none';
+  }
+</script>
 </body>
 </html>

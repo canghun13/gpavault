@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPA Raise Calculator – How Many A's Do You Need? | GPA Vault</title>
+  <meta name="description" content="Find out exactly how many A's you need to raise your GPA to your target. Enter your current GPA, credits, and goal — get your answer instantly.">
+  <meta property="og:title" content="GPA Raise Calculator – GPA Vault">
+  <meta property="og:description" content="How many A's do you need to raise your GPA? Enter your current GPA and goal to find out instantly.">
+  <link rel="canonical" href="https://gpavault.com/tools/gpa-raise-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Academics</div>
+    <h1>GPA Raise Calculator</h1>
+    <p>Enter your current GPA, total credits completed, and target GPA to see exactly how many A's you need.</p>
+  </div>
+
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+
+  <div class="calc-card">
+    <div class="form-group">
+      <label for="current-gpa">Current GPA</label>
+      <input type="number" id="current-gpa" placeholder="e.g. 3.2" min="0" max="4.0" step="0.01">
+    </div>
+    <div class="form-group">
+      <label for="credits-completed">Credits Completed So Far</label>
+      <input type="number" id="credits-completed" placeholder="e.g. 60" min="1" max="300" step="1">
+    </div>
+    <div class="form-group">
+      <label for="target-gpa">Target GPA</label>
+      <input type="number" id="target-gpa" placeholder="e.g. 3.5" min="0" max="4.0" step="0.01">
+    </div>
+    <div class="form-group">
+      <label for="credits-per-course">Credits per Course (typical)</label>
+      <select id="credits-per-course">
+        <option value="3" selected>3 credits</option>
+        <option value="4">4 credits</option>
+        <option value="2">2 credits</option>
+        <option value="1">1 credit</option>
+      </select>
+    </div>
+
+    <button class="calc-btn" onclick="calculateRaise()">Calculate</button>
+
+    <div class="result-box" id="result">
+      <div class="result-num" id="result-main">—</div>
+      <div class="result-label" id="result-label">courses with A's needed</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+
+  <div class="explainer">
+    <h2>How this calculator works</h2>
+    <p>Your cumulative GPA is calculated as total quality points divided by total credit hours. To raise your GPA, future A's (4.0) add quality points faster than lower grades do.</p>
+    <p><strong>Formula:</strong> Target GPA × (current credits + future credits) = total quality points needed. Subtract current quality points to find future points needed, then divide by 4.0 (an A) to find the minimum credits.</p>
+
+    <h2>Can you raise your GPA in one semester?</h2>
+    <p>It depends on how many credits you've already completed. The more credits you have, the harder it is to move the needle. If you have 30 credits at a 3.0 and need a 3.5, you'll need roughly 30 more credits of all A's — that's two to three semesters of perfect grades.</p>
+    <p>Earlier in your college career, each semester has more impact. If you're in your first year with 15–30 credits, a strong semester can raise your GPA significantly. Use this calculator to see your exact situation.</p>
+
+    <h2>What counts as an "A"?</h2>
+    <p>This calculator assumes A = 4.0. If you earn A− grades (3.7), your actual results will be slightly lower. For the best-case estimate, 4.0 is the right number to use.</p>
+
+    <h2>Related tools</h2>
+    <p>
+      <a href="gpa-calculator.html" style="color:var(--indigo);">GPA Calculator</a> — calculate your current GPA from your grades.<br>
+      <a href="grade-calculator.html" style="color:var(--indigo);">Grade Calculator</a> — find out what you need on upcoming assignments to hit your target grade.
+    </p>
+  </div>
+
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+  function calculateRaise() {
+    var currentGPA = parseFloat(document.getElementById('current-gpa').value);
+    var creditsCompleted = parseFloat(document.getElementById('credits-completed').value);
+    var targetGPA = parseFloat(document.getElementById('target-gpa').value);
+    var creditsPerCourse = parseFloat(document.getElementById('credits-per-course').value);
+
+    var resultBox = document.getElementById('result');
+    var resultMain = document.getElementById('result-main');
+    var resultLabel = document.getElementById('result-label');
+    var resultDetail = document.getElementById('result-detail');
+
+    if (isNaN(currentGPA) || isNaN(creditsCompleted) || isNaN(targetGPA)) {
+      return;
+    }
+    if (currentGPA < 0 || currentGPA > 4.0 || targetGPA < 0 || targetGPA > 4.0) {
+      resultMain.textContent = '!';
+      resultLabel.textContent = 'GPA must be between 0.0 and 4.0';
+      resultDetail.textContent = '';
+      resultBox.classList.add('show');
+      return;
+    }
+    if (targetGPA <= currentGPA) {
+      resultMain.textContent = '✓';
+      resultLabel.textContent = "You're already at or above your target GPA";
+      resultDetail.textContent = 'Current GPA: ' + currentGPA.toFixed(2) + ' · Target: ' + targetGPA.toFixed(2);
+      resultBox.classList.add('show');
+      return;
+    }
+
+    var currentQualityPoints = currentGPA * creditsCompleted;
+    // future credits needed: solve for x
+    // (currentQualityPoints + 4.0 * x) / (creditsCompleted + x) = targetGPA
+    // currentQualityPoints + 4.0x = targetGPA * creditsCompleted + targetGPA * x
+    // x(4.0 - targetGPA) = targetGPA * creditsCompleted - currentQualityPoints
+    var numerator = targetGPA * creditsCompleted - currentQualityPoints;
+    var denominator = 4.0 - targetGPA;
+
+    if (denominator <= 0) {
+      resultMain.textContent = '∞';
+      resultLabel.textContent = 'Target GPA of 4.0 requires all A\'s going forward';
+      resultDetail.textContent = 'A 4.0 target means every remaining course must be an A.';
+      resultBox.classList.add('show');
+      return;
+    }
+
+    var creditsNeeded = numerator / denominator;
+    var coursesNeeded = Math.ceil(creditsNeeded / creditsPerCourse);
+    var actualCredits = coursesNeeded * creditsPerCourse;
+
+    // GPA after completing those courses
+    var newQP = currentQualityPoints + 4.0 * actualCredits;
+    var newCredits = creditsCompleted + actualCredits;
+    var projectedGPA = newQP / newCredits;
+
+    resultMain.textContent = coursesNeeded;
+    resultLabel.textContent = 'courses with A\'s needed (' + actualCredits + ' credits)';
+    resultDetail.innerHTML =
+      'Projected GPA after: <strong>' + projectedGPA.toFixed(2) + '</strong><br>' +
+      'Current quality points: ' + currentQualityPoints.toFixed(1) + '<br>' +
+      'That\'s roughly <strong>' + Math.ceil(coursesNeeded / 5) + ' semester(s)</strong> of all A\'s (assuming 5 courses/semester).';
+
+    resultBox.classList.add('show');
+    resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+</body>
+</html>
