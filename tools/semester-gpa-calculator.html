@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semester GPA Calculator – Calculate This Semester's GPA | GPA Vault</title>
+  <meta name="description" content="Calculate your GPA for just this semester — not your cumulative GPA. Enter current courses, grades, and credits to see your semester GPA instantly.">
+  <meta property="og:title" content="Semester GPA Calculator – GPA Vault">
+  <meta property="og:description" content="Calculate your semester GPA separately from your cumulative GPA. Enter this semester's courses and grades — results in seconds.">
+  <link rel="canonical" href="https://gpavault.com/tools/semester-gpa-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Academics</div>
+    <h1>Semester GPA Calculator</h1>
+    <p>Calculate your GPA for this semester only — not your cumulative average. Enter your current courses, grades, and credit hours.</p>
+  </div>
+
+  <!-- AD -->
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+
+  <div class="calc-card">
+    <div id="courses-container"></div>
+
+    <button onclick="addCourse()" style="
+      background:none; border:1px dashed var(--border);
+      border-radius:8px; width:100%; padding:0.625rem;
+      color:var(--slate-mid); font-size:0.83rem; font-weight:500;
+      cursor:pointer; font-family:'Inter',sans-serif;
+      transition:all 0.15s; margin-bottom:1.25rem;
+    " onmouseover="this.style.borderColor='var(--indigo-light)';this.style.color='var(--indigo)'"
+       onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--slate-mid)'">
+      + Add another course
+    </button>
+
+    <button class="calc-btn" onclick="calculateGPA()">Calculate Semester GPA</button>
+
+    <div class="result-box" id="result">
+      <div class="result-num" id="result-gpa">—</div>
+      <div class="result-label">Your Semester GPA (4.0 scale)</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+
+  <!-- EXPLAINER -->
+  <div class="explainer">
+    <h2>Semester GPA vs. cumulative GPA</h2>
+    <p>Your semester GPA reflects only the courses you took in a single term. Your cumulative GPA is a weighted average of every course across every semester. They're calculated the same way — but semester GPA only uses this semester's data.</p>
+    <p>Knowing your semester GPA matters when you're checking whether you hit a scholarship requirement for the term, monitoring academic probation thresholds, or seeing how a strong or weak semester is likely to move your cumulative GPA.</p>
+
+    <h2>How semester GPA is calculated</h2>
+    <p><strong>Formula:</strong> Semester GPA = Σ (Grade Points × Credit Hours) ÷ Total Credit Hours this semester</p>
+    <p>Grade points follow the standard 4.0 scale: A = 4.0, A− = 3.7, B+ = 3.3, B = 3.0, B− = 2.7, C+ = 2.3, C = 2.0, C− = 1.7, D+ = 1.3, D = 1.0, F = 0.0.</p>
+
+    <h2>Why semester GPA differs from cumulative GPA</h2>
+    <p>A strong semester raises your cumulative GPA — but how much depends on how many credits you've already completed. If you have 90 credits and earn a 4.0 this semester (15 credits), your cumulative GPA only rises by about 0.15 points. If you're a freshman with 15 credits completed, that same semester moves your cumulative GPA dramatically.</p>
+    <p>Use our <a href="gpa-raise-calculator.html" style="color:var(--indigo);">GPA Raise Calculator</a> to see exactly how this semester will affect your cumulative GPA.</p>
+
+    <h2>Common uses for semester GPA</h2>
+    <p>Students check semester GPA to verify scholarship eligibility (many scholarships require a minimum GPA each term, not just cumulatively), to track progress after academic probation, or simply to see how a tough or easy semester compares to their overall average.</p>
+
+    <h2>Related tools and guides</h2>
+    <p>
+      <a href="gpa-calculator.html" style="color:var(--indigo);">GPA Calculator</a> — calculate your cumulative GPA across all semesters.<br>
+      <a href="gpa-raise-calculator.html" style="color:var(--indigo);">GPA Raise Calculator</a> — see how this semester will move your cumulative GPA.<br>
+      <a href="grade-calculator.html" style="color:var(--indigo);">Grade Calculator</a> — figure out what you need on remaining assignments.<br>
+      <a href="../blog/what-gpa-to-keep-scholarship.html" style="color:var(--indigo);">What GPA Do You Need to Keep Your Scholarship?</a> — semester thresholds explained.
+    </p>
+  </div>
+
+  <!-- AD -->
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+  var gradeScale = {
+    'A':  4.0, 'A-': 3.7,
+    'B+': 3.3, 'B':  3.0, 'B-': 2.7,
+    'C+': 2.3, 'C':  2.0, 'C-': 1.7,
+    'D+': 1.3, 'D':  1.0, 'D-': 0.7,
+    'F':  0.0
+  };
+
+  var courseCount = 0;
+
+  function addCourse(grade, credits) {
+    courseCount++;
+    var container = document.getElementById('courses-container');
+    var row = document.createElement('div');
+    row.id = 'course-' + courseCount;
+    row.style.cssText = 'display:grid;grid-template-columns:1fr auto auto;gap:0.75rem;align-items:end;margin-bottom:0.75rem;';
+    row.innerHTML = '<div class="form-group" style="margin:0">' +
+      '<label>Course ' + courseCount + '</label>' +
+      '<input type="text" placeholder="e.g. English 101" id="name-' + courseCount + '">' +
+      '</div>' +
+      '<div class="form-group" style="margin:0;min-width:100px">' +
+      '<label>Grade</label>' +
+      '<select id="grade-' + courseCount + '">' +
+      Object.keys(gradeScale).map(function(g) {
+        return '<option value="' + g + '"' + (g === (grade || 'B') ? ' selected' : '') + '>' + g + '</option>';
+      }).join('') +
+      '</select></div>' +
+      '<div class="form-group" style="margin:0;min-width:80px">' +
+      '<label>Credits</label>' +
+      '<input type="number" id="credits-' + courseCount + '" value="' + (credits || 3) + '" min="0.5" max="12" step="0.5">' +
+      '</div>';
+
+    if (courseCount > 1) {
+      var del = document.createElement('button');
+      del.textContent = '×';
+      del.style.cssText = 'background:none;border:none;cursor:pointer;color:var(--slate-light);font-size:1.2rem;padding:0 0.25rem;align-self:center;margin-top:1.25rem;';
+      del.onclick = (function(id) { return function() {
+        document.getElementById('course-' + id).remove();
+      }; })(courseCount);
+      row.appendChild(del);
+    }
+
+    container.appendChild(row);
+  }
+
+  function calculateGPA() {
+    var totalPoints = 0;
+    var totalCredits = 0;
+    var rows = [];
+
+    for (var i = 1; i <= courseCount; i++) {
+      var gradeEl = document.getElementById('grade-' + i);
+      var creditsEl = document.getElementById('credits-' + i);
+      if (!gradeEl || !creditsEl) continue;
+
+      var grade = gradeEl.value;
+      var credits = parseFloat(creditsEl.value);
+      if (isNaN(credits) || credits <= 0) continue;
+
+      var points = gradeScale[grade];
+      totalPoints += points * credits;
+      totalCredits += credits;
+      rows.push({ grade: grade, credits: credits, points: points });
+    }
+
+    if (totalCredits === 0) return;
+
+    var gpa = totalPoints / totalCredits;
+
+    document.getElementById('result-gpa').textContent = gpa.toFixed(2);
+    document.getElementById('result-detail').innerHTML =
+      'Based on <strong>' + totalCredits + ' credit hours</strong> across <strong>' + rows.length + ' courses</strong> this semester.' +
+      '<br>Total quality points: ' + totalPoints.toFixed(1);
+
+    var resultBox = document.getElementById('result');
+    resultBox.classList.add('show');
+    resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Init with 4 courses (typical semester load)
+  addCourse('A', 3);
+  addCourse('B+', 3);
+  addCourse('B', 3);
+  addCourse('C+', 3);
+</script>
+</body>
+</html>
