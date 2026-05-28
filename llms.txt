@@ -1,0 +1,53 @@
+# GPA Vault
+
+> Free calculators and guides for college students managing GPA, student loans, and academic decisions. All tools are free, no signup required.
+
+GPA Vault (gpavault.com) helps US college and high school students calculate GPA, plan for financial aid, compare student loan options, and make informed academic decisions. The site covers two main areas: GPA and academic performance tools, and student loan and college cost tools.
+
+---
+
+## GPA & Academic Tools
+
+- [GPA Calculator](https://gpavault.com/tools/gpa-calculator.html): Calculate cumulative or semester GPA from letter grades and credit hours. Supports standard 4.0 scale with plus/minus grades.
+- [Semester GPA Calculator](https://gpavault.com/tools/semester-gpa-calculator.html): Calculate GPA for a single semester only, separate from cumulative GPA. Useful for scholarship eligibility and academic probation tracking.
+- [Weighted GPA Calculator](https://gpavault.com/tools/weighted-gpa-calculator.html): Calculate weighted GPA for AP, IB, and honors courses on the 5.0 scale.
+- [GPA Raise Calculator](https://gpavault.com/tools/gpa-raise-calculator.html): Calculate exactly how many credits of A's are needed to reach a target cumulative GPA.
+- [Grade Calculator](https://gpavault.com/tools/grade-calculator.html): Track weighted course grades and calculate what score is needed on remaining assignments to hit a target grade.
+- [Final Exam Calculator](https://gpavault.com/tools/final-exam-calculator.html): Calculate the minimum score needed on a final exam to reach a target course grade.
+- [SAT Score Calculator](https://gpavault.com/tools/sat-score-calculator.html): Convert SAT section scores to a scaled total (400–1600) and see percentile rankings.
+- [ACT Score Calculator](https://gpavault.com/tools/act-score-calculator.html): Calculate ACT composite score from four section scores and see percentile rankings.
+
+---
+
+## Student Loans & College Cost Tools
+
+- [Student Loan Calculator](https://gpavault.com/tools/student-loan-calculator.html): Calculate monthly payment, total interest, and payoff timeline for federal and private student loans. Includes 2025–26 federal interest rates.
+- [Loan Repayment Calculator](https://gpavault.com/tools/loan-repayment-calculator.html): Compare standard vs extended repayment plans and model the impact of extra monthly payments.
+- [College Cost Calculator](https://gpavault.com/tools/college-cost-calculator.html): Estimate total 4-year cost of attendance including tuition, room and board, books, and fees with annual cost increase projection.
+- [Scholarship Savings Calculator](https://gpavault.com/tools/scholarship-savings-calculator.html): Calculate the true value of a scholarship including interest savings over the loan repayment period.
+- [Student Loan vs Salary Calculator](https://gpavault.com/tools/student-loan-vs-salary.html): Compare total student debt to expected starting salary to assess whether the debt-to-income ratio is manageable.
+- [Degree ROI Calculator](https://gpavault.com/tools/degree-roi-calculator.html): Calculate the financial return on a college degree by comparing total cost vs lifetime earnings premium.
+
+---
+
+## Blog: GPA & Academics
+
+- [How to Raise Your GPA in One Semester](https://gpavault.com/blog/how-to-raise-your-gpa-in-one-semester.html): Strategies that actually move the GPA needle, including course selection, grade recovery, and the math behind semester impact.
+- [How Many A's Do You Need to Raise Your GPA?](https://gpavault.com/blog/how-many-as-to-raise-gpa.html): The math behind GPA improvement with real examples and a calculator link.
+- [Does Retaking a Class Replace Your GPA?](https://gpavault.com/blog/does-retaking-a-class-replace-your-gpa.html): How grade replacement and forgiveness policies work, when retaking is worth it, and how it affects financial aid.
+- [What GPA Do You Need for Med School?](https://gpavault.com/blog/what-gpa-do-you-need-for-med-school.html): Average GPAs for MD and DO programs, BCPM science GPA explained, and options for applicants below the cutoff.
+- [What GPA Do You Need to Keep Your Scholarship?](https://gpavault.com/blog/what-gpa-to-keep-scholarship.html): Scholarship GPA requirements, per-semester vs cumulative thresholds, and what happens if you fall below.
+- [Weighted GPA Calculator for AP, IB & Honors Classes](https://gpavault.com/blog/weighted-gpa-calculator-ap-classes.html): Complete guide to calculating weighted GPA, how colleges evaluate it, and the 5.0 scale explained.
+- [How to Calculate Your Final Exam Grade](https://gpavault.com/blog/how-to-calculate-final-exam-grade.html): Step-by-step formula and examples for calculating required final exam scores.
+
+---
+
+## Blog: Student Loans & College Finance
+
+- [How Much Student Loan Debt Is Too Much?](https://gpavault.com/blog/how-much-student-loan-debt-is-too-much.html): The 1x salary rule explained — why total debt should not exceed expected first-year income.
+- [Student Loan Repayment Plans Explained (2026)](https://gpavault.com/blog/student-loan-repayment-plans-2026.html): Overview of Standard, IBR, and RAP repayment plans including the 2026 changes.
+- [Federal vs Private Student Loans](https://gpavault.com/blog/federal-vs-private-student-loans.html): Key differences, which to borrow first, and when private loans make sense.
+- [How to Find Scholarships You Actually Qualify For](https://gpavault.com/blog/how-to-find-scholarships.html): Systematic approach to finding local, niche, and institutional scholarships with less competition.
+- [Room and Board vs Off-Campus Living](https://gpavault.com/blog/room-board-vs-off-campus.html): How to calculate whether on-campus or off-campus housing is actually cheaper for your school and city.
+- [Is a College Degree Worth the Debt?](https://gpavault.com/blog/is-college-degree-worth-the-debt.html): How to calculate degree ROI for a specific major and school, not just average statistics.
+- [Average Starting Salary by Major (2026)](https://gpavault.com/blog/average-starting-salary-by-major.html): 2026 salary data by college major to benchmark expected earnings against student debt.
