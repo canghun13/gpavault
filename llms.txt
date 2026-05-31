@@ -10,6 +10,7 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 
 - [GPA Calculator](https://gpavault.com/tools/gpa-calculator.html): Calculate cumulative or semester GPA from letter grades and credit hours. Supports standard 4.0 scale with plus/minus grades.
 - [Semester GPA Calculator](https://gpavault.com/tools/semester-gpa-calculator.html): Calculate GPA for a single semester only, separate from cumulative GPA. Useful for scholarship eligibility and academic probation tracking.
+- [IB GPA Calculator](https://gpavault.com/tools/ib-gpa-calculator.html): Convert International Baccalaureate grades (1–7) to US GPA on the 4.0 unweighted and 5.0 weighted scale. Covers HL vs SL, IB diploma vs course program, and comparison with AP weighting.
 - [Weighted GPA Calculator](https://gpavault.com/tools/weighted-gpa-calculator.html): Calculate weighted GPA for AP, IB, and honors courses on the 5.0 scale.
 - [GPA Raise Calculator](https://gpavault.com/tools/gpa-raise-calculator.html): Calculate exactly how many credits of A's are needed to reach a target cumulative GPA.
 - [Grade Calculator](https://gpavault.com/tools/grade-calculator.html): Track weighted course grades and calculate what score is needed on remaining assignments to hit a target grade.
@@ -44,6 +45,8 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 
 ## Blog: Student Loans & College Finance
 
+- [Average Student Loan Debt by Major: Is Yours Normal?](https://gpavault.com/blog/average-student-loan-debt-by-major.html): 2026 average debt by field of study cross-referenced with starting salaries. Covers debt-to-salary ratios by major, pre-med/pre-law layering problem, and what to do if your ratio is too high.
+- [How to Lower Your Student Loan Payments](https://gpavault.com/blog/how-to-lower-your-student-loan-payments.html): 7 options for reducing monthly student loan payments — IDR plans, PSLF, extended repayment, refinancing, deferment, consolidation, and income growth. Includes comparison table of when each approach makes sense.
 - [How Much Student Loan Debt Is Too Much?](https://gpavault.com/blog/how-much-student-loan-debt-is-too-much.html): The 1x salary rule explained — why total debt should not exceed expected first-year income.
 - [Student Loan Repayment Plans Explained (2026)](https://gpavault.com/blog/student-loan-repayment-plans-2026.html): Overview of Standard, IBR, and RAP repayment plans including the 2026 changes.
 - [Federal vs Private Student Loans](https://gpavault.com/blog/federal-vs-private-student-loans.html): Key differences, which to borrow first, and when private loans make sense.

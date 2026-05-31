@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IB GPA Calculator – Convert IB Grades to GPA (4.0 & 5.0 Scale) | GPA Vault</title>
+  <meta name="description" content="Free IB GPA calculator. Convert International Baccalaureate grades (1–7) to US GPA on the 4.0 and 5.0 weighted scale instantly.">
+  <meta property="og:title" content="IB GPA Calculator – GPA Vault">
+  <meta property="og:description" content="Convert IB grades to US GPA. See your 4.0 unweighted and 5.0 weighted GPA from International Baccalaureate courses.">
+  <link rel="canonical" href="https://gpavault.com/tools/ib-gpa-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "IB GPA Calculator",
+  "description": "Free IB GPA calculator. Convert International Baccalaureate grades to US GPA on the 4.0 and 5.0 weighted scale.",
+  "url": "https://gpavault.com/tools/ib-gpa-calculator.html",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "GPA Vault",
+    "url": "https://gpavault.com"
+  }
+}
+</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Academics</div>
+    <h1>IB GPA Calculator</h1>
+    <p>Convert your International Baccalaureate (IB) grades to a US GPA. See your unweighted 4.0 GPA and weighted 5.0 GPA side by side.</p>
+  </div>
+
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+
+  <div class="calc-card">
+    <div id="courses-container"></div>
+
+    <button onclick="addCourse()" style="
+      background:none; border:1px dashed var(--border);
+      border-radius:8px; width:100%; padding:0.625rem;
+      color:var(--slate-mid); font-size:0.83rem; font-weight:500;
+      cursor:pointer; font-family:'Inter',sans-serif;
+      margin-bottom:1.25rem;
+    ">+ Add another course</button>
+
+    <button class="calc-btn" onclick="calculateGPA()">Calculate IB GPA</button>
+
+    <div class="result-box" id="result">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;text-align:center;">
+        <div>
+          <div class="result-num" id="result-weighted">—</div>
+          <div class="result-label">Weighted GPA (5.0 scale)</div>
+        </div>
+        <div>
+          <div class="result-num" id="result-unweighted" style="color:var(--slate-mid);">—</div>
+          <div class="result-label">Unweighted GPA (4.0 scale)</div>
+        </div>
+      </div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+
+  <div class="explainer">
+    <h2>How to convert IB grades to US GPA</h2>
+    <p>IB courses use a 1–7 grading scale. To convert to a US GPA, each IB grade maps to a letter grade, which maps to grade points on the 4.0 scale. Because IB courses are treated as the equivalent of AP courses in terms of rigor, they receive a +1.0 point bonus on the weighted 5.0 scale.</p>
+
+    <h2>IB grade to GPA conversion table</h2>
+    <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
+      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">IB Grade</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">US Letter Grade</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Unweighted GPA (4.0)</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Weighted GPA (5.0)</th></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">7</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">A</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">5.0</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">6</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">A−</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.7</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.7</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">5</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">B+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.3</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.3</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">B</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.0</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">C</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.0</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">D</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.0</td></tr>
+      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">F</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">0.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">0.0</td></tr>
+    </table>
+    <p>This conversion is the most widely accepted standard, but individual high schools and colleges may use slightly different scales. If your school uses a specific IB-to-GPA policy, check with your registrar to confirm.</p>
+
+    <h2>HL vs SL courses: does the level affect GPA?</h2>
+    <p>In the IB program, courses are divided into Higher Level (HL) and Standard Level (SL). Most US high schools apply the same +1.0 weighted bonus to both HL and SL IB courses, treating them identically to AP courses. Some schools give HL courses an extra 0.5 bonus (treating them like an additional honors bump on top of the IB bonus) while SL courses receive the standard +1.0.</p>
+    <p>Check your school's specific weighting policy — it varies. For this calculator, both HL and SL are weighted as standard IB (+1.0), which reflects the most common policy.</p>
+
+    <h2>IB diploma vs IB courses: what US colleges see</h2>
+    <p>Students in the full IB Diploma Programme complete six subject groups plus the core components (Theory of Knowledge, Extended Essay, and CAS). Students in IB Course programmes take individual IB courses without pursuing the full diploma.</p>
+    <p>Both appear on transcripts and are weighted equally for GPA purposes. However, completing the full IB Diploma carries additional signal for selective college admissions — it demonstrates sustained academic rigor across a broad curriculum, similar to how a full AP Scholar designation reads differently from a few individual AP courses.</p>
+
+    <h2>Does a high IB GPA guarantee college credit?</h2>
+    <p>No. College credit for IB work depends on your final IB exam scores, not your coursework GPA. Most US colleges accept IB scores of 4, 5, 6, or 7 (with the cutoff varying by school and subject) for credit or advanced standing. A strong in-class GPA with a low IB exam score typically earns no college credit, even if the weighted GPA looks impressive.</p>
+    <p>Check each college's IB credit policy individually — the College Board and IB organization maintain searchable databases of institutional policies.</p>
+
+    <h2>How IB GPA compares to AP GPA for college admissions</h2>
+    <p>US colleges treat IB and AP courses as equivalent in terms of rigor. Both receive the same +1.0 weighted GPA boost at most schools, and both signal that a student sought out and completed college-level coursework in high school. Admissions officers evaluate IB and AP performance on the same scale — what matters is the grade earned in the course relative to what was available at your school.</p>
+    <p>IB students sometimes worry that the 1–7 scale is harder to interpret than letter grades. In practice, a 7 is clearly an A, a 5 is a B+, and so on — admissions offices are familiar with the IB scale and apply the conversion without penalizing IB students.</p>
+
+    <h2>Mixed IB and non-IB courses</h2>
+    <p>Most students take a mix of IB courses, regular courses, and sometimes AP or Honors courses. This calculator handles IB courses specifically. For a complete weighted GPA that includes AP, Honors, and regular courses alongside IB courses, use our <a href="weighted-gpa-calculator.html" style="color:var(--indigo);">Weighted GPA Calculator</a>, which lets you set each course type individually.</p>
+
+    <h2>Related tools and guides</h2>
+    <p>
+      <a href="weighted-gpa-calculator.html" style="color:var(--indigo);">Weighted GPA Calculator</a> — calculate weighted GPA for mixed AP, IB, Honors, and regular courses.<br>
+      <a href="gpa-calculator.html" style="color:var(--indigo);">GPA Calculator</a> — calculate your unweighted cumulative GPA.<br>
+      <a href="gpa-raise-calculator.html" style="color:var(--indigo);">GPA Raise Calculator</a> — how many strong grades do you need to hit your target?<br>
+      <a href="../blog/weighted-gpa-calculator-ap-classes.html" style="color:var(--indigo);">Weighted GPA Guide for AP, IB & Honors Classes</a> — the full breakdown of how weighting works.
+    </p>
+  </div>
+
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+  var ibScale = {
+    '7': { unweighted: 4.0, letter: 'A' },
+    '6': { unweighted: 3.7, letter: 'A−' },
+    '5': { unweighted: 3.3, letter: 'B+' },
+    '4': { unweighted: 3.0, letter: 'B' },
+    '3': { unweighted: 2.0, letter: 'C' },
+    '2': { unweighted: 1.0, letter: 'D' },
+    '1': { unweighted: 0.0, letter: 'F' }
+  };
+
+  var courseCount = 0;
+
+  function addCourse(grade, level) {
+    courseCount++;
+    var container = document.getElementById('courses-container');
+    var row = document.createElement('div');
+    row.id = 'course-' + courseCount;
+    row.style.cssText = 'display:grid;grid-template-columns:1fr 90px 120px auto;gap:0.75rem;align-items:end;margin-bottom:0.75rem;';
+
+    row.innerHTML =
+      '<div class="form-group" style="margin:0"><label>Course ' + courseCount + '</label>' +
+      '<input type="text" placeholder="e.g. IB Mathematics HL"></div>' +
+      '<div class="form-group" style="margin:0"><label>IB Grade</label>' +
+      '<select id="grade-' + courseCount + '">' +
+      Object.keys(ibScale).map(function(g) {
+        return '<option value="' + g + '"' + (g === (grade || '6') ? ' selected' : '') + '>' + g + ' (' + ibScale[g].letter + ')</option>';
+      }).join('') +
+      '</select></div>' +
+      '<div class="form-group" style="margin:0"><label>Level</label>' +
+      '<select id="level-' + courseCount + '">' +
+      '<option value="hl"' + ((!level || level === 'hl') ? ' selected' : '') + '>HL</option>' +
+      '<option value="sl"' + (level === 'sl' ? ' selected' : '') + '>SL</option>' +
+      '</select></div>';
+
+    if (courseCount > 1) {
+      var del = document.createElement('button');
+      del.textContent = '×';
+      del.style.cssText = 'background:none;border:none;cursor:pointer;color:var(--slate-light);font-size:1.25rem;margin-top:1.5rem;';
+      del.onclick = (function(id) { return function() {
+        document.getElementById('course-' + id).remove();
+      }; })(courseCount);
+      row.appendChild(del);
+    } else {
+      var placeholder = document.createElement('div');
+      row.appendChild(placeholder);
+    }
+
+    container.appendChild(row);
+  }
+
+  function calculateGPA() {
+    var totalWeighted = 0;
+    var totalUnweighted = 0;
+    var count = 0;
+
+    for (var i = 1; i <= courseCount; i++) {
+      var gradeEl = document.getElementById('grade-' + i);
+      if (!gradeEl) continue;
+
+      var grade = gradeEl.value;
+      var data = ibScale[grade];
+      totalUnweighted += data.unweighted;
+      totalWeighted += (data.unweighted + 1.0);
+      count++;
+    }
+
+    if (count === 0) return;
+
+    var weighted = totalWeighted / count;
+    var unweighted = totalUnweighted / count;
+
+    document.getElementById('result-weighted').textContent = weighted.toFixed(2);
+    document.getElementById('result-unweighted').textContent = unweighted.toFixed(2);
+    document.getElementById('result-detail').innerHTML =
+      'Based on <strong>' + count + ' IB courses</strong>. ' +
+      'IB courses receive a +1.0 weighted bonus (treated equivalent to AP).';
+
+    var resultBox = document.getElementById('result');
+    resultBox.classList.add('show');
+    resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  addCourse('7', 'hl');
+  addCourse('6', 'hl');
+  addCourse('5', 'sl');
+</script>
+</body>
+</html>
