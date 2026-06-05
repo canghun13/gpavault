@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPA to Letter Grade Converter – 4.0 Scale Chart | GPA Vault</title>
+  <meta name="description" content="Convert GPA to letter grade or letter grade to GPA instantly. Full 4.0 scale chart with plus/minus grades, percentage equivalents, and GPA point values.">
+  <link rel="canonical" href="https://gpavault.com/tools/gpa-to-letter-grade-converter.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"GPA to Letter Grade Converter","description":"Convert GPA to letter grade or letter grade to GPA. Full 4.0 scale chart with plus/minus grades and percentage equivalents.","url":"https://gpavault.com/tools/gpa-to-letter-grade-converter.html","applicationCategory":"EducationalApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"GPA Vault","url":"https://gpavault.com"}}
+</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Academics</div>
+    <h1>GPA to Letter Grade Converter</h1>
+    <p>Convert a GPA to a letter grade, or a letter grade to GPA points. Enter a value in either field to convert instantly.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+  <div class="calc-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:end;">
+      <div class="form-group">
+        <label>GPA (0.0 – 4.0)</label>
+        <input type="number" id="gpa-input" placeholder="e.g. 3.5" min="0" max="4.0" step="0.01" oninput="convertFromGPA()">
+      </div>
+      <div class="form-group">
+        <label>Letter Grade</label>
+        <select id="letter-input" onchange="convertFromLetter()">
+          <option value="">— select —</option>
+          <option value="4.0">A (4.0)</option>
+          <option value="3.7">A− (3.7)</option>
+          <option value="3.3">B+ (3.3)</option>
+          <option value="3.0">B (3.0)</option>
+          <option value="2.7">B− (2.7)</option>
+          <option value="2.3">C+ (2.3)</option>
+          <option value="2.0">C (2.0)</option>
+          <option value="1.7">C− (1.7)</option>
+          <option value="1.3">D+ (1.3)</option>
+          <option value="1.0">D (1.0)</option>
+          <option value="0.0">F (0.0)</option>
+        </select>
+      </div>
+    </div>
+    <div class="result-box show" id="result" style="margin-top:1rem;">
+      <div class="result-num" id="result-letter" style="font-size:3rem;">—</div>
+      <div class="result-label" id="result-label">Enter a GPA or select a letter grade above</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>Complete GPA to letter grade conversion chart</h2>
+    <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
+      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Letter Grade</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">GPA Points</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Typical % Range</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Quality Points (3-credit)</th></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">A+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.0 (some schools 4.3)</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">97–100%</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">12.0</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">A</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">93–96%</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">12.0</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">A−</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.7</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">90–92%</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">11.1</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">B+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.3</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">87–89%</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">9.9</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">B</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">83–86%</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">9.0</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">B−</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.7</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">80–82%</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">8.1</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">C+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.3</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">77–79%</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">6.9</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">C</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">73–76%</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">6.0</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">C−</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1.7</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">70–72%</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">5.1</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">D+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1.3</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">67–69%</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.9</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">D</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">63–66%</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.0</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">D−</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">0.7</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">60–62%</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.1</td></tr>
+      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">F</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">0.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Below 60%</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">0.0</td></tr>
+    </table>
+    <p>Note: percentage cutoffs vary by institution and professor. Some schools use 90/80/70/60 as letter grade breakpoints; others use 93/83/73/63. Always check your course syllabus for the exact scale used in that class.</p>
+
+    <h2>What are quality points and why do they matter?</h2>
+    <p>Your GPA is calculated from quality points, not letter grades directly. Quality points = GPA value × credit hours. A B (3.0) in a 3-credit course earns 9.0 quality points. An A (4.0) in a 4-credit course earns 16.0 quality points. Your cumulative GPA = total quality points ÷ total credit hours attempted.</p>
+    <p>This is why a 4-credit course affects your GPA more than a 3-credit course. An A in a 4-credit course adds 16 quality points; an A in a 3-credit course adds 12. A C in a 4-credit course drops your GPA more than a C in a 3-credit course. High-credit courses in your schedule deserve proportionally more of your study time.</p>
+
+    <h2>GPA thresholds that matter in practice</h2>
+    <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
+      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">GPA</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Equivalent Grade</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Significance</th></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">All A's</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Perfect GPA; summa cum laude at most schools</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.7+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Mostly A's with occasional A−</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Magna cum laude at most schools; highly competitive for graduate programs</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.5+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Mostly A's with some B+'s</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Dean's list at most schools; competitive for most graduate programs</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.0+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">B average</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Most common scholarship GPA minimum; minimum for many graduate programs</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.5+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">B− to C+ average</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Minimum for some graduate programs and state scholarship renewals</td></tr>
+      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.0+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">C average</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Minimum to remain in good academic standing; below this risks academic probation</td></tr>
+    </table>
+
+    <h2>How different grades affect your GPA</h2>
+    <p>The GPA impact of each grade depends on how many credits you have already completed. Early in college (under 45 credits), each grade has a large effect — an A in a 3-credit course when you have 15 credits completed adds 0.13 GPA points. Later (90+ credits), the same A adds only 0.02 GPA points. This is why front-loading strong grades early in college is the highest-leverage GPA strategy available to most students.</p>
+
+    <h2>Related tools</h2>
+    <p>
+      <a href="gpa-calculator.html" style="color:var(--indigo);">GPA Calculator</a> — calculate your cumulative GPA from all your grades.<br>
+      <a href="semester-gpa-calculator.html" style="color:var(--indigo);">Semester GPA Calculator</a> — calculate this semester's GPA separately.<br>
+      <a href="gpa-raise-calculator.html" style="color:var(--indigo);">GPA Raise Calculator</a> — how many A's do you need to hit your GPA goal?<br>
+      <a href="weighted-gpa-calculator.html" style="color:var(--indigo);">Weighted GPA Calculator</a> — calculate GPA including AP, IB, and honors courses.<br>
+      <a href="../blog/how-many-as-to-raise-gpa.html" style="color:var(--indigo);">How Many A's Do You Need to Raise Your GPA?</a> — the math explained.
+    </p>
+  </div>
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+var gradeMap = [
+  {min:3.85, letter:'A', pct:'93–100%'},
+  {min:3.5, letter:'A−', pct:'90–92%'},
+  {min:3.15, letter:'B+', pct:'87–89%'},
+  {min:2.85, letter:'B', pct:'83–86%'},
+  {min:2.5, letter:'B−', pct:'80–82%'},
+  {min:2.15, letter:'C+', pct:'77–79%'},
+  {min:1.85, letter:'C', pct:'73–76%'},
+  {min:1.5, letter:'C−', pct:'70–72%'},
+  {min:1.15, letter:'D+', pct:'67–69%'},
+  {min:0.85, letter:'D', pct:'63–66%'},
+  {min:0.5, letter:'D−', pct:'60–62%'},
+  {min:0, letter:'F', pct:'Below 60%'}
+];
+var letterToGPA = {'4.0':{'letter':'A','pct':'93–100%'},'3.7':{'letter':'A−','pct':'90–92%'},'3.3':{'letter':'B+','pct':'87–89%'},'3.0':{'letter':'B','pct':'83–86%'},'2.7':{'letter':'B−','pct':'80–82%'},'2.3':{'letter':'C+','pct':'77–79%'},'2.0':{'letter':'C','pct':'73–76%'},'1.7':{'letter':'C−','pct:'70–72%'},'1.3':{'letter':'D+','pct':'67–69%'},'1.0':{'letter':'D','pct':'63–66%'},'0.0':{'letter':'F','pct':'Below 60%'}};
+
+function convertFromGPA(){
+  var v=parseFloat(document.getElementById('gpa-input').value);
+  if(isNaN(v)||v<0||v>4.3){return;}
+  document.getElementById('letter-input').value='';
+  var g=gradeMap.find(function(x){return v>=x.min;})||gradeMap[gradeMap.length-1];
+  document.getElementById('result-letter').textContent=g.letter;
+  document.getElementById('result-label').textContent='Letter grade for GPA '+v.toFixed(2);
+  document.getElementById('result-detail').textContent='Typical percentage range: '+g.pct;
+}
+function convertFromLetter(){
+  var v=document.getElementById('letter-input').value;
+  if(!v){return;}
+  document.getElementById('gpa-input').value='';
+  var info=letterToGPA[v];
+  document.getElementById('result-letter').textContent=parseFloat(v).toFixed(1);
+  document.getElementById('result-label').textContent='GPA points for '+(info?info.letter:v);
+  document.getElementById('result-detail').textContent=info?'Typical percentage range: '+info.pct:'';
+}
+</script>
+</body>
+</html>

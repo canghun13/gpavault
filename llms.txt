@@ -13,6 +13,7 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 - [IB GPA Calculator](https://gpavault.com/tools/ib-gpa-calculator.html): Convert International Baccalaureate grades (1–7) to US GPA on the 4.0 unweighted and 5.0 weighted scale. Covers HL vs SL, IB diploma vs course program, and comparison with AP weighting.
 - [Weighted GPA Calculator](https://gpavault.com/tools/weighted-gpa-calculator.html): Calculate weighted GPA for AP, IB, and honors courses on the 5.0 scale.
 - [GPA Raise Calculator](https://gpavault.com/tools/gpa-raise-calculator.html): Calculate exactly how many credits of A's are needed to reach a target cumulative GPA.
+- [GPA to Letter Grade Converter](https://gpavault.com/tools/gpa-to-letter-grade-converter.html): Convert GPA to letter grade or letter grade to GPA. Full 4.0 scale chart with plus/minus grades, percentage equivalents, and quality point values.
 - [Grade Calculator](https://gpavault.com/tools/grade-calculator.html): Track weighted course grades and calculate what score is needed on remaining assignments to hit a target grade.
 - [Final Exam Calculator](https://gpavault.com/tools/final-exam-calculator.html): Calculate the minimum score needed on a final exam to reach a target course grade.
 - [SAT Score Calculator](https://gpavault.com/tools/sat-score-calculator.html): Convert SAT section scores to a scaled total (400–1600) and see percentile rankings.
@@ -33,6 +34,7 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 
 ## Blog: GPA & Academics
 
+- [How to Calculate Cumulative GPA](https://gpavault.com/blog/how-to-calculate-cumulative-gpa.html): Step-by-step formula, quality points explained, worked examples across multiple semesters, and common calculation mistakes.
 - [How to Raise Your GPA in One Semester](https://gpavault.com/blog/how-to-raise-your-gpa-in-one-semester.html): Strategies that actually move the GPA needle, including course selection, grade recovery, and the math behind semester impact.
 - [How Many A's Do You Need to Raise Your GPA?](https://gpavault.com/blog/how-many-as-to-raise-gpa.html): The math behind GPA improvement with real examples and a calculator link.
 - [Does Retaking a Class Replace Your GPA?](https://gpavault.com/blog/does-retaking-a-class-replace-your-gpa.html): How grade replacement and forgiveness policies work, when retaking is worth it, and how it affects financial aid.
@@ -45,12 +47,13 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 
 ## Blog: Student Loans & College Finance
 
+- [How to Lower Your Student Loan Interest Rate](https://gpavault.com/blog/how-to-lower-student-loan-interest-rate.html): Autopay discounts, refinancing private loans, extra principal payments, employer benefits — every realistic method ranked by impact. Includes warning against refinancing federal loans.
 - [Average Student Loan Debt by Major: Is Yours Normal?](https://gpavault.com/blog/average-student-loan-debt-by-major.html): 2026 average debt by field of study cross-referenced with starting salaries. Covers debt-to-salary ratios by major, pre-med/pre-law layering problem, and what to do if your ratio is too high.
 - [How to Lower Your Student Loan Payments](https://gpavault.com/blog/how-to-lower-your-student-loan-payments.html): 7 options for reducing monthly student loan payments — IDR plans, PSLF, extended repayment, refinancing, deferment, consolidation, and income growth. Includes comparison table of when each approach makes sense.
 - [How Much Student Loan Debt Is Too Much?](https://gpavault.com/blog/how-much-student-loan-debt-is-too-much.html): The 1x salary rule explained — why total debt should not exceed expected first-year income.
-- [Student Loan Repayment Plans Explained (2026)](https://gpavault.com/blog/student-loan-repayment-plans-2026.html): Overview of Standard, IBR, and RAP repayment plans including the 2026 changes.
+- [Student Loan Repayment Plans Explained (2026)](https://gpavault.com/blog/student-loan-repayment-plans-2026.html): Overview of Standard, IBR, PAYE, and RAP repayment plans including the 2026 changes replacing SAVE.
 - [Federal vs Private Student Loans](https://gpavault.com/blog/federal-vs-private-student-loans.html): Key differences, which to borrow first, and when private loans make sense.
 - [How to Find Scholarships You Actually Qualify For](https://gpavault.com/blog/how-to-find-scholarships.html): Systematic approach to finding local, niche, and institutional scholarships with less competition.
 - [Room and Board vs Off-Campus Living](https://gpavault.com/blog/room-board-vs-off-campus.html): How to calculate whether on-campus or off-campus housing is actually cheaper for your school and city.
 - [Is a College Degree Worth the Debt?](https://gpavault.com/blog/is-college-degree-worth-the-debt.html): How to calculate degree ROI for a specific major and school, not just average statistics.
-- [Average Starting Salary by Major (2026)](https://gpavault.com/blog/average-starting-salary-by-major.html): 2026 salary data by college major to benchmark expected earnings against student debt.
+- [Average Starting Salary by Major (2026)](https://gpavault.com/blog/average-starting-salary-by-major.html): 2026 salary data by college major — STEM, business, healthcare, liberal arts, education — to benchmark expected earnings against student debt.
