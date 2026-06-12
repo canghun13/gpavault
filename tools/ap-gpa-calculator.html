@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AP GPA Calculator – See How AP Classes Affect Your GPA | GPA Vault</title>
+  <meta name="description" content="Free AP GPA calculator. Enter your AP courses and grades to see exactly how they affect your weighted GPA — and how many AP classes you need to hit your goal.">
+  <link rel="canonical" href="https://gpavault.com/tools/ap-gpa-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AP GPA Calculator",
+  "description": "Free AP GPA calculator. Enter your AP courses and grades to see how they affect your weighted GPA.",
+  "url": "https://gpavault.com/tools/ap-gpa-calculator.html",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "GPA Vault",
+    "url": "https://gpavault.com"
+  }
+}
+</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Academics</div>
+    <h1>AP GPA Calculator</h1>
+    <p>Enter your AP and non-AP courses to see exactly how your AP classes affect your weighted GPA. Compare weighted vs unweighted side by side.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+
+  <div class="calc-card">
+    <p style="font-size:0.83rem;color:var(--slate-mid);margin-bottom:1.25rem;">Enter your current courses. Mark each as AP, Honors, or Regular — the calculator applies the correct weight automatically.</p>
+    <div id="courses-container"></div>
+    <button onclick="addCourse()" style="background:none;border:1px dashed var(--border);border-radius:8px;width:100%;padding:0.625rem;color:var(--slate-mid);font-size:0.83rem;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:1.25rem;" onmouseover="this.style.borderColor='var(--indigo-light)';this.style.color='var(--indigo)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--slate-mid)'">+ Add another course</button>
+    <button class="calc-btn" onclick="calculateGPA()">Calculate AP GPA</button>
+    <div class="result-box" id="result">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;text-align:center;margin-bottom:1rem;">
+        <div>
+          <div class="result-num" id="result-weighted">—</div>
+          <div class="result-label">Weighted GPA (with AP bonus)</div>
+        </div>
+        <div>
+          <div class="result-num" id="result-unweighted" style="color:var(--slate-mid);">—</div>
+          <div class="result-label">Unweighted GPA (4.0 scale)</div>
+        </div>
+      </div>
+      <div class="result-detail" id="result-detail"></div>
+      <div id="result-breakdown" style="margin-top:1rem;font-size:0.82rem;color:var(--slate-mid);text-align:left;border-top:1px solid var(--border);padding-top:1rem;"></div>
+    </div>
+  </div>
+
+  <div class="explainer">
+    <h2>How AP courses affect your GPA</h2>
+    <p>AP (Advanced Placement) courses receive a +1.0 bonus on the weighted GPA scale. This means an A in an AP class is worth 5.0 instead of the standard 4.0, a B in an AP class is worth 4.0, and a C is worth 3.0. The bonus applies regardless of whether you take the AP exam or what score you receive on it.</p>
+    <p>The purpose of the weight is to reflect academic rigor — AP courses are college-level, and the grading scale acknowledges that earning a B in AP Chemistry is a stronger academic achievement than earning a B in a standard chemistry course.</p>
+
+    <h2>AP weight by grade</h2>
+    <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
+      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Grade</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Regular GPA Points</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">AP Weighted Points (+1.0)</th></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">A+ / A</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">5.0</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">A−</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.7</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.7</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">B+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.3</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.3</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">B</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.0</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">B−</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.7</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.7</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">C+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.3</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.3</td></tr>
+      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">C</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.0</td></tr>
+    </table>
+
+    <h2>How many AP classes do you need to raise your weighted GPA?</h2>
+    <p>The +1.0 bonus per AP course looks significant, but its impact on your overall weighted GPA depends on how many total courses you take and what grades you earn. Here is what different AP course loads produce when you earn all A's:</p>
+    <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
+      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">AP Courses (out of 6 total)</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Weighted GPA (all A's)</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Unweighted GPA</th></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">0 AP courses</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1 AP course</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.17</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2 AP courses</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.33</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3 AP courses</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.50</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4 AP courses</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.67</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
+      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">6 AP courses (all)</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">5.00</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
+    </table>
+    <p>Notice that the unweighted GPA stays at 4.0 in every scenario — the AP bonus only affects the weighted number. This is why colleges use both: weighted GPA signals rigor, unweighted GPA provides a standardized baseline for comparison.</p>
+
+    <h2>Does a B in AP hurt your GPA more than an A in a regular class?</h2>
+    <p>No — and this is one of the most common misconceptions about AP courses. A B in an AP class earns 4.0 weighted points, which is the same as an A in a regular class (also 4.0 unweighted). On the weighted scale, a B in AP is neutral compared to an A in regular. On the unweighted scale, a B in AP (3.0) is lower than an A in regular (4.0) — but colleges understand this context.</p>
+    <p>The practical implication: taking AP courses and earning B's does not hurt your weighted GPA. If you are on the borderline between taking AP and not taking it because you are worried about a B, the weighted GPA math does not justify that concern. The bigger risk is overloading — taking too many AP courses at once and performing poorly across all of them.</p>
+
+    <h2>AP exam scores vs AP course grades: what colleges see</h2>
+    <p>Your AP course grade (the letter grade on your transcript) is separate from your AP exam score (1–5, set by College Board). Colleges see both, but they affect different things:</p>
+    <ul>
+      <li><strong>AP course grade</strong> affects your GPA directly — it is on your high school transcript and is weighted in GPA calculations.</li>
+      <li><strong>AP exam score</strong> determines college credit eligibility — most colleges award credit for scores of 3, 4, or 5, with many preferring 4 or 5 for selective programs.</li>
+      <li>You can earn an A in an AP course and still score a 2 on the exam. Colleges see this discrepancy. Strong exam scores alongside strong grades carry more weight than course grades alone.</li>
+    </ul>
+    <p>For college credit purposes, a score of 4 or 5 on the AP exam can allow you to skip introductory college courses entirely — saving both time and tuition.</p>
+
+    <h2>AP vs Honors: which is better for your GPA?</h2>
+    <p>AP courses receive a +1.0 bonus; Honors courses typically receive a +0.5 bonus. For weighted GPA purposes, two AP classes produce a larger weighted bump than four Honors classes (assuming equal grades). However, AP courses also carry higher workload and exam pressure. The right choice depends on your capacity and goals:</p>
+    <ul>
+      <li>If your goal is maximizing weighted GPA and you are confident you can earn A's or B's, AP is the stronger choice per course.</li>
+      <li>If you are stretching yourself to the point where AP risks B's and C's across multiple courses, a combination of AP and Honors may produce a better weighted GPA than all AP with mixed grades.</li>
+      <li>Admissions officers evaluate your choices in the context of what was available at your school. Taking the most rigorous courses available to you and performing well is more valuable than optimizing a specific GPA number.</li>
+    </ul>
+
+    <h2>Related tools and guides</h2>
+    <p>
+      <a href="weighted-gpa-calculator.html" style="color:var(--indigo);">Weighted GPA Calculator</a> — calculate your full weighted GPA including AP, IB, and Honors.<br>
+      <a href="gpa-calculator.html" style="color:var(--indigo);">GPA Calculator</a> — calculate your unweighted cumulative GPA.<br>
+      <a href="ib-gpa-calculator.html" style="color:var(--indigo);">IB GPA Calculator</a> — convert IB grades to US GPA scale.<br>
+      <a href="gpa-raise-calculator.html" style="color:var(--indigo);">GPA Raise Calculator</a> — how many A's do you need to reach your GPA goal?<br>
+      <a href="../blog/weighted-gpa-calculator-ap-classes.html" style="color:var(--indigo);">Weighted GPA Guide for AP Classes</a> — full breakdown of how AP weighting works.<br>
+      <a href="../blog/what-gpa-do-you-need-for-med-school.html" style="color:var(--indigo);">What GPA Do You Need for Med School?</a> — how AP GPA factors into admissions.
+    </p>
+  </div>
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+var gs={'A+':4.3,'A':4.0,'A-':3.7,'B+':3.3,'B':3.0,'B-':2.7,'C+':2.3,'C':2.0,'C-':1.7,'D+':1.3,'D':1.0,'F':0.0};
+var n=0;
+function addCourse(g,t){
+  n++;
+  var c=document.getElementById('courses-container');
+  var row=document.createElement('div');
+  row.id='cr-'+n;
+  row.style.cssText='display:grid;grid-template-columns:1fr 90px 130px auto;gap:0.75rem;align-items:end;margin-bottom:0.75rem;';
+  row.innerHTML='<div class="form-group" style="margin:0"><label>Course '+n+'</label><input type="text" placeholder="e.g. AP Calculus BC"></div>'
+    +'<div class="form-group" style="margin:0"><label>Grade</label><select id="g-'+n+'">'+Object.keys(gs).map(function(x){return'<option'+(x===(g||'A')?' selected':'')+'>'+x+'</option>';}).join('')+'</select></div>'
+    +'<div class="form-group" style="margin:0"><label>Type</label><select id="t-'+n+'"><option value="ap"'+((!t||t==='ap')?' selected':'')+'>AP (+1.0)</option><option value="honors"'+(t==='honors'?' selected':'')+'>Honors (+0.5)</option><option value="regular"'+(t==='regular'?' selected':'')+'>Regular</option></select></div>'
+    +(n>1?'<button onclick="document.getElementById(\'cr-'+n+'\').remove()" style="background:none;border:none;cursor:pointer;color:var(--slate-light);font-size:1.25rem;margin-top:1.5rem;">×</button>':'<div></div>');
+  c.appendChild(row);
+}
+function calculateGPA(){
+  var wp=0,up=0,tot=0,apCount=0,honorsCount=0,regCount=0;
+  var breakdown=[];
+  for(var i=1;i<=n;i++){
+    var gEl=document.getElementById('g-'+i);
+    var tEl=document.getElementById('t-'+i);
+    if(!gEl||!tEl)continue;
+    var pts=gs[gEl.value];
+    var type=tEl.value;
+    var bonus=type==='ap'?1.0:type==='honors'?0.5:0;
+    var wPts=pts+bonus;
+    wp+=wPts;up+=pts;tot++;
+    if(type==='ap')apCount++;
+    else if(type==='honors')honorsCount++;
+    else regCount++;
+    breakdown.push({grade:gEl.value,type:type,up:pts.toFixed(1),wp:wPts.toFixed(1)});
+  }
+  if(!tot)return;
+  var wGPA=(wp/tot).toFixed(2);
+  var uGPA=(up/tot).toFixed(2);
+  var boost=((wp-up)/tot).toFixed(2);
+  document.getElementById('result-weighted').textContent=wGPA;
+  document.getElementById('result-unweighted').textContent=uGPA;
+  document.getElementById('result-detail').innerHTML='Based on <strong>'+tot+' courses</strong> ('+apCount+' AP, '+honorsCount+' Honors, '+regCount+' Regular). AP/Honors bonus adds <strong>+'+boost+'</strong> to your weighted GPA.';
+  var bHtml='<strong>Course breakdown:</strong><br>';
+  breakdown.forEach(function(b,idx){
+    bHtml+='Course '+(idx+1)+': '+b.grade+' ('+b.type+') → Unweighted: '+b.up+' / Weighted: '+b.wp+'<br>';
+  });
+  document.getElementById('result-breakdown').innerHTML=bHtml;
+  var r=document.getElementById('result');r.classList.add('show');r.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+addCourse('A','ap');addCourse('B+','ap');addCourse('A','honors');addCourse('A-','regular');
+</script>
+</body>
+</html>
