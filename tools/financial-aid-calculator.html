@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Aid Calculator – Estimate Your Net College Cost | GPA Vault</title>
+  <meta name="description" content="Enter your grants, scholarships, and loans to find your true out-of-pocket college cost per year. Free financial aid calculator — no signup required.">
+  <link rel="canonical" href="https://gpavault.com/tools/financial-aid-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Financial Aid Calculator",
+  "description": "Estimate your true out-of-pocket college cost after grants, scholarships, and loans. Free financial aid calculator, no signup.",
+  "url": "https://gpavault.com/tools/financial-aid-calculator.html",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "GPA Vault",
+    "url": "https://gpavault.com"
+  }
+}
+</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">College Costs</div>
+    <h1>Financial Aid Calculator</h1>
+    <p>Enter your Cost of Attendance and financial aid package to find your true net cost — what you actually pay out of pocket each year.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+  <div class="calc-card">
+    <h3 style="font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:var(--slate);margin:0 0 1rem;">Cost of Attendance (Annual)</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.5rem;">
+      <div class="form-group" style="margin:0"><label>Tuition & Fees ($)</label><input type="number" id="tuition" value="35000" min="0"></div>
+      <div class="form-group" style="margin:0"><label>Room & Board ($)</label><input type="number" id="room" value="14000" min="0"></div>
+      <div class="form-group" style="margin:0"><label>Books & Supplies ($)</label><input type="number" id="books" value="1200" min="0"></div>
+      <div class="form-group" style="margin:0"><label>Personal & Transportation ($)</label><input type="number" id="personal" value="2500" min="0"></div>
+    </div>
+
+    <h3 style="font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:var(--slate);margin:0 0 1rem;">Free Money (Does Not Need to Be Repaid)</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.5rem;">
+      <div class="form-group" style="margin:0"><label>Federal Pell Grant ($)</label><input type="number" id="pell" value="0" min="0"></div>
+      <div class="form-group" style="margin:0"><label>Institutional Grant / Scholarship ($)</label><input type="number" id="inst" value="12000" min="0"></div>
+      <div class="form-group" style="margin:0"><label>State Grant ($)</label><input type="number" id="state" value="0" min="0"></div>
+      <div class="form-group" style="margin:0"><label>Outside Scholarships ($)</label><input type="number" id="outside" value="0" min="0"></div>
+    </div>
+
+    <h3 style="font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:var(--slate);margin:0 0 1rem;">Loans (Must Be Repaid)</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.5rem;">
+      <div class="form-group" style="margin:0"><label>Federal Subsidized Loan ($)</label><input type="number" id="sub" value="3500" min="0"></div>
+      <div class="form-group" style="margin:0"><label>Federal Unsubsidized Loan ($)</label><input type="number" id="unsub" value="2000" min="0"></div>
+      <div class="form-group" style="margin:0"><label>Parent PLUS / Private Loan ($)</label><input type="number" id="plus" value="0" min="0"></div>
+      <div class="form-group" style="margin:0"><label>Work-Study (estimated earnings) ($)</label><input type="number" id="workstudy" value="0" min="0"></div>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">Calculate Net Cost</button>
+
+    <div class="result-box" id="result">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;text-align:center;margin-bottom:1rem;">
+        <div><div class="result-num" id="res-coa" style="font-size:1.5rem;">—</div><div class="result-label">Total Cost of Attendance</div></div>
+        <div><div class="result-num" id="res-net" style="font-size:1.5rem;">—</div><div class="result-label">Net Cost After Free Aid</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;text-align:center;margin-bottom:1rem;">
+        <div><div style="font-size:1.1rem;font-weight:700;color:var(--indigo);" id="res-free">—</div><div class="result-label" style="font-size:0.75rem;">Total Free Aid</div></div>
+        <div><div style="font-size:1.1rem;font-weight:700;color:var(--slate-mid);" id="res-loans">—</div><div class="result-label" style="font-size:0.75rem;">Total Loans</div></div>
+        <div><div style="font-size:1.1rem;font-weight:700;color:var(--slate);" id="res-pocket">—</div><div class="result-label" style="font-size:0.75rem;">Out-of-Pocket Gap</div></div>
+      </div>
+      <div class="result-detail" id="res-detail"></div>
+    </div>
+  </div>
+
+  <div class="explainer">
+    <h2>What this calculator shows</h2>
+    <p>Your financial aid award letter lists a lot of numbers, and not all of them reduce what you actually owe. This calculator separates your aid into three buckets: free money (grants and scholarships you never repay), loans (money you borrow and must repay with interest), and your remaining out-of-pocket gap after everything is applied.</p>
+    <p>The net cost figure is what most families should focus on — not the sticker price and not the total aid package number. A school with a high sticker price and generous grants can be cheaper than a lower-cost school with minimal aid.</p>
+
+    <h2>Understanding Cost of Attendance (COA)</h2>
+    <p>COA is the total estimated annual cost to attend a school, including tuition, fees, room and board, books, supplies, transportation, and personal expenses. Colleges set their own COA figures and publish them each academic year. The number on your financial aid award letter is the school's official COA — not just your direct charges.</p>
+    <p>The gap between COA and your direct billed charges (tuition + room if living on campus) is the indirect cost estimate — things like books and personal spending. You will not receive a bill for these, but they are still real expenses you need to budget for.</p>
+
+    <h2>Free money vs loans: why the distinction matters</h2>
+    <p>Aid letters often bundle grants and loans together under a single "financial aid package" total, which can make a $30,000 aid package look equivalent whether it is $30,000 in grants or $15,000 in grants and $15,000 in loans. They are not equivalent. Loans must be repaid with interest — typically starting six months after graduation. A package heavy on loans can leave you with $40,000–$80,000 in debt before you have earned a paycheck.</p>
+    <p>When comparing schools, compare net costs (COA minus free money only) rather than total aid packages. The school that offers more loans in its package is not offering you more money — it is offering you more debt.</p>
+
+    <h2>Types of grants and scholarships</h2>
+    <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
+      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Type</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Source</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Based On</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Renewable?</th></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Pell Grant</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Federal</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Financial need (FAFSA)</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Yes, annually (max 6 years)</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Institutional Grant</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">College</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Need or merit (varies)</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Often requires GPA minimum</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">State Grant</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">State government</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Need, merit, or residency</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Varies by state program</td></tr>
+      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Outside Scholarship</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Private orgs, employers</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Merit, field, background</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Varies widely</td></tr>
+    </table>
+
+    <h2>Federal loan types explained</h2>
+    <p>Subsidized loans: the federal government pays the interest while you are enrolled at least half-time. You do not accrue interest during school. Unsubsidized loans: interest accrues from the moment of disbursement, including while you are in school. If you do not pay interest during school, it capitalizes (is added to your principal) when repayment begins, increasing your total balance.</p>
+    <p>For a $5,500 unsubsidized loan at 6.53% over four years of school, uncapitalized interest adds roughly $1,440 to your balance before your first payment. Paying interest during school — even small amounts — prevents this compounding.</p>
+
+    <h2>What "out-of-pocket gap" means and how to cover it</h2>
+    <p>After applying all free aid and loans, the gap is what remains. Options for covering this gap include: family contribution (EFC/SAI from FAFSA), part-time work or work-study earnings, additional outside scholarships, Parent PLUS loans, or private student loans as a last resort.</p>
+    <p>The 1x salary rule applies here: total loan debt across all four years (federal and private) should not exceed your expected first-year salary after graduation. If the gap is so large that covering it requires loans that push you above this threshold, the net cost of that school may not be financially sustainable for your chosen major.</p>
+
+    <h2>GPA requirements for keeping your financial aid</h2>
+    <p>Most institutional scholarships and grants require maintaining a minimum GPA — typically 2.5 to 3.0 — to renew each year. Losing a $12,000 annual scholarship for one semester below a GPA threshold can dramatically change the total cost of your degree. Check the renewal conditions for every award in your package, and track your GPA throughout each semester.</p>
+    <p>Use our <a href="gpa-calculator.html" style="color:var(--indigo);">GPA Calculator</a> to track your cumulative GPA, and see our guide on <a href="../blog/what-gpa-to-keep-scholarship.html" style="color:var(--indigo);">what GPA you need to keep your scholarship</a> for threshold-specific guidance.</p>
+
+    <h2>Comparing aid packages across schools</h2>
+    <p>When you have offers from multiple schools, compare them on net cost — not sticker price or total aid. Use this process:</p>
+    <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
+      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Step</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">What to Do</th></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Pull the total COA for each school (tuition + room + everything)</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Subtract only grants and scholarships from COA (no loans, no work-study)</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Multiply by 4 for total degree net cost</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Compare that number against your expected first-year salary for your major</td></tr>
+      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">5</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">If total loan need exceeds 1x starting salary, the school may not be financially sustainable</td></tr>
+    </table>
+
+    <h2>Related tools and guides</h2>
+    <p>
+      <a href="college-cost-calculator.html" style="color:var(--indigo);">College Cost Calculator</a> — estimate total 4-year degree cost including inflation.<br>
+      <a href="scholarship-savings-calculator.html" style="color:var(--indigo);">Scholarship Savings Calculator</a> — see the long-term value of winning a scholarship.<br>
+      <a href="student-loan-calculator.html" style="color:var(--indigo);">Student Loan Calculator</a> — total interest cost over your loan's life.<br>
+      <a href="degree-roi-calculator.html" style="color:var(--indigo);">Degree ROI Calculator</a> — is the total cost worth it for your major?<br>
+      <a href="../blog/how-to-find-scholarships.html" style="color:var(--indigo);">How to Find Scholarships You Actually Qualify For</a> — systematic approach to free money.<br>
+      <a href="../blog/what-gpa-to-keep-scholarship.html" style="color:var(--indigo);">What GPA Do You Need to Keep Your Scholarship?</a> — GPA thresholds by award type.<br>
+      <a href="../blog/how-does-financial-aid-work.html" style="color:var(--indigo);">How Does Financial Aid Work?</a> — the full process from FAFSA to award letter.
+    </p>
+  </div>
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+function fmt(n){return '$'+Math.round(n).toLocaleString();}
+function calculate(){
+  var tuition=parseFloat(document.getElementById('tuition').value)||0;
+  var room=parseFloat(document.getElementById('room').value)||0;
+  var books=parseFloat(document.getElementById('books').value)||0;
+  var personal=parseFloat(document.getElementById('personal').value)||0;
+  var coa=tuition+room+books+personal;
+
+  var pell=parseFloat(document.getElementById('pell').value)||0;
+  var inst=parseFloat(document.getElementById('inst').value)||0;
+  var state=parseFloat(document.getElementById('state').value)||0;
+  var outside=parseFloat(document.getElementById('outside').value)||0;
+  var freeAid=pell+inst+state+outside;
+
+  var sub=parseFloat(document.getElementById('sub').value)||0;
+  var unsub=parseFloat(document.getElementById('unsub').value)||0;
+  var plus=parseFloat(document.getElementById('plus').value)||0;
+  var ws=parseFloat(document.getElementById('workstudy').value)||0;
+  var totalLoans=sub+unsub+plus;
+
+  var netCost=coa-freeAid;
+  var gap=Math.max(0,netCost-totalLoans-ws);
+
+  document.getElementById('res-coa').textContent=fmt(coa);
+  document.getElementById('res-net').textContent=fmt(netCost);
+  document.getElementById('res-free').textContent=fmt(freeAid);
+  document.getElementById('res-loans').textContent=fmt(totalLoans);
+  document.getElementById('res-pocket').textContent=fmt(gap);
+
+  var detail='';
+  if(freeAid>=coa){
+    detail='Your free aid covers your full Cost of Attendance. You have no out-of-pocket gap.';
+  } else if(gap===0){
+    detail='Your free aid and loans together cover your full cost. Out-of-pocket gap is $0.';
+  } else {
+    detail='After free aid and loans, your remaining out-of-pocket gap is <strong>'+fmt(gap)+'</strong> per year — or roughly <strong>'+fmt(gap*4)+'</strong> over 4 years. Consider outside scholarships or work-study to reduce this gap.';
+  }
+  if(totalLoans>0){
+    detail+=' <strong>Note:</strong> Loans ('+fmt(totalLoans)+'/yr) must be repaid — they reduce your gap now but increase your total degree cost.';
+  }
+  document.getElementById('res-detail').innerHTML=detail;
+  var r=document.getElementById('result');r.classList.add('show');r.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>
