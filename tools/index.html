@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Student Calculators – GPA, Loans & More | GPA Vault</title>
+  <meta name="description" content="Browse 19+ free calculators for GPA, student loans, college costs, SAT/ACT scores, and degree ROI. Built for US college students. No signup needed.">
+  <link rel="canonical" href="https://gpavault.com/tools/">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .tools-page { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+    .tools-page-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .tools-page-header h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--slate);
+      margin-bottom: 0.5rem;
+    }
+    .tools-page-header p {
+      color: var(--slate-light);
+      font-size: 1rem;
+    }
+
+    /* Search */
+    .tools-search-wrap {
+      max-width: 480px;
+      margin: 0 auto 1.75rem;
+      position: relative;
+    }
+    .tools-search-input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.75rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--slate);
+      background: var(--white);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      box-sizing: border-box;
+    }
+    .tools-search-input:focus {
+      border-color: var(--indigo-light);
+      box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+    }
+    .tools-search-icon {
+      position: absolute;
+      left: 0.875rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--slate-light);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    /* Filter tabs */
+    .tools-filter-wrap {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      padding: 0.4rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--slate-light);
+      background: var(--white);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover { border-color: var(--indigo-light); color: var(--indigo); }
+    .filter-btn.active {
+      background: var(--indigo);
+      border-color: var(--indigo);
+      color: #fff;
+    }
+
+    /* Cat sections */
+    .cat-section { margin-bottom: 3rem; }
+    .cat-section.hidden { display: none; }
+    .cat-section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--slate);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .cat-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .tool-card.hidden { display: none; }
+
+    .tools-no-results {
+      display: none;
+      text-align: center;
+      color: var(--slate-light);
+      font-size: 0.9rem;
+      padding: 3rem 0;
+    }
+  </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<div class="tools-page">
+
+  <div class="tools-page-header">
+    <div class="section-label">Calculators</div>
+    <h1>Free Student Calculators</h1>
+    <p>GPA, student loans, college costs, test scores, and career ROI — all free, no signup needed.</p>
+  </div>
+
+  <!-- Search -->
+  <div class="tools-search-wrap">
+    <span class="tools-search-icon">🔍</span>
+    <input
+      type="text"
+      class="tools-search-input"
+      id="tools-search"
+      placeholder="Search calculators…"
+      oninput="filterTools(this.value)"
+      autocomplete="off"
+    >
+  </div>
+
+  <!-- Filter tabs -->
+  <div class="tools-filter-wrap">
+    <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+    <button class="filter-btn" onclick="setFilter('academics', this)">📊 Academics</button>
+    <button class="filter-btn" onclick="setFilter('loans', this)">💰 Tuition &amp; Loans</button>
+    <button class="filter-btn" onclick="setFilter('test', this)">📋 Test Scores</button>
+    <button class="filter-btn" onclick="setFilter('career', this)">💼 Career &amp; ROI</button>
+  </div>
+
+  <div id="tools-no-results" class="tools-no-results">No calculators found. Try a different keyword.</div>
+
+  <!-- Academics -->
+  <div class="cat-section" id="cat-academics" data-cat="academics">
+    <div class="cat-section-title">📊 Academics</div>
+    <div class="tools-grid">
+
+      <a href="gpa-calculator.html" class="tool-card featured" data-search="gpa calculator cumulative grades credit hours letter percentage" data-cat="academics">
+        <div class="tool-card-top">
+          <div class="tool-icon">📊</div>
+          <span class="tool-badge">Most Popular</span>
+        </div>
+        <h3>GPA Calculator</h3>
+        <p>Calculate your current GPA from your grades and credit hours. Supports letter grades and percentages.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+      <a href="weighted-gpa-calculator.html" class="tool-card" data-search="weighted gpa calculator ap ib honors 5.0 scale courses" data-cat="academics">
+        <div class="tool-icon">⭐</div>
+        <h3>Weighted GPA Calculator</h3>
+        <p>Calculate your weighted GPA including AP, IB, and honors courses with the correct scale.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+      <a href="high-school-gpa-calculator.html" class="tool-card" data-search="high school gpa calculator weighted unweighted 4.0 freshman sophomore junior senior" data-cat="academics">
+        <div class="tool-icon">🏫</div>
+        <h3>High School GPA Calculator</h3>
+        <p>Calculate your high school GPA — weighted or unweighted — with AP, IB, and honors course support.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+      <a href="grade-calculator.html" class="tool-card" data-search="grade calculator assignment target course score weighted" data-cat="academics">
+        <div class="tool-icon">🎯</div>
+        <h3>Grade Calculator</h3>
+        <p>Find out what grade you need on upcoming assignments to hit your target course grade.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+      <a href="final-exam-calculator.html" class="tool-card" data-search="final exam calculator score needed pass ace class grade" data-cat="academics">
+        <div class="tool-icon">📝</div>
+        <h3>Final Exam Grade Calculator</h3>
+        <p>What score do you need on your final exam to pass — or ace — the class? Find out instantly.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+      <a href="gpa-raise-calculator.html" class="tool-card" data-search="gpa raise calculator how many as needed target cumulative semester" data-cat="academics">
+        <div class="tool-icon">📈</div>
+        <h3>GPA Raise Calculator</h3>
+        <p>How many A's do you need to reach your target GPA? See exactly what this semester can do for your cumulative GPA.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+      <a href="semester-gpa-calculator.html" class="tool-card" data-search="semester gpa calculator current term courses grades separate" data-cat="academics">
+        <div class="tool-icon">📅</div>
+        <h3>Semester GPA Calculator</h3>
+        <p>Calculate your GPA for this semester only — separate from your cumulative average.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+      <a href="ib-gpa-calculator.html" class="tool-card" data-search="ib gpa calculator international baccalaureate convert 1 7 us 4.0 scale" data-cat="academics">
+        <div class="tool-icon">🌍</div>
+        <h3>IB GPA Calculator</h3>
+        <p>Convert International Baccalaureate grades (1–7) to US GPA on the 4.0 and weighted 5.0 scale.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+      <a href="ap-gpa-calculator.html" class="tool-card" data-search="ap gpa calculator advanced placement weighted unweighted compare courses" data-cat="academics">
+        <div class="tool-icon">📐</div>
+        <h3>AP GPA Calculator</h3>
+        <p>See exactly how your AP courses affect your weighted GPA. Compare weighted vs unweighted side by side.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+      <a href="gpa-to-letter-grade-converter.html" class="tool-card" data-search="gpa letter grade converter 4.0 scale plus minus percentage chart" data-cat="academics">
+        <div class="tool-icon">🔤</div>
+        <h3>GPA to Letter Grade Converter</h3>
+        <p>Convert any GPA to a letter grade — or letter grade to GPA — instantly. Full 4.0 scale chart.</p>
+        <div class="tool-arrow">Convert now →</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Tuition & Loans -->
+  <div class="cat-section" id="cat-loans" data-cat="loans">
+    <div class="cat-section-title">💰 Tuition &amp; Loans</div>
+    <div class="tools-grid">
+
+      <a href="college-cost-calculator.html" class="tool-card" data-search="college cost calculator tuition room board fees 4 year total expenses" data-cat="loans">
+        <div class="tool-icon">🏫</div>
+        <h3>College Cost Calculator</h3>
+        <p>Estimate total 4-year college costs including tuition, room &amp; board, and fees.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+      <a href="student-loan-calculator.html" class="tool-card" data-search="student loan calculator total owe graduation monthly payments interest" data-cat="loans">
+        <div class="tool-icon">💰</div>
+        <h3>Student Loan Calculator</h3>
+        <p>See exactly how much you'll owe at graduation and what your monthly payments will look like.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+      <a href="loan-repayment-calculator.html" class="tool-card" data-search="loan repayment calculator standard extended income driven plan compare timeline" data-cat="loans">
+        <div class="tool-icon">📅</div>
+        <h3>Loan Repayment Calculator</h3>
+        <p>Plan your repayment timeline. Compare standard, extended, and income-driven plans.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+      <a href="scholarship-savings-calculator.html" class="tool-card" data-search="scholarship savings calculator reduce loan burden interest lifetime" data-cat="loans">
+        <div class="tool-icon">🎓</div>
+        <h3>Scholarship Savings Calculator</h3>
+        <p>See how scholarships reduce your total loan burden and lifetime interest paid.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+      <a href="financial-aid-calculator.html" class="tool-card" data-search="financial aid calculator award letter grants loans net cost fafsa" data-cat="loans">
+        <div class="tool-icon">📋</div>
+        <h3>Financial Aid Calculator</h3>
+        <p>Separate grants from loans in your award letter and find your true net cost per year.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Test Scores -->
+  <div class="cat-section" id="cat-test" data-cat="test">
+    <div class="cat-section-title">📋 Test Scores</div>
+    <div class="tools-grid">
+
+      <a href="sat-score-calculator.html" class="tool-card" data-search="sat score calculator raw scaled percentile math reading writing" data-cat="test">
+        <div class="tool-icon">📋</div>
+        <h3>SAT Score Calculator</h3>
+        <p>Convert raw SAT scores to scaled scores and see your percentile ranking.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+      <a href="act-score-calculator.html" class="tool-card" data-search="act score calculator composite section english math reading science percentile" data-cat="test">
+        <div class="tool-icon">📋</div>
+        <h3>ACT Score Calculator</h3>
+        <p>Calculate your composite ACT score from individual section scores and see your percentile.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Career & ROI -->
+  <div class="cat-section" id="cat-career" data-cat="career">
+    <div class="cat-section-title">💼 Career &amp; ROI</div>
+    <div class="tools-grid">
+
+      <a href="degree-roi-calculator.html" class="tool-card" data-search="degree roi calculator return investment cost earnings worth it major" data-cat="career">
+        <div class="tool-icon">📈</div>
+        <h3>Degree ROI Calculator</h3>
+        <p>Is your degree worth it? Calculate the return on investment based on cost and expected earnings.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+      <a href="student-loan-vs-salary.html" class="tool-card" data-search="student loan vs salary calculator debt manageable starting income ratio" data-cat="career">
+        <div class="tool-icon">💼</div>
+        <h3>Student Loan vs Salary Calculator</h3>
+        <p>Compare your student loan balance to your starting salary. See if your debt load is manageable.</p>
+        <div class="tool-arrow">Calculate now →</div>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+  var activeFilter = 'all';
+
+  function setFilter(cat, btn) {
+    activeFilter = cat;
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    // re-run current search with new filter
+    filterTools(document.getElementById('tools-search').value);
+  }
+
+  function filterTools(query) {
+    var q = query.trim().toLowerCase();
+    var cats = ['cat-academics', 'cat-loans', 'cat-test', 'cat-career'];
+    var totalVisible = 0;
+
+    document.querySelectorAll('.tool-card').forEach(function(card) {
+      var cardCat = card.getAttribute('data-cat');
+      var text = (card.getAttribute('data-search') || '') + ' ' + (card.textContent || '');
+      var matchesSearch = !q || text.toLowerCase().indexOf(q) !== -1;
+      var matchesFilter = activeFilter === 'all' || cardCat === activeFilter;
+
+      if (matchesSearch && matchesFilter) {
+        card.classList.remove('hidden');
+        totalVisible++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    cats.forEach(function(catId) {
+      var cat = document.getElementById(catId);
+      if (!cat) return;
+      var catDataCat = cat.getAttribute('data-cat');
+      var filterMatch = activeFilter === 'all' || catDataCat === activeFilter;
+      var visibleCards = cat.querySelectorAll('.tool-card:not(.hidden)');
+      if (!filterMatch || visibleCards.length === 0) {
+        cat.classList.add('hidden');
+      } else {
+        cat.classList.remove('hidden');
+      }
+    });
+
+    var noResults = document.getElementById('tools-no-results');
+    noResults.style.display = totalVisible === 0 ? 'block' : 'none';
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>High School GPA Calculator – Weighted & Unweighted | GPA Vault</title>
+  <meta name="description" content="Free high school GPA calculator for weighted and unweighted GPA. Supports AP, IB, and honors courses on the 4.0 and 5.0 scale. Instant results, no signup.">
+  <link rel="canonical" href="https://gpavault.com/tools/high-school-gpa-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "High School GPA Calculator",
+  "description": "Free high school GPA calculator for weighted and unweighted GPA. Supports AP, IB, and honors courses.",
+  "url": "https://gpavault.com/tools/high-school-gpa-calculator.html",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "GPA Vault",
+    "url": "https://gpavault.com"
+  }
+}
+</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Academics</div>
+    <h1>High School GPA Calculator</h1>
+    <p>Calculate your high school GPA — weighted or unweighted — with full support for AP, IB, and honors courses. See both the 4.0 and 5.0 scale side by side.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+
+  <div class="calc-card">
+    <div id="courses-container"></div>
+    <button onclick="addCourse()" style="background:none;border:1px dashed var(--border);border-radius:8px;width:100%;padding:0.625rem;color:var(--slate-mid);font-size:0.83rem;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:1.25rem;">+ Add another course</button>
+    <button class="calc-btn" onclick="calculateGPA()">Calculate High School GPA</button>
+
+    <div class="result-box" id="result">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;text-align:center;">
+        <div><div class="result-num" id="result-weighted">—</div><div class="result-label">Weighted GPA (5.0 scale)</div></div>
+        <div><div class="result-num" id="result-unweighted">—</div><div class="result-label">Unweighted GPA (4.0 scale)</div></div>
+      </div>
+      <div id="result-summary" style="margin-top:1rem;font-size:0.88rem;color:var(--slate-mid);text-align:center;"></div>
+    </div>
+  </div>
+
+  <!-- EXPLAINER -->
+  <div class="explainer">
+
+    <h2>How High School GPA Is Calculated</h2>
+    <p>Your high school GPA is a credit-weighted average of all your course grades converted to grade points. Each letter grade maps to a number on the 4.0 scale: an A equals 4.0, a B equals 3.0, a C equals 2.0, a D equals 1.0, and an F equals 0. Schools multiply each grade point by the number of credits for that course, add them all together, then divide by total credits earned.</p>
+    <p>Most high school courses carry 1.0 credit per semester. Some schools use half-credits for electives or PE, and a few use a 5-point scale where each course is worth 5 credits (essentially the same math). Check your school's handbook if you're unsure how many credits each class carries.</p>
+
+    <h2>Weighted vs. Unweighted GPA</h2>
+    <p>An unweighted GPA uses the standard 4.0 scale for every class, regardless of how difficult the course is. A student who earns an A in a standard English class and an A in AP English both receive 4.0 grade points for that grade on the unweighted scale.</p>
+    <p>A weighted GPA rewards more challenging coursework by adding extra grade points before calculating the average. Most schools add +0.5 for Honors courses and +1.0 for AP or IB courses. That means an A in AP Calculus earns 5.0 weighted grade points, and an A in an Honors course earns 4.5. This allows weighted GPAs to exceed 4.0 — top students in rigorous programs often reach 4.5 or even 5.0.</p>
+    <p>Colleges typically review both versions. A high weighted GPA signals you took on difficult coursework, while the unweighted GPA gives admissions officers a standardized comparison across schools with different weighting systems.</p>
+
+    <h2>Grade Point Scale Used in This Calculator</h2>
+    <div class="explainer-table-wrap" style="overflow-x:auto;margin:1rem 0;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+        <thead>
+          <tr style="background:var(--indigo-faint);">
+            <th style="padding:0.5rem 0.75rem;text-align:left;border:1px solid var(--border);">Letter Grade</th>
+            <th style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">Standard (4.0)</th>
+            <th style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">Honors (+0.5)</th>
+            <th style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">AP / IB (+1.0)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">A+ / A</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">4.0</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">4.5</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">5.0</td></tr>
+          <tr style="background:var(--bg);"><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">A-</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">3.7</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">4.2</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">4.7</td></tr>
+          <tr><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">B+</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">3.3</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">3.8</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">4.3</td></tr>
+          <tr style="background:var(--bg);"><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">B</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">3.0</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">3.5</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">4.0</td></tr>
+          <tr><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">B-</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">2.7</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">3.2</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">3.7</td></tr>
+          <tr style="background:var(--bg);"><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">C+</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">2.3</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">2.8</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">3.3</td></tr>
+          <tr><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">C</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">2.0</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">2.5</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">3.0</td></tr>
+          <tr style="background:var(--bg);"><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">C-</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">1.7</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">2.2</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">2.7</td></tr>
+          <tr><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">D+</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">1.3</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">1.3</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">1.3</td></tr>
+          <tr style="background:var(--bg);"><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">D</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">1.0</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">1.0</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">1.0</td></tr>
+          <tr><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">F</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">0.0</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">0.0</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">0.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Note: Some schools cap A+ at 4.3 on the unweighted scale. If your district uses that policy, your results may differ slightly. D grades typically don't receive a weighting bonus since they fall below the threshold for advanced course expectations.</p>
+
+    <h2>Step-by-Step Example</h2>
+    <p>Say you took five courses this semester, each worth 1.0 credit:</p>
+    <div class="explainer-table-wrap" style="overflow-x:auto;margin:1rem 0;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+        <thead>
+          <tr style="background:var(--indigo-faint);">
+            <th style="padding:0.5rem 0.75rem;text-align:left;border:1px solid var(--border);">Course</th>
+            <th style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">Grade</th>
+            <th style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">Type</th>
+            <th style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">Unweighted</th>
+            <th style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">Weighted</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">AP Calculus</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">A</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">AP</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">4.0</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">5.0</td></tr>
+          <tr style="background:var(--bg);"><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">Honors English</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">B+</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">Honors</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">3.3</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">3.8</td></tr>
+          <tr><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">US History</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">A-</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">Standard</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">3.7</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">3.7</td></tr>
+          <tr style="background:var(--bg);"><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">Spanish III</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">B</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">Standard</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">3.0</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">3.0</td></tr>
+          <tr><td style="padding:0.5rem 0.75rem;border:1px solid var(--border);">AP Biology</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">A</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">AP</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">4.0</td><td style="padding:0.5rem 0.75rem;text-align:center;border:1px solid var(--border);">5.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Unweighted GPA = (4.0 + 3.3 + 3.7 + 3.0 + 4.0) ÷ 5 = <strong>3.60</strong></p>
+    <p>Weighted GPA = (5.0 + 3.8 + 3.7 + 3.0 + 5.0) ÷ 5 = <strong>4.10</strong></p>
+
+    <h2>What GPA Do You Need for College Admissions?</h2>
+    <p>There's no universal cutoff, but here are realistic targets based on school selectivity:</p>
+    <p><strong>Highly selective schools (top 25):</strong> Admitted students typically show unweighted GPAs of 3.85 or above, with weighted GPAs often above 4.2. Course rigor matters as much as the number itself — a 3.9 in all-standard courses is less competitive than a 3.7 with a full AP load.</p>
+    <p><strong>Selective schools (top 50–100):</strong> Most admitted students have unweighted GPAs in the 3.5–3.9 range. Strong standardized test scores and extracurriculars can offset a GPA slightly below this range.</p>
+    <p><strong>State universities and less selective schools:</strong> Many public universities consider students with GPAs of 2.5 to 3.5, depending on the major and program. Some programs (nursing, engineering, business) have higher internal requirements than the general admission threshold.</p>
+    <p>Keep in mind that colleges see your GPA in context — your school's grading scale, the courses available to you, and grade trends over time all factor into how your transcript is evaluated.</p>
+
+    <h2>How to Improve Your High School GPA</h2>
+    <p>Your GPA is a cumulative average, which means every grade you've earned so far has an effect on it — and the more credits you've already completed, the harder any single semester can move the needle. A student with 10 credits on record can raise their GPA more dramatically in one semester than a student with 30 credits already locked in.</p>
+    <p>The most effective strategy is to target courses where you're currently earning C's and move them to B's. A C (2.0) drags your average down significantly; moving it to a B (3.0) gains a full grade point. Going from B to A gains the same one point, but eliminating low grades gives you the highest leverage. Taking additional AP or honors courses also helps your weighted GPA, though it won't change your unweighted average unless you earn strong grades in those courses.</p>
+    <p>If you want to know exactly how many A's you'd need to reach a target GPA, try the <a href="gpa-raise-calculator.html">GPA Raise Calculator</a>.</p>
+
+    <h2>Frequently Asked Questions</h2>
+    <p><strong>Does PE or electives count in my GPA?</strong> It depends on your school. Most districts include all graded courses in GPA, including PE, health, and electives. Some schools exclude physical education. Check your school's grade reporting policy or transcript to confirm which courses are factored in.</p>
+    <p><strong>What happens if I retake a class?</strong> Grade replacement policies vary by district. Some schools replace the original grade entirely; others average both attempts; some keep both grades on the transcript but only count one in GPA. If you're retaking a course to improve a D or F, confirm your school's repeat policy before assuming the old grade disappears.</p>
+    <p><strong>Do AP scores affect my GPA?</strong> AP exam scores (1–5) are separate from your GPA. Your GPA is determined by the letter grade your teacher awards for the course, not the AP exam score. A 5 on the AP exam doesn't help your GPA if you earned a B in the class — though earning college credit may matter for placement once you arrive at college.</p>
+    <p><strong>Is a 3.5 a good high school GPA?</strong> A 3.5 unweighted GPA is solid and puts you in a competitive range for most colleges. It typically corresponds to a B+ average. For highly selective schools, you'll want to be above 3.7 unweighted, but a 3.5 combined with strong test scores and a rigorous course load can still open many doors.</p>
+    <p><strong>When do colleges stop looking at my GPA?</strong> Colleges base their admissions decisions on your GPA through junior year and first-semester senior grades. Once you're admitted, they may still request your final transcript and rescind admission if senior grades drop significantly. Your GPA continues to matter for merit scholarships and academic standing requirements after you enroll.</p>
+
+    <h2>Related Tools</h2>
+    <p>Looking to calculate your college GPA or plan for what you need on an upcoming exam? These tools cover next steps:</p>
+    <ul>
+      <li><a href="gpa-calculator.html">GPA Calculator</a> — cumulative GPA across multiple semesters using the college 4.0 scale</li>
+      <li><a href="weighted-gpa-calculator.html">Weighted GPA Calculator</a> — see your weighted vs. unweighted GPA side by side</li>
+      <li><a href="gpa-raise-calculator.html">GPA Raise Calculator</a> — find out exactly how many A's you need to hit a target GPA</li>
+      <li><a href="ap-gpa-calculator.html">AP GPA Calculator</a> — model the impact of your AP courses on your weighted average</li>
+    </ul>
+
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+var gradePoints = {
+  'A+': 4.0, 'A': 4.0, 'A-': 3.7,
+  'B+': 3.3, 'B': 3.0, 'B-': 2.7,
+  'C+': 2.3, 'C': 2.0, 'C-': 1.7,
+  'D+': 1.3, 'D': 1.0, 'D-': 0.7,
+  'F': 0.0
+};
+var weightBonus = { 'standard': 0, 'honors': 0.5, 'ap': 1.0, 'ib': 1.0 };
+
+var courseCount = 0;
+
+function addCourse(grade, credits, type) {
+  courseCount++;
+  var id = courseCount;
+  var gradeOptions = ['A+','A','A-','B+','B','B-','C+','C','C-','D+','D','D-','F'].map(function(g) {
+    return '<option value="' + g + '"' + (grade === g ? ' selected' : '') + '>' + g + '</option>';
+  }).join('');
+  var typeOptions = [
+    ['standard','Standard'],['honors','Honors (+0.5)'],['ap','AP (+1.0)'],['ib','IB (+1.0)']
+  ].map(function(t) {
+    return '<option value="' + t[0] + '"' + (type === t[0] ? ' selected' : '') + '>' + t[1] + '</option>';
+  }).join('');
+
+  var html = '<div class="course-row" id="course-' + id + '" style="display:grid;grid-template-columns:2fr 1fr 2fr auto;gap:0.5rem;align-items:center;margin-bottom:0.75rem;">'
+    + '<select id="grade-' + id + '" style="padding:0.5rem 0.75rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.88rem;font-family:\'Inter\',sans-serif;color:var(--slate);background:var(--white);cursor:pointer;">' + gradeOptions + '</select>'
+    + '<input type="number" id="credits-' + id + '" value="' + (credits || 1) + '" min="0.5" max="5" step="0.5" style="padding:0.5rem 0.75rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.88rem;font-family:\'Inter\',sans-serif;color:var(--slate);background:var(--white);width:100%;box-sizing:border-box;" placeholder="Credits">'
+    + '<select id="type-' + id + '" style="padding:0.5rem 0.75rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.88rem;font-family:\'Inter\',sans-serif;color:var(--slate);background:var(--white);cursor:pointer;">' + typeOptions + '</select>'
+    + '<button onclick="removeCourse(' + id + ')" style="background:none;border:none;cursor:pointer;color:var(--slate-light);font-size:1.1rem;padding:0.25rem;">✕</button>'
+    + '</div>';
+
+  var container = document.getElementById('courses-container');
+  var div = document.createElement('div');
+  div.innerHTML = html;
+  container.appendChild(div.firstChild);
+}
+
+function removeCourse(id) {
+  var el = document.getElementById('course-' + id);
+  if (el) el.remove();
+}
+
+function calculateGPA() {
+  var rows = document.querySelectorAll('#courses-container .course-row');
+  if (rows.length === 0) { alert('Please add at least one course.'); return; }
+
+  var totalCredits = 0, totalUnweightedPoints = 0, totalWeightedPoints = 0;
+  var valid = true;
+
+  rows.forEach(function(row) {
+    var id = row.id.replace('course-', '');
+    var grade = document.getElementById('grade-' + id).value;
+    var credits = parseFloat(document.getElementById('credits-' + id).value);
+    var type = document.getElementById('type-' + id).value;
+
+    if (isNaN(credits) || credits <= 0) { valid = false; return; }
+    var gp = gradePoints[grade];
+    var bonus = weightBonus[type] || 0;
+    totalCredits += credits;
+    totalUnweightedPoints += gp * credits;
+    totalWeightedPoints += (gp + bonus) * credits;
+  });
+
+  if (!valid || totalCredits === 0) { alert('Please check your credit values.'); return; }
+
+  var unweighted = (totalUnweightedPoints / totalCredits).toFixed(2);
+  var weighted = (totalWeightedPoints / totalCredits).toFixed(2);
+
+  document.getElementById('result-weighted').textContent = weighted;
+  document.getElementById('result-unweighted').textContent = unweighted;
+
+  var summary = '';
+  var uw = parseFloat(unweighted);
+  if (uw >= 3.7) summary = 'Strong GPA — competitive for most colleges and merit scholarships.';
+  else if (uw >= 3.3) summary = 'Good GPA — solid range for many 4-year universities.';
+  else if (uw >= 2.7) summary = 'Average GPA — meets minimum requirements at many schools.';
+  else summary = 'Below average — consider focusing on courses where improvement is most achievable.';
+  document.getElementById('result-summary').textContent = summary;
+
+  document.getElementById('result').style.display = 'block';
+}
+
+// Initialize with 5 courses
+(function() {
+  var defaults = [
+    { grade: 'A', credits: 1, type: 'ap' },
+    { grade: 'B+', credits: 1, type: 'honors' },
+    { grade: 'A-', credits: 1, type: 'standard' },
+    { grade: 'B', credits: 1, type: 'standard' },
+    { grade: 'A', credits: 1, type: 'ap' }
+  ];
+  defaults.forEach(function(d) { addCourse(d.grade, d.credits, d.type); });
+})();
+
+// Add label row above courses
+(function() {
+  var label = document.createElement('div');
+  label.style.cssText = 'display:grid;grid-template-columns:2fr 1fr 2fr auto;gap:0.5rem;margin-bottom:0.25rem;';
+  label.innerHTML = '<span style="font-size:0.75rem;font-weight:600;color:var(--slate-light);text-transform:uppercase;letter-spacing:0.05em;">Grade</span>'
+    + '<span style="font-size:0.75rem;font-weight:600;color:var(--slate-light);text-transform:uppercase;letter-spacing:0.05em;">Credits</span>'
+    + '<span style="font-size:0.75rem;font-weight:600;color:var(--slate-light);text-transform:uppercase;letter-spacing:0.05em;">Course Type</span>'
+    + '<span></span>';
+  document.getElementById('courses-container').parentNode.insertBefore(label, document.getElementById('courses-container'));
+})();
+</script>
+</body>
+</html>
