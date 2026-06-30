@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPA Scale: 4.0 Chart, Percentage to GPA & Weighted Scale | GPA Vault</title>
+  <meta name="description" content="Free GPA scale calculator and reference chart. Convert percentage to GPA, see the full 4.0 and weighted 5.0 scale, and understand how your school's scale works.">
+  <link rel="canonical" href="https://gpavault.com/tools/gpa-scale.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"GPA Scale Calculator","description":"Free GPA scale calculator and reference chart. Convert percentage to GPA and see the full 4.0 and weighted 5.0 scale.","url":"https://gpavault.com/tools/gpa-scale.html","applicationCategory":"EducationalApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"GPA Vault","url":"https://gpavault.com"}}
+</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Academics</div>
+    <h1>GPA Scale</h1>
+    <p>Enter a percentage grade to convert it to GPA instantly, or use the reference charts below to understand the standard 4.0 and weighted 5.0 GPA scales.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+
+  <div class="calc-card">
+    <div class="form-group">
+      <label>Percentage Grade (0–100)</label>
+      <input type="number" id="pct-input" placeholder="e.g. 91" min="0" max="100" step="0.1" oninput="convertPct()">
+    </div>
+    <div class="result-box show" id="result" style="margin-top:1rem;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;text-align:center;">
+        <div><div class="result-num" id="result-letter">—</div><div class="result-label">Letter Grade</div></div>
+        <div><div class="result-num" id="result-gpa">—</div><div class="result-label">GPA Points (4.0 scale)</div></div>
+      </div>
+      <div id="result-detail" style="margin-top:1rem;font-size:0.88rem;color:var(--slate-mid);text-align:center;"></div>
+    </div>
+  </div>
+
+  <div class="explainer">
+
+    <h2>What is the GPA scale?</h2>
+    <p>The GPA scale is the system schools use to convert your letter or percentage grades into a single number that represents your overall academic performance. In the United States, the standard scale runs from 0.0 to 4.0, where an A equals 4.0, a B equals 3.0, a C equals 2.0, a D equals 1.0, and an F equals 0.0. This is called the unweighted scale because it applies the same point value to every course, regardless of difficulty.</p>
+    <p>Many high schools also report a weighted GPA on a scale that extends to 5.0 or higher, which adds bonus points for Honors, AP, or IB coursework. Understanding both scales — and which one a specific form or application is asking for — is essential for accurately reporting your academic record.</p>
+
+    <h2>Standard 4.0 GPA scale (unweighted)</h2>
+    <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
+      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Letter Grade</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">GPA Points</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Percentage Range</th></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">A+ / A</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">93–100%</td></tr>
+      <tr style="border-bottom:1px solid var(--border);background:var(--bg);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">A-</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.7</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">90–92%</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">B+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.3</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">87–89%</td></tr>
+      <tr style="border-bottom:1px solid var(--border);background:var(--bg);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">B</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">83–86%</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">B-</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.7</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">80–82%</td></tr>
+      <tr style="border-bottom:1px solid var(--border);background:var(--bg);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">C+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.3</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">77–79%</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">C</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">73–76%</td></tr>
+      <tr style="border-bottom:1px solid var(--border);background:var(--bg);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">C-</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1.7</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">70–72%</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">D+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1.3</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">67–69%</td></tr>
+      <tr style="border-bottom:1px solid var(--border);background:var(--bg);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">D</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">63–66%</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">D-</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">0.7</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">60–62%</td></tr>
+      <tr style="background:var(--bg);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">F</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">0.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Below 60%</td></tr>
+    </table>
+    <p>Note: percentage cutoffs vary by school. Some use 94% as the A threshold, others use 90% or 93%. Always confirm your school's exact scale in the student handbook or syllabus rather than assuming the table above applies universally.</p>
+
+    <h2>Weighted GPA scale (5.0)</h2>
+    <p>Weighted GPA adds bonus points for more rigorous coursework before averaging. Most US schools add +0.5 for Honors courses and +1.0 for AP or IB courses to the base grade point value:</p>
+    <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
+      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Grade</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Standard</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Honors (+0.5)</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">AP/IB (+1.0)</th></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">A</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.5</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">5.0</td></tr>
+      <tr style="border-bottom:1px solid var(--border);background:var(--bg);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">B</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.5</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.0</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">C</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.5</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.0</td></tr>
+      <tr style="background:var(--bg);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">D / F</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1.0 / 0.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1.0 / 0.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1.0 / 0.0</td></tr>
+    </table>
+    <p>Most schools do not apply a weighting bonus to D or F grades — the bonus rewards strong performance in difficult courses, not enrollment alone. This is why weighted GPAs can exceed 4.0 but a poor performance in an AP class still drags the average down significantly.</p>
+
+    <h2>How to convert percentage to GPA</h2>
+    <p>To convert a percentage grade to GPA: first convert the percentage to a letter grade using your school's cutoff table, then convert that letter grade to GPA points using the scale above. There is no universal formula that works across every school, since cutoff percentages vary — a 91% might be an A- at one school and a B+ at another.</p>
+    <p>A simplified formula some calculators use is GPA = (Percentage ÷ 100) × 4, which gives a rough estimate but ignores letter grade cutoffs and plus/minus distinctions. For example, this formula converts 91% directly to 3.64 GPA, while the letter-grade method (91% = A-) gives 3.7. The letter-grade method is more accurate for US schools, since GPA is fundamentally based on letter grades, not raw percentages.</p>
+
+    <h2>10-point and other international GPA scales</h2>
+    <p>Outside the US, many countries use different scales entirely. India commonly uses a 10-point scale, where a 9–10 corresponds to an A grade. Some European countries use percentage-based or 20-point scales without converting to a 4.0 equivalent at all. If you're applying to US institutions from an international system, most colleges either ask for your scores in the original scale alongside a school-provided conversion, or use a standardized conversion service like WES (World Education Services) for transcript evaluation.</p>
+    <p>A rough cross-reference: a 9.0+ on a 10-point Indian scale is roughly equivalent to a 4.0 US GPA; an 8.0 is roughly a 3.5; a 7.0 is roughly a 3.0. These are approximations only — official transcript evaluation services should always be used for actual admissions or credential purposes.</p>
+
+    <h2>Why GPA scales differ between schools</h2>
+    <p>There is no single GPA standard enforced nationally in the US. Each school district, college, and university sets its own grading and weighting policies. Some differences you'll commonly encounter: whether A+ is capped at 4.0 or given a bonus value of 4.3, whether D grades receive weighting bonuses, whether dual enrollment courses count as AP-equivalent for weighting purposes, and where exact percentage cutoffs fall between letter grades.</p>
+    <p>This is also why colleges often recalculate your GPA using their own standardized method rather than using your school-reported number directly — it lets them compare applicants from different schools on a common basis. See our guide on <a href="../blog/how-to-calculate-unweighted-gpa.html" style="color:var(--indigo);">how to calculate unweighted GPA</a> for more on how colleges handle this recalculation.</p>
+
+    <h2>Frequently asked questions</h2>
+    <p><strong>What is the highest possible GPA?</strong> On the standard unweighted scale, 4.0 is the maximum (some schools cap A+ at 4.3). On a weighted scale with AP/IB bonuses, the theoretical maximum is typically 5.0, achieved only by earning A's in every AP or IB course taken.</p>
+    <p><strong>Is a 3.5 GPA good?</strong> A 3.5 unweighted GPA corresponds to roughly a B+ average and is considered strong — competitive for most four-year universities and solid for many merit scholarships. For highly selective schools, applicants typically need closer to 3.7 or above.</p>
+    <p><strong>Does GPA scale matter for college applications?</strong> Yes — colleges need to know whether your reported GPA is weighted or unweighted, and on what scale, to interpret it correctly. Most application forms (Common App, Coalition App) ask you to specify your school's scale, and many colleges recalculate GPA internally using their own standardized formula regardless of what you report.</p>
+    <p><strong>Can GPA be higher than 4.0 without AP or IB classes?</strong> Generally no. Without weighting bonuses from advanced coursework, the unweighted scale caps at 4.0 (or 4.3 if your school gives A+ a bonus value). A GPA above 4.0 almost always indicates a weighted scale that includes Honors, AP, or IB credit.</p>
+
+    <h2>Related tools and guides</h2>
+    <p>
+      <a href="gpa-calculator.html" style="color:var(--indigo);">GPA Calculator</a> — calculate your full cumulative GPA from your courses.<br>
+      <a href="weighted-gpa-calculator.html" style="color:var(--indigo);">Weighted GPA Calculator</a> — see your weighted vs unweighted GPA side by side.<br>
+      <a href="gpa-to-letter-grade-converter.html" style="color:var(--indigo);">GPA to Letter Grade Converter</a> — convert a specific GPA value to/from a letter grade.<br>
+      <a href="high-school-gpa-calculator.html" style="color:var(--indigo);">High School GPA Calculator</a> — calculate weighted and unweighted high school GPA.<br>
+      <a href="../blog/how-to-calculate-unweighted-gpa.html" style="color:var(--indigo);">How to Calculate Unweighted GPA</a> — full formula and worked examples.
+    </p>
+
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+function convertPct() {
+  var pct = parseFloat(document.getElementById('pct-input').value);
+  if (isNaN(pct) || pct < 0 || pct > 100) {
+    document.getElementById('result-letter').textContent = '—';
+    document.getElementById('result-gpa').textContent = '—';
+    document.getElementById('result-detail').textContent = '';
+    return;
+  }
+
+  var scale = [
+    { min: 97, letter: 'A+', gpa: 4.0 },
+    { min: 93, letter: 'A', gpa: 4.0 },
+    { min: 90, letter: 'A-', gpa: 3.7 },
+    { min: 87, letter: 'B+', gpa: 3.3 },
+    { min: 83, letter: 'B', gpa: 3.0 },
+    { min: 80, letter: 'B-', gpa: 2.7 },
+    { min: 77, letter: 'C+', gpa: 2.3 },
+    { min: 73, letter: 'C', gpa: 2.0 },
+    { min: 70, letter: 'C-', gpa: 1.7 },
+    { min: 67, letter: 'D+', gpa: 1.3 },
+    { min: 63, letter: 'D', gpa: 1.0 },
+    { min: 60, letter: 'D-', gpa: 0.7 },
+    { min: 0, letter: 'F', gpa: 0.0 }
+  ];
+
+  var match = scale.find(function(s) { return pct >= s.min; });
+
+  document.getElementById('result-letter').textContent = match.letter;
+  document.getElementById('result-gpa').textContent = match.gpa.toFixed(1);
+
+  var simpleFormula = (pct / 100 * 4).toFixed(2);
+  document.getElementById('result-detail').textContent =
+    'Simplified percentage formula gives ' + simpleFormula + ' — letter-grade method (shown above) is more accurate for most US schools.';
+}
+</script>
+</body>
+</html>
