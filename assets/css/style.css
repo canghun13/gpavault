@@ -245,7 +245,7 @@ nav {
 }
 
 /* ── SECTION ── */
-.section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+.section { width: 100%; padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
 .section-header { margin-bottom: 2.5rem; }
 .section-label {
   font-size: 0.72rem; font-weight: 600;
@@ -354,6 +354,7 @@ nav {
   padding: 5rem 2rem;
 }
 .why-inner {
+  width: 100%;
   max-width: 1100px; margin: 0 auto;
   display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
   align-items: center;
@@ -443,6 +444,7 @@ footer {
   padding: 2.5rem 2rem;
 }
 .footer-inner {
+  width: 100%;
   max-width: 1100px; margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between;
   flex-wrap: wrap; gap: 1rem;
@@ -464,6 +466,7 @@ footer {
 
 /* ── TOOL PAGE ── */
 .tool-page {
+  width: 100%;
   max-width: 780px; margin: 0 auto;
   padding: 3rem 2rem 5rem;
 }
