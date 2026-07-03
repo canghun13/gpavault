@@ -614,4 +614,15 @@ footer {
     padding: 0.45rem 0.65rem !important;
     font-size: 0.78rem !important;
   }
+
+  /* Responsive tool forms: multi-column input grids (loan calc fields,
+     dynamic course rows added via JS) collapse to a single column so
+     inputs stay usable on narrow screens. Attribute selector matches
+     inline style="" set both in markup and by JS at runtime. */
+  [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+
+  .tool-page { padding: 2rem 1.25rem 3.5rem !important; }
 }
