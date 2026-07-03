@@ -598,4 +598,20 @@ footer {
   .why-cards { grid-template-columns: 1fr 1fr; }
   .stats-bar { gap: 2rem; }
   .footer-inner { flex-direction: column; gap: 1.25rem; }
+
+  /* Responsive tables: horizontal scroll instead of squeezed/broken columns.
+     !important needed because table styles are set inline / via page-level
+     <style> blocks that load after this stylesheet. */
+  table {
+    display: block !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+    border-radius: 8px !important;
+  }
+  table th, table td {
+    padding: 0.45rem 0.65rem !important;
+    font-size: 0.78rem !important;
+  }
 }
