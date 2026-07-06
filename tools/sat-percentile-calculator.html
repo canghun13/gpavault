@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAT Percentile Calculator – National Ranking by Score | GPA Vault</title>
+  <meta name="description" content="Enter your SAT score to see your national percentile ranking, section-level breakdown, and how you compare to admitted students at different college tiers. Free, updated 2026.">
+  <link rel="canonical" href="https://gpavault.com/tools/sat-percentile-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SAT Percentile Calculator",
+  "description": "Enter your SAT score to see your national percentile ranking, section-level breakdown, and how you compare to admitted students at different college tiers.",
+  "url": "https://gpavault.com/tools/sat-percentile-calculator.html",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "GPA Vault",
+    "url": "https://gpavault.com"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What's the difference between my SAT score and my percentile?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your score (400-1600) is a fixed number on the College Board's scale. Your percentile tells you what percentage of test-takers you scored higher than. The same score can mean a different percentile from year to year as the testing pool shifts slightly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this the same as the percentile on my official score report?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This tool estimates your percentile using recent published College Board data. Your official score report includes the exact percentile calculated at the time you tested, which may differ slightly since percentiles are recalculated periodically."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a higher percentile always mean a better chance of admission?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Percentile tells you how you compare to all test-takers nationally, but admissions decisions depend on how your score compares to each specific school's admitted student range, plus your full application. A high national percentile can still be below a selective school's 25th percentile."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Test Scores</div>
+    <h1>SAT Percentile Calculator</h1>
+    <p>Enter your SAT score to see your national percentile ranking and how it compares to admitted students at different college tiers.</p>
+  </div>
+  <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
+  <div class="calc-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="form-group"><label>Total SAT Score (400–1600)</label><input type="number" id="total" value="1200" min="400" max="1600" step="10"></div>
+      <div class="form-group"><label>Math Score (optional, 200–800)</label><input type="number" id="math" value="" min="200" max="800" step="10" placeholder="e.g. 620"></div>
+    </div>
+    <div class="form-group"><label>Reading & Writing Score (optional, 200–800)</label><input type="number" id="rw" value="" min="200" max="800" step="10" placeholder="e.g. 590"></div>
+    <button class="calc-btn" onclick="calculate()">See My Percentile</button>
+    <div class="result-box" id="result">
+      <div class="result-num" id="result-pct">—</div>
+      <div class="result-label">National Percentile</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>What your percentile actually means</h2>
+    <p>Your SAT percentile tells you the percentage of test-takers you scored higher than — not the percentage of questions you got right. If you're in the 80th percentile, you outscored 80% of the students in the comparison group. It's a relative ranking, not a grade.</p>
+    <p>There are two versions of this ranking: the "SAT User" percentile (compares you only to students who actually took the SAT that year) and the "Nationally Representative" percentile (compares you to all US students in your grade, including those who never took the SAT). The two can differ by several points for the same score — admissions offices mostly reference the SAT User percentile, and that's what this tool estimates.</p>
+
+    <h2>SAT score to percentile table (2026)</h2>
+    <table>
+      <tr><th>Score</th><th>Percentile</th><th>Score</th><th>Percentile</th></tr>
+      <tr><td>1600</td><td>99th+</td><td>1100</td><td>58th</td></tr>
+      <tr><td>1550</td><td>99th</td><td>1050</td><td>49th</td></tr>
+      <tr><td>1500</td><td>98th</td><td>1000</td><td>40th</td></tr>
+      <tr><td>1450</td><td>96th</td><td>950</td><td>32nd</td></tr>
+      <tr><td>1400</td><td>94th</td><td>900</td><td>25th</td></tr>
+      <tr><td>1350</td><td>91st</td><td>850</td><td>18th</td></tr>
+      <tr><td>1300</td><td>87th</td><td>800</td><td>10th</td></tr>
+      <tr><td>1250</td><td>81st</td><td>750</td><td>6th</td></tr>
+      <tr><td>1200</td><td>74th</td><td>700</td><td>3rd</td></tr>
+      <tr><td>1150</td><td>66th</td><td>650</td><td>1st</td></tr>
+    </table>
+    <p>Notice the curve is steepest at the top: going from 1450 to 1550 moves you only 3 percentile points (96th to 99th), while going from 1100 to 1200 moves you 16 points (58th to 74th). Percentile gains get much harder to earn as your score climbs, because so many high scorers cluster together at the top of the distribution.</p>
+    <p>Already have raw section answers instead of a scaled score? Use the <a href="sat-score-calculator.html" style="color:var(--indigo);">SAT Score Calculator</a> first to get your composite, then come back here for the percentile breakdown.</p>
+
+    <h2>Math vs Reading & Writing: percentiles behave differently</h2>
+    <p>The two sections don't have identical percentile curves. Math tends to be harsher at the top — a perfect 800 is roughly the 99th percentile, but a large cohort of high-scoring international and STEM-focused students compresses the upper range, meaning a 750 in Math might rank lower than a 750 in Reading & Writing. Reading & Writing has a wider spread at the high end, so strong verbal scores can sometimes boost your overall national ranking more than an equivalent Math score.</p>
+    <p>If your Math and R&W percentiles differ significantly from each other, that gap is useful information: it shows admissions officers (and you) which section represents your stronger academic profile, independent of your composite.</p>
+
+    <h2>Percentile by college admission tier</h2>
+    <table>
+      <tr><th>College Tier</th><th>Typical Middle 50% Score</th><th>Approx. Percentile Range</th></tr>
+      <tr><td>Highly selective (Ivy+, top 15)</td><td>1480–1570</td><td>96th–99th</td></tr>
+      <tr><td>Selective (top 50)</td><td>1350–1470</td><td>91st–96th</td></tr>
+      <tr><td>Competitive (top 100)</td><td>1200–1350</td><td>74th–91st</td></tr>
+      <tr><td>Most 4-year public universities</td><td>1000–1200</td><td>40th–74th</td></tr>
+      <tr><td>Open-access / community college</td><td>No minimum</td><td>—</td></tr>
+    </table>
+    <p>These ranges reflect the 25th–75th percentile of enrolled students at each tier, not an official cutoff. Being below a school's 25th percentile doesn't disqualify you — it means test scores are working against your application there, and other parts (GPA, essays, extracurriculars) need to carry more weight.</p>
+
+    <h2>How percentiles shift year to year</h2>
+    <p>Percentile tables are recalculated periodically using the most recent cohort of test-takers, so the same score can correspond to a slightly different percentile from one year to the next. This isn't because the test changed — it's because the comparison pool shifted. A 1350 that was 89th percentile two years ago might be 91st percentile this year if slightly fewer students scored in that range recently. Always check the year on any percentile table you're using, including this one.</p>
+
+    <h2>Should you submit your score if you're below a school's percentile range?</h2>
+    <p>Many schools remain test-optional, which makes this a real decision rather than a formality. If your percentile falls at or above a school's published 25th percentile, submitting generally helps your application. If you're meaningfully below the 25th percentile, withholding your score may strengthen your file — especially if the rest of your application (GPA, coursework rigor, essays) is strong. Between the 25th and 50th percentile is more of a judgment call: submitting can still signal transparency and confidence if your other materials are competitive.</p>
+
+    <h2>Frequently Asked Questions</h2>
+    <p><strong>What's the difference between my SAT score and my percentile?</strong> Your score (400–1600) is a fixed number on the College Board's scale. Your percentile tells you what percentage of test-takers you scored higher than. The same score can mean a different percentile from year to year as the testing pool shifts slightly.</p>
+    <p><strong>Is this the same as the percentile on my official score report?</strong> This tool estimates your percentile using recent published College Board data. Your official score report includes the exact percentile calculated at the time you tested, which may differ slightly since percentiles are recalculated periodically.</p>
+    <p><strong>Does a higher percentile always mean a better chance of admission?</strong> No. Percentile tells you how you compare to all test-takers nationally, but admissions decisions depend on how your score compares to each specific school's admitted student range, plus your full application. A high national percentile can still be below a selective school's 25th percentile.</p>
+    <p><strong>What's a good SAT percentile?</strong> Above the 75th percentile (roughly 1250+) is competitive for most colleges. Above the 90th percentile (roughly 1330+) is strong for selective schools. Above the 98th percentile (roughly 1500+) is competitive for the most selective universities in the country.</p>
+
+    <h2>Related tools and guides</h2>
+    <p>
+      <a href="sat-score-calculator.html" style="color:var(--indigo);">SAT Score Calculator</a> — convert raw section answers into your scaled composite score.<br>
+      <a href="act-score-calculator.html" style="color:var(--indigo);">ACT Score Calculator</a> — calculate your ACT composite and percentile.<br>
+      <a href="../blog/what-is-a-good-sat-score.html" style="color:var(--indigo);">What Is a Good SAT Score?</a> — full percentile breakdown by college tier.
+    </p>
+  </div>
+  <div class="ad-banner" style="margin-top:2rem;">Advertisement · Google AdSense</div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+var percentiles={1600:99,1550:99,1500:98,1450:96,1400:94,1350:91,1300:87,1250:81,1200:74,1150:66,1100:58,1050:49,1000:40,950:32,900:25,850:18,800:10,750:6,700:3,650:1,600:1};
+var mathPercentiles={800:99,750:93,700:85,650:74,600:61,550:47,500:33,450:20,400:9,350:2};
+var rwPercentiles={800:99,750:96,700:90,650:80,600:66,550:51,500:36,450:22,400:10,350:3};
+function lookup(table,score){
+  var keys=Object.keys(table).map(Number).sort(function(a,b){return b-a;});
+  for(var i=0;i<keys.length;i++){if(score>=keys[i])return table[keys[i]];}
+  return 1;
+}
+function calculate(){
+  var total=parseInt(document.getElementById('total').value);
+  var mathVal=document.getElementById('math').value;
+  var rwVal=document.getElementById('rw').value;
+  var pct=lookup(percentiles,total);
+  document.getElementById('result-pct').textContent=pct+(pct>=99?'th+':pct===1?'st':pct===2?'nd':pct===3?'rd':'th');
+  var detail='You scored higher than approximately <strong>'+pct+'%</strong> of test-takers nationally.<br>';
+  if(mathVal){
+    var mp=lookup(mathPercentiles,parseInt(mathVal));
+    detail+='Math percentile: <strong>'+mp+'th</strong><br>';
+  }
+  if(rwVal){
+    var rp=lookup(rwPercentiles,parseInt(rwVal));
+    detail+='Reading & Writing percentile: <strong>'+rp+'th</strong><br>';
+  }
+  detail+=(total>=1480?'Competitive range for highly selective universities (Ivy+/top 15).'
+    :total>=1350?'Competitive range for selective universities (top 50).'
+    :total>=1200?'Competitive range for most 4-year universities.'
+    :total>=1000?'Around the national average — around the middle 50% for many public universities.'
+    :'Below the national average. Focused test prep could meaningfully improve your percentile.');
+  var res=document.getElementById('result');res.classList.add('show');res.scrollIntoView({behavior:'smooth',block:'nearest'});
+  document.getElementById('result-detail').innerHTML=detail;
+}
+</script>
+</body>
+</html>

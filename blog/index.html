@@ -81,6 +81,12 @@
   <div class="cat-section" id="cat-academics" style="margin-bottom:3rem;">
     <div class="cat-section-title" style="font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:var(--slate);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;">📊 Academics</div>
     <div class="blog-grid">
+      <a href="how-to-raise-your-gpa-in-one-semester.html" class="blog-card" data-search="can you raise your gpa in one semester the real math academics grades study">
+        <span class="blog-tag">Academics</span>
+        <h3>Can You Raise Your GPA in One Semester? The Real Math</h3>
+        <p>See exactly how many points one strong semester can add to your GPA based on your credit count — plus the highest-impact moves to make.</p>
+        <div class="blog-meta">13 min read · Updated July 2026</div>
+      </a>
       <a href="what-is-the-deans-list-gpa-requirement.html" class="blog-card" data-search="deans list gpa requirement semester honor roll presidents list">
         <span class="blog-tag">Academics</span>
         <h3>What Is the Dean's List GPA Requirement? 2026 Guide</h3>
@@ -122,12 +128,6 @@
         <h3>What GPA Do You Need to Graduate College? (By Major &amp; School)</h3>
         <p>The minimum is 2.0 at most schools — but your major, scholarship, and honors goals change that number significantly.</p>
         <div class="blog-meta">8 min read · June 2026</div>
-      </a>
-      <a href="how-to-raise-your-gpa-in-one-semester.html" class="blog-card" data-search="how to raise your gpa in one semester academics grades study">
-        <span class="blog-tag">Academics</span>
-        <h3>How to Raise Your GPA in One Semester (With Real Math)</h3>
-        <p>The math behind how much you can move your GPA, plus the strategies that give you the best shot.</p>
-        <div class="blog-meta">13 min read · Updated June 2026</div>
       </a>
       <a href="how-to-calculate-cumulative-gpa.html" class="blog-card" data-search="how to calculate cumulative gpa formula quality points credits academics">
         <span class="blog-tag">Academics</span>
@@ -236,6 +236,25 @@
     </div>
   </div>
 
+  <!-- Test Scores -->
+  <div class="cat-section" id="cat-test" style="margin-bottom:3rem;">
+    <div class="cat-section-title" style="font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:var(--slate);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;">📋 Test Scores</div>
+    <div class="blog-grid">
+      <a href="what-is-a-good-sat-score.html" class="blog-card" data-search="good sat score percentile college tier benchmark test optional">
+        <span class="blog-tag">Test Scores</span>
+        <h3>What Is a Good SAT Score? 2026 Percentiles by College Tier</h3>
+        <p>Percentile benchmarks by college tier, section-level analysis, and test-optional submission strategy.</p>
+        <div class="blog-meta">10 min read · July 2026</div>
+      </a>
+      <a href="what-is-a-good-act-score.html" class="blog-card" data-search="good act score percentile college tier benchmark test optional">
+        <span class="blog-tag">Test Scores</span>
+        <h3>What Is a Good ACT Score? 2026 Percentiles by College Tier</h3>
+        <p>Percentile benchmarks by college tier, section score strategy, and test-optional submission strategy.</p>
+        <div class="blog-meta">9 min read · July 2026</div>
+      </a>
+    </div>
+  </div>
+
   <!-- Career & ROI -->
   <div class="cat-section" id="cat-career">
     <div class="cat-section-title" style="font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:var(--slate);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;">📈 Career & ROI</div>
@@ -263,7 +282,7 @@
   function filterBlog(query) {
     var q = query.trim().toLowerCase();
     var cards = document.querySelectorAll('.blog-card');
-    var categories = ['cat-academics', 'cat-loans', 'cat-costs', 'cat-career'];
+    var categories = ['cat-academics', 'cat-loans', 'cat-costs', 'cat-test', 'cat-career'];
     var totalVisible = 0;
 
     cards.forEach(function(card) {
