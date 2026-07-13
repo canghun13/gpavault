@@ -23,7 +23,7 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 
 ## Student Loans & College Cost Tools
 
-- [Student Loan Calculator](https://gpavault.com/tools/student-loan-calculator.html): Calculate monthly payment, total interest, and payoff timeline for federal and private student loans. Includes 2025–26 federal interest rates.
+- [Student Loan Calculator](https://gpavault.com/tools/student-loan-calculator.html): Calculate monthly payment, total interest, and payoff timeline for federal and private student loans. Includes 2026–27 federal interest rates.
 - [Loan Repayment Calculator](https://gpavault.com/tools/loan-repayment-calculator.html): Compare standard vs extended repayment plans and model the impact of extra monthly payments.
 - [College Cost Calculator](https://gpavault.com/tools/college-cost-calculator.html): Estimate total 4-year cost of attendance including tuition, room and board, books, and fees with annual cost increase projection.
 - [Scholarship Savings Calculator](https://gpavault.com/tools/scholarship-savings-calculator.html): Calculate the true value of a scholarship including interest savings over the loan repayment period.
