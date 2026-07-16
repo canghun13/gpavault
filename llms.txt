@@ -18,6 +18,7 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 - [Final Exam Calculator](https://gpavault.com/tools/final-exam-calculator.html): Calculate the minimum score needed on a final exam to reach a target course grade.
 - [SAT Score Calculator](https://gpavault.com/tools/sat-score-calculator.html): Convert SAT section scores to a scaled total (400–1600) and see percentile rankings.
 - [ACT Score Calculator](https://gpavault.com/tools/act-score-calculator.html): Calculate ACT composite score from four section scores and see percentile rankings.
+- [ACT Superscore Calculator](https://gpavault.com/tools/act-superscore-calculator.html): Combine your best English, Math, and Reading section scores across up to 3 ACT test dates into a superscore composite, under the 2026 Enhanced ACT format.
 
 ---
 
