@@ -87,6 +87,29 @@ blog/index.html 카드 재정렬 후 BeautifulSoup으로 카드 27개 / href 중
 - 색인 대기 중인 보강 완료 파일 재작업 금지 원칙은 **신규 페이지 제작에는 적용되지 않음** — 신규는 언제든 만들어도 됨, 다만 항상 기존 파일과의 카니발라이제이션 먼저 확인
 - 신규 페이지 만들 때 체크리스트: (1) 페이지 자체 (2) `assets/partials/header.html` 드롭다운 (3) 전체 파일 noscript nav 일괄치환 (4) `tools/index.html` 또는 `blog/index.html` 카드 (5) `sitemap.xml` (6) `llms.txt` (7) 관련 기존 페이지에 상호링크 1곳 이상
 
+---
+
+## 0-C. 07-16 세 번째 세션 — 신규 블로그 글도 필요하다는 지적 반영
+
+### 배경
+사용자가 "블로그는 안 만들어?"라고 재차 지적 — 신규 확장이 툴 하나로 끝나면 안 되고 블로그 쪽도 신규가 필요하다는 취지. 0-B에서 만든 `act-superscore-calculator.html`과 자연스럽게 묶이면서도 그 자체와는 다른 앵글의 블로그 주제를 찾아 진행.
+
+### 주제 선정 과정
+- 신규 툴(superscore)과 겹치지 않으면서 카니발라이제이션 없는 블로그 주제를 찾기 위해 사이트 전체에서 "Enhanced ACT"(2025~2026 ACT 개편) 키워드를 검색했으나 **0건** — 사이트 어디에도 ACT 시험 자체가 어떻게 바뀌었는지(문항 수, 시간, Science 선택제, 응시료 등)를 정면으로 다루는 콘텐츠가 없었음. `what-is-a-good-act-score.html`은 퍼센타일 기준표 위주, 신규 `act-superscore-calculator.html`은 superscore 계산 방식 위주로만 Enhanced ACT를 짧게 언급 — 둘 다 "포맷이 왜/어떻게 바뀌었는지" 자체는 다루지 않음 → **완전히 빈 자리 확인, 카니발라이제이션 우려 없이 진행**
+- 웹 검색으로 정확한 사실관계 확인(Kaplan, Magoosh, PrepScholar, test-ninjas 등 교차 확인): 문항수 215→131(Science 제외 시), English 75→50문항, Math 60→45문항(5지선다→4지선다), Reading 40→36문항, Science는 선택制로 전환되어 컴포지트에서 제외되고 별도 STEM 점수(Math+Science 평균)로 분리, 코어 시험시간 175분→125분, 문항당 시간 약 18~22% 증가. 롤아웃: 2025년 4월(온라인 내셔널) → 2025년 9월(종이 내셔널, 전체 3과목 컴포지트 적용) → 2026년 봄(스쿨데이/국제, 전환 완료). 2026년 기준 Legacy ACT는 완전히 폐지되어 선택지 자체가 없음 — 이 사실관계로 정확도 있는 비교분석형 콘텐츠 작성 가능하다고 판단
+
+### 실제 작업
+1. **`blog/new-act-format-2025-2026-changes.html` 신규 생성** (1,339단어) — "New ACT Format 2025–2026: Enhanced ACT vs. Legacy ACT". Enhanced vs Legacy 비교표(문항수/시간/Science 처리방식), 롤아웃 타임라인 표, Science 선택 여부 판단 기준, 기존 학습자료가 여전히 유효한지, superscore에 미치는 영향(신규 계산기로 CTA 링크), "더 쉬워진 건가?" 등 비교분석·문제해결 위주 구성. FAQ 5개 + FAQPage 스키마, Article 스키마 모두 포함. 문법 검증 통과
+2. **`blog/index.html`** Test Scores 섹션에 카드 추가 (28개 카드, 중복 없음 확인)
+3. **`sitemap.xml`, `llms.txt`** 신규 URL 반영
+4. **상호링크**: `tools/act-superscore-calculator.html`과 `blog/what-is-a-good-act-score.html` 양쪽의 "Related tools and guides"에 신규 글 링크 추가 (전자는 오늘 신규 생성 파일이라 제한 없음, 후자는 마지막 수정이 오늘(07-16) 이지만 같은 세션 내 후속 수정이라 문제 없음 — sitemap lastmod/dateModified는 이미 07-16으로 반영돼 있어 재갱신 불필요)
+
+커밋 `5a02acd`, push 완료. GitHub Actions "pages build and deployment" 워크플로에서 해당 커밋 `completed success` 확인(legacy `/pages/builds/latest` API는 일시적으로 이전 커밋을 보여주는 지연이 있었으나, Actions 로그 기준으로는 정상 배포 확인됨 — 다음 세션에서 한 번 더 최신 커밋 기준으로 빌드 상태 재확인 권장). 사이트 전체 JSON-LD 재검증, sitemap.xml 파싱 검증 통과, blog-card 28개/tool-card 22개 중복 없음 확인.
+
+### 이번 세션에서 배운 점 (다음 세션 참고)
+- "보강 위주로 진행"이 곧 "신규는 안 해도 된다"는 뜻이 아님 — 사용자가 명시적으로 지적하기 전까지 신규 착수가 뜸했던 점 반성. 앞으로는 **보강 작업과 별개로, 매 세션 최소 신규 후보 1~2개는 항상 함께 검토**할 것
+- 신규 툴을 만들 때는 그 툴과 자연스럽게 짝을 이루는 블로그 글(또는 반대로 블로그를 만들 때 짝이 되는 툴)도 같이 고려하면 카니발라이제이션 걱정 없이 신규 콘텐츠를 늘릴 수 있음 — 이번 superscore 계산기 + Enhanced ACT 개편 설명 글 조합이 좋은 예시
+
 ## 0. 작업 방식 (재확인)
 
 - 매 세션 **새 GitHub 토큰**을 사용자가 발급해서 줌 → `git clone https://<TOKEN>@github.com/canghun13/gpavault.git`
