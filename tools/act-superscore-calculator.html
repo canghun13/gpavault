@@ -7,6 +7,10 @@
   <meta name="description" content="Calculate your ACT superscore across multiple test dates. Enter scores from up to 3 attempts and see your best-section composite under the 2026 Enhanced ACT format (English, Math, Reading).">
   <link rel="canonical" href="https://gpavault.com/tools/act-superscore-calculator.html">
   <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .ss-input{width:100%;padding:0.625rem 0.6rem;border:1px solid var(--border);border-radius:8px;font-size:0.9rem;font-family:'Inter',sans-serif;color:var(--slate);background:var(--white);outline:none;transition:border-color 0.15s, box-shadow 0.15s;}
+    .ss-input:focus{border-color:var(--indigo-light);box-shadow:0 0 0 3px rgba(79,70,229,0.1);}
+  </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
@@ -101,24 +105,24 @@
       </tr>
       <tr>
         <td style="padding:0.4rem;color:var(--slate-mid);">Test 1</td>
-        <td style="padding:0.25rem;"><input type="number" id="t1e" min="1" max="36" style="width:100%;" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t1m" min="1" max="36" style="width:100%;" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t1r" min="1" max="36" style="width:100%;" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t1s" min="1" max="36" style="width:100%;" placeholder="—"></td>
+        <td style="padding:0.25rem;"><input type="number" id="t1e" min="1" max="36" class="ss-input" placeholder="—"></td>
+        <td style="padding:0.25rem;"><input type="number" id="t1m" min="1" max="36" class="ss-input" placeholder="—"></td>
+        <td style="padding:0.25rem;"><input type="number" id="t1r" min="1" max="36" class="ss-input" placeholder="—"></td>
+        <td style="padding:0.25rem;"><input type="number" id="t1s" min="1" max="36" class="ss-input" placeholder="—"></td>
       </tr>
       <tr>
         <td style="padding:0.4rem;color:var(--slate-mid);">Test 2</td>
-        <td style="padding:0.25rem;"><input type="number" id="t2e" min="1" max="36" style="width:100%;" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t2m" min="1" max="36" style="width:100%;" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t2r" min="1" max="36" style="width:100%;" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t2s" min="1" max="36" style="width:100%;" placeholder="—"></td>
+        <td style="padding:0.25rem;"><input type="number" id="t2e" min="1" max="36" class="ss-input" placeholder="—"></td>
+        <td style="padding:0.25rem;"><input type="number" id="t2m" min="1" max="36" class="ss-input" placeholder="—"></td>
+        <td style="padding:0.25rem;"><input type="number" id="t2r" min="1" max="36" class="ss-input" placeholder="—"></td>
+        <td style="padding:0.25rem;"><input type="number" id="t2s" min="1" max="36" class="ss-input" placeholder="—"></td>
       </tr>
       <tr>
         <td style="padding:0.4rem;color:var(--slate-mid);">Test 3</td>
-        <td style="padding:0.25rem;"><input type="number" id="t3e" min="1" max="36" style="width:100%;" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t3m" min="1" max="36" style="width:100%;" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t3r" min="1" max="36" style="width:100%;" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t3s" min="1" max="36" style="width:100%;" placeholder="—"></td>
+        <td style="padding:0.25rem;"><input type="number" id="t3e" min="1" max="36" class="ss-input" placeholder="—"></td>
+        <td style="padding:0.25rem;"><input type="number" id="t3m" min="1" max="36" class="ss-input" placeholder="—"></td>
+        <td style="padding:0.25rem;"><input type="number" id="t3r" min="1" max="36" class="ss-input" placeholder="—"></td>
+        <td style="padding:0.25rem;"><input type="number" id="t3s" min="1" max="36" class="ss-input" placeholder="—"></td>
       </tr>
     </table>
     <button class="calc-btn" onclick="calculate()">Calculate My Superscore</button>
