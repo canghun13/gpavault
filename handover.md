@@ -56,6 +56,37 @@ blog/index.html 카드 재정렬 후 BeautifulSoup으로 카드 27개 / href 중
 
 ---
 
+## 0-B. 07-16 같은 날 두 번째 세션 — 신규 콘텐츠 확장
+
+### 배경
+사용자가 "보강만 하지 말고 신규도 필요하다, 최근에 너무 안 했다, 확장이 필요한 시점"이라고 명시적으로 요청. 색인 반영 대기 중이라 보강 위주로 진행해온 원칙은 유효하지만, 신규 페이지 자체를 아예 안 만든 지 오래됐다는 지적(마지막 신규 툴은 07-07 sat-percentile-calculator)에 따라 신규 1건을 제대로 만들어 진행.
+
+### 신규 페이지 후보 검토 과정 (중복 방지 위해 기존 파일 전수 확인)
+- **President's List GPA 요건** — 검토했으나 `blog/what-is-the-deans-list-gpa-requirement.html`에 이미 "Dean's List vs Honor Roll vs President's List" 비교표로 다뤄지고 있어 **카니발라이제이션 우려로 기각**
+- **Subsidized vs Unsubsidized 대출 비교** — `federal-vs-private-student-loans.html`과 `student-loan-calculator.html`에 이미 상당히 다뤄지고 있어 **보류** (쿼리 볼륨도 분산되어 있어 신규 페이지보다는 향후 보강 후보로 백로그 이관)
+- **do you have to pay back a scholarship / how much is a scholarship worth** — 쿼리 자체가 파편화(각 1회 노출 수준)돼 있어 독립 신규 글로는 얇은 콘텐츠(thin content) 위험 판단, **보류**
+- **ACT Superscore Calculator** — GSC에 "act superscore calculator", "superscore act calculator", "act test superscore calculator" 등 뚜렷한 클러스터 존재. 웹 검색으로 확인한 결과 test-ninjas.com, tampalanguagecenter.com 등 소규모 사이트들이 이미 전용 계산기를 운영 중 — 즉 수요는 검증됐고 초대형 권위 사이트가 독점하고 있지 않아 **승산 있다고 판단, 신규 진행 결정**. 특히 GSC에 함께 잡힌 "act score calculator without science", "act score calculator no science" 쿼리가 실제로 **2025년 Enhanced ACT 개편(Science 섹션 선택制 전환, superscore는 English+Math+Reading 3과목만 반영)**과 정확히 일치함을 웹 검색으로 확인 — 시의성 있고 정확한 콘텐츠 작성 가능
+- 기존 `tools/act-score-calculator.html`(단일 응시 회차 점수 계산)과는 기능이 명확히 다름(다중 응시 회차의 섹션별 최고점을 조합) — 중복 아님. `act-score-calculator.html` 자체는 v5부터 이어진 "관망 원칙"(헤드 키워드 경쟁 압도적)에 따라 **이번에도 편집하지 않음**, 대신 새 페이지에서 그쪽으로 링크만 걸어 내부 링크 구조 확장
+
+### 실제 작업
+1. **`tools/act-superscore-calculator.html` 신규 생성** (1,072 단어) — 최대 3회 응시분의 English/Math/Reading(+선택 Science) 입력 → 섹션별 최고점 자동 조합 → superscore 계산. Enhanced ACT(2025~) vs Legacy ACT 방식 비교표, 아이비리그 학교별 superscore 정책 차이(하버드·프린스턴은 미적용), superscore 기반 재응시 전략, FAQ 5개(FAQPage 스키마 포함) 수록. WebApplication + FAQPage 스키마 2개 모두 JSON 문법 검증 통과
+2. **`assets/partials/header.html`** — 데스크톱/모바일 드롭다운 네비 "Test Scores" 섹션에 신규 항목 추가 (중앙 관리 파일이라 이 한 곳만 수정하면 전체 페이지 실제 노출 네비에 자동 반영됨)
+3. **noscript 네비게이션 (54개 파일 전체)** — 스크립트로 일괄 치환 (`act-score-calculator` 링크 뒤에 `act-superscore-calculator` 링크 삽입, 상대경로(`../tools/`)와 루트경로(`tools/`) 두 패턴 모두 처리). `editorial-policy.html`, `methodology.html`은 원래부터 축약형 네비(Tools/Blog/About만 있음)라 대상 아님, 정상
+4. **`tools/index.html`** — Test Scores 섹션에 신규 카드 추가, BeautifplSoup으로 22개 카드 전부 href 중복 없음 검증 완료(기존 21+신규 1)
+5. **`sitemap.xml`, `llms.txt`** — 신규 URL 항목 추가
+6. **`blog/what-is-a-good-act-score.html`** — "Related tools and guides"에 신규 계산기 링크 1줄 추가(상호링크), dateModified 07-16 갱신, sitemap lastmod도 갱신. 이 파일은 2주 재작업 제한 대상이 아니었음(마지막 수정 07-07)
+
+커밋 `c928066`, push 완료, Pages 빌드 `built` 확인 완료 (commit sha 일치 확인). 전체 사이트 JSON-LD 문법 재검증(site-wide) 및 sitemap.xml XML 파싱 검증 통과.
+
+### 다음 세션 백로그 갱신
+0-A 섹션의 백로그(financial-aid-calculator, student-loan-vs-salary, what-is-a-good-gpa-in-college FAQ 보강)에 아래 항목 추가:
+4. **신규 후보**: Subsidized vs Unsubsidized федeral loan 비교 콘텐츠 — 쿼리 볼륨이 더 쌓이면 독립 블로그 글 검토, 아직은 기존 파일들에 분산 보강하는 쪽이 안전
+5. **신규 후보**: 스콜라십 상환 의무 여부(do you have to pay back a scholarship) — 쿼리 볼륨 추이 지켜보고 축적되면 착수
+
+### 이번 세션 원칙 재확인 (다음 세션에도 적용)
+- 색인 대기 중인 보강 완료 파일 재작업 금지 원칙은 **신규 페이지 제작에는 적용되지 않음** — 신규는 언제든 만들어도 됨, 다만 항상 기존 파일과의 카니발라이제이션 먼저 확인
+- 신규 페이지 만들 때 체크리스트: (1) 페이지 자체 (2) `assets/partials/header.html` 드롭다운 (3) 전체 파일 noscript nav 일괄치환 (4) `tools/index.html` 또는 `blog/index.html` 카드 (5) `sitemap.xml` (6) `llms.txt` (7) 관련 기존 페이지에 상호링크 1곳 이상
+
 ## 0. 작업 방식 (재확인)
 
 - 매 세션 **새 GitHub 토큰**을 사용자가 발급해서 줌 → `git clone https://<TOKEN>@github.com/canghun13/gpavault.git`
