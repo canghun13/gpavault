@@ -10,6 +10,17 @@
   <style>
     .ss-input{width:100%;padding:0.625rem 0.6rem;border:1px solid var(--border);border-radius:8px;font-size:0.9rem;font-family:'Inter',sans-serif;color:var(--slate);background:var(--white);outline:none;transition:border-color 0.15s, box-shadow 0.15s;}
     .ss-input:focus{border-color:var(--indigo-light);box-shadow:0 0 0 3px rgba(79,70,229,0.1);}
+    .ss-header-row{display:grid;grid-template-columns:70px repeat(4,1fr);gap:0.6rem;margin-bottom:0.5rem;font-size:0.8rem;color:var(--slate-mid);font-weight:600;}
+    .ss-test-row{display:grid;grid-template-columns:70px repeat(4,1fr);gap:0.6rem;align-items:center;margin-bottom:0.6rem;}
+    .ss-test-label{font-size:0.85rem;color:var(--slate-mid);}
+    .ss-mobile-label{display:none;}
+    @media (max-width:640px){
+      .ss-header-row{display:none;}
+      .ss-test-row{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;border:1px solid var(--border);border-radius:10px;padding:0.85rem;margin-bottom:0.75rem;}
+      .ss-test-label{grid-column:1/-1;font-size:0.95rem;font-weight:700;color:var(--slate);margin-bottom:0.25rem;}
+      .ss-field{display:flex;flex-direction:column;gap:0.25rem;}
+      .ss-mobile-label{display:block;font-size:0.78rem;color:var(--slate-mid);font-weight:500;}
+    }
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
@@ -95,36 +106,34 @@
   </div>
   <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
   <div class="calc-card">
-    <table style="width:100%;border-collapse:collapse;margin-bottom:1rem;font-size:0.85rem;">
-      <tr>
-        <th style="text-align:left;padding:0.4rem;color:var(--slate-mid);"></th>
-        <th style="text-align:left;padding:0.4rem;color:var(--slate-mid);">English</th>
-        <th style="text-align:left;padding:0.4rem;color:var(--slate-mid);">Math</th>
-        <th style="text-align:left;padding:0.4rem;color:var(--slate-mid);">Reading</th>
-        <th style="text-align:left;padding:0.4rem;color:var(--slate-mid);">Science (optional)</th>
-      </tr>
-      <tr>
-        <td style="padding:0.4rem;color:var(--slate-mid);">Test 1</td>
-        <td style="padding:0.25rem;"><input type="number" id="t1e" min="1" max="36" class="ss-input" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t1m" min="1" max="36" class="ss-input" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t1r" min="1" max="36" class="ss-input" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t1s" min="1" max="36" class="ss-input" placeholder="—"></td>
-      </tr>
-      <tr>
-        <td style="padding:0.4rem;color:var(--slate-mid);">Test 2</td>
-        <td style="padding:0.25rem;"><input type="number" id="t2e" min="1" max="36" class="ss-input" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t2m" min="1" max="36" class="ss-input" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t2r" min="1" max="36" class="ss-input" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t2s" min="1" max="36" class="ss-input" placeholder="—"></td>
-      </tr>
-      <tr>
-        <td style="padding:0.4rem;color:var(--slate-mid);">Test 3</td>
-        <td style="padding:0.25rem;"><input type="number" id="t3e" min="1" max="36" class="ss-input" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t3m" min="1" max="36" class="ss-input" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t3r" min="1" max="36" class="ss-input" placeholder="—"></td>
-        <td style="padding:0.25rem;"><input type="number" id="t3s" min="1" max="36" class="ss-input" placeholder="—"></td>
-      </tr>
-    </table>
+    <div class="ss-header-row">
+      <div></div>
+      <div>English</div>
+      <div>Math</div>
+      <div>Reading</div>
+      <div>Science (optional)</div>
+    </div>
+    <div class="ss-test-row">
+      <div class="ss-test-label">Test 1</div>
+      <div class="ss-field"><label class="ss-mobile-label">English</label><input type="number" id="t1e" min="1" max="36" class="ss-input" placeholder="—"></div>
+      <div class="ss-field"><label class="ss-mobile-label">Math</label><input type="number" id="t1m" min="1" max="36" class="ss-input" placeholder="—"></div>
+      <div class="ss-field"><label class="ss-mobile-label">Reading</label><input type="number" id="t1r" min="1" max="36" class="ss-input" placeholder="—"></div>
+      <div class="ss-field"><label class="ss-mobile-label">Science (optional)</label><input type="number" id="t1s" min="1" max="36" class="ss-input" placeholder="—"></div>
+    </div>
+    <div class="ss-test-row">
+      <div class="ss-test-label">Test 2</div>
+      <div class="ss-field"><label class="ss-mobile-label">English</label><input type="number" id="t2e" min="1" max="36" class="ss-input" placeholder="—"></div>
+      <div class="ss-field"><label class="ss-mobile-label">Math</label><input type="number" id="t2m" min="1" max="36" class="ss-input" placeholder="—"></div>
+      <div class="ss-field"><label class="ss-mobile-label">Reading</label><input type="number" id="t2r" min="1" max="36" class="ss-input" placeholder="—"></div>
+      <div class="ss-field"><label class="ss-mobile-label">Science (optional)</label><input type="number" id="t2s" min="1" max="36" class="ss-input" placeholder="—"></div>
+    </div>
+    <div class="ss-test-row">
+      <div class="ss-test-label">Test 3</div>
+      <div class="ss-field"><label class="ss-mobile-label">English</label><input type="number" id="t3e" min="1" max="36" class="ss-input" placeholder="—"></div>
+      <div class="ss-field"><label class="ss-mobile-label">Math</label><input type="number" id="t3m" min="1" max="36" class="ss-input" placeholder="—"></div>
+      <div class="ss-field"><label class="ss-mobile-label">Reading</label><input type="number" id="t3r" min="1" max="36" class="ss-input" placeholder="—"></div>
+      <div class="ss-field"><label class="ss-mobile-label">Science (optional)</label><input type="number" id="t3s" min="1" max="36" class="ss-input" placeholder="—"></div>
+    </div>
     <button class="calc-btn" onclick="calculate()">Calculate My Superscore</button>
     <div class="result-box" id="result">
       <div class="result-num" id="result-num">—</div>
