@@ -110,6 +110,44 @@ blog/index.html 카드 재정렬 후 BeautifulSoup으로 카드 27개 / href 중
 - "보강 위주로 진행"이 곧 "신규는 안 해도 된다"는 뜻이 아님 — 사용자가 명시적으로 지적하기 전까지 신규 착수가 뜸했던 점 반성. 앞으로는 **보강 작업과 별개로, 매 세션 최소 신규 후보 1~2개는 항상 함께 검토**할 것
 - 신규 툴을 만들 때는 그 툴과 자연스럽게 짝을 이루는 블로그 글(또는 반대로 블로그를 만들 때 짝이 되는 툴)도 같이 고려하면 카니발라이제이션 걱정 없이 신규 콘텐츠를 늘릴 수 있음 — 이번 superscore 계산기 + Enhanced ACT 개편 설명 글 조합이 좋은 예시
 
+---
+
+## 0-D. 07-16 네 번째 세션 — "확장을 더 많이 해야 한다" / 장기 롱테일 전략 논의 + 신규 콘텐츠 유형 2개 도입
+
+### 배경
+사용자가 "지금 페이지 수가 너무 적다, 색인이 반쯤 잡힌 지금이 확장할 때다, tool/blog 말고 추가할 만한 게 있나?"라고 요청. **바로 만들지 말고 먼저 방향을 정하자**는 사용자 요청에 따라, 실행 전에 옵션을 정리해서 논의 후 결정하는 방식으로 진행함(이 패턴은 앞으로도 "구조적 결정"이 필요한 순간에는 반복 적용할 것 — 예: 새 콘텐츠 유형 도입, 사이트 구조 변경 등).
+
+### 논의된 옵션과 결론
+tool/blog 외 콘텐츠 유형 후보로 다음을 제시:
+- **A. "X vs Y" 비교 전용 페이지** — AI 검색이 비교분석 콘텐츠를 선호한다는 기존 원칙과 가장 직접적으로 부합. 페이지당 검색의도 뚜렷하고 경쟁 상대적으로 낮음
+- **B. 용어사전(Glossary)** — 정의성 롱테일 쿼리("what is X") 대량 흡수에 유리, 확장성 좋음
+- **C. "Is X worth it" 판단형 페이지** — degree-roi-calculator, is-college-degree-worth-the-debt.html과 결이 겹칠 위험 있어 보류
+- **D. 주(state)별 정보 페이지** — 페이지 수는 폭발적으로 늘릴 수 있으나 정확성 유지 부담과 E-E-A-T 리스크 커서 지금 규모에는 보류 결정
+
+**사용자 결정: A+B 병행**, 단 "가치없는 콘텐츠로 안 걸리게" 퀄리티 담보 조건부.
+
+### 품질 안전장치 (다음에도 이 원칙 유지)
+- **B(용어사전)의 핵심 리스크**: 용어별 개별 페이지 20~30개를 만들면 정의 한두 줄짜리 얇은 페이지가 무더기로 생겨 AdSense "가치없는 콘텐츠" 재검토에 불리하게 작용할 수 있음 → **개별 페이지 대신 단일 허브 페이지**로 구성해 해결 (용어당 정의+예시+관련 툴 링크 포함, 전체 분량 확보). 향후 특정 용어의 검색량이 GSC에서 확인되면 그때 개별 페이지로 승격하는 방식으로 확장할 것 (지금은 승격 안 함)
+- **A(비교 페이지)**: 기존 tool/blog와 동일한 품질 기준(800~1200단어, 비교표+FAQ+스키마) 그대로 적용하면 리스크 없음 — 이미 검증된 방식 반복
+
+### 실제 작업
+1. **`glossary.html` 신규 생성** (루트 경로, 1,759단어) — "GPA & Academics"(9개) / "Financial Aid & Loans"(13개) / "Test Scores"(6개) 3개 카테고리, 총 28개 용어. 용어당 정의 + 실용적 설명 + 관련 기존 툴/블로그로 내부링크. `DefinedTermSet`/`DefinedTerm` 스키마 사용(용어사전에 가장 적합한 schema.org 타입). 카테고리 점프 목차(TOC) 포함
+2. **헤더 네비게이션 구조 변경**: `assets/partials/header.html`에 최상위 메뉴 **Glossary**를 Blog와 About 사이에 신규 추가 (데스크톱+모바일 양쪽) → Tools / Blog / Glossary / About 4개 구조로 확장. noscript nav 58개 파일 전체에 스크립트로 일괄 반영(전체 tool-list 버전과 축약형 버전 둘 다 처리)
+3. **`blog/grad-plus-vs-private-loans-2026.html` 신규 생성** (1,584단어) — "Grad PLUS vs. Private Loans for Grad School: What Changed in 2026". 2026년 7월 1일부로 Grad PLUS 대출이 신규 차입자에게 차단된 정책(OBBBA 법안) 반영. Legacy borrower vs New borrower 판정 기준, Grad PLUS/Direct Unsubsidized/Private Loan 3자 비교표, 신규 연방 대출 한도, PSLF 관련 함정(Tiered Standard는 PSLF 미적용, RAP 별도 신청 필요), 진행 중인 법적 소송 현황까지 언급(구체적 수치는 계속 유동적이라 "학교에 직접 확인" 안내 포함해 정확성 리스크 관리). 웹 검색으로 Kaplan/Credible/여러 대학 재정지원처 공식 페이지 교차 확인해 사실관계 정확도 확보
+4. **`blog/index.html`** Student Loans 섹션에 카드 추가 (29개 카드, 중복 없음 확인) — glossary.html은 tool/blog 어디에도 속하지 않는 독립 콘텐츠라 인덱스 카드 없음(내비게이션 메뉴로만 접근)
+5. **`sitemap.xml`, `llms.txt`** 신규 URL 2개 반영 (glossary.html은 새 "## Reference" 섹션으로 llms.txt에 분리 등록)
+6. **상호링크**: `federal-vs-private-student-loans.html`의 "Related tools and guides"에 신규 Grad PLUS 글 링크 추가, dateModified/sitemap lastmod 07-16 갱신 (이 파일은 07-13에 금리 수정만 있었고 2주 재작업 제한 대상 아님)
+
+커밋 `3f74eb2`, push 완료. GitHub Actions 빌드 `completed success` 확인 완료. 사이트 전체 JSON-LD 재검증(63개 파일 변경분 포함) 통과, sitemap.xml 파싱 검증 통과(59개 URL), blog-card 29개 중복 없음 확인.
+
+### 다음 세션 참고사항
+- **A(비교 페이지) 후보 백로그** (이번에 Grad PLUS 1건 진행, 나머지는 다음 세션에):
+  - Weighted vs Unweighted GPA — 왜 다르게 계산되는지, 대학 입시 관점, 학교별 가중치 스케일 예시 등 깊이 있는 별도 글 (지금은 weighted-gpa-calculator.html 안에 짧은 FAQ로만 존재)
+  - Dean's List vs Latin Honors(cum laude 등) — 재학 중 우등 vs 졸업 시 우등, 시점이 달라 dean's-list 글과도 안 겹침
+  - (ACT vs SAT는 헤드키워드 경쟁 너무 세서 계속 제외)
+- **B(용어사전) 확장 전략**: 지금은 허브 1페이지, 다음 GSC 데이터에서 특정 용어("discretionary income", "capitalized interest" 등)의 검색 임프레션이 확인되면 그 용어만 골라 독립 페이지로 승격 검토. 무분별하게 개별 페이지부터 늘리지 말 것
+- **사이트 구조가 Tools/Blog/Glossary/About 4단으로 늘어났음** — 다음에 새 콘텐츠 유형(예: C나 D)을 추가로 도입하게 되면 헤더 네비게이션 공간과 모바일 드롭다운 구조를 다시 검토해야 할 수 있음
+
 ## 0. 작업 방식 (재확인)
 
 - 매 세션 **새 GitHub 토큰**을 사용자가 발급해서 줌 → `git clone https://<TOKEN>@github.com/canghun13/gpavault.git`
