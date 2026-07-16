@@ -1,6 +1,58 @@
-# GPA Vault 인수인계 문서 v7 (2026-07-13 기준, AdSense 재검토 준비 세션 반영)
+# GPA Vault 인수인계 문서 v8 (2026-07-16 세션 반영)
 
-이전 v6 문서를 대체함. v6(및 그 이전 버전들)의 배경 설명은 그대로 유효하므로 필요시 참고. 이 문서는 **07-13 같은 날 진행된 두 번째 세션(AdSense "가치없는 콘텐츠" 재검토 대비 점검)**에서 바뀐 것 위주로 정리.
+이전 v7 문서를 대체함. v7(및 그 이전 버전들)의 배경 설명은 그대로 유효하므로 필요시 참고. 이 문서는 **07-16 세션(GSC 데이터 기반 신규/보강 + 롱테일 키워드 전략)**에서 바뀐 것 위주로 맨 위에 정리하고, 이전 v7 본문은 아래에 그대로 보존.
+
+---
+
+## 0-A. 07-16 세션 작업 내역 (★ 최신, 맨 위에서부터 읽을 것)
+
+### 배경 및 지시사항
+사용자가 이번 세션에서 추가로 준 지침 (앞으로도 계속 적용):
+- **AI 검색(예: ChatGPT/Perplexity 등)에서는 도메인 권위보다 콘텐츠 자체의 문제해결/비교분석 품질이 더 중요**하다는 사용자 판단 — 이후 신규/보강 작업은 이 방향(비교표, 구체적 케이스 비교, "왜"에 대한 답)을 우선시할 것
+- 신규 콘텐츠 착수 전 **기존 파일과의 중복(카니발라이제이션) 확인 필수** + **웹 검색으로 경쟁 강도 확인 후 롱테일 키워드 위주로 진행**
+- **수익화(AdSense 트래픽/클릭) 관점에서 우선순위 판단** — 임프레션 크고 순위 개선 여지 큰 페이지부터
+- 대시보드/시각화 자료 만들지 말고 **분석 결과는 텍스트로만** 보고
+
+### GSC 데이터 분석 결과 (07-16 export, Performance + Coverage)
+- **Coverage 개선 확인**: 07-13에 있던 "크롤링됨 - 현재 색인이 생성되지 않음" 1건이 07-16엔 **0건으로 해소됨**. "발견됨 - 현재 색인 생성되지 않음"도 29건 → **21건으로 감소** (색인 진행 중, 긍정적 신호). 리디렉션 3 / noindex 1(정상, 의도된 것) / 404 1(검증 중)은 기존과 동일, 조사 불필요.
+- **Performance 쿼리 분석**: 아직 전체 사이트 클릭 0에 가까움(과거 대비 큰 변화 없음, 07-13 기준 4주 GA4 오가닉 세션 11건 수준 언급됐던 것과 일관). 그러나 노출은 꾸준히 쌓이고 있고, 특히 아래 롱테일 클러스터들이 순위 70~100위권에 몰려 있어 온페이지 보강 여지가 큼:
+  1. **percentage-to-GPA 숫자 변환 쿼리 클러스터** ("90 to gpa", "87 to gpa", "97 to gpa", "b in gpa" 등 15개 이상 변형, 대부분 순위 90~100위) — `gpa-to-letter-grade-converter.html`이 정확히 이 의도에 맞는 페이지인데 **FAQ 텍스트는 있었지만 FAQPage 스키마가 누락**돼 있었음 (07-09/07-13에 발견된 것과 동일한 유형의 버그, 이 파일은 그동안 점검 대상에서 빠져 있었음)
+  2. **weighted-to-unweighted GPA 변환 쿼리** ("weighted gpa to gpa", "convert weighted to unweighted gpa" 등 5개) — `weighted-gpa-calculator.html`은 이미 두 값을 나란히 계산해주는 툴이지만 이 변환 관련 FAQ가 없었음
+  3. **nursing GPA prerequisite 쿼리** ("what gpa do you need for nursing prerequisites", "minimum gpa for nursing school", "whats the average gpa for nursing school acceptance") — `blog/what-gpa-do-you-need-for-nursing-school.html`이 이미 순위 31.81(사이트 내 4번째로 좋은 순위)까지 올라와 있어 소폭 보강만으로 1페이지 진입 가능성 있다고 판단
+  4. **degree ROI 비교 쿼리 클러스터** ("degree roi calculator", "grad school roi calculator", "law school roi calculator", "college roi calculator" 등 7개) — `degree-roi-calculator.html`도 **FAQ 텍스트는 있는데 FAQPage 스키마 누락** 버그 발견 (동일 유형)
+  5. **student loan repayment plan 비교 쿼리** ("graduated repayment calculator", "parent plus loan repayment calculator" 등, 전체 repayment 관련 쿼리 임프레션 합산 시 사이트 내 최대 규모 클러스터) — `loan-repayment-calculator.html`(사이트 전체 2위 임프레션, 124회)은 FAQ 스키마는 이미 있었지만 Graduated/Parent PLUS 관련 FAQ가 빠져 있었음
+
+- **경쟁 강도 웹 검색**: "percentage to GPA" 계열은 num8ers.com, gradeconvert.com, convertgpa.com, smartcgpa.com 등 다수의 중소 사이트가 이미 경쟁 중이나 대부분 인도 CGPA(10점 스케일) 중심 — 미국 GPA 특화 롱테일("90 to gpa" 같은 초단문 쿼리)은 상대적으로 빈 틈이 있다고 판단, 온페이지 보강으로 진행 결정. degree ROI, nursing GPA, repayment plan comparison 클러스터는 초고권위 사이트(대학 공식 사이트 정도만 상위 노출)가 장악하고 있지 않아 보강 승산 있음으로 판단.
+- **college-cost-calculator, act-score-calculator**: v5~v7 원칙대로 이번에도 건드리지 않음 (헤드 키워드 경쟁 압도적, 지시 없으면 관망 유지)
+- **신규 페이지 필요성 재검토**: 기존 21개 tools + 27개 blog가 주요 쿼리 코호트를 이미 커버하고 있어, 이번 세션도 v7과 동일하게 **신규 페이지 대신 기존 페이지 보강**이 우선이라고 판단 (완전히 새로운 쿼리 의도를 가진 미커버 클러스터가 GSC 데이터상 발견되지 않음). 신규 페이지 후보는 계속 없음.
+
+### 실제 작업 내역 (5개 파일, 전부 보강 체크리스트 4개 항목 적용)
+1. **`tools/gpa-to-letter-grade-converter.html`** — FAQPage 스키마 신규 추가(버그 수정) + percentage-to-GPA 관련 FAQ 4개 신규(90/87/95·97/B 관련 숫자 변환 쿼리 대응)
+2. **`tools/degree-roi-calculator.html`** — FAQPage 스키마 신규 추가(버그 수정) + ROI 비교 FAQ 2개 신규(law school/grad school ROI 비교, ROI vs 단순 cost-vs-salary 비교 — 사용자가 요청한 "비교분석" 스타일 콘텐츠)
+3. **`tools/weighted-gpa-calculator.html`** — weighted→unweighted 변환 FAQ 1개 신규 추가 (기존에 FAQPage 스키마는 있었음, 항목만 추가)
+4. **`blog/what-gpa-do-you-need-for-nursing-school.html`** — FAQ 섹션 신규 생성(기존엔 FAQ 자체가 없었음) + FAQPage 스키마 신규 + 3개 문항(prerequisites GPA, minimum GPA, average acceptance GPA), Article dateModified 07-16 갱신, 화면 "Updated July 2026" 텍스트 갱신, blog/index.html cat-academics 섹션 최상단으로 이동
+5. **`tools/loan-repayment-calculator.html`** — 기존 FAQPage 스키마에 문항 2개 추가(Graduated vs Standard 비교, Parent PLUS 대출의 상환 플랜 제약 — 역시 "비교분석" 스타일)
+
+전부 sitemap.xml lastmod 07-16 갱신 완료. llms.txt는 5개 파일 전부 확인했으나 문구가 이미 최신이라 갱신 불필요(날짜 표기 없음, 설명 문구도 변경 내용과 어긋나지 않음).
+
+blog/index.html 카드 재정렬 후 BeautifulSoup으로 카드 27개 / href 중복 0건 검증 완료. 5개 파일 전부 JSON-LD 문법 검증(python json.loads) 통과, HTML 파싱 이상 없음 확인.
+
+커밋 `520779a`, push 완료, Pages 빌드 `built` 확인 완료 (commit sha 일치 확인).
+
+### 이번 세션에 건드리지 않은 것 (재확인)
+- `college-cost-calculator.html`, `act-score-calculator.html` — 관망 유지
+- 07-11 보강 5개(dean's list, gpa-scale, student-loan-debt-too-much, repayment-plans-2026, grade-calculator), 07-13 첫 세션 보강 2개(how-many-as-to-raise-gpa, ib-gpa-calculator) — **아직 2주 안 지남(07-16 기준 07-25/07-27이 재작업 가능 시점)**, 손대지 않음
+- `student-loan-calculator.html`, `semester-gpa-calculator.html` (07-13 두 번째 세션에 800단어 미만 보강됨), `scholarship-savings-calculator.html` (같은 세션에 보강) — 2주 이내라 재작업 보류 대상으로 새로 편입 (아래 다음 세션 체크리스트에 반영)
+- `financial-aid-calculator.html`, `student-loan-vs-salary.html`, `blog/what-is-a-good-gpa-in-college.html` — 후보로 검토했으나 이번 세션 5개에 밀려 보류, 다음 세션 백로그로 이관 (아래 참고)
+
+### 다음 세션 백로그 (신규 착수 후보, 우선순위순)
+1. `tools/financial-aid-calculator.html` — "will i qualify for financial aid calculator", "financial aid cal" 등 쿼리 대응 FAQ 보강 (이미 FAQPage 스키마 있음, 항목만 추가하면 됨)
+2. `tools/student-loan-vs-salary.html` — "student loan minimum salary", "salary threshold for student loan repayment" 등 대응 FAQ 신규 (현재 FAQ 자체 없음, 임프레션은 아직 낮으니 우선순위 1번보다 낮음)
+3. `blog/what-is-a-good-gpa-in-college.html` — "is a 3.75 gpa good in college", "what is a good cumulative gpa" 등 대응 FAQ 신규
+- 사용자에게 착수 여부 물어보지 않고 바로 진행해도 되는 원칙(v7 2번 항목) 유지되는 한, 다음 세션 시작 시 새 GSC export로 우선순위 재확인 후 바로 진행
+
+### AdSense 재검토 관련
+사용자가 이번 세션에 재검토 제출 여부를 언급하지 않음 — **다음 세션 시작 시 반드시 먼저 확인할 것** (v7 문서 9번, 15번 체크리스트 항목 그대로 유효).
 
 ---
 
@@ -138,7 +190,7 @@ GSC Performance/Coverage export (07-13) + GA4 리포트(06-15~07-12) 분석 후 
 6. 작업 시 **신규는 9개 파일 체크리스트, 보강은 4개 파일 체크리스트(본문/sitemap/blog-index/llms.txt) 누락 금지** — llms.txt 빠뜨리면 사용자가 바로 지적함
 7. college-cost-calculator, act-score-calculator는 별도 지시 없으면 건드리지 않기
 8. 리디렉션 이슈는 조사하지 않기 (사용자 확인됨)
-9. 07-11에 보강한 5개 파일 + 07-13에 보강한 2개 파일(how-many-as-to-raise-gpa, ib-gpa-calculator)은 최소 2주는 재작업하지 말 것 — 색인 반영 시간 필요
+9. 07-11에 보강한 5개 파일 + 07-13에 보강한 2개 파일(how-many-as-to-raise-gpa, ib-gpa-calculator)은 최소 2주는 재작업하지 말 것 — 색인 반영 시간 필요 (★ 07-16 추가: `gpa-to-letter-grade-converter.html`, `degree-roi-calculator.html`, `weighted-gpa-calculator.html`, `blog/what-gpa-do-you-need-for-nursing-school.html`, `loan-repayment-calculator.html` 5개도 동일하게 07-30까지 재작업 보류. 상세는 맨 위 0-A 섹션 참고)
 10. **연방 대출 금리는 매년 7월 1일 갱신됨을 기억할 것** — 다음 갱신은 2027-07-01이니 그 전까지는 6.52%/8.07%/9.07%가 맞는 숫자. 매 세션 시작 시 "지금 몇 월인지" 확인해서 회계연도 넘어갔으면 사이트 전체 금리 재점검
 11. 작업 완료 후 커밋/푸시 → Pages 빌드 `built` 확인까지 끝내고, **사용자가 직접 확인해야 할 URL을 클릭 가능한 링크로 정리해서 제시** (사용자는 영어를 몰라서 콘텐츠 검수가 아니라 화면이 깨졌는지만 육안 확인함 — 문구 검수 요청하지 말 것)
 12. 세션 끝나면 토큰 revoke 리마인드
