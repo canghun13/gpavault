@@ -54,6 +54,7 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 - [How Much Student Loan Debt Is Too Much?](https://gpavault.com/blog/how-much-student-loan-debt-is-too-much.html): The 1x rule and 10% payment benchmark explained with major-specific debt ceilings, school type comparisons, and options if you have already borrowed too much. Updated July 2026.
 - [Student Loan Repayment Plans Explained (2026)](https://gpavault.com/blog/student-loan-repayment-plans-2026.html): Overview of Standard, IBR, PAYE, and RAP repayment plans including the 2026 changes replacing SAVE.
 - [Federal vs Private Student Loans](https://gpavault.com/blog/federal-vs-private-student-loans.html): Key differences, which to borrow first, and when private loans make sense.
+- [Grad PLUS vs. Private Loans for Grad School (2026)](https://gpavault.com/blog/grad-plus-vs-private-loans-2026.html): Grad PLUS eliminated for new borrowers July 1, 2026 — legacy borrower vs new borrower test, new federal borrowing caps, comparison table, and decision framework for filling the funding gap.
 - [How to Find Scholarships You Actually Qualify For](https://gpavault.com/blog/how-to-find-scholarships.html): Systematic approach to finding local, niche, and institutional scholarships with less competition.
 - [Room and Board vs Off-Campus Living](https://gpavault.com/blog/room-board-vs-off-campus.html): How to calculate whether on-campus or off-campus housing is actually cheaper for your school and city.
 - [Is a College Degree Worth the Debt?](https://gpavault.com/blog/is-college-degree-worth-the-debt.html): How to calculate degree ROI for a specific major and school, not just average statistics.
@@ -74,3 +75,6 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 - [What Is a Good SAT Score?](https://gpavault.com/blog/what-is-a-good-sat-score.html): SAT score benchmarks by college tier and percentile, Math vs Reading & Writing section analysis, scholarship thresholds, and test-optional submission strategy.
 - [What Is a Good ACT Score?](https://gpavault.com/blog/what-is-a-good-act-score.html): ACT score benchmarks by college tier and percentile, section score strategy, scholarship thresholds, ACT vs SAT comparison, and test-optional submission strategy.
 - [New ACT Format 2025–2026: Enhanced ACT vs. Legacy ACT](https://gpavault.com/blog/new-act-format-2025-2026-changes.html): Full breakdown of the Enhanced ACT redesign — fewer questions, optional Science, shorter test time, new 3-section composite, rollout timeline, and prep implications.
+
+## Reference
+- [Glossary](https://gpavault.com/glossary.html): Plain-English definitions of 28 GPA, financial aid, student loan, and test score terms — quality points, discretionary income, capitalized interest, superscore, Student Aid Index, and more — each linking to the relevant calculator or guide.
