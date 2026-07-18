@@ -36,6 +36,20 @@
 - **`blog/ap-credit-vs-placement.html`** (신규, 1,524단어) — 오늘 만든 `ap-credit-calculator.html`과 짝. "AP credit"과 "AP placement"의 실질적 차이(학점 총량 감소 여부)를 비교표 + 워크스루 예시(Maria/Devon)로 설명, 4가지 결과 조합 비교표, 학교 유형별 정책 경향, 전략적 활용법. 경쟁 확인 결과 sparkl.me 등 유사 주제 텍스트 글은 이미 존재하지만, 오늘 만든 인터랙티브 계산기와 결합된 자산이라는 차별점으로 진행 결정. 반대로 percentage-to-gpa-converter.html 짝 블로그(국제 성적 스케일 비교 등)는 **오늘 만든 툴 페이지 자체 본문이 이미 breakpoint/스케일 변환 설명으로 충분히 두꺼워서(FAQ 5개 포함) 별도 블로그를 만들면 같은 세션 내 자기잠식 위험이 크다고 판단해 보류** — 이 판단 기준(같은 세션에 만든 툴의 본문이 이미 깊으면 블로그 생략 가능)은 다음에도 참고할 것
 - blog/index.html cat-academics 최상단 카드 추가(30개, 중복 0건), sitemap.xml(62 URL), llms.txt, `ap-credit-calculator.html`에 상호링크 추가. 커밋 `dfacf37`, push 완료
 
+### 추가 작업 (같은 세션 계속 진행 — 사용자가 "할 수 있는 만큼 계속 하라"고 명시적으로 요청)
+
+**백로그 보강 2건 마저 처리** (바로 아래 "다음 세션 참고사항"에 있던 v9 이월 항목 1, 2번):
+- `tools/student-loan-vs-salary.html` — FAQPage 스키마 누락 버그 수정(기존 3문항 있었는데 스키마 없었음, 이 세션에서만 벌써 4번째 동일 유형 버그 발견) + FAQ 신규 2개("percent of income", "minimum salary threshold" 쿼리 대응)
+- `blog/what-is-a-good-gpa-in-college.html` — 동일 버그 수정 + FAQ 신규 2개("good cumulative gpa", "is a 3.75 gpa good" 정확매칭)
+- 둘 다 sitemap/blog-index/llms.txt 체크리스트 반영. 커밋 `5ce5acd`
+
+**신규 블로그 추가 1건** (v8 0-D 백로그 "A(비교 페이지)" 후보 중 착수):
+- `blog/deans-list-vs-latin-honors.html` (1,216단어) — Dean's List(학기 단위, 반복 가능) vs Latin Honors(졸업 시 1회, 누적GPA 기반)의 핵심 차이, Fixed GPA cutoff vs percentile-of-class 두 산정 방식 비교, 왜 한쪽만 받는 경우가 생기는지 실제 시나리오, 이력서 기재 전략. 경쟁 확인 결과 대학 registrar 개별 페이지 위주라 상대적으로 덜 포화됨 확인 후 진행
+- blog/index.html cat-academics 최상단(31개 카드), sitemap(63 URL), llms.txt, 상호링크 3곳(what-is-a-good-gpa-in-college.html, what-is-the-deans-list-gpa-requirement.html[2주 보류 대상이지만 신규 페이지 링크 추가 예외 적용], glossary.html). 커밋 `f444d58`, push 및 빌드 확인 완료
+
+이로써 이번 세션 v9 백로그 3개 항목(financial-aid-calculator 보강은 첫 세션에 완료, student-loan-vs-salary/what-is-a-good-gpa-in-college 보강은 이번에 완료) 전부 소진, v8 0-D 백로그 "Dean's List vs Latin Honors" 항목도 완료 — 아래 "다음 세션 참고사항"의 관련 문구는 갱신된 것으로 간주.
+
+### AdSense 재검토 관련 (갱신)
 
 사용자가 이번 세션에 **재검토를 이미 제출했음을 확인**. 결과 여부는 아직 언급 없음 — 다음 세션에서 결과 나왔는지 확인할 것(최우선 체크리스트에서는 제외, 일반 확인 사항으로 격하).
 
