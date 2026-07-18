@@ -1,6 +1,54 @@
-# GPA Vault 인수인계 문서 v8 (2026-07-16 세션 반영)
+# GPA Vault 인수인계 문서 v9 (2026-07-18 세션 반영)
 
-이전 v7 문서를 대체함. v7(및 그 이전 버전들)의 배경 설명은 그대로 유효하므로 필요시 참고. 이 문서는 **07-16 세션(GSC 데이터 기반 신규/보강 + 롱테일 키워드 전략)**에서 바뀐 것 위주로 맨 위에 정리하고, 이전 v7 본문은 아래에 그대로 보존.
+이전 v8 문서를 대체함. v8(및 그 이전 버전들)의 배경 설명은 그대로 유효하므로 필요시 참고. 이 문서는 **07-18 세션(GSC 데이터 재분석 + 보강)**에서 바뀐 것 위주로 맨 위에 정리하고, 이전 v8 본문은 아래에 그대로 보존.
+
+---
+
+## 0-★. 07-18 세션 작업 내역 (★★ 최신, 맨 위에서부터 읽을 것)
+
+### GSC 데이터 분석 (07-18 export, 07-16 대비 큰 변화 없음)
+- Coverage: 심각한 문제 구성 07-16과 동일 — 리디렉션 3(조사 안 함) / noindex 1(정상, 404 스텁) / 404 1(검증 중) / 발견-미색인 21 / 크롤링-미색인 0. 07-16에 21건으로 줄었던 "발견됨-미색인"이 07-18에도 21건 유지 — 색인 진행이 정체된 건 아니고 이 시점에 새로 추가된 페이지(act-superscore-calculator, new-act-format 블로그, glossary, grad-plus-vs-private-loans)가 아직 발견-대기 큐에 쌓여있을 가능성 있음. 다음 세션에서 계속 관찰할 것.
+- Performance: 상위 쿼리/페이지 리스트가 07-16 세션들에서 분석한 것과 거의 동일한 롱테일 클러스터로 구성돼 있어(전체 사이트 클릭 여전히 0에 수렴, 노출만 축적 중) 새로운 클러스터 발굴보다는 **기존 백로그(0-A 섹션 하단 다음 세션 백로그) 우선 처리**로 판단하고 진행함.
+- 07-16에 신규 생성한 4개 페이지(act-superscore-calculator, new-act-format-2025-2026-changes, glossary, grad-plus-vs-private-loans-2026)는 아직 이번 Performance 리포트 상위 페이지 리스트에 노출되지 않음 — 생성 후 2일 시점이라 정상, 인덱싱/랭킹 반영에 시간 필요.
+
+### 이번 세션 우선순위 판단 (수익화 관점)
+2주 재작업 보류 대상 파일(07-16 세션 5개 파일, 07-13/07-11 세션 파일들)을 모두 제외한 뒤, 임프레션과 현재 순위(1페이지 근접도)를 기준으로 아래 4개 파일을 이번 세션 작업 대상으로 선정:
+
+1. **`blog/what-gpa-do-you-need-to-graduate-college.html`** (55 노출, 순위 **11.42** — 홈페이지 다음으로 사이트 전체 2번째로 좋은 순위, 1페이지 진입 임박) — GSC 쿼리 "what does your gpa need to be to graduate"(순위 11, 정확히 이 페이지 타겟 의도와 일치)에 직접 대응하는 FAQ 문항이 없었음(제목엔 반영돼 있지만 FAQ 텍스트로는 없었음) → **최우선으로 선정**
+2. **`tools/gpa-calculator.html`** (14 노출, 순위 24.29, 사이트 대표 GPA 계산기) — 기존과 동일한 유형의 버그 재발견: FAQ 텍스트(5개 문항)는 있는데 **FAQPage 스키마가 누락**돼 있었음. 순위도 괜찮은 편이라 스키마 추가로 리치 스니펫 노출 시 CTR 개선 기대
+3. **`tools/financial-aid-calculator.html`** (17 노출) — v8 문서 0-A 섹션 백로그 1번 항목, 이미 착수 승인된 상태. "will i qualify for financial aid calculator", "how much financial aid can i get" 등 자격/한도 관련 쿼리에 대응하는 FAQ가 없었음(기존 FAQ는 계산기 사용법 위주) → 신규 FAQ 2개 추가
+4. **`blog/weighted-gpa-calculator-ap-classes.html`** — 임프레션 자체는 GSC 페이지 리스트 상위에 없지만, **또 동일한 유형의 버그** 발견: FAQ 텍스트(4개 문항, "Weighted vs unweighted GPA" 섹션 포함)는 있는데 FAQPage 스키마가 누락돼 있었음. 이 페이지는 **v8 0-D 섹션에서 백로그로 남겨뒀던 "Weighted vs Unweighted GPA 비교 전용 페이지" 신규 제작 아이디어를 재검토하다가 발견** — 확인해보니 이 기존 글 안에 이미 "Weighted vs unweighted GPA: which matters for college admissions?" H2 섹션 + 상세 비교표 + FAQ까지 있어서, **신규 페이지를 또 만들면 카니발라이제이션**이었음. → **신규 페이지 제작 대신 이 기존 글의 스키마 버그 수정으로 대체 결정**, v8 백로그의 해당 항목은 이걸로 해소된 것으로 간주하고 제거
+
+### 신규 콘텐츠 검토 결과 (진행 안 함, 이유 명시)
+- 사용자가 신규 콘텐츠 착수 시 중복 확인 + 경쟁 키워드 조사를 요청함에 따라, "weighted GPA to unweighted GPA 변환" 관련 신규 페이지 여부를 웹 검색으로 확인함 — num8ers.com이 `weighted-to-unweighted-gpa-converter` 전용 페이지를 이미 운영 중이며 콘텐츠 완성도도 높음. 게다가 위에서 확인했듯 **우리 사이트 자체에 이미 이 주제를 다루는 페이지가 2개**(`tools/weighted-gpa-calculator.html`— FAQ로 변환 공식 보유, `blog/weighted-gpa-calculator-ap-classes.html`— 서술형 비교 섹션 보유) 존재해서 3번째 페이지를 만드는 건 자기잠식 위험이 큼 → **신규 페이지 보류, 기존 2개 페이지 보강으로 충분하다고 판단**(이번 세션엔 위 4번 항목으로 blog 쪽만 스키마 수정, tool 쪽은 07-16에 이미 FAQ 추가되어 07-30까지 재작업 보류 대상)
+- 그 외 완전히 새로운 검색의도를 가진 미커버 쿼리 클러스터는 07-18 GSC 데이터에서 추가 발견되지 않음 — 신규 페이지 후보 없음, 이번 세션은 보강 위주로 진행
+
+### 실제 작업 내역 (4개 파일, 보강 체크리스트 4개 항목 적용)
+1. `blog/what-gpa-do-you-need-to-graduate-college.html` — FAQ 신규 1개("What GPA do you actually need to be to graduate?", GSC 쿼리 정확 매칭), dateModified/화면 날짜 07-18 갱신, blog/index.html cat-academics 섹션 최상단 이동
+2. `tools/gpa-calculator.html` — FAQPage 스키마 신규 추가(버그 수정, 기존 5개 FAQ 텍스트 그대로 스키마화, 신규 문항 추가는 안 함 — 명확한 쿼리 갭이 없었음)
+3. `tools/financial-aid-calculator.html` — FAQ 신규 2개("will I qualify", "how much can I get" 자격/한도 문의 대응)
+4. `blog/weighted-gpa-calculator-ap-classes.html` — FAQPage 스키마 신규 추가(버그 수정, 기존 4개 FAQ 텍스트 그대로 스키마화, weighted→unweighted 변환 관련 신규 FAQ는 추가 안 함 — 자매 파일 `tools/weighted-gpa-calculator.html`에 이미 거의 동일한 FAQ가 07-16에 추가돼 있어 중복/근접 콘텐츠 위험 판단), dateModified/화면 날짜 07-18 갱신, blog/index.html cat-academics 섹션 최상단 이동(그래프-college와 나란히 최상단 2개)
+
+전부 sitemap.xml lastmod 07-18 갱신 완료. llms.txt는 4개 파일 전부 확인했으나 설명 문구가 이미 정확해 갱신 불필요.
+
+blog/index.html 카드 29개 / href 중복 0건 검증(BeautifulSoup). 4개 파일 + 사이트 전체 63개 파일 JSON-LD 문법 검증(python json.loads) 통과, sitemap.xml(59 URL) XML 파싱 검증 통과.
+
+### 이번 세션에 건드리지 않은 것
+- `college-cost-calculator.html`, `act-score-calculator.html` — 관망 유지 (원칙 변경 없음)
+- 07-16 세션 5개 파일(gpa-to-letter-grade-converter, degree-roi-calculator, weighted-gpa-calculator[tool], what-gpa-do-you-need-for-nursing-school, loan-repayment-calculator) — **07-30까지 재작업 보류 유지**
+- 07-11/07-13 보강 파일들 — 각각 07-25/07-27까지 보류 유지 (v8 문서 그대로)
+- `tools/sat-score-calculator.html` — 임프레션 93으로 높은 편이지만 확인 결과 이미 FAQPage 스키마 정상 존재 + sat-percentile-calculator.html과의 카니발라이제이션 방지 FAQ까지 잘 되어 있어 버그 없음, 순위(42.61)도 나쁘지 않아 이번 세션 후순위로 보류(백로그 유지 안 함, 특별한 개선 여지가 안 보임)
+- 백로그 2, 3번(`tools/student-loan-vs-salary.html` 2 노출, `blog/what-is-a-good-gpa-in-college.html` 8 노출) — 임프레션이 아직 낮아 이번 세션은 위 4개 대비 우선순위 밀림, 백로그 유지(아래 참고)
+
+### 다음 세션 백로그 (갱신됨)
+1. `tools/student-loan-vs-salary.html` — FAQ 신규(현재 FAQ 자체 없음), "student loan minimum salary" 등 대응
+2. `blog/what-is-a-good-gpa-in-college.html` — FAQ 신규(현재 FAQ 자체 없음), "is a 3.75 gpa good in college" 등 대응
+3. (v8에서 이관됐던 "Weighted vs Unweighted GPA 비교 페이지" 신규 제작 아이디어는 이번 세션에 기존 페이지로 충분히 커버됨이 확인되어 **백로그에서 제거**)
+4. (v8 0-D "Dean's List vs Latin Honors" 비교 페이지 아이디어는 계속 유효 — 착수 안 함, 다음 세션 후보)
+5. 신규 페이지: 이번 세션 특별히 새로 발굴된 후보 없음. 다음 세션 시작 시 새 GSC export로 재확인
+
+### AdSense 재검토 관련
+사용자가 이번 세션에도 재검토 제출 여부를 언급하지 않음 — **다음 세션 시작 시 반드시 먼저 확인할 것** (계속 유효, v8/v7 문서와 동일).
 
 ---
 
