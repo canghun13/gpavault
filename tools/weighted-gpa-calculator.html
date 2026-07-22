@@ -176,11 +176,20 @@ function addCourse(g,t){
   var row=document.createElement('div');
   row.id='cr-'+n;
   row.style.cssText='display:grid;grid-template-columns:1fr 90px 120px auto;gap:0.75rem;align-items:end;margin-bottom:0.75rem;';
-  row.innerHTML='<div class="form-group" style="margin:0"><label>Course '+n+'</label><input type="text" placeholder="e.g. AP Chemistry"></div>'
+  row.innerHTML='<div class="form-group" style="margin:0"><label class="course-label">Course '+n+'</label><input type="text" placeholder="e.g. AP Chemistry"></div>'
     +'<div class="form-group" style="margin:0"><label>Grade</label><select id="g-'+n+'">'+Object.keys(gs).map(function(x){return'<option'+(x===(g||'A')?' selected':'')+'>'+x+'</option>';}).join('')+'</select></div>'
     +'<div class="form-group" style="margin:0"><label>Type</label><select id="t-'+n+'"><option value="regular"'+((!t||t==='regular')?' selected':'')+'>Regular</option><option value="honors"'+(t==='honors'?' selected':'')+'>Honors (+0.5)</option><option value="ap"'+(t==='ap'?' selected':'')+'>AP / IB (+1.0)</option></select></div>'
-    +(n>1?'<button onclick="document.getElementById(\'cr-'+n+'\').remove()" style="background:none;border:none;cursor:pointer;color:var(--slate-light);font-size:1.25rem;margin-top:1.5rem;">×</button>':'<div></div>');
+    +(n>1?'<button onclick="removeCourse(\'cr-'+n+'\')" style="background:none;border:none;cursor:pointer;color:var(--slate-light);font-size:1.25rem;margin-top:1.5rem;">×</button>':'<div></div>');
   c.appendChild(row);
+  renumberCourses();
+}
+function removeCourse(id){
+  document.getElementById(id).remove();
+  renumberCourses();
+}
+function renumberCourses(){
+  var labels=document.getElementById('courses-container').querySelectorAll('.course-label');
+  labels.forEach(function(label,index){label.textContent='Course '+(index+1);});
 }
 function calculateGPA(){
   var wp=0,up=0,tot=0;

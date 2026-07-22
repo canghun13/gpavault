@@ -170,7 +170,7 @@
     row.style.cssText = 'display:grid;grid-template-columns:1fr 90px 120px auto;gap:0.75rem;align-items:end;margin-bottom:0.75rem;';
 
     row.innerHTML =
-      '<div class="form-group" style="margin:0"><label>Course ' + courseCount + '</label>' +
+      '<div class="form-group" style="margin:0"><label class="course-label">Course ' + courseCount + '</label>' +
       '<input type="text" placeholder="e.g. IB Mathematics HL"></div>' +
       '<div class="form-group" style="margin:0"><label>IB Grade</label>' +
       '<select id="grade-' + courseCount + '">' +
@@ -190,6 +190,7 @@
       del.style.cssText = 'background:none;border:none;cursor:pointer;color:var(--slate-light);font-size:1.25rem;margin-top:1.5rem;';
       del.onclick = (function(id) { return function() {
         document.getElementById('course-' + id).remove();
+        renumberCourses();
       }; })(courseCount);
       row.appendChild(del);
     } else {
@@ -198,6 +199,15 @@
     }
 
     container.appendChild(row);
+    renumberCourses();
+  }
+
+  function renumberCourses() {
+    var container = document.getElementById('courses-container');
+    var labels = container.querySelectorAll('.course-label');
+    labels.forEach(function(label, index) {
+      label.textContent = 'Course ' + (index + 1);
+    });
   }
 
   function calculateGPA() {
