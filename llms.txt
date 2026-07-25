@@ -30,6 +30,7 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 - [Loan Repayment Calculator](https://gpavault.com/tools/loan-repayment-calculator.html): Compare standard vs extended repayment plans and model the impact of extra monthly payments.
 - [Interest Capitalization Calculator](https://gpavault.com/tools/interest-capitalization-calculator.html): See how much a student loan balance grows when unpaid interest capitalizes after deferment, forbearance, or a grace period, including the long-term cost impact.
 - [OBBBA Loan Limit Calculator](https://gpavault.com/tools/obbba-loan-limit-calculator.html): Calculate exact 2026 federal student loan annual and lifetime limits by borrower type (undergraduate, graduate, professional, Parent PLUS), including proration for part-time enrollment and grandfathered/continuing-borrower status.
+- [Cosigner Release Countdown Calculator](https://gpavault.com/tools/cosigner-release-calculator.html): Calculate how many consecutive on-time payments remain before eligibility to apply for private student loan cosigner release, and estimate the calendar month of eligibility.
 - [College Cost Calculator](https://gpavault.com/tools/college-cost-calculator.html): Estimate total 4-year cost of attendance including tuition, room and board, books, and fees with annual cost increase projection.
 - [Scholarship Savings Calculator](https://gpavault.com/tools/scholarship-savings-calculator.html): Calculate the true value of a scholarship including interest savings over the loan repayment period.
 
@@ -109,6 +110,9 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 
 - [Academic Probation vs. Suspension vs. Dismissal](https://gpavault.com/blog/academic-probation-vs-suspension-vs-dismissal.html): Side-by-side comparison of three escalating academic standing statuses — triggers, whether you can keep taking classes, transcript impact, and the recovery path for each.
 - [Private Student Loan Cosigner Release: Requirements Compared](https://gpavault.com/blog/cosigner-release-requirements-compared.html): Neutral, cross-lender comparison of typical cosigner release requirements — on-time payment history, credit checks, income verification, and graduation requirements.
+- [Double Major vs. Minor vs. Switching Majors: Which Fits You?](https://gpavault.com/blog/double-major-vs-minor-vs-switching-majors.html): Data-driven comparison linking directly to the Minor Value Calculator and Major Switch Cost Calculator to compare actual cost/time figures rather than generic qualitative advice.
+- [Transfer Schools vs. Switch Majors: Which Costs You Less?](https://gpavault.com/blog/transfer-vs-switch-major.html): Compares the credit-loss risk of transferring colleges versus switching majors at the same school, with links to run both scenarios through dedicated calculators.
+- [Parent PLUS Loans: Old Rules vs. New OBBBA Rules](https://gpavault.com/blog/parent-plus-old-vs-new-rules.html): Side-by-side comparison of Parent PLUS borrowing limits and Income-Contingent Repayment eligibility before and after July 1, 2026, including the missed consolidation deadline to preserve ICR.
 
 ## Reference
 - [Glossary](https://gpavault.com/glossary.html): Plain-English definitions of 28 GPA, financial aid, student loan, and test score terms — quality points, discretionary income, capitalized interest, superscore, Student Aid Index, and more — each linking to the relevant calculator or guide.
