@@ -44,6 +44,7 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 - [Transfer Credit Loss Calculator](https://gpavault.com/tools/transfer-credit-loss-calculator.html): Calculate how many credits are likely to be rejected when transferring colleges, the resulting extra semesters, and the total extra cost.
 - [Credit Overload Calculator](https://gpavault.com/tools/credit-overload-calculator.html): Calculate whether paying a per-credit overload fee for extra course credits is a net financial win, based on whether it eliminates a future semester.
 - [Grad School Application Cost Calculator](https://gpavault.com/tools/grad-school-application-cost-calculator.html): Sum total application-season costs across multiple graduate programs — application fees, standardized test fees, score reports, transcripts, and campus visits.
+- [Do Major + Minor Combinations Actually Matter?](https://gpavault.com/blog/major-minor-combinations-real-examples.html): Examines verified real academic paths (Mary Barra, Susan Wojcicki, Satya Nadella) that combined two fields of study, explicitly addresses survivorship bias in using famous examples, cites labor market data on emerging interdisciplinary majors/minors (AI, data science, sustainability), and recommends a practical decision process over copying any single path.
 
 ---
 
