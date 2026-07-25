@@ -49,6 +49,8 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 
 ## Blog: GPA & Academics
 
+- [Accused of Using AI on an Assignment? What It Does to Your GPA](https://gpavault.com/blog/ai-academic-integrity-gpa-impact.html): Explains the typical consequences of an AI academic integrity violation (usually a failed assignment/course, not automatic expulsion), the false-positive problem with AI detectors, disclosure-based policies, GPA math, and recovery options.
+
 - [How to Calculate Cumulative GPA](https://gpavault.com/blog/how-to-calculate-cumulative-gpa.html): Step-by-step formula, quality points explained, worked examples across multiple semesters, and common calculation mistakes.
 - [How to Raise Your GPA in One Semester](https://gpavault.com/blog/how-to-raise-your-gpa-in-one-semester.html): Strategies that actually move the GPA needle, including course selection, grade recovery, and the math behind semester impact.
 - [How Many A's Do You Need to Raise Your GPA?](https://gpavault.com/blog/how-many-as-to-raise-gpa.html): The math behind GPA improvement with real examples and a calculator link.
@@ -105,6 +107,7 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 ## Comparisons
 
 - [Academic Probation vs. Suspension vs. Dismissal](https://gpavault.com/blog/academic-probation-vs-suspension-vs-dismissal.html): Side-by-side comparison of three escalating academic standing statuses — triggers, whether you can keep taking classes, transcript impact, and the recovery path for each.
+- [Private Student Loan Cosigner Release: Requirements Compared](https://gpavault.com/blog/cosigner-release-requirements-compared.html): Neutral, cross-lender comparison of typical cosigner release requirements — on-time payment history, credit checks, income verification, and graduation requirements.
 
 ## Reference
 - [Glossary](https://gpavault.com/glossary.html): Plain-English definitions of 28 GPA, financial aid, student loan, and test score terms — quality points, discretionary income, capitalized interest, superscore, Student Aid Index, and more — each linking to the relevant calculator or guide.
