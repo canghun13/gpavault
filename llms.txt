@@ -32,8 +32,18 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 - [OBBBA Loan Limit Calculator](https://gpavault.com/tools/obbba-loan-limit-calculator.html): Calculate exact 2026 federal student loan annual and lifetime limits by borrower type (undergraduate, graduate, professional, Parent PLUS), including proration for part-time enrollment and grandfathered/continuing-borrower status.
 - [College Cost Calculator](https://gpavault.com/tools/college-cost-calculator.html): Estimate total 4-year cost of attendance including tuition, room and board, books, and fees with annual cost increase projection.
 - [Scholarship Savings Calculator](https://gpavault.com/tools/scholarship-savings-calculator.html): Calculate the true value of a scholarship including interest savings over the loan repayment period.
+
+---
+
+## Majors & Careers Tools
+
 - [Student Loan vs Salary Calculator](https://gpavault.com/tools/student-loan-vs-salary.html): Compare total student debt to expected starting salary to assess whether the debt-to-income ratio is manageable.
 - [Degree ROI Calculator](https://gpavault.com/tools/degree-roi-calculator.html): Calculate the financial return on a college degree by comparing total cost vs lifetime earnings premium.
+- [Major Switch Cost Calculator](https://gpavault.com/tools/major-switch-cost-calculator.html): Calculate how many credits are lost when switching majors, the resulting extra semesters, and the total extra tuition and living cost.
+- [Minor Value Calculator](https://gpavault.com/tools/minor-value-calculator.html): Calculate the genuinely extra credits a minor requires after accounting for overlap with major/gen-ed requirements, and whether it delays graduation.
+- [Transfer Credit Loss Calculator](https://gpavault.com/tools/transfer-credit-loss-calculator.html): Calculate how many credits are likely to be rejected when transferring colleges, the resulting extra semesters, and the total extra cost.
+- [Credit Overload Calculator](https://gpavault.com/tools/credit-overload-calculator.html): Calculate whether paying a per-credit overload fee for extra course credits is a net financial win, based on whether it eliminates a future semester.
+- [Grad School Application Cost Calculator](https://gpavault.com/tools/grad-school-application-cost-calculator.html): Sum total application-season costs across multiple graduate programs — application fees, standardized test fees, score reports, transcripts, and campus visits.
 
 ---
 
