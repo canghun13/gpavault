@@ -13,6 +13,7 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 - [IB GPA Calculator](https://gpavault.com/tools/ib-gpa-calculator.html): Convert International Baccalaureate grades (1–7) to US GPA on the 4.0 unweighted and 5.0 weighted scale. Covers HL vs SL, IB diploma vs course program, and comparison with AP weighting.
 - [Weighted GPA Calculator](https://gpavault.com/tools/weighted-gpa-calculator.html): Calculate weighted GPA for AP, IB, and honors courses on the 5.0 scale.
 - [GPA Raise Calculator](https://gpavault.com/tools/gpa-raise-calculator.html): Calculate exactly how many credits of A's are needed to reach a target cumulative GPA.
+- [Academic Probation Calculator](https://gpavault.com/tools/academic-probation-calculator.html): Calculate how many semesters, at what semester GPA, are needed to raise a cumulative GPA above an academic probation threshold, with a full scenario table.
 - [GPA to Letter Grade Converter](https://gpavault.com/tools/gpa-to-letter-grade-converter.html): Convert GPA to letter grade or letter grade to GPA. Full 4.0 scale chart with plus/minus grades, percentage equivalents, and quality point values.
 - [Percentage to GPA Converter](https://gpavault.com/tools/percentage-to-gpa-converter.html): Convert any percentage or number grade to GPA instantly, with standard and alternate breakpoint scales. Also converts GPA from a 5.0, 7.0, 9.0, 10.0, or 100-point scale to the standard US 4.0 scale.
 - [Grade Calculator](https://gpavault.com/tools/grade-calculator.html): Track weighted course grades and calculate what score is needed on remaining assignments to hit a target grade.
@@ -46,6 +47,7 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 - [What GPA Do You Need to Keep Your Scholarship?](https://gpavault.com/blog/what-gpa-to-keep-scholarship.html): Scholarship GPA requirements, per-semester vs cumulative thresholds, and what happens if you fall below.
 - [Weighted GPA Calculator for AP, IB & Honors Classes](https://gpavault.com/blog/weighted-gpa-calculator-ap-classes.html): Complete guide to calculating weighted GPA, how colleges evaluate it, and the 5.0 scale explained.
 - [How to Calculate Your Final Exam Grade](https://gpavault.com/blog/how-to-calculate-final-exam-grade.html): Step-by-step formula and examples for calculating required final exam scores.
+- [Academic Probation vs. Suspension vs. Dismissal](https://gpavault.com/blog/academic-probation-vs-suspension-vs-dismissal.html): Side-by-side comparison of three escalating academic standing statuses — triggers, whether you can keep taking classes, transcript impact, and the recovery path for each.
 
 ---
 
