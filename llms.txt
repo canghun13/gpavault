@@ -57,7 +57,6 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 - [What GPA Do You Need to Keep Your Scholarship?](https://gpavault.com/blog/what-gpa-to-keep-scholarship.html): Scholarship GPA requirements, per-semester vs cumulative thresholds, and what happens if you fall below.
 - [Weighted GPA Calculator for AP, IB & Honors Classes](https://gpavault.com/blog/weighted-gpa-calculator-ap-classes.html): Complete guide to calculating weighted GPA, how colleges evaluate it, and the 5.0 scale explained.
 - [How to Calculate Your Final Exam Grade](https://gpavault.com/blog/how-to-calculate-final-exam-grade.html): Step-by-step formula and examples for calculating required final exam scores.
-- [Academic Probation vs. Suspension vs. Dismissal](https://gpavault.com/blog/academic-probation-vs-suspension-vs-dismissal.html): Side-by-side comparison of three escalating academic standing statuses — triggers, whether you can keep taking classes, transcript impact, and the recovery path for each.
 
 ---
 
@@ -94,6 +93,18 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 - [What Is a Good SAT Score?](https://gpavault.com/blog/what-is-a-good-sat-score.html): SAT score benchmarks by college tier and percentile, Math vs Reading & Writing section analysis, scholarship thresholds, and test-optional submission strategy.
 - [What Is a Good ACT Score?](https://gpavault.com/blog/what-is-a-good-act-score.html): ACT score benchmarks by college tier and percentile, section score strategy, scholarship thresholds, ACT vs SAT comparison, and test-optional submission strategy.
 - [New ACT Format 2025–2026: Enhanced ACT vs. Legacy ACT](https://gpavault.com/blog/new-act-format-2025-2026-changes.html): Full breakdown of the Enhanced ACT redesign — fewer questions, optional Science, shorter test time, new 3-section composite, rollout timeline, and prep implications.
+
+---
+
+## Study Abroad
+
+- [Study Abroad Cost Calculator](https://gpavault.com/tools/study-abroad-cost-calculator.html): Estimate total study abroad program cost including program fees, flights, housing, food, and visa/insurance costs.
+- [Does Studying Abroad Affect Your GPA?](https://gpavault.com/blog/does-studying-abroad-affect-your-gpa.html): Compares the range of home-institution policies on recording study abroad grades — Pass/Fail with no GPA impact vs. full grade transfer — and how to find your own school's policy.
+- [Can You Use Financial Aid, Loans & Scholarships for Study Abroad?](https://gpavault.com/blog/study-abroad-financial-aid-guide.html): What financial aid types carry over to study abroad programs, what doesn't (like Work-Study), dedicated study abroad scholarships, and home-school vs third-party provider funding differences.
+
+## Comparisons
+
+- [Academic Probation vs. Suspension vs. Dismissal](https://gpavault.com/blog/academic-probation-vs-suspension-vs-dismissal.html): Side-by-side comparison of three escalating academic standing statuses — triggers, whether you can keep taking classes, transcript impact, and the recovery path for each.
 
 ## Reference
 - [Glossary](https://gpavault.com/glossary.html): Plain-English definitions of 28 GPA, financial aid, student loan, and test score terms — quality points, discretionary income, capitalized interest, superscore, Student Aid Index, and more — each linking to the relevant calculator or guide.
