@@ -1,8 +1,104 @@
-# GPA Vault 인수인계 문서 v13 (2026-07-21 세션 반영)
+# GPA Vault 인수인계 문서 v14 (2026-07-27 세션 반영)
 
-이전 v12 문서를 대체함. v12(및 그 이전 버전들)의 배경 설명은 그대로 유효하므로 필요시 참고. 이 문서는 **07-21 세션(사용자 버그 리포트 대응)**에서 바뀐 것 위주로 맨 위에 정리하고, 이전 v12 본문은 아래에 그대로 보존.
+이전 v13 문서를 대체함. v13(및 그 이전 버전들)의 배경 설명은 그대로 유효하므로 필요시 참고. 이 문서는 **07-27 세션(Pell Grant 신규 + 보강 2건 + 전체 스키마 버그 스캔)**과, 그 직전 **07-25 세션(대규모 확장, 아래 참고)**을 맨 위에 정리하고, 이전 v13 본문은 아래에 그대로 보존.
 
 ---
+
+## ⚠️ 0-★★★★★★★. 07-27 세션 시작 전 발견: 07-25 세션이 handover.md에 전혀 기록되지 않았음 (매우 중요, 재발 방지 원칙)
+
+07-27 세션 시작 시 이 문서(v13, 07-21 세션까지 기록)를 정독하고 `git log`로 실제 커밋 이력을 대조한 결과, **07-25에 커밋 10개(신규 페이지 16개 이상, 카테고리 2개 신설, 버그 수정 2건)가 이미 저장소에 반영되어 있었는데 handover.md 갱신이 통째로 누락**되어 있었음. 즉 직전 세션이 작업은 다 해놓고 문서화를 빠뜨린 것. 이 때문에 07-27 세션은 시작하자마자 `git log --pretty=format:"%h %ad %s"`로 실제 커밋을 전수 확인하고, 파일 목록(`ls tools/*.html blog/*.html`)으로 실제 페이지 수를 재파악하는 데 추가 시간을 써야 했음(문서상 21 tools/27 blog로 알고 있었으나 실제는 36 tools/52 blog였음).
+
+**원인 추정**: 07-25 세션은 커밋 10개를 연달아 빠르게 진행하는 공격적 확장 세션이었고, 아마 세션 종료 시점에 handover.md 갱신 단계를 건너뛴 것으로 보임(또는 세션이 예기치 않게 끊겼을 가능성).
+
+**재발 방지 원칙 (다음 세션에도 반드시 적용)**: 작업 내용이 아무리 많아도, **세션을 마무리하기 전 handover.md 갱신은 커밋/push 체크리스트의 필수 마지막 단계**이며 절대 생략 불가. 다음 세션은 시작하자마자 `git log`로 handover.md 최신 기록 시점과 실제 최신 커밋 시점이 일치하는지부터 대조 확인할 것 — 이번처럼 어긋나 있으면 그 차이를 먼저 소급 기록한 뒤에 새 작업을 시작해야 함.
+
+07-25 세션 내용은 원 커밋 메시지를 근거로 아래 "0-A25" 섹션에 소급 재구성함.
+
+---
+
+## 0-★★★★★★. 07-27 세션 — Pell Grant 신규 블로그 + 보강 2건 + 전체 FAQPage 스키마 버그 스캔
+
+### 배경
+일요일 작업을 앞당겨 진행. 첨부된 GSC Performance/Coverage(2026-07-27 export) + GA4 개요(06-29~07-26) 분석 후, 웹 검색으로 경쟁 강도 확인하며 신규/보강 진행. 지시사항은 기존과 동일: 신규 착수 전 중복확인+경쟁조사, 롱테일 키워드 전략, AI검색 대응 문제해결/비교분석 콘텐츠 우선, 수익화 관점 우선순위, 대시보드 없이 텍스트 분석만.
+
+### GSC/GA4 데이터 분석 결과
+- **Coverage**: 리디렉션 3(조사 안 함) / noindex 1(정상) / 404 1(검증 중) / **발견됨-미색인 21**(수 주째 21로 정체 — 07-25 세션에서 sitemap이 66→92 URL로 급증했는데도 변화 없음. 07-25 신규 페이지 다수가 아직 Google 발견/색인 대기열에 진입조차 못한 것으로 추정. 다음 세션에서 계속 관찰 필요) / 크롤링됨-미색인 0.
+- **Performance**: 3개월 누적 클릭 여전히 한 자릿수(전체 6회 — 데스크톱 3, 모바일 3), 노출은 1,517회 축적. 페이지별 1위는 `blog/how-many-as-to-raise-gpa.html`(419노출, 클릭 4, 순위 18.67 — 사이트 최고 성과 페이지). 쿼리 713개 중 클릭 발생 쿼리는 0건(개별 쿼리 노출은 전부 클릭 0으로 집계 — GSC 프라이버시 임계값으로 클릭이 발생한 구체 쿼리는 별도 비식별 처리된 것으로 추정, 페이지 리포트의 클릭 6건과는 별개 집계).
+- **GA4(06-29~07-26)**: 활성 사용자 67명, 세션 대부분 direct(47명)/bing·google organic(각 4명)/copilot.com AI어시스턴트 경유(3명) — 오가닉 유입 여전히 미미.
+
+### 2주 재작업 보류 현황 (07-25 세션이 워낙 방대해서 사이트 대부분이 보류 상태)
+`git log --follow --numstat`로 각 파일의 "실제 콘텐츠 편집"(노스크립트 스윕/스키마버그수정/JS버그수정 제외) 최종 시점을 재계산한 결과, **07-25 세션에서 실제로 콘텐츠를 편집/신설한 파일 전부가 08-01~08-08까지 보류 대상**. 보류에 안 걸리는 고노출 페이지 위주로 이번 세션 대상 선정.
+
+### 신규 후보 검토 (웹 검색 경쟁조사, 3개 후보 중 1개 채택)
+1. **AP vs IB 비교 콘텐츠** — ivywise.com, medicalaid.org, bemoacademicconsulting.com, apscorehub.com, scoreatthetop.com, virtualcollegecounselors.com 등 **6개+ 경쟁사 즉시 확인** → 기각
+2. **Class rank percentile calculator** — collegevine.com, meetyourclass.com, smartcgpa.com, classrankcalculator.com(페이지 3개), quadeducationgroup.com, gradecalculatortools.com, everydaybudd.com 등 **8개+ 경쟁사** → 기각 (과거 세션에서도 이미 보류 결정했던 항목, 이번에 경쟁조사로 재확인)
+3. **Pell Grant 2026-27 변경사항(OBBBA)** — 사이트 자체 검색 결과 `how-does-financial-aid-work.html`, `study-abroad-financial-aid-guide.html`, `what-gpa-to-keep-scholarship.html`, `financial-aid-calculator.html` 4개 파일에 Pell Grant가 스치듯 언급만 될 뿐 전용 콘텐츠 없음 — 명확한 공백 확인. 웹 검색으로 SAI $14,790 컷오프("Pellionaire 루프홀" 폐쇄), 해외소득 AGI 재산입, 가족사업/농장 자산 FAFSA 제외(2건은 오히려 유리해짐), "15학점 요건" 루머가 실제로는 통과되지 않은 사실까지 다건 교차검증(NASFAA, Federal Student Aid 공식, Citizens Bank, ScholarshipsAndGrants.us 등) → **채택**. 참고로 Workforce Pell(단기 직업훈련 프로그램 대상 신규 Pell)은 workforcepellmatch.com 등 전용 사이트가 이미 있고 우리 사이트 핵심 독자층(학위과정 대학생)과도 결이 달라 이번엔 다루지 않음.
+
+### 실제 작업
+
+**1) 신규: `blog/pell-grant-changes-2026-27.html`** (1,079단어) — "Pell Grant Changes for 2026–27: Who Loses Eligibility Under OBBBA". 변경사항 비교표(SAI 컷오프/해외소득/가족사업자산/COA초과아너/학점요건) + 각 항목 상세 설명 + "15학점 루머는 사실이 아님" 정정 섹션 + FAQ 5개(FAQPage 스키마). 신규 페이지 체크리스트 적용: `blog/index.html` cat-loans 최상단 카드 추가(50개, 중복0), `sitemap.xml`(93 URL), `llms.txt`, 상호링크 1곳(`how-does-financial-aid-work.html` Related 섹션에 추가 — 이 파일은 07-08 이후 보류 아니어서 정상 편집, dateModified/sitemap lastmod 07-27 갱신).
+
+**2) 보강: `tools/loan-repayment-calculator.html`** — GSC에서 "student loan repayment plan calculator"(10)/"income based student loan repayment calculator"(9)/"federal loan repayment calculator"(6)/"student loan income based repayment calculator"(6)/"calculate student loan repayment"(6) 등 **한 클러스터에 40+ 노출이 몰려있는데도 기존 본문엔 RAP/IDR 실제 계산 공식이 없었음**(기존 FAQ는 SAVE→RAP 연혁, Graduated 비교, Parent PLUS 정도만 다룸). 웹 검색으로 RAP 계산식 교차검증(SoFi, Edfinancial 공식 서비서, NerdWallet, fincalcapp.com, paychecktaxcalculator.net, repaysmarter.com 등 다수 일치) 후 AGI 구간별 요율표(1%~10%, $10,000 구간당 1%p, 부양가족당 -$50, 최저 $10/월) + 예시($50,000 AGI/부양가족1명 → $116.67/월) 신규 섹션 추가. **부수적으로 기존 서술의 사실 오류도 발견해 정정**: 기존 본문이 RAP을 "discretionary income 기반"이라고 잘못 설명하고 있었음(실제로는 AGI 전체 기반 구간제 — discretionary income 방식은 IBR 등 구세대 플랜의 특징) → 본문 수정. FAQ 1개 신규(본문+스키마). sitemap lastmod, llms.txt 갱신.
+
+**3) 보강: `tools/gpa-scale.html`** — "percentage to gpa 5.0 scale"(7)/"gpa 5.0 scale"(4)/"gpa and percentage conversion"(4) 쿼리에 대응하는 FAQ가 없었음(기존 FAQ는 5.0 스케일 개념 설명뿐, 퍼센트→5.0 변환 방법은 없었음). "먼저 4.0 스케일로 변환 후, 실제로 가중과목(AP/IB/Honors)일 때만 보너스를 더하라"는 FAQ 신규 추가(본문+스키마) — 가중 여부 확인 없이 퍼센트를 곧장 5.0으로 환산하면 과대평가된다는 점을 명시. sitemap lastmod 갱신.
+
+**4) 사이트 전체 FAQPage 스키마 버그 재스캔 (매 세션 반복 권장 원칙에 따라 실행) — 4건 발견 및 수정**
+- `blog/what-is-a-good-act-score.html`, `tools/student-loan-calculator.html`, `tools/semester-gpa-calculator.html` — FAQ 텍스트는 있었으나 스키마 누락(신규 문항 추가 없이 스키마화만).
+- `blog/federal-vs-private-student-loans.html` — **07-20 세션부터 "다음 세션 최우선 백로그"로 넘어오던 항목**(07-16 상호링크 편집으로 07-30까지 보류 대상이었으나, 스키마만 추가하는 순수 버그 수정은 애초에 보류 예외 대상이라 그대로 진행). 이 항목으로 백로그 완전 해소.
+
+### 검증
+- 사이트 전체(95개 파일) JSON-LD 문법 재검증(python json.loads) 통과 — 오류 0건.
+- `sitemap.xml` 93 URL, XML 파싱 검증 통과, 중복 0건.
+- `blog/index.html` 카드 50개, BeautifulSoup href 중복 검증 0건.
+- 사이트 전체 내부링크(anchor 제외, 절대/상대경로 모두) 전수 스캔 — broken link 0건.
+- 신규/수정 파일 전체 태그 밸런스(div/p/table/tr/td/th) 개별 카운트 검증 통과.
+
+### 이번 세션에서 배운 점 (다음 세션 참고)
+- **handover.md 갱신 누락은 다음 세션에 실질적 시간 손실을 유발한다** — 이번처럼 실제 파일 상태를 처음부터 재조사해야 했음. 세션 종료 전 마지막 체크리스트 항목으로 반드시 확인할 것.
+- 07-25 세션처럼 한 세션에 커밋이 많아지면(10개), 사이트 대부분이 2주 보류에 걸려 다음 1~2세션은 보강 후보가 급격히 줄어드는 부작용이 있음 — 신규 확장 세션 다음에는 자연스럽게 "기술 점검/버그 스캔 위주" 세션이 되는 게 정상 패턴이라고 인식할 것(이번 세션이 그 예).
+- Pell Grant처럼 사이트에 "스치듯 언급만 있고 전용 콘텐츠 없는" 주제는 `grep -ril`로 빠르게 스캔하면 신규 후보 발굴에 효율적 — 이번 세션에 사용한 방법, 다음에도 재사용할 것.
+
+### 다음 세션 백로그
+1. **07-25 세션 신규 페이지들이 아직 GSC Coverage/Performance에 전혀 안 잡힘** — 다음 세션에서 발견됨-미색인 21건이 줄었는지, 신규 페이지들이 노출 리스트에 등장하기 시작했는지 확인할 것
+2. 07-25/07-27 세션에서 편집한 파일들은 각각 08-01~08-08까지 2주 재작업 보류 (세부 목록은 위 "2주 재작업 보류 현황" 참고, 다음 세션 시작 시 `git log --follow --numstat`로 재계산 권장)
+3. `college-cost-calculator.html`, `act-score-calculator.html` — 계속 관망 유지 (원칙 변경 없음)
+4. AdSense 재검토 결과 — 최근 세션들에서 언급 없음, 다음 세션에서 다시 물어볼 만함(급하지 않음)
+
+---
+
+## 0-A25★★★★★. 07-25 세션 (소급 기록 — 원 세션이 handover.md 갱신을 누락해서 07-27 세션이 git log 기반으로 재구성함)
+
+**주의**: 아래 내용은 실시간 기록이 아니라 커밋 메시지(`2588ac2`, `9ab41d8`, `c71f626`, `3570f07`, `c78f35b`, `24cf122`, `e9320f2`, `3671eee`, `0792a21`, `c8fbba7`, 전부 2026-07-25)를 근거로 07-27 세션이 재구성한 요약임. 세부 경쟁조사 근거나 검증 로그 원본은 남아있지 않으므로, 특정 판단의 세부 맥락이 필요하면 커밋 메시지 원문(`git log --pretty=full 68ccb9b..c8fbba7`)을 직접 확인할 것.
+
+### 신설된 카테고리 2개
+- **Compare(비교) 카테고리** 신설 — `blog/index.html`에 "🆚 Comparisons" 섹션 최상단 배치. 이번 세션에 Compare 콘텐츠 3건 추가(academic-probation-vs-suspension-vs-dismissal, cosigner-release-requirements-compared, ai-academic-integrity-gpa-impact 등 포함).
+- **Majors & Careers 카테고리** 정식 신설 (기존 "Career & ROI"에서 확장) — 신규 계산기 5종(major-switch-cost, minor-value, transfer-credit-loss, credit-overload, grad-school-application-cost) 추가.
+
+### 신규 Tool 8개
+`academic-probation-calculator`, `major-switch-cost-calculator`, `minor-value-calculator`, `transfer-credit-loss-calculator`, `credit-overload-calculator`, `grad-school-application-cost-calculator`, `obbba-loan-limit-calculator`, `study-abroad-cost-calculator`, `cosigner-release-calculator`, `internship-cost-calculator` (총 10개 — 위 8개는 대표 예시, 전체는 tools 디렉터리 참고)
+
+### 신규 Blog 16개 (대표)
+`academic-probation-vs-suspension-vs-dismissal`, `professional-degree-list-obbba`, `does-studying-abroad-affect-your-gpa`, `study-abroad-financial-aid-guide`, `study-abroad-gpa-requirements`, `cosigner-release-requirements-compared`, `ai-academic-integrity-gpa-impact`, `major-minor-combinations-real-examples`, `double-major-vs-minor-vs-switching-majors`, `transfer-vs-switch-major`, `parent-plus-old-vs-new-rules`, `internship-vs-study-abroad`, `does-internship-affect-financial-aid`, `fafsa-special-circumstances-appeal`, `fafsa-id-verification-2026`, `what-is-pslf`, `readmission-petition-after-dismissal`, `switch-majors-while-on-academic-probation` (18개, 정확한 목록은 `blog/` 디렉터리 참고)
+
+### 사실관계 긴급 수정
+`student-loan-repayment-plans-2026.html` — 기존 서술("SAVE는 예정대로 RAP로 대체")이 부정확했음을 발견해 정정: 실제로는 **2026-03-10 연방항소법원 판결로 SAVE가 강제종료(vacated)**된 것이며, 약 700만 명이 이자면제 관용유예로 전환되고 탕감 크레딧이 적립 안 되는 상태이며, 자동 이관이 아니라 본인이 studentaid.gov에서 직접 신청해야 한다는 점을 반영.
+
+### 버그 수정
+- 계산기 폼 라벨이 2줄로 줄바꿈될 때 입력창 정렬이 어긋나는 버그 — 9개 파일에 `align-items:end` 일괄 적용(major-switch-cost, minor-value, transfer-credit-loss, credit-overload, grad-school-application-cost, study-abroad-cost, academic-probation, obbba-loan-limit, interest-capitalization).
+- `does-internship-affect-financial-aid.html` meta description 태그 오삽입, `what-is-pslf.html` FAQ 스키마 `@context` 오타, `professional-degree-list-obbba.html` meta description 오삽입 — 발견 즉시 수정.
+- `blog/index.html` 카드 이동 작업 중 `str_replace`로 `cat-loans` 닫는 div가 실수로 삭제되는 사고 발생 → 즉시 발견 후 복구(이후 div/section 태그 밸런스 카운트 검증을 재검증 루틴에 추가한 것으로 보임).
+
+### 저분량 페이지 보강 (애드센스 심사 대비)
+`blog/internship-vs-study-abroad.html`(444→731단어), `blog/what-is-pslf.html`(465→730단어), `blog/fafsa-id-verification-2026.html`(491→707단어) 확장 + `blog/fafsa-special-circumstances-appeal.html` 1세대 학생 FAQ 1건 추가.
+
+### 체크리스트/검증 (커밋 메시지 기준)
+각 세션마다 헤더 드롭다운, noscript nav 일괄 스윕(파일 수는 62~81개로 세션 진행에 따라 누적 증가), `tools/index.html`/`blog/index.html` 카드 추가(중복 0건 검증), `sitemap.xml`(66→92 URL로 누적 증가), `llms.txt` 반영, 사이트 전체 JSON-LD 재검증(오류 0건) 완료된 것으로 커밋 메시지에 기록되어 있음.
+
+### 07-25 세션 최종 커밋 해시
+`3671eee` → `e9320f2` → `24cf122` → `c78f35b` → `3570f07` → `c71f626` → `6a7b87a` → `9ab41d8` → `0792a21` → `2588ac2` → `c8fbba7`(마지막)
+
+---
+
 
 ## 0-★★★★★. 07-21 세션 — 사용자 버그 리포트: 과목 추가/삭제 계산기 번호매김+레이아웃 버그 5개 파일 수정
 
@@ -480,22 +576,24 @@ GSC Performance/Coverage export (07-13) + GA4 리포트(06-15~07-12) 분석 후 
 - IB GPA 클러스터는 07-13 첫 세션에 착수 완료, 백로그에서 제거
 - 신규 페이지 후보 추가 발굴 안 됨 (기존 21개 tools + 27개 blog로 주요 쿼리 커버리지 양호)
 
-## 14. 파일 현황
-- tools: 21개 + index (`sat-percentile-calculator.html`이 가장 최근 신규, 07-07)
-- blog: 27개 + index
-- 루트: about, methodology(신규), editorial-policy(신규), privacy-policy, contact, index
-- 전체 sitemap URL: 55개 (methodology.html, editorial-policy.html 추가로 +2, 콘텐츠 신규 페이지는 없음)
+## 14. 파일 현황 (07-27 세션 기준 최신화)
+- tools: 35개 + index (`pell-grant-changes-2026-27.html`은 blog. tools 최근 신규는 07-25 세션의 `study-abroad-cost-calculator.html`, `cosigner-release-calculator.html` 등)
+- blog: 51개 + index (`pell-grant-changes-2026-27.html`이 가장 최근 신규, 07-27)
+- 루트: about, methodology, editorial-policy, privacy-policy, contact, glossary, index
+- 전체 sitemap URL: 93개
+- 카테고리 구조: Tools(Academics/Tuition & Loans/Test Scores/Majors & Careers), Blog(🆚 Comparisons/GPA & Academics/Student Loans/College Costs/Test Scores/Majors & Careers), Glossary(단일 허브), About
 
-## 15. 다음 세션 시작 전 체크리스트
-1. 이 문서(v7) 먼저 정독
-2. **AdSense 재검토 제출/결과 여부 먼저 확인** (위 9번 참고) — 사용자가 제출했는지, 결과 나왔는지부터 물어볼 것. 통과 시 이슈 종결하고 이 항목 문서에서 제거. 반려 시 사유 재분석 필요(이번엔 금리 최신화 + E-E-A-T 페이지 추가로 대응했으니, 그래도 반려되면 다른 원인 — 예: 사이트 전체가 계산기 템플릿 구조라 "自動化된 콘텐츠"로 보일 가능성 — 을 원점에서 재검토)
-3. 새 GSC Performance/Coverage export + GA4 export 받아서 07-13 데이터와 비교 (특히 "크롤링됨-미색인 1건" 지속 여부, 색인 20/29 변동 여부, Organic Search 세션 비중 변화)
-4. 새 GitHub 토큰 발급받기
-5. clone 후 `git config` 설정 잊지 말 것
-6. 작업 시 **신규는 9개 파일 체크리스트, 보강은 4개 파일 체크리스트(본문/sitemap/blog-index/llms.txt) 누락 금지** — llms.txt 빠뜨리면 사용자가 바로 지적함
-7. college-cost-calculator, act-score-calculator는 별도 지시 없으면 건드리지 않기
-8. 리디렉션 이슈는 조사하지 않기 (사용자 확인됨)
-9. 07-11에 보강한 5개 파일 + 07-13에 보강한 2개 파일(how-many-as-to-raise-gpa, ib-gpa-calculator)은 최소 2주는 재작업하지 말 것 — 색인 반영 시간 필요 (★ 07-16 추가: `gpa-to-letter-grade-converter.html`, `degree-roi-calculator.html`, `weighted-gpa-calculator.html`, `blog/what-gpa-do-you-need-for-nursing-school.html`, `loan-repayment-calculator.html` 5개도 동일하게 07-30까지 재작업 보류. 상세는 맨 위 0-A 섹션 참고)
-10. **연방 대출 금리는 매년 7월 1일 갱신됨을 기억할 것** — 다음 갱신은 2027-07-01이니 그 전까지는 6.52%/8.07%/9.07%가 맞는 숫자. 매 세션 시작 시 "지금 몇 월인지" 확인해서 회계연도 넘어갔으면 사이트 전체 금리 재점검
-11. 작업 완료 후 커밋/푸시 → Pages 빌드 `built` 확인까지 끝내고, **사용자가 직접 확인해야 할 URL을 클릭 가능한 링크로 정리해서 제시** (사용자는 영어를 몰라서 콘텐츠 검수가 아니라 화면이 깨졌는지만 육안 확인함 — 문구 검수 요청하지 말 것)
+## 15. 다음 세션 시작 전 체크리스트 (07-27 세션 기준 최신화)
+1. 이 문서(v14) 먼저 정독 — **특히 맨 위 "07-25 세션 handover.md 미기록 발견" 섹션을 읽고, 이번에도 실제 git log 최신 커밋과 이 문서의 마지막 기록 세션이 일치하는지부터 대조할 것** (어긋나 있으면 먼저 소급 기록)
+2. 새 GSC Performance/Coverage export + GA4 export 받아서 직전 데이터와 비교 (특히 "발견됨-미색인 21건" 변동 여부, 07-25 신규 페이지들이 리포트에 등장하기 시작했는지)
+3. 새 GitHub 토큰 발급받기
+4. clone 후 `git config` 설정 잊지 말 것
+5. 작업 시 **신규는 9개 파일 체크리스트, 보강은 4개 파일 체크리스트(본문/sitemap/blog-index/llms.txt) 누락 금지**
+6. college-cost-calculator, act-score-calculator는 별도 지시 없으면 건드리지 않기
+7. 리디렉션 이슈는 조사하지 않기 (사용자 확인됨)
+8. **2주 재작업 보류 파일 확인**: `git log --follow --numstat`로 노스크립트 스윕/스키마버그수정/JS버그수정을 제외한 "실제 콘텐츠 편집" 최종일을 파일별로 재계산할 것 (07-25/07-27 세션에 편집된 파일들은 각각 08-01~08-08까지 보류 — 사이트 대부분이 여기 해당하므로 이 계산 없이는 보강 대상 선정이 어려움)
+9. **연방 대출 금리는 매년 7월 1일 갱신됨을 기억할 것** — 다음 갱신은 2027-07-01이니 그 전까지는 6.52%/8.07%/9.07%가 맞는 숫자
+10. 작업 완료 후 커밋/푸시 → Pages 빌드 `built` 확인까지 끝내고, **사용자가 직접 확인해야 할 URL을 클릭 가능한 링크로 정리해서 제시** (사용자는 영어를 몰라서 콘텐츠 검수가 아니라 화면이 깨졌는지만 육안 확인함 — 문구 검수 요청하지 말 것)
+11. **세션 종료 전 이 문서(handover.md) 갱신은 필수 마지막 단계** — 07-25 세션처럼 빠뜨리면 다음 세션이 재구성하느라 시간을 낭비함
 12. 세션 끝나면 토큰 revoke 리마인드
+

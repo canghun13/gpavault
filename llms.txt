@@ -27,7 +27,7 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 ## Student Loans & College Cost Tools
 
 - [Student Loan Calculator](https://gpavault.com/tools/student-loan-calculator.html): Calculate monthly payment, total interest, and payoff timeline for federal and private student loans. Includes 2026–27 federal interest rates.
-- [Loan Repayment Calculator](https://gpavault.com/tools/loan-repayment-calculator.html): Compare standard vs extended repayment plans and model the impact of extra monthly payments.
+- [Loan Repayment Calculator](https://gpavault.com/tools/loan-repayment-calculator.html): Compare standard vs extended repayment plans and model the impact of extra monthly payments. Includes the RAP (Repayment Assistance Plan) bracket formula table and worked example for estimating income-driven payments.
 - [Interest Capitalization Calculator](https://gpavault.com/tools/interest-capitalization-calculator.html): See how much a student loan balance grows when unpaid interest capitalizes after deferment, forbearance, or a grace period, including the long-term cost impact.
 - [OBBBA Loan Limit Calculator](https://gpavault.com/tools/obbba-loan-limit-calculator.html): Calculate exact 2026 federal student loan annual and lifetime limits by borrower type (undergraduate, graduate, professional, Parent PLUS), including proration for part-time enrollment and grandfathered/continuing-borrower status.
 - [Cosigner Release Countdown Calculator](https://gpavault.com/tools/cosigner-release-calculator.html): Calculate how many consecutive on-time payments remain before eligibility to apply for private student loan cosigner release, and estimate the calendar month of eligibility.
@@ -69,6 +69,7 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 
 ## Blog: Student Loans & College Finance
 
+- [Pell Grant Changes for 2026–27: Who Loses Eligibility Under OBBBA](https://gpavault.com/blog/pell-grant-changes-2026-27.html): Covers the new $14,790 SAI cutoff that closes the "Pellionaire loophole," foreign earned income now counted in the SAI formula, family business/farm asset exclusions that help eligibility, and a debunked rumor about a 15-credit requirement.
 - [What Is PSLF and Do You Qualify?](https://gpavault.com/blog/what-is-pslf.html): Explains Public Service Loan Forgiveness basics — qualifying loans, employers, repayment plans, the 120-payment count, and why early applicants were commonly denied.
 - [FAFSA Special Circumstances Appeal: How to Request a Professional Judgment](https://gpavault.com/blog/fafsa-special-circumstances-appeal.html): Neutral, cross-institution guide to FAFSA special circumstances/professional judgment appeals — qualifying situations (job loss, divorce, death in family, medical expenses), the general process, and required documentation by situation type.
 - [FAFSA ID Verification: What Changed in 2026](https://gpavault.com/blog/fafsa-id-verification-2026.html): Covers the new real-time photo ID verification requirement added to the FAFSA form starting April 2026, how it differs from longstanding financial-data verification, and what happens if a student can't complete it.
