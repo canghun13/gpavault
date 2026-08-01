@@ -553,16 +553,19 @@ footer {
   letter-spacing: -0.01em;
 }
 .explainer p { font-size: 0.88rem; color: var(--slate-mid); line-height: 1.7; margin-bottom: 1rem; }
+.table-scroll-hint {
+  display: none;
+  font-size: 0.75rem; color: var(--slate-light);
+  text-align: right; margin: 1rem 0 -0.5rem;
+}
 .explainer table {
   width: 100%; border-collapse: collapse;
   margin: 1.25rem 0; font-size: 0.85rem;
-  display: block; overflow-x: auto;
 }
 .explainer th {
   background: var(--indigo-faint); color: var(--indigo-dark);
   font-weight: 600; padding: 0.5rem 0.75rem; text-align: left;
   border-bottom: 2px solid var(--indigo-light);
-  white-space: nowrap;
 }
 .explainer td {
   padding: 0.5rem 0.75rem;
@@ -642,6 +645,9 @@ footer {
     padding: 0.45rem 0.65rem !important;
     font-size: 0.78rem !important;
   }
+  /* Only show the "scroll for more" hint on narrow screens, right where
+     table{} above actually goes scrollable — hidden by default on desktop. */
+  .table-scroll-hint { display: block !important; }
 
   /* Responsive tool forms: multi-column input grids (loan calc fields,
      dynamic course rows added via JS) collapse to a single column so
