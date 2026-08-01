@@ -43,10 +43,21 @@
 - FAQPage 스키마 누락 재스캔 — 이번엔 0건(07-27 세션에 4건 다 고쳤던 게 유지되고 있음 확인).
 
 ### 다음 세션 백로그
-1. **2주 재작업 보류**: `tools/sap-calculator.html`, `blog/does-withdrawing-a-class-affect-financial-aid.html`, `blog/how-to-appeal-a-sap-suspension.html`, `blog/what-gpa-to-keep-scholarship.html`은 08-15까지 보류. `academic-probation-vs-suspension-vs-dismissal.html`, `fafsa-special-circumstances-appeal.html`은 이번엔 링크 추가만(보류 예외)이라 원래 보류 시한(08-08) 그대로 유지.
-2. 계획에 있던 나머지 후보들 — 클러스터 C(성적사면이 LSAC/AMCAS/SAP엔 안 통한다는 교차비교), 클러스터 D(RAP→IBR 전환 시 탕감카운트 미이월 등 RAP 전환 함정), 클러스터 E(장학금 2~4년차 유지조건) — 아직 미착수, 다음 세션 후보로 유효.
-3. 새 SAP 계산기 관련 GSC 신호는 당연히 아직 없음(발행 당일) — 다음 세션에서 노출/색인 발생 여부 확인.
-4. 사용자가 "토큰은 알아서 관리하니 언급 금지"라고 명시함 — **다음 세션부터 토큰 revoke 리마인드를 하지 말 것.** 이 지침은 이 저장소 작업 전반에 적용되는 사용자 선호로 간주.
+1. **2주 재작업 보류(사용자가 예외 지시 안 하는 한 준수)**: `tools/sap-calculator.html`, `blog/does-withdrawing-a-class-affect-financial-aid.html`, `blog/how-to-appeal-a-sap-suspension.html`, `blog/what-gpa-to-keep-scholarship.html`, `blog/student-loan-repayment-plans-2026.html`, `blog/does-retaking-a-class-replace-your-gpa.html`은 08-15까지 보류. `academic-probation-vs-suspension-vs-dismissal.html`, `fafsa-special-circumstances-appeal.html`은 링크 추가만(보류 예외)이라 원래 보류 시한(08-08) 그대로 유지.
+2. 새 SAP 계산기 관련 GSC 신호는 당연히 아직 없음(발행 당일) — 다음 세션에서 노출/색인 발생 여부 확인.
+3. 사용자가 "토큰은 알아서 관리하니 언급 금지"라고 명시함 — **다음 세션부터 토큰 revoke 리마인드를 하지 말 것.** 이 지침은 이 저장소 작업 전반에 적용되는 사용자 선호로 간주.
+4. 사용자가 "선점 효과 보려면 2주 보류 무시하고 진행"이라고 지시한 사례가 이번 세션에 있었음(클러스터 C/D) — **이건 일반 원칙 변경이 아니라 그 순간의 명시적 지시였음.** 다음 세션에서 별도 지시가 없으면 기본값(2주 보류 준수)으로 돌아갈 것. 사용자가 다시 "진행해"라고 하면 그때 예외 적용.
+
+### 08-01 세션 연장 — "계속" 요청 후 클러스터 C/D 실행 (사용자가 2주 보류 원칙에 대해 예외 지시)
+같은 세션에서 "계속" 요청을 받아 남은 백로그를 조사한 결과, 클러스터 D/C 둘 다 대상 파일이 2주 보류 중이라 일단 "다음 세션에 하자"고 보고했으나, **사용자가 "미리 선점 효과를 봐야 하니 진짜 아닌 것 아니면 진행해"라고 명시적으로 지시**해서 2주 보류를 무시하고 그대로 실행함. **이번처럼 사용자가 명시적으로 보류 예외를 지시하면 따를 것 — 단, 이런 지시가 없으면 기본값은 여전히 2주 보류 준수.**
+
+- **클러스터 E (장학금 2~4년차 유지조건) — 스킵 확정**: `meritplaybook.com`이라는 전용 경쟁사(학교별 유지조건 페이지 프로그래매틱 수백 개 + 유료 커스텀 리포트 상품) 발견, "진짜 아니다 싶은 것"에 해당한다고 판단해 사용자 지시("진짜 아니다 싶은거 말고는 진행")에 따라 이번에도 스킵. 일반 설명 콘텐츠로는 재추천하지 않음. 착수하려면 이 경쟁사 대비 확실한 도구화 차별화부터 다시 고민할 것.
+
+- **클러스터 D 실행 완료 — `blog/student-loan-repayment-plans-2026.html`에 FAQ 2개 보강**: 신규 페이지 대신 기존의 이미 두꺼운(2,257단어) 글에 흡수시킴(자기잠식 방지). 웹 검색으로 두 사실 모두 다중 소스 교차검증 완료(Yahoo Finance, tateesq.com, Credible, paychecktaxcalculator.net, SwitchWize, KU 공식 재정지원 페이지 등 6곳+): ① IBR은 Standard 10년 상환액이 상한이지만 RAP엔 그런 상한이 없어 고소득자는 RAP이 오히려 더 비쌀 수 있음 ② RAP→IBR로 전환하면 RAP에서 쌓은 납입 횟수가 IBR 탕감 카운트로 이월 안 됨(반대 방향인 IBR→RAP는 이월됨, PSLF는 플랜 무관하게 별도로 카운트). FAQ 본문+스키마 추가, dateModified/방문자 표시 날짜/sitemap lastmod 08-01로 갱신, llms.txt 설명 갱신.
+
+- **클러스터 C 실행 완료 — `blog/does-retaking-a-class-replace-your-gpa.html`에 신규 섹션+FAQ 보강**: 기존에 있던 애매한 "대학원 지원에 영향 있나요?" 섹션을 AMCAS/LSAC/SAP 각각의 구체적 사실로 교체. 웹 검색으로 3개 시스템 각각 교차검증(AMCAS는 학교공식 페이지, LSAC는 Magoosh/test-ninjas/7sage, SAP는 Chaffey College/Minnesota State 시스템 정책/Fullerton College/PSU 등 다수 학교 SAP 정책 문서로 확인) — 셋 다 학교의 성적사면(academic renewal/grade replacement)을 인정하지 않고 원래 성적을 그대로 계산에 포함시킨다는 공통점, 단 SAP의 GPA 요소는 학교마다 약간의 재량 차이가 있을 수 있어 그 부분만 헤지 문구 추가(PSU 사례처럼 SAP GPA에서는 사면을 인정하는 학교도 있으나 이수율/최대기간 요소는 예외 없이 항상 포함됨). FAQ 본문+스키마 추가, `tools/sap-calculator.html` 상호링크 추가, dateModified/읽기시간/sitemap lastmod 08-01로 갱신, llms.txt 설명 갱신.
+
+- **공통 교훈**: 계획 단계 경쟁조사(외부 웹 검색)만으로는 부족하고, 실행 직전 (1) 웹 검색 경쟁사 재확인 (2) 우리 사이트 기존 관련 파일을 직접 열어 이미 얼마나 다뤄져 있는지 확인, 이 두 가지를 다시 거쳐야 함. 계획 단계에서 "신규 페이지"로 분류했던 것도 실행 시점엔 "기존 페이지 보강"이 맞는 경우가 많았음(이번에 클러스터 C, D 둘 다 그랬음) — 기존 페이지가 이미 두꺼우면 신규 페이지보다 보강이 자기잠식 위험이 없고 효율적.
 
 ---
 
