@@ -1,8 +1,53 @@
-# GPA Vault 인수인계 문서 v15 (2026-08-01 세션 반영)
+# GPA Vault 인수인계 문서 v16 (2026-08-01 세션 반영, "연방 지원금 자격 계산" 클러스터 신설)
 
-이전 v14 문서를 대체함. v14(및 그 이전 버전들)의 배경 설명은 그대로 유효하므로 필요시 참고. 이 문서는 **08-01 세션(SAP 클러스터 신설: 계산기 1개 + 블로그 2개)**을 맨 위에 정리하고, 이전 v14 본문은 아래에 그대로 보존.
+이전 v15 문서를 대체함. v15(및 그 이전 버전들)의 배경 설명은 그대로 유효하므로 필요시 참고. 이 문서는 같은 날(08-01) 진행된 두 번째 대형 세션 — **"연방 지원금 자격 계산" 클러스터 신설(Pell 계산기 3개 + 블로그 1개)**을 맨 위에 정리하고, 이전 v15 본문은 아래에 그대로 보존. (참고: `41fa806` UI 버그 수정 커밋은 v15에 기록이 누락됐었음 — 사소한 1줄 CSS 수정이라 별도 소급 섹션 없이 이 자리에서 언급만 하고 넘어감.)
 
 ---
+
+## 0-★★★★★★★★. 08-01 세션(2차) — "연방 지원금 자격 계산" 클러스터 신설: Pell 계산기 3개 + 블로그 1개
+
+### 배경
+직전 턴에서 "기획만 담당" 지시로 경쟁조사 후 실행 프롬프트만 산출했고, 이번 세션에서 그 프롬프트를 그대로 받아 실행함. 사용자가 "수량 정하지 말고 최대한 할 수 있는 부분까지 하라"고 지시해서 계획된 A-1~A-4 전부(여력 되면만 하려 했던 A-4까지) 완료함.
+
+### 0단계 대조 결과
+`git log` 최신 커밋(`41fa806`)과 handover.md v15 마지막 기록이 일치 — 소급 기록 불필요. 단, `41fa806`(sap-calculator.html % UI 버그 수정)이 v15 본문에 직접 언급은 안 돼 있었음(파일현황 숫자는 일치해서 실질적 문제는 없었음).
+
+### 경쟁조사 근거 (직전 "기획" 턴에서 사전 확인, 이번 세션에서 재확인)
+"Pell enrollment intensity", "Pell lifetime eligibility 600%" 검색 결과가 전부 개별 대학 .edu 페이지 + 연방 공식 핸드북(fsapartners.ed.gov)뿐이고 독립 계산기가 0개 — SAP 계산기와 정확히 같은 공백 패턴. IPA(소득보호공제)는 경쟁사들이 숫자를 서로 다르게 쓰고 있어($7,040/$7,600/$11,510 혼재) 정확한 현행 수치 확보 자체가 차별화 요소였음.
+
+### 중복확인 결과
+`grep -ril "enrollment intensity\|lifetime eligibility\|LEU\|income protection\|work-study\|full-time"`로 확인한 결과, "enrollment intensity"는 `pell-grant-changes-2026-27.html`에 FAQ 한 줄 스치듯 언급(공식 비례표나 계산기는 없음), "lifetime eligibility/LEU"는 사이트 전체 0건, "income protection allowance"는 `does-internship-affect-financial-aid.html`에 개념만 언급되고 정확한 금액은 없었음(오히려 이번 신규 계산기가 그 공백을 채움) — 셋 다 진짜 공백 확인, 신규 진행.
+
+### 실제 작업
+
+**1) 신규 툴: `tools/pell-enrollment-intensity-calculator.html`**
+수강학점 → Pell 비례배분율 계산(학점÷전일제기준×100, 100% 상한). FSA Handbook Vol7 Ch3 공식 비례표(12=100%~1=8%)로 로직 검증 완료, node로 사전계산 + jsdom으로 시나리오 3개(9학점/12학점/18학점 초과) 실제 동작 검증. "학점 1개 추가 시 금액 차이"를 강조하는 게 핵심 차별화(9→10학점 = $295.80 차이). Pell만 이 방식을 쓰고 나머지 Title IV 프로그램은 구간제라는 비대칭을 본문 핵심으로 서술.
+
+**2) 신규 툴: `tools/pell-lifetime-eligibility-calculator.html`**
+600% LEU 잔여 계산(600−현재LEU, ÷100×연간지급액, ÷50=잔여 전일제학기수). FSA Handbook Vol7 Ch8 공식 예시(LEU 537.605% → 잔여 62.395%)로 실제 사례 대조 검증까지 완료. "SAP과 달리 LEU는 이의신청 불가"라는 대비를 SAP appeal 글과 상호링크로 연결.
+
+**3) 신규 블로그: `blog/12-vs-15-credits-financial-aid-trap.html`**
+"12학점의 함정" — 연방 전일제 기준(12학점)과 4년 졸업 필요 페이스(15학점)의 3학점 격차가 Pell 평생한도·SAP 150% 여유·졸업기간 세 가지에 동시에 영향을 준다는 문제해결형 글. **작성 중 자체 재검산으로 오류 발견 및 수정**: 초안에 "SAP 150% 한도 소진율 12학점 111% vs 15학점 89%"라는 구체 수치를 넣었으나, node로 재계산한 결과 무결점 시나리오에서는 양쪽 다 동일하게 66.7%로 나와 완전히 틀린 주장이었음 → "느린 페이스 자체가 아니라 느린 페이스+평균 완주율(NSC 데이터 75%)의 결합이 진짜 리스크"라는 정확한 설명으로 전면 수정. NSC 통계(28%가 1학년에 30학점 이상 이수, 9/12 완주율)는 Higher Ed Dive·EdSource의 원문 보도로 재검증 후 사용. **이번 세션에서 배운 점: 그럴듯해 보이는 구체적 수치를 만들 때는 반드시 실제 공식으로 재계산해서 검증할 것 — 문장이 자연스럽다고 숫자가 맞는 건 아니다.**
+
+**4) 신규 툴: `tools/student-income-protection-calculator.html`** (계획상 "여력 되면"이었으나 완료)
+학생 소득보호공제(IPA) $11,770(2026-27, 부양학생 본인소득 기준)와 초과분 50% 산입 로직. Federal Register 공식 고시, FSA Handbook 2026-27판, CollegeData, The Mather Group 등 4곳+ 교차검증. 근로장학금(work-study) 소득은 전액 별도 제외라는 점을 명확히 구분. **독립학생용 수치는 확인 안 해서 의도적으로 스코프에서 제외**하고 본문/FAQ에 명시적으로 헤지함(부양학생 본인소득 전용이라고 라벨링).
+
+### 체크리스트 적용
+- 신규 툴 3개 전부 9개 체크리스트: 본문/canonical/WebApplication+FAQPage 스키마/header.html 드롭다운(Tuition & Loans 섹션)/noscript nav 일괄 스윕(91→92→94개 파일, 매 단계 중복 삽입 0건 확인)/tools/index.html 카드(39개, 중복 0)/sitemap.xml/llms.txt/상호링크.
+- 신규 블로그 1개도 동일 체크리스트(blog/index.html cat-loans 최상단 카드, 53개 중복 0).
+- 상호링크 6곳: `sap-calculator.html`(신규 3건 링크 추가, 당일 작성분이라 hold 해당 없음), `pell-grant-changes-2026-27.html`(07-27 편집분, 보류 예외 적용·lastmod 미갱신), `financial-aid-calculator.html`(07-08 이후 보류 아니라 정상 편집+lastmod 갱신), `does-internship-affect-financial-aid.html`(07-25 편집분, 보류 예외 적용·lastmod 미갱신).
+
+### 검증
+사이트 전체(102개 파일) JSON-LD 재검증 통과(오류 0), sitemap.xml 100 URL 파싱/중복 통과, blog-card 53개/tool-card 39개 전부 중복 0, 내부링크 전수 스캔 broken 0, FAQPage 스키마 누락 재스캔 0건, 신규 파일 전체 태그 밸런스 통과, 계산기 3개 전부 node --check(JS 문법) + jsdom(실제 DOM 시뮬레이션 시나리오별) 이중 검증 통과.
+
+### 다음 세션 백로그
+1. **2주 재작업 보류(08-15까지)**: `tools/pell-enrollment-intensity-calculator.html`, `tools/pell-lifetime-eligibility-calculator.html`, `tools/student-income-protection-calculator.html`, `blog/12-vs-15-credits-financial-aid-trap.html`, `tools/sap-calculator.html`(이번에 링크 추가로 재편집), `tools/financial-aid-calculator.html`. `pell-grant-changes-2026-27.html`, `does-internship-affect-financial-aid.html`은 링크 추가만이라 원래 보류 시한 유지.
+2. 계획에 있던 "장학금 displacement의 좁은 앵글"(어떤 지원금부터 깎이나 + 6개 주 금지법)은 미착수, 다음 세션 후보로 유효.
+3. 새 Pell 계산기 3개+블로그 1개 관련 GSC 신호는 당연히 아직 없음(발행 당일) — 다음 세션에서 노출/색인 발생 여부 확인. SAP 클러스터(같은 날 오전 발행)도 아직 확인 안 됨, 같이 볼 것.
+4. `student-income-protection-calculator.html`의 독립학생용 IPA 수치는 확인 안 하고 스코프 제외했음 — 필요시 다음 세션에서 studentaid.gov로 확인 후 독립학생 케이스 추가 고려.
+
+---
+
 
 ## 0-★★★★★★★. 08-01 세션 — SAP(Satisfactory Academic Progress) 클러스터 신설
 
@@ -634,26 +679,29 @@ GSC Performance/Coverage export (07-13) + GA4 리포트(06-15~07-12) 분석 후 
 - IB GPA 클러스터는 07-13 첫 세션에 착수 완료, 백로그에서 제거
 - 신규 페이지 후보 추가 발굴 안 됨 (기존 21개 tools + 27개 blog로 주요 쿼리 커버리지 양호)
 
-## 14. 파일 현황 (08-01 세션 기준 최신화)
-- tools: 36개 + index (`sap-calculator.html`이 가장 최근 신규, 08-01)
-- blog: 53개 + index (`does-withdrawing-a-class-affect-financial-aid.html`, `how-to-appeal-a-sap-suspension.html`이 가장 최근 신규, 08-01)
+## 14. 파일 현황 (08-01 세션 2차 기준 최신화)
+- tools: 39개 + index (`pell-enrollment-intensity-calculator.html`, `pell-lifetime-eligibility-calculator.html`, `student-income-protection-calculator.html`이 가장 최근 신규, 08-01)
+- blog: 54개 + index (`12-vs-15-credits-financial-aid-trap.html`이 가장 최근 신규, 08-01)
 - 루트: about, methodology, editorial-policy, privacy-policy, contact, glossary, index
-- 전체 sitemap URL: 96개
+- 전체 sitemap URL: 100개
 - 카테고리 구조: Tools(Academics/Tuition & Loans/Test Scores/Majors & Careers), Blog(🆚 Comparisons/GPA & Academics/Student Loans/College Costs/Test Scores/Majors & Careers), Glossary(단일 허브), About
 
-## 15. 다음 세션 시작 전 체크리스트 (08-01 세션 기준 최신화)
-1. 이 문서(v15) 먼저 정독 — 실제 git log 최신 커밋과 이 문서의 마지막 기록 세션이 일치하는지부터 대조할 것 (어긋나 있으면 먼저 소급 기록)
-2. 새 GSC Performance/Coverage export + GA4 export 받아서 직전 데이터와 비교 (특히 "발견됨-미색인 21건" 변동 여부, 07-25 신규 페이지들이 리포트에 등장하기 시작했는지)
+## 15. 다음 세션 시작 전 체크리스트 (08-01 세션 2차 기준 최신화)
+1. 이 문서(v16) 먼저 정독 — 실제 git log 최신 커밋과 이 문서의 마지막 기록 세션이 일치하는지부터 대조할 것 (어긋나 있으면 먼저 소급 기록)
+2. 새 GSC Performance/Coverage export + GA4 export 받아서 직전 데이터와 비교 (특히 "발견됨-미색인 21건" 변동 여부, 07-25/08-01 신규 페이지들이 리포트에 등장하기 시작했는지)
 3. 새 GitHub 토큰 발급받기
 4. clone 후 `git config` 설정 잊지 말 것
 5. 작업 시 **신규는 9개 파일 체크리스트, 보강은 4개 파일 체크리스트(본문/sitemap/blog-index/llms.txt) 누락 금지**
 6. college-cost-calculator, act-score-calculator는 별도 지시 없으면 건드리지 않기
 7. 리디렉션 이슈는 조사하지 않기 (사용자 확인됨)
-8. **2주 재작업 보류 파일 확인**: `git log --follow --numstat`로 노스크립트 스윕/스키마버그수정/JS버그수정을 제외한 "실제 콘텐츠 편집" 최종일을 파일별로 재계산할 것. 08-01 세션 신규/편집분은 08-15까지 보류.
+8. **2주 재작업 보류 파일 확인**: `git log --follow --numstat`로 노스크립트 스윕/스키마버그수정/JS버그수정을 제외한 "실제 콘텐츠 편집" 최종일을 파일별로 재계산할 것. 08-01 세션(2차) 신규/편집분은 08-15까지 보류.
 9. **연방 대출 금리는 매년 7월 1일 갱신됨을 기억할 것** — 다음 갱신은 2027-07-01이니 그 전까지는 6.52%/8.07%/9.07%가 맞는 숫자
 10. 작업 완료 후 커밋/푸시 → Pages 빌드 `built` 확인까지 끝내고, **사용자가 직접 확인해야 할 URL을 클릭 가능한 링크로 정리해서 제시** (사용자는 영어를 몰라서 콘텐츠 검수가 아니라 화면이 깨졌는지만 육안 확인함 — 문구 검수 요청하지 말 것)
 11. **세션 종료 전 이 문서(handover.md) 갱신은 필수 마지막 단계**
-12. **토큰 관련: 사용자가 08-01 세션에서 "토큰은 알아서 관리하니 앞으로 언급 금지"라고 명시적으로 요청함 — 이후 세션에서는 토큰 revoke를 리마인드하지 말 것.** (이전까지는 매 세션 종료 시 리마인드하던 항목이었으나 사용자 선호로 폐지됨)
+12. **토큰 관련: 사용자가 "토큰은 알아서 관리하니 앞으로 언급 금지"라고 명시적으로 요청함 — 이후 세션에서는 토큰 revoke를 리마인드하지 말 것.**
 13. JS 문자열에 아포스트로피(you'd, that's, it's 등)가 들어간 경우 `node --check`로 문법 검증할 것 — 08-01 세션에 `\\'` 이중 이스케이프 오타로 문법 오류 2건 발생했었음 (육안으로는 안 보이는 버그)
+14. 입력칸 옆에 단위(%, $)를 `<span>`으로 붙이지 말 것 — input이 width:100%라 다음 줄로 밀려서 그리드 행 높이가 어긋남. 단위는 라벨 텍스트에 "(%)" 식으로 넣을 것.
+15. **본문에 구체적인 수치 주장(비교표의 %, 계산 결과 예시 등)을 넣을 때는 반드시 실제 공식으로 재계산해서 검증할 것.** 08-01 세션(2차)에서 "SAP 150% 소진율 12학점 111% vs 15학점 89%"라는 그럴듯한 수치를 초안에 넣었으나 node로 재계산한 결과 완전히 틀렸음을 발견해 전면 수정한 사례가 있었음 — 문장이 자연스럽게 읽힌다고 숫자가 맞는 게 아니다.
+
 
 
