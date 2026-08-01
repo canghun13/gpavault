@@ -1,8 +1,55 @@
-# GPA Vault 인수인계 문서 v14 (2026-07-27 세션 반영)
+# GPA Vault 인수인계 문서 v15 (2026-08-01 세션 반영)
 
-이전 v13 문서를 대체함. v13(및 그 이전 버전들)의 배경 설명은 그대로 유효하므로 필요시 참고. 이 문서는 **07-27 세션(Pell Grant 신규 + 보강 2건 + 전체 스키마 버그 스캔)**과, 그 직전 **07-25 세션(대규모 확장, 아래 참고)**을 맨 위에 정리하고, 이전 v13 본문은 아래에 그대로 보존.
+이전 v14 문서를 대체함. v14(및 그 이전 버전들)의 배경 설명은 그대로 유효하므로 필요시 참고. 이 문서는 **08-01 세션(SAP 클러스터 신설: 계산기 1개 + 블로그 2개)**을 맨 위에 정리하고, 이전 v14 본문은 아래에 그대로 보존.
 
 ---
+
+## 0-★★★★★★★. 08-01 세션 — SAP(Satisfactory Academic Progress) 클러스터 신설
+
+### 배경
+이번 세션은 이전 턴(07-27 세션 직후)에서 별도로 "기획만 담당, 실행 금지" 요청으로 경쟁조사와 실행 프롬프트만 먼저 산출했고, 이번 세션에서 그 프롬프트를 그대로 받아 실행했다. 경쟁조사 결과: Latin honors/AMCAS BCPM/LSAC GPA/RAP 단독/class rank 계산기는 전부 전용 경쟁 사이트 4~10곳 이상 확인되어 재확인 없이 기각. 반면 "SAP calculator"·"67% completion rate" 검색 결과는 전부 개별 대학(.edu) 페이지뿐이고 전국 단위 독립 경쟁 사이트가 없어 최우선 채택.
+
+### 0단계 대조 결과
+`git log` 최신 커밋(`dab4005`, 07-27)과 handover.md v14 마지막 기록 세션이 정확히 일치 — 소급 기록 불필요했음(07-25 사고가 재발하지 않은 것 확인).
+
+### 중복확인 결과 — 계획을 실행 중 일부 수정함
+사전 계획에는 "SAP vs 학사경고 차이" 블로그(A-2)도 포함되어 있었으나, `grep -ril`로 확인한 결과 **`blog/academic-probation-vs-suspension-vs-dismissal.html`이 이미 본문+FAQ에서 "SAP는 등록사무처가 아닌 재정지원처가 관장하는 별도의 연방 요건"이라는 핵심 구분을 명확히 다루고 있어 A-2는 중복 판단, 스킵**하고 대신 그 구분 설명을 SAP 계산기 자체의 explainer/FAQ에 흡수시켰다. 마찬가지로 계획에 있던 "여력 되면" 항목인 **President's List vs Dean's List 비교(클러스터 B)도, `blog/what-is-the-deans-list-gpa-requirement.html`에 이미 President's List/Dean's List/Honor Roll/Chancellor's List 4단계 비교표가 존재함을 확인하고 착수하지 않음.** 이렇게 중복확인이 사전 웹 검색 경쟁조사만으로는 못 잡는 "우리 사이트 자체 중복"을 잡아낸 사례이니, 다음 세션도 계획 단계의 후보를 그대로 밀어붙이지 말고 실행 중에도 재확인할 것.
+
+### 실제 작업 (커밋 1개로 완료)
+
+**1) 신규 툴: `tools/sap-calculator.html`**
+- 입력 6개(누적GPA/GPA요건/총 시도학점/총 이수학점/이수율요건%/학위 총 필요학점), 출력은 3개 기준(GPA·이수율·150% 최대기간)을 한 화면에 pass/fail로 동시 표시.
+- 핵심 차별화: 이수율 미달 시 "67%(또는 커스텀 요건) 도달까지 추가로 통과해야 할 학점 수"를 역산 공식 `(target*attempted - earned)/(1-target)`으로 계산해 보여줌. node로 사전 검증(시도80/이수48/목표67% → 17학점 필요, 수기 계산과 일치) + jsdom으로 시나리오 3개(이수율 미달/전항목 통과/150% 초과) 실제 DOM 시뮬레이션 검증 완료.
+- **버그 발견 및 수정**: 최초 작성 시 JS 문자열 내 어퍼스트로피 이스케이프를 `\\'`(백슬래시 2개)로 잘못 입력해 문자열이 조기 종료되는 문법 오류 2건 발생 — `node --check`로 즉시 발견해 `\'`로 수정. **다음 세션도 JS 문자열에 아포스트로피(you'd, that's 등)가 들어가면 `node --check`로 반드시 문법 검증할 것 — 육안으로는 안 보이는 종류의 버그였음.**
+- FAQ 5개(본문+스키마): SAP 정의, 67%가 정확히 150% 규정의 수학적 하한이라는 점(임의의 숫자가 아님), 학사경고와의 차이, W/F가 이수율에 미치는 영향, 미달 시 절차.
+
+**2) 신규 블로그: `blog/does-withdrawing-a-class-affect-financial-aid.html`**
+- "W는 GPA에 영향 없다"는 통념에서 한 단계 더 들어가 "그래도 SAP 이수율(attempted 산입)에는 영향을 준다"는 점을 핵심으로. R2T4(Title IV 반환) 60% 규정도 다뤘고, **웹 검색으로 2026-07-01부로 R2T4 규정이 개정되었다는 최신 사실**(Full Refund Withdrawal Exemption 신설 등)까지 확인해 반영. 1,032단어, FAQ 5개.
+
+**3) 신규 블로그: `blog/how-to-appeal-a-sap-suspension.html`**
+- 승인/기각 사유를 표로 명확히 대비(의료·사망·재해 등은 승인, 바쁜 알바·일반적 재정난은 명시적으로 기각 대상이라는 점을 여러 대학 정책에서 교차검증). 이의신청 필수 3요소(무슨 일이 있었는지/무엇이 바뀌었는지/구체적 학업계획) + 승인 후 "financial aid probation" 처리 방식까지. 929단어, FAQ 5개.
+
+### 체크리스트 적용
+- 신규 툴 9개 체크리스트 전항목: 본문/canonical/WebApplication+FAQPage 스키마/header.html 드롭다운(Academics 섹션에 추가)/noscript nav 일괄 스윕(90개 파일, 중복 삽입 0건 확인)/tools/index.html 카드(36개, 중복 0)/sitemap.xml/llms.txt/상호링크.
+- 신규 블로그 2건도 동일 체크리스트(헤더 드롭다운·noscript는 블로그 특성상 미해당) — blog/index.html cat-academics 최상단 카드(52개, 중복 0), sitemap, llms.txt, 상호링크.
+- 상호링크 5곳: `academic-probation-vs-suspension-vs-dismissal.html`(SAP 계산기 링크 2곳, 07-25 편집분이라 보류 예외 적용·lastmod 미갱신), `fafsa-special-circumstances-appeal.html`(SAP appeal 글 링크, 동일하게 보류 예외·lastmod 미갱신), `what-gpa-to-keep-scholarship.html`(withdraw 글 링크, 이 파일은 마지막 실질 편집이 07-08이라 보류 대상 아니었으므로 정상 편집 + dateModified·sitemap lastmod 08-01로 갱신).
+
+### 검증
+- 사이트 전체(98개 파일) JSON-LD 재검증 통과(오류 0).
+- sitemap.xml 96 URL(93→96), XML 파싱 통과, 중복 0.
+- blog-card 52개/tool-card 36개 전부 중복 0.
+- 내부링크 전수 스캔 broken 0.
+- 신규/수정 파일 전체 태그 밸런스(div/p/table/tr/td/th/a/li) 개별 확인 통과.
+- FAQPage 스키마 누락 재스캔 — 이번엔 0건(07-27 세션에 4건 다 고쳤던 게 유지되고 있음 확인).
+
+### 다음 세션 백로그
+1. **2주 재작업 보류**: `tools/sap-calculator.html`, `blog/does-withdrawing-a-class-affect-financial-aid.html`, `blog/how-to-appeal-a-sap-suspension.html`, `blog/what-gpa-to-keep-scholarship.html`은 08-15까지 보류. `academic-probation-vs-suspension-vs-dismissal.html`, `fafsa-special-circumstances-appeal.html`은 이번엔 링크 추가만(보류 예외)이라 원래 보류 시한(08-08) 그대로 유지.
+2. 계획에 있던 나머지 후보들 — 클러스터 C(성적사면이 LSAC/AMCAS/SAP엔 안 통한다는 교차비교), 클러스터 D(RAP→IBR 전환 시 탕감카운트 미이월 등 RAP 전환 함정), 클러스터 E(장학금 2~4년차 유지조건) — 아직 미착수, 다음 세션 후보로 유효.
+3. 새 SAP 계산기 관련 GSC 신호는 당연히 아직 없음(발행 당일) — 다음 세션에서 노출/색인 발생 여부 확인.
+4. 사용자가 "토큰은 알아서 관리하니 언급 금지"라고 명시함 — **다음 세션부터 토큰 revoke 리마인드를 하지 말 것.** 이 지침은 이 저장소 작업 전반에 적용되는 사용자 선호로 간주.
+
+---
+
 
 ## ⚠️ 0-★★★★★★★. 07-27 세션 시작 전 발견: 07-25 세션이 handover.md에 전혀 기록되지 않았음 (매우 중요, 재발 방지 원칙)
 
@@ -576,24 +623,26 @@ GSC Performance/Coverage export (07-13) + GA4 리포트(06-15~07-12) 분석 후 
 - IB GPA 클러스터는 07-13 첫 세션에 착수 완료, 백로그에서 제거
 - 신규 페이지 후보 추가 발굴 안 됨 (기존 21개 tools + 27개 blog로 주요 쿼리 커버리지 양호)
 
-## 14. 파일 현황 (07-27 세션 기준 최신화)
-- tools: 35개 + index (`pell-grant-changes-2026-27.html`은 blog. tools 최근 신규는 07-25 세션의 `study-abroad-cost-calculator.html`, `cosigner-release-calculator.html` 등)
-- blog: 51개 + index (`pell-grant-changes-2026-27.html`이 가장 최근 신규, 07-27)
+## 14. 파일 현황 (08-01 세션 기준 최신화)
+- tools: 36개 + index (`sap-calculator.html`이 가장 최근 신규, 08-01)
+- blog: 53개 + index (`does-withdrawing-a-class-affect-financial-aid.html`, `how-to-appeal-a-sap-suspension.html`이 가장 최근 신규, 08-01)
 - 루트: about, methodology, editorial-policy, privacy-policy, contact, glossary, index
-- 전체 sitemap URL: 93개
+- 전체 sitemap URL: 96개
 - 카테고리 구조: Tools(Academics/Tuition & Loans/Test Scores/Majors & Careers), Blog(🆚 Comparisons/GPA & Academics/Student Loans/College Costs/Test Scores/Majors & Careers), Glossary(단일 허브), About
 
-## 15. 다음 세션 시작 전 체크리스트 (07-27 세션 기준 최신화)
-1. 이 문서(v14) 먼저 정독 — **특히 맨 위 "07-25 세션 handover.md 미기록 발견" 섹션을 읽고, 이번에도 실제 git log 최신 커밋과 이 문서의 마지막 기록 세션이 일치하는지부터 대조할 것** (어긋나 있으면 먼저 소급 기록)
+## 15. 다음 세션 시작 전 체크리스트 (08-01 세션 기준 최신화)
+1. 이 문서(v15) 먼저 정독 — 실제 git log 최신 커밋과 이 문서의 마지막 기록 세션이 일치하는지부터 대조할 것 (어긋나 있으면 먼저 소급 기록)
 2. 새 GSC Performance/Coverage export + GA4 export 받아서 직전 데이터와 비교 (특히 "발견됨-미색인 21건" 변동 여부, 07-25 신규 페이지들이 리포트에 등장하기 시작했는지)
 3. 새 GitHub 토큰 발급받기
 4. clone 후 `git config` 설정 잊지 말 것
 5. 작업 시 **신규는 9개 파일 체크리스트, 보강은 4개 파일 체크리스트(본문/sitemap/blog-index/llms.txt) 누락 금지**
 6. college-cost-calculator, act-score-calculator는 별도 지시 없으면 건드리지 않기
 7. 리디렉션 이슈는 조사하지 않기 (사용자 확인됨)
-8. **2주 재작업 보류 파일 확인**: `git log --follow --numstat`로 노스크립트 스윕/스키마버그수정/JS버그수정을 제외한 "실제 콘텐츠 편집" 최종일을 파일별로 재계산할 것 (07-25/07-27 세션에 편집된 파일들은 각각 08-01~08-08까지 보류 — 사이트 대부분이 여기 해당하므로 이 계산 없이는 보강 대상 선정이 어려움)
+8. **2주 재작업 보류 파일 확인**: `git log --follow --numstat`로 노스크립트 스윕/스키마버그수정/JS버그수정을 제외한 "실제 콘텐츠 편집" 최종일을 파일별로 재계산할 것. 08-01 세션 신규/편집분은 08-15까지 보류.
 9. **연방 대출 금리는 매년 7월 1일 갱신됨을 기억할 것** — 다음 갱신은 2027-07-01이니 그 전까지는 6.52%/8.07%/9.07%가 맞는 숫자
 10. 작업 완료 후 커밋/푸시 → Pages 빌드 `built` 확인까지 끝내고, **사용자가 직접 확인해야 할 URL을 클릭 가능한 링크로 정리해서 제시** (사용자는 영어를 몰라서 콘텐츠 검수가 아니라 화면이 깨졌는지만 육안 확인함 — 문구 검수 요청하지 말 것)
-11. **세션 종료 전 이 문서(handover.md) 갱신은 필수 마지막 단계** — 07-25 세션처럼 빠뜨리면 다음 세션이 재구성하느라 시간을 낭비함
-12. 세션 끝나면 토큰 revoke 리마인드
+11. **세션 종료 전 이 문서(handover.md) 갱신은 필수 마지막 단계**
+12. **토큰 관련: 사용자가 08-01 세션에서 "토큰은 알아서 관리하니 앞으로 언급 금지"라고 명시적으로 요청함 — 이후 세션에서는 토큰 revoke를 리마인드하지 말 것.** (이전까지는 매 세션 종료 시 리마인드하던 항목이었으나 사용자 선호로 폐지됨)
+13. JS 문자열에 아포스트로피(you'd, that's, it's 등)가 들어간 경우 `node --check`로 문법 검증할 것 — 08-01 세션에 `\\'` 이중 이스케이프 오타로 문법 오류 2건 발생했었음 (육안으로는 안 보이는 버그)
+
 
