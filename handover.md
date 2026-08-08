@@ -130,6 +130,35 @@
 
 ---
 
+## Sonnet 실행 결과 (08-08, 커밋 `ca08ede`)
+
+A~D 전부 완료. 신규 페이지 0건(지시 준수). 커밋/푸시 완료, Pages 빌드 `built` + Actions `completed/success` 확인 완료(commit sha `ca08ede` 일치).
+
+**A. `tools/ib-gpa-calculator.html`** — 총점(24~42) → GPA 표 19행 신규 추가. 표의 모든 값을 사이트 기존 과목별(1~7) 환산표와 수학적으로 일치하도록 선형보간 계산 후, 별도 파이썬 스크립트로 소스 공식과 19/19 전수 대조 검증(일치). TOK/EE 보너스 3점 때문에 동일 총점(예: 42)도 실제 GPA가 다를 수 있다는 설명을 highlight-box로 추가(예시: 6과목 만점+보너스0 vs 6과목평균6.5+보너스3, 둘 다 총점42지만 GPA 4.00 vs 3.85로 실제 0.15 차이) — 경쟁사 7곳 중 이 앵글을 다루는 곳 없음. 43~45점은 6과목만으로는 도달 불가능(최대 42)해서 항상 보너스 포함이라는 사실도 명시. FAQ 2개 개정(본문+JSON-LD 동기화 확인). **43~45점 구간은 조합이 너무 다양해 표에서 의도적으로 제외**하고 대신 "과목별 계산기 사용 권장" 문구로 헤지 — 다음 세션에서 이 구간 처리가 부족하다는 판단이 들면 재검토.
+
+**B. `percentage-to-gpa-converter.html` ↔ `gpa-to-letter-grade-converter.html`** — 기존에 percentage→letter 단방향 링크만 있던 비대칭을 발견, 양방향으로 수정. letter 페이지는 "범위(range) 제공", percentage 페이지는 "정확한 숫자 변환" 프레이밍으로 meta description·본문 문구를 분리해서 역할을 명시적으로 갈랐음. `gpa-scale.html`은 지시대로 미터치.
+
+**C. `blog/what-is-the-deans-list-gpa-requirement.html`** — 신규 H2 "Dean's Lister and GWA"(필리핀) 섹션 추가: GWA 1.75 기준(다수 소스 교차검증: gwacalculator.blog, gwacalculatr.com, gwacal.com 등 5곳+ 일치), GPA와 반대로 낮을수록 우수하다는 점, UP은 명칭이 다르다(University/College Scholar)는 예외까지 반영. FAQ 4개 신규(cumulative vs semester 정확 표현 매칭 / "몇 %가 받나" — BestColleges·Scholarships360·JobLoving 등 교차검증해 "10~25%"로 범위 표기, 특정 블로그 하나의 단정적 수치는 인용 안 함 / President's·Chancellor's List / Dean's Lister·GWA), 본문 FAQ와 JSON-LD 9/9 개수·내용 일치 확인. 1,216→1,771단어. blog/index.html cat-academics 최상단 재배치 완료(카드 53개, 중복 0).
+
+**D. IndexNow** — 랜덤 hex 키(64자) 생성, `/{key}.txt` 루트에 배치해서 이번 커밋에 포함(sitemap.xml에는 미포함, 지시 준수). **단, 실제 IndexNow API로 URL을 제출하는 POST/GET 호출 자체는 이번 세션에서 실행하지 못함** — bash_tool 네트워크 egress 허용목록에 `api.indexnow.org`/`bing.com`이 없어서 시도 시 `403 host_not_allowed`(우리 쪽 egress 프록시가 막은 것, IndexNow 서버 응답 아님) 반환됨. web_fetch 툴도 "이전 검색/fetch 결과에 없는 URL은 못 연다"는 제약이 있어 우회 불가. 키 파일 자체는 이번 커밋으로 정상 배포됐고(Actions 성공 확인), **제출만 남은 상태**.
+
+**다음 사람(사용자 또는 향후 세션)이 해야 할 일 — 매우 간단, 5분 이내:**
+```bash
+curl -X POST https://api.indexnow.org/indexnow \
+  -H "Content-Type: application/json; charset=utf-8" \
+  -d '{
+    "host": "gpavault.com",
+    "key": "4ecbb2cc89f059e8138b521308eb76716c0ce520c587b424a65a5b2d171fd774",
+    "keyLocation": "https://gpavault.com/4ecbb2cc89f059e8138b521308eb76716c0ce520c587b424a65a5b2d171fd774.txt",
+    "urlList": ["https://gpavault.com/", "https://gpavault.com/tools/gpa-calculator.html", ... (sitemap.xml의 100개 URL 전체)]
+  }'
+```
+사용자 본인 컴퓨터 터미널이나 이 저장소를 다루는 다음 세션(네트워크 제한 없는 환경)에서 위 curl 1회만 실행하면 끝남. urlList는 sitemap.xml에서 자동 추출 가능(`python3 -c "import re; print(re.findall(r'<loc>(.*?)</loc>', open('sitemap.xml').read()))"`). **다음 세션 필독**: 이 항목이 처리됐는지 먼저 확인하고, 안 됐으면 최우선으로 처리할 것 — 키 파일만 있고 제출을 안 하면 아무 효과가 없음.
+
+**검증**: 사이트 전체 JSON-LD 재검증 통과(오류 0), sitemap.xml 100 URL 파싱 통과(중복 0), blog-card 53개/tool-card 39개 중복 0, 내부링크 전수 스캔 broken 0(템플릿 `{{BASE}}` 플레이스홀더는 정상 제외 처리), 수정 파일 전체 태그 밸런스(div/p/a/table/tr/td/th/h2/ul/li) 개별 확인 통과.
+
+---
+
 ## [보존] 이전 문서 v16 본문 (2026-08-01 세션까지)
 
 # GPA Vault 인수인계 문서 v16 (2026-08-01 세션 반영, "연방 지원금 자격 계산" 클러스터 신설)
@@ -841,7 +870,7 @@ GSC Performance/Coverage export (07-13) + GA4 리포트(06-15~07-12) 분석 후 
 17. **★ 수익화 방침(08-07 사용자 확정): AdSense에 의존하지 않는다.** 제휴/광고사 중 되는 건 전부 한다. AdSense 재심사 여부도, 다른 제휴/광고사 채택 여부도 **Opus가 데이터로 판단**한다(사용자에게 "재심사 하셨어요?"라고 매 세션 묻는 관성 폐기). AdSense보다 유리한 대안이 있으면 먼저 능동적으로 추천할 것. 08-07 판정 = **제휴 1순위(트래픽 하한 없음), 디스플레이는 월 1,000세션 도달 시 Journey by Mediavine, AdSense 재심사는 "색인 60개+월 500세션" 전까지 보류.** 상세 근거는 맨 위 v17 섹션 참고.
 18. **제휴 프로그램 승인 전에는 사이트에 제휴 링크도, `affiliate-disclosure.html`도 만들지 말 것** — 실체 없는 고지문은 허위 표시다. 승인 후 체크리스트는 v17 섹션에 정리해둠.
 19. **`git clone --depth`(얕은 클론) 금지.** 얕게 받으면 모든 파일 히스토리가 "신규 생성"으로 보여서 2주 재작업 보류 계산이 통째로 틀어진다(08-07 세션에 실제로 겪음). 이미 얕게 받았으면 `git fetch --unshallow` 후 계산할 것.
-20. **Bing/Yahoo 유입이 Google보다 많다는 사실을 잊지 말 것**(08-07 GA4: Bing 7 + Yahoo 9 vs Google 5). Google 색인 병목에만 매달리지 말고 Bing 쪽 최적화(IndexNow, Bing Webmaster Tools)도 같이 챙길 것.
+20. **Bing/Yahoo 유입이 Google보다 많다는 사실을 잊지 말 것**(08-07 GA4: Bing 7 + Yahoo 9 vs Google 5). Google 색인 병목에만 매달리지 말고 Bing 쪽 최적화(IndexNow, Bing Webmaster Tools)도 같이 챙길 것. **08-08 갱신: IndexNow 키 파일은 배포됨(`/4ecbb2cc89f059e8138b521308eb76716c0ce520c587b424a65a5b2d171fd774.txt`), 실제 URL 제출은 샌드박스 네트워크 제한으로 아직 안 됨 — "Sonnet 실행 결과" 섹션의 curl 명령 참고해서 다음 사람이 실행할 것.**
 21. **"크롤링됨 — 현재 색인이 생성되지 않음" 건수를 매 세션 반드시 확인할 것.** 이 수치가 늘고 있으면 신규 페이지 확장을 멈추고 기존 페이지 통합/강화로 전환하는 신호다(08-07에 0→11로 신규 발생해서 그 세션 신규를 0건으로 결정함).
 
 
