@@ -1,3 +1,175 @@
+# GPA Vault 인수인계 문서 v18 (2026-08-12 세션 — 노출 폭락 원인규명 + 색인 병목 해소 확인 + 신규 확장 재개)
+
+이전 v17 문서를 대체함. v17 이하 본문은 아래에 그대로 보존.
+
+---
+
+## 0-★★★★★★★★★★. 08-12 세션 — 이번 세션의 3대 결론 (다음 세션은 여기부터 읽을 것)
+
+### 0단계 대조 결과
+`git log` 최신 커밋 `0b336b6`(08-08, handover 갱신)과 v17 마지막 기록이 정확히 일치 — 소급 기록 불필요. 07-25 사고 재발 없음.
+
+### ★★★ 결론 1: 노출 98% 폭락은 우리 사이트 문제가 아니다 (전략 변경 금지)
+
+일별 노출: 08-03 266 → **08-04 53 → 08-05 9 → 08-06 20 → 08-07 5 → 08-08 5 → 08-09 3**.
+v17에서 "GSC 지연일 가능성 높음, 단정하지 말 것"으로 보류했던 건인데, **지연이 아니라 실제 하락으로 확정**됐다(추가 며칠 데이터가 전부 한 자릿수로 확정됨).
+
+**웹 조사 결과 원인은 외부 요인으로 판단:**
+- 2026-08-01~03에 Semrush Sensor, Mozcast, Sistrix, AccuRanker, Algoroo 등 **주요 변동성 추적기가 일제히 스파이크**. 업계 전반에서 급격한 트래픽 손실 보고.
+- 구글은 **공식 업데이트를 확정하지 않았고**, Search Status Dashboard에도 8/1~8/6 사이 랭킹/색인/크롤링/서빙 장애 기록 없음. 마지막 확정 업데이트는 2026-06 스팸 업데이트.
+- 한 분석에서 **"노출 44% 감소 vs 클릭 11% 감소"** 패턴 보고 — 순위 강등이 아니라 측정/집계 효과라는 신호.
+
+**우리 데이터도 같은 모양이다**: 평균 순위는 40~70대 유지, 클릭은 오히려 08-04에 1건 발생. 순위가 죽은 게 아니라 노출 집계가 죽었다.
+
+**기술 점검 결과 사이트 이상 없음**: noindex 오삽입 없음(의도된 2건 = 404 스텁, privacy-policy만), canonical 누락은 privacy-policy 1건뿐(정상), robots.txt/sitemap 정상, GA4 활성 사용자 72명으로 안정적(직전 76에서 소폭 감소, 붕괴 아님).
+
+**→ 전략 변경하지 않았다.** 업계 공통 권고가 "확정 안 된 변동성에 대규모 개편으로 반응하는 것이 일시적 흔들림을 진짜 손실로 만드는 방법"이다. **다음 세션에서 반드시 할 일: 노출이 회복됐는지 확인.** 회복됐으면 외부 요인 확정, 2주 지나도 한 자릿수면 그때 사이트 차원 재진단.
+
+### ★★★ 결론 2: 색인 병목이 사실상 해소됐다 → 신규 확장 재개 근거
+
+사용자가 준 Coverage 드릴다운(발견됨 — 현재 색인이 생성되지 않음) 기준:
+- **23건 → 2건** (2026-07-25부터 급감, 08-07까지 2 유지)
+- 남은 2건: `methodology.html`, `tools/gpa-raise-calculator.html`
+
+v17이 신규를 0건으로 묶은 근거는 "크롤링됨-미색인 0→11"이었는데, **이번 export에는 그 항목이 없어서 판단 불가**(사용자 지시: 색인은 준 자료로만 판단). 주어진 자료만 보면 색인 병목을 이유로 신규를 막을 근거가 없어서 **신규 확장 재개**로 판정했고 실제로 신규 1건 진행함.
+
+**다음 세션 주의**: 가능하면 "크롤링됨 — 현재 색인이 생성되지 않음" 드릴다운도 같이 받을 것. 이 수치가 다시 늘고 있으면 v17의 판단(확장 중단 → 통합/강화 전환)이 여전히 유효하다.
+
+### ★★★ 결론 3: 홈페이지 배지 9개가 전부 dofollow 외부링크였다 (수정 완료)
+
+`index.html` 하단 디렉터리 배지 — newtool.site, foundrlist, fazier, findly.tools, twelve.tools, pitchwall, kittylaunch, sellwithboost, **boostdomainrating** — 9개 전부 `rel`에 nofollow가 없어 dofollow 상태였음. 배지 상호교환은 구글 링크 스팸 정책이 명시적으로 지목하는 패턴이고, 특히 boostdomainrating은 이름부터 DR 부양 목적이라 리스크가 크다.
+
+**전부 `rel="nofollow sponsored"` 적용함.** 중요: **사용자의 디렉터리 등록 전략 자체는 전혀 건드리지 않았다.** 우리가 받는 인바운드 링크 가치와 GA4 referral 유입은 그대로이고, 우리가 밖으로 내보내는 추천 신호만 제거한 순수 방어 조치다. **앞으로 새 배지를 추가할 때도 반드시 `rel="nofollow sponsored"`를 붙일 것.**
+
+노출 폭락과의 인과관계는 주장하지 않음 — 하락 시작(08-04)이 boostdomainrating 배지 추가(08-06)보다 앞선다.
+
+---
+
+## 08-12 세션 실제 작업 내역 (커밋 `5396b95`, push + Pages 빌드 `built` 확인 완료)
+
+### 신규 1건: `tools/r2t4-calculator.html` (1,705단어)
+
+중도 휴학 시 받은 연방 지원금을 얼마나 반환해야 하는지 계산하는 도구.
+
+**후보 선정 과정 (3개 조사, 2개 기각)**
+1. **GPA→퍼센트 전용 페이지** — gpatopercentage.com, convertgpa.com, num8ers, calcullatr, gpacalc.app, gdx.in, assignmentdude, ouruniversitypedia 등 **8곳+** → 기각. 대신 `gpa-scale.html` 보강으로 흡수(아래 참고).
+2. **유학 학자금 대출** — SoFi, Credible, Earnest, Sallie Mae, LendEDU, College Finance, GoOverseas, internationalstudentloan 등 **8곳+**(대형 렌더 소유 사이트 다수) → 기각.
+3. **R2T4** — 검색 결과가 **전부 개별 대학 .edu 페이지**(PCOM, 오리건대, Massasoit, St. Lawrence, TAMIU, 캐피털대 등) **+ 저품질 범용 계산기 1곳(calculatorshub.net)뿐** → **채택**. SAP·Pell 계산기가 통했던 것과 정확히 같은 공백 패턴.
+
+**차별화 3가지 (경쟁 .edu 페이지들이 안 다루는 것)**
+1. **3분할 표시** — 학교 반환분 / 본인 대출분 / 보조금 초과지급분. 대부분의 .edu 페이지는 "돈을 물어낼 수도 있습니다"에서 끝난다.
+2. **등록금 환불이 클수록 학생이 더 손해** — 학교 반환분 상한이 `등록금 × 미이수율`이라, 등록금이 낮으면 학교 몫이 줄고 학생 몫이 커진다. 저학비 통학생이 비싼 사립 기숙사생보다 더 많이 물어내는 구조. 또한 등록금 환불과 R2T4는 별개 절차라 환불받아도 계산은 그대로 돌아간다.
+3. **2026-07-01 규정 개정 반영** — 신규 규정 적용 기준이 처리일이 아니라 **최종 출석일(LDA)**이라 6/30 휴학은 7월에 처리돼도 구 규정 적용. R2T4 freeze date 폐지, **Full Refund Withdrawal Exemption**(관대한 환불정책 학교가 "미출석 처리"로 계산 자체를 건너뛸 수 있는 선택 조항) 신설.
+
+**★ 규정 확정 과정 (다음에 R2T4 건드릴 때 반드시 참고)**
+보조금(grant) 상환 상한 규정이 출처마다 표현이 달랐음:
+- De Anza: "학생 몫 × 50%"
+- GTCC / CUNY Hostos / WVNCC: "학생 몫 − 보조금 총액의 50%" (Title IV grant protection)
+
+**연방 워크시트 방식인 후자로 확정.** 근거: GTCC 공개 실사례가 `$2,775 × 50% = $1,387.50`을 차감해 잔액 $6.25 → $50 미만이라 면제로 계산되며, 이 방식이어야 숫자가 맞아떨어짐. De Anza 쪽은 우연히 비슷한 값이 나오는 케이스의 단순화로 판단.
+그 외 확정 사항: 60% 초과 시 100% 이수 / 5일 이상 예정 휴식은 분모·분자 양쪽에서 제외 / 반환 순서 = 무보조 Direct → 보조 Direct → PLUS → Pell → FSEOG(대출이 앞이라 학생 몫이 대출에 먼저 흡수됨) / 보조금 초과지급 $50 이하 면제 / 대출분은 약속어음 정상 조건대로 상환(즉시 청구 아님) / 보조금 초과지급은 약 45일 내 상환 또는 상환약정 없으면 전국 어느 학교에서도 연방지원 자격 상실.
+
+**검증**: 파이썬으로 공식 구현 → **오리건대 공개 예시(75일 중 22일 = 29.3%, $1,074.43 / $2,592.57)와 PCOM 예시(미이수 70.8% × $17,822 = $12,618)에 대조 일치** 확인 → jsdom으로 6개 시나리오(기본/고액 등록금/보조금 초과지급 실제 발생/60% 경과/50달러 면제 경계/0 나눗셈 방어) 실행해 파이썬 기준값과 전부 일치. `node --check` 통과.
+
+**체크리스트**: 신규 9개 항목 전부 적용 — 페이지/canonical/WebApplication+FAQPage(FAQ 7개, 본문·스키마 7:7)/header.html 드롭다운(Tuition & Loans)/noscript nav 98개 파일 일괄 스윕(중복 삽입 0)/tools/index.html 카드(40개, 중복 0)/sitemap.xml(101 URL)/llms.txt/상호링크 4곳.
+
+### 보강 1: `tools/gpa-scale.html` (1,371 → 2,004단어)
+
+08-10 보류 해제된 파일이고, v17이 "허브 재정의는 다음 세션으로 이월"로 남긴 대상. 사이트 **최대 노출(677회)인데 83위**.
+
+**★ 발견: GPA→퍼센트 역방향 쿼리 클러스터가 사이트 커버리지 0건이었음.**
+GSC에 `4.0 gpa to percentage`(5), `2.8 gpa to percentage`(5), `gpa in percentage`(6), `3.94 gpa to percentage`(18위), `4.5 gpa to percentage`(16위) 등 **56개 쿼리 / 노출 103회**가 쌓였는데, 사이트 전체에 GPA→퍼센트 방향을 다루는 곳이 한 군데도 없었음(percentage→GPA 방향만 존재). 대부분 68~93위라 구글이 gpa-scale.html로 억지 매칭시키던 상태.
+
+**차별화**: 경쟁사 8곳이 전부 쓰는 `퍼센트 = GPA × 25` 공식을 실제로 검산했더니 **4.0에서만 맞고 그 아래는 전부 과소평가**. 3.0(B, 83~86%) → 75%(C), 2.0(C, 73~76%) → 50%(낙제), 0.7 → 17.5%. **최대 오차 42.5%p.** 11행 대조표로 제시하고 "letter grade를 다리로 삼아 범위를 읽으라"는 정확한 방법을 제시. 검산 근거를 우리 페이지 기존 환산표로 삼아 내부 정합성도 확보.
+추가 헤지: 누적 GPA는 평균이라 애초에 단일 퍼센트로 역산 불가능하며, 기관이 퍼센트를 요구하면 registrar가 보유한 학교 자체 평균을 받는 게 우선이라는 점 명시.
+
+**허브 재정의(카니발라이제이션 정리)**: 본문 상단과 FAQ에서 "이 페이지는 참조 차트, 실제 숫자 변환은 저쪽"이라고 두 converter(`percentage-to-gpa-converter`, `gpa-to-letter-grade-converter`)로 명시적 라우팅. Related에도 percentage converter 추가. FAQ 3개 신규(본문·스키마 9:9 일치). sitemap lastmod 08-12, llms.txt 갱신.
+
+### 보강 2: `methodology.html`(617→1,016단어) + `editorial-policy.html`(367→718단어)
+
+**★ 두 파일 모두 `<h1>`이 아예 없었고 JSON-LD도 0건이었음** — 사이트 전체에서 이 둘만 그런 상태였다. h1 추가 + AboutPage 스키마 추가.
+`methodology.html`은 GSC 발견됨-미색인 2건 중 1건이고, 내부링크가 4개뿐이었음(얇은 분량 + 약한 내부링크 = 크롤링 우선순위 하락의 전형).
+
+- **methodology**: "연방 지원금 자격 계산기" 섹션 신설 — SAP/Pell 2종/IPA/OBBBA 한도/R2T4 8종을 FSA Handbook·34 CFR 668 근거와 함께 설명(이 계산기군에 대한 방법론이 통째로 빠져 있었음). "수치 검증 절차" 섹션 신설(공개된 연방 워크드 예시와 대조하는 실제 관행 서술 — E-E-A-T). 내부링크 4 → 15개.
+- **editorial-policy**: **"How we make money" 섹션 신설** — v17이 정한 "제휴 승인 전 `affiliate-disclosure.html` 금지" 원칙을 지키면서, **현재 제휴가 없다는 사실을 명시**하고 도입 시 공개·`sponsored` 마킹 원칙을 미리 명문화. 연방 대출을 사설로 리파이낸스하면 연방 보호가 영구 소멸된다는 경고를 광고주 사정으로 약화시키지 않는다는 원칙도 명문화(v17 "절대 하지 말 것" 항목의 문서화). "규정이 바뀌는 주제 처리 방식" 섹션 신설(SAVE→RAP 서술을 실제로 정정했던 이력을 근거로 사용).
+
+**주의**: 이건 허위 표시가 아니다 — "제휴 수수료를 받습니다"가 아니라 "현재 제휴 없음 + 도입 시 이렇게 하겠다"는 서술이다. 실제 승인 후에는 v17 체크리스트대로 `affiliate-disclosure.html` 신설 + 이 문단 갱신이 필요하다.
+
+### 검증
+사이트 전체 105개 파일 JSON-LD 오류 0, sitemap.xml 101 URL 파싱/중복 0, tool-card 40개·blog-card 53개 중복 0, 내부링크 전수 스캔 broken 0(`/favicon.ico` 2건은 루트 절대경로 오탐, 파일 존재 확인), 수정 파일 전체 태그 밸런스 통과, R2T4 JS `node --check` + jsdom 6시나리오 통과.
+
+### 이번 세션 오탐 기록 (다음 세션이 같은 착각 반복하지 말 것)
+`tools/index.html` 카드 수를 셀 때 `class="tool-card"`로 정확히 매칭하면 **39개가 아니라 38개**로 나와 "gpa-calculator 카드 누락"으로 오판했었음. 실제로는 `gpa-calculator.html`이 `class="tool-card featured"`라 정규식에서 빠진 것. **카드 카운트 정규식은 `class="tool-card[^"]*"`로 쓸 것.** blog-card도 `<a class="blog-card" ... href=...` 순서라 href가 뒤에 온다 — 속성 순서를 가정한 정규식 쓰지 말 것.
+
+---
+
+## 08-12 기준 GSC / GA4 데이터 (지난 3개월 / GA4 07-14~08-10)
+
+**Performance (지난 3개월)**
+- 총 클릭 **8** / 총 노출 **5,613** / CTR 0.14% / 평균 순위 약 53 — v17(5,580)과 사실상 동일. **즉 최근 1주일이 노출을 거의 못 보탰다**(위 결론 1 참고).
+- 기기별: 데스크톱 4,502노출/5클릭(58.6위), 모바일 1,099노출/3클릭(**17.21위**), 태블릿 12. **모바일 순위 우위 계속 유지** — 모바일 화면 깨짐은 계속 신경 쓸 것.
+- 국가별: 미국 3,924노출/7클릭, 영국 136/1클릭. 인도 208, 캐나다 193, 베트남 182, 필리핀 101(Dean's Lister 항목과 연결), 한국 30(**5.83위** — 가장 좋은 순위).
+
+**페이지별 (노출 상위)**
+| 페이지 | 노출 | 클릭 | 순위 | 코멘트 |
+|---|---|---|---|---|
+| tools/gpa-scale.html | 677 | 0 | 83.07 | 이번 세션 보강함 |
+| blog/how-many-as-to-raise-gpa.html | 591 | 4 | **17.31** | 여전히 사이트 최고 성과 |
+| tools/ib-gpa-calculator.html | 548 | 0 | **40.00** | 08-08 총점표 보강 효과 아직 미반영 |
+| blog/what-is-the-deans-list-gpa-requirement.html | 501 | 1 | 38.78 | 08-08 보강 효과 아직 미반영 |
+| tools/gpa-to-letter-grade-converter.html | 438 | 0 | 79.87 | |
+| tools/college-cost-calculator.html | 355 | 0 | 63.67 | 관망 유지 |
+| tools/act-score-calculator.html | 296 | 0 | 71.49 | 관망 유지 |
+| blog/how-to-raise-your-gpa-in-one-semester.html | 208 | 1 | **11.98** | 순위 최상위권 |
+| tools/sat-score-calculator.html | 202 | 0 | 43.10 | |
+
+**1페이지권에 근접한 쿼리(20위 이내) — 다음 세션 우선 후보**
+`gpa to letter grade converter`(6위), `dean's lister vs latin honors` 계열(6~9.5위, 4~5개 변형), `2.34 gpa with 36 on act`(9위), `convert grades to letters`(9위), `ib diploma gpa calculator`/`ib weighted gpa calculator`(11위), `minimum gpa to graduate college`(11위), `is dean's list based on cumulative or by semester`(15위), `gwa for dean's list`(16위), `percentage to gpa calculator`(17위), `what gpa is needed for deans list`(17위).
+→ **Dean's List 클러스터가 20위 이내 쿼리를 가장 많이 갖고 있다**(08-08 보강분이 아직 GSC에 반영 전이라 더 오를 여지 있음). 다만 해당 파일은 08-22까지 보류.
+
+**GA4 (07-14~08-10, 4주)**
+- 활성 사용자 **72**(직전 76), 신규 71, 이벤트 742, 평균 참여시간 51초
+- 소스: direct 41 / **bing organic 11 / yahoo organic 9 / google organic 4** / copilot.com(AI) 2 / referral 4(foundrlist, kittylaunch, newtool.site, twelve.tools)
+- **★ Bing(11)+Yahoo(9)=20명 vs Google(4명) — 격차가 v17(16 vs 5)보다 더 벌어졌다.** IndexNow 제출의 가치가 더 커졌다.
+- 조회수 2위가 여전히 `does-retaking-a-class-replace-your-gpa`(16조회/15명, 이탈률 26.7%) — GSC 노출은 거의 없는데 GA4 사용자는 많은 Bing/AI/direct 경유 페이지.
+- 홈페이지 이탈률 67%(직전 73%에서 개선) — 여전히 사이트 내 최악 수준.
+
+---
+
+## ★ 다음 세션이 반드시 확인/처리할 것 (우선순위순)
+
+1. **IndexNow 제출 — 아직도 안 됨(2세션째 이월).** 샌드박스 egress에서 `api.indexnow.org` / `www.bing.com` / `yandex.com` 전부 **403 `host_not_allowed`**로 차단됨(이번 세션에도 재시도해서 확인). 키 파일은 정상 배포돼 있음. **v17 "Sonnet 실행 결과" 섹션의 curl 명령을 사용자 본인 터미널에서 1회 실행하면 끝.** Bing/Yahoo 유입이 Google의 5배인 지금, 그리고 Google 노출이 죽어 있는 지금 효과가 가장 크다.
+2. **노출 회복 여부 확인** — 08-10 이후 일별 노출이 두 자릿수 이상으로 돌아왔는지. 회복됐으면 외부 요인 확정이고 아무것도 안 해도 된다. 2주 지나도 한 자릿수면 그때 사이트 차원 재진단 착수.
+3. **"크롤링됨 — 현재 색인이 생성되지 않음" 드릴다운 확보** — v17의 11건이 줄었는지 확인 필요. 이번 export엔 없었음.
+4. **제휴 프로그램 가입 — 아직 한 건도 착수 안 됨(v17에서 이월).** 세금정보(W-8BEN) 때문에 사용자만 할 수 있는 액션. Impact.com / CJ / ShareASale / Awin / Amazon Associates 중 한 곳 가입 → 승인 여부 회신받아야 진행 가능. **자산은 계속 쌓이는데 수익화 파이프가 아예 안 열려 있는 상태**이고, 이번에 만든 R2T4 계산기 오디언스("휴학하고 돈 물어내게 생긴 사람")가 학자금 제휴와 정확히 겹친다. 승인 전 제휴 링크·`affiliate-disclosure.html` 생성은 여전히 금지.
+5. **AdSense 재심사 — 계속 보류.** v17 판정 기준("색인 60개 이상 + 월 세션 500 이상") 미달 상태 유지. 단, 이번 세션에 E-E-A-T 페이지 2개를 실질 보강했고 색인 병목도 풀린 정황이라, 다음 세션에 색인 수치를 보고 재판정할 가치는 있다.
+6. **`tools/gpa-raise-calculator.html`** — 발견됨-미색인 2건 중 나머지 1건. 1,147단어이고 nav로 100개 파일에서 링크되는데도 크롤링이 안 됐다는 건 `blog/how-many-as-to-raise-gpa.html`(2,163단어, 사이트 최고 성과 페이지, 17위)과의 **중복 판정 가능성이 높다**. 이번 세션엔 시간상 미착수. 다음 세션에서 두 파일을 열어 역할 분담(도구 vs 설명)을 title/H1/본문 수준에서 명시적으로 갈라줄 것. **단 `how-many-as-to-raise-gpa.html` 쪽은 건드리지 말 것**(사이트 최고 성과 페이지, 리스크 대비 이득 없음) — 도구 쪽만 손볼 것.
+
+## 2주 재작업 보류 현황 (08-12 기준)
+- **08-15까지 보류**: 08-01 세션 신규/편집분 — `tools/sap-calculator.html`, `tools/pell-*`(2개), `tools/student-income-protection-calculator.html`, `tools/financial-aid-calculator.html`, `blog/12-vs-15-credits-financial-aid-trap.html`, `blog/does-withdrawing-a-class-affect-financial-aid.html`, `blog/how-to-appeal-a-sap-suspension.html`, `blog/what-gpa-to-keep-scholarship.html`, `blog/student-loan-repayment-plans-2026.html`, `blog/does-retaking-a-class-replace-your-gpa.html`
+  (이 중 4개는 이번 세션에 **상호링크만** 추가했으므로 보류 예외 적용, lastmod·dateModified 미갱신 — 원래 시한 유지)
+- **08-22까지 보류**: 08-08 세션 편집분 — `tools/ib-gpa-calculator.html`, `tools/percentage-to-gpa-converter.html`, `tools/gpa-to-letter-grade-converter.html`, `blog/what-is-the-deans-list-gpa-requirement.html`
+- **08-26까지 보류**: 이번 세션(08-12) 편집분 — `tools/r2t4-calculator.html`, `tools/gpa-scale.html`, `methodology.html`, `editorial-policy.html`
+- **보류 해제(작업 가능)**: `tools/loan-repayment-calculator.html`(07-27), `blog/how-many-as-to-raise-gpa.html`, `tools/gpa-raise-calculator.html`, `tools/sat-score-calculator.html`, `tools/final-exam-calculator.html`, `blog/what-gpa-do-you-need-for-nursing-school.html`, `tools/sat-percentile-calculator.html`, `tools/gpa-calculator.html`, `tools/weighted-gpa-calculator.html`
+
+## 파일 현황 (08-12 기준)
+- tools: **40개** + index (`r2t4-calculator.html`이 최신 신규, 08-12)
+- blog: 55개 + index
+- 루트: about, methodology, editorial-policy, privacy-policy, contact, glossary, index
+- 전체 sitemap URL: **101개**
+- 카드: tool-card 40개, blog-card 53개 (blog 파일 55개 중 2개는 카드 없음 — 404 스텁 `how-to-raise-your-gpa.html`, index)
+
+## 체크리스트 추가분 (v17 15~21번에 이어서)
+22. **새 디렉터리 배지를 `index.html`에 추가할 때는 반드시 `rel="nofollow sponsored"`를 붙일 것.** 08-12에 기존 9개를 일괄 수정했다. dofollow로 두면 링크 스팸 정책 리스크가 생긴다.
+23. **확정되지 않은 구글 변동성에 대규모 개편으로 반응하지 말 것.** 08-12에 노출이 98% 빠졌지만 업계 전반 현상이었고 순위·GA4는 멀쩡했다. 노출과 클릭·순위를 분리해서 볼 것 — 노출만 빠지고 순위가 유지되면 집계 이슈일 가능성이 높다. **먼저 변동성 추적기와 Search Status Dashboard를 웹 검색으로 확인한 뒤 판단할 것.**
+24. **카드 카운트 정규식은 `class="tool-card[^"]*"`**(featured 변형 존재). blog-card는 `class`가 `href`보다 앞에 온다 — 속성 순서 가정 금지.
+25. **h1/스키마 누락 전수 스캔을 주기적으로 돌릴 것.** 08-12에 `methodology.html`·`editorial-policy.html` 둘 다 h1도 JSON-LD도 없는 상태로 오래 방치돼 있었다. FAQPage 스키마 스캔은 하고 있었지만 h1 존재 여부는 아무도 안 보고 있었다.
+
+
+---
+
+## [보존] 이전 문서 v17 본문 (2026-08-08 세션까지)
+
 # GPA Vault 인수인계 문서 v17 (2026-08-07 Opus 분석 세션 — 수익화 방침 확정 + 정체 원인 진단)
 
 이전 v16 문서를 대체함. v16 이하 본문은 아래에 그대로 보존. 이 세션은 **Opus가 분석·기획만 담당하고 실제 파일 작업은 Sonnet이 수행하는 분업 세션**이라, 맨 위 섹션은 "Sonnet에게 넘긴 작업 지시"와 "사용자가 새로 확정한 수익화 방침" 두 가지가 핵심.
