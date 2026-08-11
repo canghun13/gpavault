@@ -10,13 +10,25 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "Methodology",
+  "url": "https://gpavault.com/methodology.html",
+  "description": "How GPA Vault's calculators are built \u2014 the formulas, official data sources, verification process, and update schedule behind every GPA, test score, loan, and federal aid tool on the site.",
+  "dateModified": "2026-08-12",
+  "isPartOf": {"@type": "WebSite", "name": "GPA Vault", "url": "https://gpavault.com"},
+  "publisher": {"@type": "Organization", "name": "GPA Vault", "url": "https://gpavault.com"}
+}
+</script>
 </head>
 <body>
 <div id="header-placeholder"></div>
 <noscript><nav style="padding:0.75rem 1rem;font-size:0.75rem;line-height:1.8;background:#f8fafc;border-bottom:1px solid #e2e8f0;"><a href="tools/">Tools</a> | <a href="blog/">Blog</a> | <a href="glossary.html">Glossary</a> | <a href="about.html">About</a></nav></noscript>
 <div class="tool-page" style="padding-top:4rem;">
   <div class="explainer">
-    <h2>Methodology</h2>
+    <h1>Methodology</h1>
     <p>This page explains how GPA Vault's calculators are built and kept accurate — the formulas we use, where the underlying numbers come from, and how often each one gets checked.</p>
 
     <h2>GPA and grade calculators</h2>
@@ -34,6 +46,15 @@
     <h2>College cost, financial aid, and ROI calculators</h2>
     <p>Cost-of-attendance figures, aid formulas, and ROI comparisons are based on publicly available federal financial aid formulas (FAFSA methodology) and published national or major-specific averages from sources such as the Department of Education, NCES, and Bureau of Labor Statistics wage data. Where we cite "average" figures (starting salary by major, average debt by major, etc.), these are drawn from the most recent publicly available datasets at time of writing, not our own survey data.</p>
 
+    <h2>Federal aid eligibility calculators</h2>
+    <p>A group of our tools models federal eligibility rules rather than arithmetic: <a href="tools/sap-calculator.html" style="color:var(--indigo);">Satisfactory Academic Progress</a>, <a href="tools/pell-enrollment-intensity-calculator.html" style="color:var(--indigo);">Pell enrollment intensity</a>, <a href="tools/pell-lifetime-eligibility-calculator.html" style="color:var(--indigo);">Pell lifetime eligibility (600% LEU)</a>, the <a href="tools/student-income-protection-calculator.html" style="color:var(--indigo);">student income protection allowance</a>, <a href="tools/obbba-loan-limit-calculator.html" style="color:var(--indigo);">federal loan limits</a>, and <a href="tools/r2t4-calculator.html" style="color:var(--indigo);">Return of Title IV funds</a>.</p>
+    <p>These follow the formulas as published in the Federal Student Aid Handbook and the corresponding sections of 34 CFR Part 668, not a simplified version of them. Where the regulation defines a threshold — the 67% completion rate, the 150% maximum timeframe, the 60% point in a payment period, the 600% lifetime Pell cap, the 50% Title IV grant protection — we use the regulatory figure and explain where it comes from rather than presenting it as an arbitrary number.</p>
+    <p>Two limits apply to every tool in this group. Schools retain discretion in places the regulations allow, so a specific institution's policy can differ from the federal default, and we say so on each page rather than implying our output is binding. And federal aid rules changed substantially in 2026 — the Return of Title IV regulations that took effect July 1, 2026, and the loan and Pell eligibility changes under OBBBA — so these pages are updated when official rule changes take effect rather than on a fixed calendar.</p>
+
+    <h2>How we check numbers before publishing</h2>
+    <p>Any page that states a specific figure — a conversion table, a worked dollar example, a percentage claim in a comparison — gets recomputed independently before it goes live, rather than being accepted because the sentence reads plausibly. Where a federal agency or university publishes a worked example, we run our own implementation against that published example and confirm the outputs match before shipping the tool.</p>
+    <p>This process regularly catches errors. Conversion tables are checked row by row against the source formula. Interactive calculators are run through scenario tests, including the edge cases at either end of a threshold, so that the behaviour just above and just below a cutoff is verified rather than assumed. When a recalculation contradicts a draft claim, the claim gets rewritten — we would rather publish a narrower statement we can verify than a striking one we cannot.</p>
+
     <h2>What we don't do</h2>
     <p>We don't invent statistics, fabricate citations, or present a single school's or lender's policy as a universal rule. Where numbers vary by institution — GPA weighting, IB-to-GPA conversion, specific aid formulas — we say so explicitly rather than picking one convention and presenting it as the only answer.</p>
 
@@ -41,7 +62,12 @@
     <p>If you find a calculation error or an outdated figure, email us at <a href="mailto:canghun13@naver.com" style="color:var(--indigo);">canghun13@naver.com</a>. We check and correct reported errors as they come in, and update rate-dependent pages on the annual schedule described above.</p>
 
     <h2>Related</h2>
-    <p><a href="editorial-policy.html" style="color:var(--indigo);">Editorial Policy</a> — how we write and review content on this site.</p>
+    <p>
+      <a href="editorial-policy.html" style="color:var(--indigo);">Editorial Policy</a> — how we write and review content on this site.<br>
+      <a href="glossary.html" style="color:var(--indigo);">Glossary</a> — definitions for the GPA, financial aid, and test score terms used across these tools.<br>
+      <a href="tools/" style="color:var(--indigo);">All calculators</a> — the full tool index.<br>
+      <a href="about.html" style="color:var(--indigo);">About GPA Vault</a> — who runs this site and why.
+    </p>
   </div>
 </div>
 <div id="footer-placeholder"></div>
