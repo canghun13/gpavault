@@ -47,14 +47,14 @@
   <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
   <div class="calc-card">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end;">
-      <div class="form-group"><label>Calendar Days in the Term</label><input type="number" id="days-total" placeholder="e.g. 110" min="1" max="400" step="1" value="110"></div>
-      <div class="form-group"><label>Calendar Days You Completed</label><input type="number" id="days-done" placeholder="e.g. 30" min="0" max="400" step="1" value="30"></div>
-      <div class="form-group"><label>Federal Grants Received ($)</label><input type="number" id="grants" placeholder="e.g. 3700" min="0" step="1" value="3700"></div>
-      <div class="form-group"><label>Federal Loans Disbursed ($)</label><input type="number" id="loans" placeholder="e.g. 2750" min="0" step="1" value="2750"></div>
-      <div class="form-group"><label>Institutional Charges for the Term ($)</label><input type="number" id="charges" placeholder="e.g. 4500" min="0" step="1" value="4500"></div>
+      <div class="form-group"><label>Calendar Days in the Term</label><input type="number" id="days-total" oninput="calculate()" placeholder="e.g. 110" min="1" max="400" step="1" value="110"></div>
+      <div class="form-group"><label>Calendar Days You Completed</label><input type="number" id="days-done" oninput="calculate()" placeholder="e.g. 30" min="0" max="400" step="1" value="30"></div>
+      <div class="form-group"><label>Federal Grants Received ($)</label><input type="number" id="grants" oninput="calculate()" placeholder="e.g. 3700" min="0" step="1" value="3700"></div>
+      <div class="form-group"><label>Federal Loans Disbursed ($)</label><input type="number" id="loans" oninput="calculate()" placeholder="e.g. 2750" min="0" step="1" value="2750"></div>
+      <div class="form-group"><label>Institutional Charges for the Term ($)</label><input type="number" id="charges" oninput="calculate()" placeholder="e.g. 4500" min="0" step="1" value="4500"></div>
     </div>
-    <button class="calc-btn" onclick="calculate()">Estimate My R2T4 Outcome</button>
-    <div class="result-box" id="result">
+    <button class="calc-btn" onclick="calculate();scrollToResult();">Estimate My R2T4 Outcome</button>
+    <div class="result-box show" id="result">
       <div class="result-num" id="result-main">—</div>
       <div class="result-label" id="result-label">Percentage of Aid Earned</div>
       <div class="result-detail" id="result-detail"></div>
@@ -119,6 +119,14 @@
 function money(n){
   return "$" + n.toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2});
 }
+function scrollToResult(){
+  try {
+    var b = document.getElementById("result");
+    if (b && typeof b.scrollIntoView === "function") {
+      b.scrollIntoView({behavior: "smooth", block: "nearest"});
+    }
+  } catch (e) { /* scrolling is cosmetic; never let it break the calculation */ }
+}
 function calculate(){
   var daysTotal = parseFloat(document.getElementById("days-total").value);
   var daysDone = parseFloat(document.getElementById("days-done").value);
@@ -136,8 +144,8 @@ function calculate(){
   var label = document.getElementById("result-label");
   var detail = document.getElementById("result-detail");
   var box = document.getElementById("result");
-  box.classList.add("show");
-  function reveal(){ if (box.scrollIntoView) { box.scrollIntoView({behavior: "smooth", block: "nearest"}); } }
+  if (box) { box.classList.add("show"); }
+  function reveal(){ /* box is always visible; kept for call-site compatibility */ }
 
   if (daysTotal <= 0) {
     main.textContent = "—";
@@ -209,6 +217,11 @@ function calculate(){
 
   detail.innerHTML = html;
   reveal();
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", calculate);
+} else {
+  calculate();
 }
 </script>
 </body>
