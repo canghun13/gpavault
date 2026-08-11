@@ -135,6 +135,9 @@ function calculate(){
   var main = document.getElementById("result-main");
   var label = document.getElementById("result-label");
   var detail = document.getElementById("result-detail");
+  var box = document.getElementById("result");
+  box.classList.add("show");
+  function reveal(){ if (box.scrollIntoView) { box.scrollIntoView({behavior: "smooth", block: "nearest"}); } }
 
   if (daysTotal <= 0) {
     main.textContent = "—";
@@ -172,6 +175,7 @@ function calculate(){
     html += "<p><strong>You passed the 60% point, so you earned 100% of your federal aid.</strong> Nothing is returned to the Department of Education. Your school must still check whether you are owed a post-withdrawal disbursement of any aid that was not paid out yet, and your institutional charges are handled separately under your school refund policy.</p>";
     html += "<p>Note that this is only the aid side. The withdrawn credits still count as attempted but not earned against your Satisfactory Academic Progress completion rate.</p>";
     detail.innerHTML = html;
+    reveal();
     return;
   }
 
@@ -204,8 +208,8 @@ function calculate(){
   html += "<p style=\"font-size:0.85rem;\">Estimate only. Your school performs the official calculation on the Department of Education worksheet, and its figures govern. Ask your financial aid office for a copy of your completed R2T4 worksheet.</p>";
 
   detail.innerHTML = html;
+  reveal();
 }
-calculate();
 </script>
 </body>
 </html>
