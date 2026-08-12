@@ -573,6 +573,42 @@ footer {
   color: var(--slate-mid);
 }
 .explainer tr:last-child td { border-bottom: none; }
+
+/* Result-box tables — .result-box is centered and has no table styling of its own,
+   so tables injected into #result-detail rendered as unstyled centered text.
+   Mirrors .explainer table but tuned for the indigo-faint result background.
+   Sits ABOVE the responsive `table {}` block so the existing mobile
+   overflow-x mechanism still applies unchanged. */
+.result-detail { text-align: left; }
+.result-box table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  margin: 1.1rem 0; font-size: 0.82rem;
+  background: var(--white);
+  border: 1px solid var(--indigo-light);
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: left;
+}
+.result-box th {
+  background: var(--indigo-faint); color: var(--indigo-dark);
+  font-weight: 600; padding: 0.55rem 0.75rem; text-align: left;
+  white-space: nowrap;
+  border-bottom: 2px solid var(--indigo-light);
+}
+.result-box td {
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--slate-mid);
+  vertical-align: top;
+}
+.result-box td:nth-child(2) {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--slate);
+}
+.result-box tr:last-child td { border-bottom: none; }
+.result-box .table-scroll-hint { text-align: right; margin: 0.75rem 0 -0.5rem; }
 .highlight-box {
   background: #f8fafc; border-left: 3px solid var(--indigo);
   padding: 1rem 1.25rem; margin: 1.25rem 0;
