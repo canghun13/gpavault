@@ -1,3 +1,150 @@
+# GPA Vault 인수인계 문서 v19 (2026-08-17 세션 — Bing이 실질 채널임을 데이터로 확인 + 구글 노출 미회복 재진단)
+
+이전 v18 문서를 대체함. v18 이하 본문은 아래에 그대로 보존.
+
+### 0단계 대조 결과
+최신 커밋 `760ab83`(08-12 CSS 수정)과 v18 기록 일치 — 소급 기록 불필요.
+
+---
+
+## ★★★★★ 결론 1: 구글 노출은 회복되지 않았다. 그리고 그건 이제 중요한 문제가 아니다
+
+v18이 "다음 세션에 노출 회복 여부를 확인하고, 2주 지나도 한 자릿수면 사이트 차원 재진단"이라고 남겼다. **회복 안 됐다.**
+
+일별 노출: 08-04 53 → 08-05 9 → ... → 08-10 11 → 08-11 12 → 08-12 8 → 08-13 8 → 08-14 3 → 08-15 0.
+붕괴 이전이 하루 200~350이었으니 **11일 연속 98% 수준 하락 유지**.
+
+**그런데 클릭은 3개월 누적 8 → 7로 거의 변화가 없다**(1건은 롤링 윈도우에서 빠진 것). 노출만 죽고 클릭은 그대로다.
+
+### 웹 조사 결과 — v18의 외부요인 판단은 유지되나, 해석이 달라져야 한다
+- 8/1~3과 8/5~6에 서드파티 추적기 변동성 확인, 구글은 **여전히 업데이트 미확정**. 마지막 확정 업데이트는 6월 스팸 업데이트(6/26 종료).
+- 보고된 사례들이 서로 모순됨(7/22부터 하락한 곳, 8/6에 회복한 곳, 70% 빠졌다가 몇 시간 뒤 복구된 곳). 즉 **단일 원인의 코어 업데이트가 아님**.
+- **★ 가장 중요한 관찰**: Barry Schwartz 지적 — 순위 변동 자체가 매년 덜 중요해지고 있다. 구글이 순위와 무관하게 퍼블리셔로 보내는 트래픽을 계속 줄이고 있고, **대형 퍼블리셔들이 구글 검색 차단을 진지하게 검토 중**이다. "구글이 콘텐츠를 크롤링하고 구글이 방문자를 보낸다"는 교환이 뒤집혔다. 순위를 가장 집요하게 추적하는 사이트가 **밑에서 줄어들고 있는 채널을 최적화하고 있는** 상황일 수 있다.
+- 진단법: 노출 대폭 하락 + 클릭 소폭 하락 = 품질 강등이 아니라 노출 집계 축소.
+
+**→ 우리 데이터가 정확히 그 패턴이다. 사이트 차원 재진단 결과: 사이트 문제 아님. 구글 채널 자체가 축소된 것.**
+
+---
+
+## ★★★★★ 결론 2: Bing이 이 사이트의 실질 채널이다 (이번 세션 최대 발견)
+
+사용자가 이번에 Bing Webmaster 데이터를 처음 제공했고, 그림이 완전히 뒤집혔다.
+
+| | 구글 (3개월) | Bing (같은 기간) |
+|---|---|---|
+| 노출 | 5,644 | 354 |
+| 클릭 | 7 | **7** |
+| CTR | 0.12% | **1.98%** |
+| 평균 순위 | 53 | **약 5** |
+
+**Bing은 구글의 1/16 노출로 같은 클릭 수를 만든다.** 키워드 리포트 기준 CTR은 10%(70노출/7클릭)까지 나온다.
+
+GA4도 같은 방향이다(07-20~08-16, 활성 사용자 83 — 직전 72에서 증가):
+- **bing 21 + yahoo 11 + duckduckgo 2 = 34** vs **google 4**
+- 세션 기준으로도 bing 25 + yahoo 12 + duckduckgo 2 + copilot.com(ai-assistant) 2 vs google 4
+- direct 42명이 최다 — 여기에 AI 어시스턴트 경유 유입이 섞여 있을 가능성이 높음
+
+Yahoo·DuckDuckGo·Copilot이 전부 Bing 인덱스를 쓰므로, **실질적으로 검색 유입의 89%가 Bing 생태계**다.
+
+### ★ Bing 쿼리는 전부 롱테일 대화형이다 — 우리 전략이 맞았다는 증거
+- "what weighted gpa is b- average with an ap and 3 honors classes" (8노출, 6.5위)
+- "how many grades needed to raise gpa 12 in 20 credits to 19 overall" (4노출)
+- "how grades from study abroad affect undergraduate financial aid" (**1위**)
+- "does ibsu completely overwrite a failing grade on the cumulative gpa calculation once the unit is successfully retaken"
+- "ifi have two associates degress how much of my federal pell lifetime eligibilty have i used?" (오타 포함)
+- "what isthe average student loan balance for social science majors in usa" (**1위, 클릭 1**)
+
+전부 Copilot 스타일 자연어 문장이다. **롱테일 + 니치 연방규정 전략이 Bing에서는 실제로 1~10위를 만들고 있다.** 구글에서 40~80위인 것과 대조적.
+
+### Bing 상위 페이지 (구글과 완전히 다른 순서)
+| 페이지 | Bing 노출 | Bing 순위 | 구글 노출 |
+|---|---|---|---|
+| blog/does-retaking-a-class-replace-your-gpa | **146** | 5.09 | 1 (45위) |
+| blog/what-is-the-deans-list-gpa-requirement | 75 | 5.45 | 504 |
+| tools/pell-lifetime-eligibility-calculator | 54 | 5.13 | 24 |
+| blog/what-gpa-do-you-need-to-graduate-college | 16 | **2.94** | 175 |
+| blog/average-student-loan-debt-by-major | 8 | 3.38 | **0** (클릭 2, CTR 25%) |
+
+**★ 구글 노출이 0인데 Bing에서 클릭이 나오는 페이지들이 있다**(average-student-loan-debt-by-major, what-gpa-to-keep-scholarship, how-to-calculate-cumulative-gpa 등). 구글 페이지 리포트에 아예 안 나오는 페이지가 약 10개.
+
+### → 전략 변경 아님, 평가 지표 변경
+사용자 지시대로 **공격적 확장 전략은 그대로 유지**한다. 바꿀 것은 성과를 무엇으로 판단하느냐다.
+**앞으로 세션 성과 판단은 Bing 순위/CTR + GA4 사용자 수를 1차 지표로, 구글 노출은 참고 지표로 볼 것.** 구글 노출이 회복되지 않아도 그것만으로 콘텐츠 품질 문제라고 판단하지 말 것.
+
+---
+
+## 08-17 세션 작업 내역 (커밋 `e76c7b0`, push + Actions `completed/success` 확인)
+
+### 신규 1건: `tools/repeat-coursework-aid-calculator.html` (1,661단어)
+
+**선정 경위 — 후보 2개 조사, 1개 기각**
+Bing 최대 자산이 리테이크 클러스터(`does-retaking-a-class-replace-your-gpa`, 146노출 5.09위, GA4 조회 2위)라 여기서 확장하기로 함.
+1. **Retake/Grade Replacement GPA 계산기** → **기각**. 경쟁 7곳+ (best-calculators, pearson.com, cgpacalculatoronline, thegpacalculator, gpagradecalculator, gpacalculators.net, kean.edu). 완전 포화.
+2. **Repeat Coursework 지원금 자격 계산기** → **채택**. 검색 결과가 .edu 9곳(UCF, 애리조나, Southern Connecticut, Stockton, UWG, UTRGV, GSU, Temple, CCS) + 독립 계산기 1곳(cumgpacalculator, 경고 박스 수준)뿐. SAP·R2T4와 동일한 공백 패턴.
+
+**규정 (34 CFR, .edu 9곳 교차 확인)**
+- 이미 통과한 과목은 **Title IV 지원 재수강 1회만** 허용. 3번째 시도는 지원 대상 아님.
+- 낙제(F)/철회(W) 과목은 **통과할 때까지 무제한** 지원 가능.
+- 통과 기준 = **D 이상** 또는 P/S/CR. (전공은 C 이상을 요구하는데 지원 규정상으론 이미 "통과"라 함정)
+- **재수강을 W/F로 끝내도 1회는 소진됨**(UWG 명시). 이게 학생들이 가장 억울해하는 지점.
+- 이전 시도에 지원금을 안 받았어도 규정 적용(시도 횟수 기준, 자금 출처 무관).
+- 제외된 학점은 **재학 상태 산정에서 빠짐** → Pell intensity 하락, 6학점 미만이면 Direct Loan 차단.
+- 교내/주정부 장학금은 실제 등록 학점 기준이라 대개 영향 없음(CCS).
+- SAP는 반대 방향: 지원금이 안 나온 시도도 attempted credits에 포함됨.
+
+**차별화**: .edu 페이지들은 시나리오 표만 제시하고 끝난다. 이 도구는 제외 후 실제 aid-eligible 학점 → 재학 상태 → Pell 손실 금액 → **비재수강 학점 몇 개를 더 들으면 무력화되는지**까지 계산. "15학점 중 3학점 제외는 손실 0, 12학점 중 3학점 제외는 Pell 25% 손실" — 같은 재수강인데 시간표에 따라 결과가 갈린다는 게 핵심 인사이트.
+
+**검증**: UCF(12→9), Temple(15→12), CCS(12→9) 공개 사례와 계산 일치. jsdom 8개 시나리오 + **getComputedStyle(display) 3경로 확인**(v18 교훈 반영). 0 나눗셈, 제외>총합 역전 입력 방어 확인. 신규 9개 체크리스트 전항목 적용(noscript 99개 파일, 중복 0).
+
+**카니발라이제이션 방지**: `pell-enrollment-intensity-calculator`와 역할 분리 — 이 도구는 "어느 학점이 세는가", Pell 도구는 "센 학점이 얼마가 되는가". 상호링크로 명시.
+
+### 보강 1건: `tools/gpa-raise-calculator.html` (1,155 → 1,321단어) — 미색인 원인 해소
+
+v18이 다음 세션 과제로 남긴 건. GSC 발견됨-미색인 2건 중 1건이고, nav로 100개 파일에서 링크되는데도 크롤링이 안 됨 → `blog/how-many-as-to-raise-gpa.html`(2,215단어, 노출 591/17.31위)과의 중복 판정으로 확정.
+
+실제로 확인해보니 title 개념이 동일("How Many A's Do You Need")하고 H2도 등급대체/초기학기영향/학점수가 겹쳤음.
+
+**블로그는 사이트 최고 성과 페이지라 손 안 댐. 도구 쪽만 차별화:**
+- title/description을 **reachability(도달 가능성)** 축으로 전환
+- 중복 H2 2개를 **"GPA 상한선(ceiling)"** 개념으로 교체 — 블로그가 안 다루는 각도.
+  상한 = (기존 quality points + 4.0 × 잔여학점) ÷ 총학점.
+  검산: 2.4/60완료/60잔여 → 3.2(3.5는 수학적으로 불가능), 2.4/30완료/90잔여 → 3.6. 같은 GPA인데 타이밍만으로 선택지가 갈림.
+- 역할 분담 명시: **블로그 = 개수 질문, 도구 = 도달 가능 여부.** llms.txt에도 명기.
+
+---
+
+## ★ 다음 세션이 확인/처리할 것 (우선순위순)
+
+1. **IndexNow 제출 — 4세션째 이월. 이제 이게 단일 최우선 액션이다.**
+   Bing이 실질 채널이라는 게 이번에 데이터로 확정됐고, IndexNow는 Bing 색인에 직접 신호를 보내는 유일한 수단이다. 샌드박스 egress에서 `api.indexnow.org`/`bing.com`/`yandex.com` 전부 403 `host_not_allowed`라 세션 내 실행 불가(3회 재시도해 확인). 키 파일은 정상 배포됨. **v17 섹션의 curl 명령을 사용자 터미널에서 1회 실행하면 끝.**
+2. **Bing Webmaster 데이터를 매번 받을 것.** 이번에 처음 받았는데 판단이 완전히 바뀌었다. 구글 GSC만 보면 "죽은 사이트"로 오판하게 된다. Page Traffic Report + Keyword Report 두 개면 충분.
+3. **`gpa-raise-calculator` 색인 여부 재확인.** 이번 차별화가 통했는지가 "중복 판정 → 크롤링 거부" 가설의 검증이다. 여전히 미색인이면 가설이 틀린 것이므로 다른 원인(nav 링크 과다로 인한 저품질 신호 등)을 봐야 한다.
+4. **`methodology.html`** — 미색인 2건 중 나머지. 08-12에 617→1,016단어로 보강 + h1/스키마 추가했으므로 그 효과를 확인만 하면 됨. 08-26까지 보류라 이번엔 손대지 않았다.
+5. **Bing 상위 페이지 우선 보강 검토.** `does-retaking-a-class-replace-your-gpa`(146노출)가 압도적 1위인데 08-15에 보류 해제됐다. 다음 세션에 보강 후보 1순위. `what-gpa-do-you-need-to-graduate-college`도 Bing 2.94위로 클릭 직전.
+6. **수익화 — v18 정정 유지.** 월 세션 500 또는 월 검색 클릭 50 도달 전까지 제휴·광고 액션을 사용자에게 요구하지 말 것. 현재 GA4 세션 약 108/4주, 검색 클릭 14/3개월로 임계치 한참 아래. 다만 **Bing CTR이 2%라 트래픽이 늘면 전환이 실제로 발생할 구조**는 확인됐다.
+
+## 2주 재작업 보류 현황 (08-17 기준)
+- **08-22까지**: `tools/ib-gpa-calculator.html`, `tools/percentage-to-gpa-converter.html`, `tools/gpa-to-letter-grade-converter.html`, `blog/what-is-the-deans-list-gpa-requirement.html`
+- **08-26까지**: `tools/r2t4-calculator.html`, `tools/gpa-scale.html`, `methodology.html`, `editorial-policy.html`
+- **08-31까지**: 이번 세션분 — `tools/repeat-coursework-aid-calculator.html`, `tools/gpa-raise-calculator.html`
+- **보류 해제**: 08-01 세션분 전체(`sap-calculator`, `pell-*`, `student-income-protection`, `financial-aid-calculator`, `12-vs-15-credits`, `does-withdrawing`, `how-to-appeal-a-sap-suspension`, `what-gpa-to-keep-scholarship`, `student-loan-repayment-plans-2026`, **`does-retaking-a-class-replace-your-gpa`**), `loan-repayment-calculator`, `how-many-as-to-raise-gpa`, `sat-score-calculator`, `final-exam-calculator`, `gpa-calculator`, `weighted-gpa-calculator` 등
+  (이 중 4개는 이번 세션에 **상호링크만** 추가 — 보류 예외, lastmod 미갱신)
+
+## 파일 현황 (08-17 기준)
+- tools **41개** + index / blog 55개 + index / 루트 7개
+- sitemap URL **102개**, tool-card 41개(미등록 도구 0), blog-card 53개
+- 전체 106개 HTML 파일 JSON-LD 오류 0, 내부링크 broken 0
+
+## 체크리스트 추가분 (v18 22~25번에 이어서)
+26. **구글 GSC만으로 사이트 건강을 판단하지 말 것.** 08-17에 구글 노출 98% 하락 상태에서 Bing 순위는 평균 5위, CTR 2%, GA4 사용자는 오히려 증가(72→83)였다. 반드시 Bing Webmaster + GA4를 함께 볼 것.
+27. **노출과 클릭을 분리해서 볼 것.** 노출 대폭 하락 + 클릭 유지 = 노출 집계 축소이지 품질 강등이 아니다. 이 경우 콘텐츠 개편으로 대응하지 말 것.
+28. **새 계산기는 반드시 결과창 기본 표시(`result-box show`) + 전 입력에 `oninput` + 로드 시 1회 실행으로 만들 것.** 클릭 한 경로에만 의존하면 v18에서 겪은 "아무것도 안 보임" 사고가 재발한다. 검증은 실제 style.css 주입 후 `getComputedStyle(display)`를 로드/입력/클릭 3경로에서 확인.
+29. **미색인 페이지를 만나면 먼저 "내부 중복"을 의심할 것.** nav로 100개 파일에서 링크되는데도 크롤링이 안 된다면 링크 부족이 아니라 중복 판정이다. 이때 **성과가 좋은 쪽은 절대 건드리지 말고 안 좋은 쪽만 차별화**할 것.
+
+---
+
+## [보존] 이전 문서 v18 본문 (2026-08-12 세션까지)
+
 # GPA Vault 인수인계 문서 v18 (2026-08-12 세션 — 노출 폭락 원인규명 + 색인 병목 해소 확인 + 신규 확장 재개)
 
 이전 v17 문서를 대체함. v17 이하 본문은 아래에 그대로 보존.
