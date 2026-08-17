@@ -7,6 +7,20 @@
 
 ---
 
+## ★★★★★★ 절대 하지 말 것 — 색인 수동 제출 금지 (사용자 확정 방침, 2026-08-17 명문화)
+
+**IndexNow 제출, 구글 URL 검사/색인 생성 요청, 그 밖의 모든 수동 색인 제출을 하지 않는다. 검색엔진이 자연스럽게 크롤링해 가도록 둔다.**
+
+- 이것은 사용자가 **구글 색인 논의 때 이미 지시했던 사항**이다. 그런데 v17~v19 인수인계 문서 어디에도 기록되지 않았고, 그 결과 **4개 세션 연속으로 "IndexNow 제출이 최우선 액션"이라고 반복 제안**하는 사고가 났다. 지시를 문서화하지 않은 것이 근본 원인이다.
+- 이미 배포된 IndexNow 키 파일(`/4ecbb2cc...txt`)은 **그대로 둔다**. 파일이 존재하는 것 자체는 무해하며, 삭제도 별도 작업이므로 사용자 지시 없이 건드리지 않는다. **단 그 키로 제출 API를 호출하지 않는다.**
+- 색인이 안 되는 페이지를 발견해도 대응은 **수동 제출이 아니라 내부 원인 제거**다: 중복 판정 해소, 내부링크 보강, 얇은 분량 보강, sitemap lastmod 갱신까지가 우리가 하는 일의 전부다. (08-17에 `gpa-raise-calculator` 중복 해소로 처리한 방식이 올바른 예시.)
+- **다음 세션이 이 항목을 다시 액션 아이템으로 올리면 그 자체가 실수다.**
+
+### 함께 새긴 교훈 — 사용자 구두 지시는 즉시 문서화할 것
+세션 중 사용자가 내린 방침성 지시(하지 말 것 / 바꾸지 말 것 / 우선순위)는 **그 세션 handover에 반드시 남긴다.** 남기지 않으면 다음 세션이 데이터만 보고 정반대 결론을 내리고, 사용자는 같은 말을 반복하게 된다. 이번 IndexNow 건이 정확히 그 사례다.
+
+---
+
 ## ★★★★★ 결론 1: 구글 노출은 회복되지 않았다. 그리고 그건 이제 중요한 문제가 아니다
 
 v18이 "다음 세션에 노출 회복 여부를 확인하고, 2주 지나도 한 자릿수면 사이트 차원 재진단"이라고 남겼다. **회복 안 됐다.**
@@ -115,8 +129,7 @@ v18이 다음 세션 과제로 남긴 건. GSC 발견됨-미색인 2건 중 1건
 
 ## ★ 다음 세션이 확인/처리할 것 (우선순위순)
 
-1. **IndexNow 제출 — 4세션째 이월. 이제 이게 단일 최우선 액션이다.**
-   Bing이 실질 채널이라는 게 이번에 데이터로 확정됐고, IndexNow는 Bing 색인에 직접 신호를 보내는 유일한 수단이다. 샌드박스 egress에서 `api.indexnow.org`/`bing.com`/`yandex.com` 전부 403 `host_not_allowed`라 세션 내 실행 불가(3회 재시도해 확인). 키 파일은 정상 배포됨. **v17 섹션의 curl 명령을 사용자 터미널에서 1회 실행하면 끝.**
+1. ~~IndexNow 제출~~ → **영구 금지. 아래 "절대 하지 말 것" 항목 참고. 다시 제안하지 말 것.**
 2. **Bing Webmaster 데이터를 매번 받을 것.** 이번에 처음 받았는데 판단이 완전히 바뀌었다. 구글 GSC만 보면 "죽은 사이트"로 오판하게 된다. Page Traffic Report + Keyword Report 두 개면 충분.
 3. **`gpa-raise-calculator` 색인 여부 재확인.** 이번 차별화가 통했는지가 "중복 판정 → 크롤링 거부" 가설의 검증이다. 여전히 미색인이면 가설이 틀린 것이므로 다른 원인(nav 링크 과다로 인한 저품질 신호 등)을 봐야 한다.
 4. **`methodology.html`** — 미색인 2건 중 나머지. 08-12에 617→1,016단어로 보강 + h1/스키마 추가했으므로 그 효과를 확인만 하면 됨. 08-26까지 보류라 이번엔 손대지 않았다.
@@ -140,6 +153,8 @@ v18이 다음 세션 과제로 남긴 건. GSC 발견됨-미색인 2건 중 1건
 27. **노출과 클릭을 분리해서 볼 것.** 노출 대폭 하락 + 클릭 유지 = 노출 집계 축소이지 품질 강등이 아니다. 이 경우 콘텐츠 개편으로 대응하지 말 것.
 28. **새 계산기는 반드시 결과창 기본 표시(`result-box show`) + 전 입력에 `oninput` + 로드 시 1회 실행으로 만들 것.** 클릭 한 경로에만 의존하면 v18에서 겪은 "아무것도 안 보임" 사고가 재발한다. 검증은 실제 style.css 주입 후 `getComputedStyle(display)`를 로드/입력/클릭 3경로에서 확인.
 29. **미색인 페이지를 만나면 먼저 "내부 중복"을 의심할 것.** nav로 100개 파일에서 링크되는데도 크롤링이 안 된다면 링크 부족이 아니라 중복 판정이다. 이때 **성과가 좋은 쪽은 절대 건드리지 말고 안 좋은 쪽만 차별화**할 것.
+30. **색인 수동 제출(IndexNow, 구글 색인 생성 요청 등)은 하지 않는다.** 사용자 확정 방침. 위 "절대 하지 말 것" 섹션 참고. 자연 크롤링에 맡긴다.
+31. **작업 보고 시 화면 확인용 링크는 "이번 세션에 시각적으로 변한 모든 페이지"를 빠짐없이 줄 것.** 신규 페이지만 주면 안 된다. 본문 섹션을 교체·추가한 기존 페이지, 카드가 추가된 index 페이지, 헤더/푸터 파셜을 건드려 전 페이지에 영향이 가는 경우까지 포함한다. 08-17에 신규 1개만 주고 본문이 교체된 `gpa-raise-calculator`와 카드가 추가된 `tools/index.html`을 누락한 사고가 있었다.
 
 ---
 
@@ -277,7 +292,7 @@ GSC에 `4.0 gpa to percentage`(5), `2.8 gpa to percentage`(5), `gpa in percentag
 **GA4 (07-14~08-10, 4주)**
 - 활성 사용자 **72**(직전 76), 신규 71, 이벤트 742, 평균 참여시간 51초
 - 소스: direct 41 / **bing organic 11 / yahoo organic 9 / google organic 4** / copilot.com(AI) 2 / referral 4(foundrlist, kittylaunch, newtool.site, twelve.tools)
-- **★ Bing(11)+Yahoo(9)=20명 vs Google(4명) — 격차가 v17(16 vs 5)보다 더 벌어졌다.** IndexNow 제출의 가치가 더 커졌다.
+- **★ Bing(11)+Yahoo(9)=20명 vs Google(4명) — 격차가 v17(16 vs 5)보다 더 벌어졌다.** IndexNow 제출의 가치가 더 커졌다. **[무효 — 2026-08-17 확정: 색인 수동 제출 금지. 문서 최상단 "절대 하지 말 것" 참고.]**
 - 조회수 2위가 여전히 `does-retaking-a-class-replace-your-gpa`(16조회/15명, 이탈률 26.7%) — GSC 노출은 거의 없는데 GA4 사용자는 많은 Bing/AI/direct 경유 페이지.
 - 홈페이지 이탈률 67%(직전 73%에서 개선) — 여전히 사이트 내 최악 수준.
 
@@ -320,7 +335,7 @@ v17이 "제휴는 트래픽 하한이 없으니 1순위"라고 판정했고 이�
 
 ## ★ 다음 세션이 반드시 확인/처리할 것 (우선순위순)
 
-1. **IndexNow 제출 — 아직도 안 됨(2세션째 이월).** 샌드박스 egress에서 `api.indexnow.org` / `www.bing.com` / `yandex.com` 전부 **403 `host_not_allowed`**로 차단됨(이번 세션에도 재시도해서 확인). 키 파일은 정상 배포돼 있음. **v17 "Sonnet 실행 결과" 섹션의 curl 명령을 사용자 본인 터미널에서 1회 실행하면 끝.** Bing/Yahoo 유입이 Google의 5배인 지금, 그리고 Google 노출이 죽어 있는 지금 효과가 가장 크다.
+1. **IndexNow 제출 — 아직도 안 됨(2세션째 이월).** 샌드박스 egress에서 `api.indexnow.org` / `www.bing.com` / `yandex.com` 전부 **403 `host_not_allowed`**로 차단됨(이번 세션에도 재시도해서 확인). 키 파일은 정상 배포돼 있음. **v17 "Sonnet 실행 결과" 섹션의 curl 명령을 사용자 본인 터미널에서 1회 실행하면 끝.** Bing/Yahoo 유입이 Google의 5배인 지금, 그리고 Google 노출이 죽어 있는 지금 효과가 가장 크다. **[무효 — 2026-08-17 확정: 색인 수동 제출 금지. 문서 최상단 "절대 하지 말 것" 참고.]**
 2. **노출 회복 여부 확인** — 08-10 이후 일별 노출이 두 자릿수 이상으로 돌아왔는지. 회복됐으면 외부 요인 확정이고 아무것도 안 해도 된다. 2주 지나도 한 자릿수면 그때 사이트 차원 재진단 착수.
 3. **"크롤링됨 — 현재 색인이 생성되지 않음" 드릴다운 확보** — v17의 11건이 줄었는지 확인 필요. 이번 export엔 없었음.
 4. **제휴 프로그램 가입 — 재촉하지 말 것(08-12 정정).** 위 "수익화 우선순위 정정" 섹션 참고. 월 세션 500 또는 월 검색 클릭 50에 도달하기 전까지는 제휴·광고 관련 액션을 사용자에게 요구하지 않는다. 승인 전 제휴 링크·`affiliate-disclosure.html` 생성 금지는 그대로 유효.
@@ -451,7 +466,7 @@ v17이 "제휴는 트래픽 하한이 없으니 1순위"라고 판정했고 이�
 **GA4 (07-10~08-06, 4주)**
 - 활성 사용자 **76**(직전 세션 67에서 소폭 증가), 신규 77, 이벤트 781, 평균 참여시간 48초
 - 소스: direct 48 / **yahoo organic 9 / bing organic 7 / google organic 5** / copilot.com(AI 어시스턴트) 2 / referral 5(foundrlist, kittylaunch, newtool.site, twelve.tools)
-- **★ 중요: Bing(7)+Yahoo(9)=16명 > Google(5명).** Google보다 Bing/Yahoo가 우리를 훨씬 잘 색인·노출하고 있다. Google 색인 병목이 풀릴 때까지 **Bing 쪽을 적극 공략하는 게 비용 대비 효율이 훨씬 좋다** → IndexNow 도입 권장(아래 지시 D).
+- **★ 중요: Bing(7)+Yahoo(9)=16명 > Google(5명).** Google보다 Bing/Yahoo가 우리를 훨씬 잘 색인·노출하고 있다. Google 색인 병목이 풀릴 때까지 **Bing 쪽을 적극 공략하는 게 비용 대비 효율이 훨씬 좋다** → IndexNow 도입 권장(아래 지시 D). **[무효 — 2026-08-17 확정: 색인 수동 제출 금지. 문서 최상단 "절대 하지 말 것" 참고.]**
 - copilot.com 경유 유입이 계속 잡힘 → `llms.txt` 유지 전략이 실제로 작동 중이라는 방증. 계속 갱신할 것.
 - 페이지별 조회수 2위가 `does-retaking-a-class-replace-your-gpa`(16조회/**15명**, 이탈률 26.7%) — GSC 노출은 거의 없는데 GA4 사용자는 많다. Google 외 경로(Bing/AI/direct)로 들어오는 페이지. 이탈률도 사이트 평균보다 훨씬 좋음.
 - 홈페이지 이탈률 73%로 사이트 내 최악 — 홈에서 툴로 넘어가는 동선이 약하다는 신호(당장 손대진 않되 기록해둠).
@@ -478,7 +493,7 @@ v17이 "제휴는 트래픽 하한이 없으니 1순위"라고 판정했고 이�
 - **A. `tools/ib-gpa-calculator.html` — IB 총점(24~45) 쿼리 흡수** (최우선). 548노출/40위로 노출·순위 조합이 사이트 최고인데 클릭 0. 현재 변환표가 **과목별 점수(1~7)만** 다루고 **디플로마 총점(24~45)은 FAQ 1개로 "총점 말고 과목별로 계산하세요"라고 회피**하고 있음. 그런데 GSC 쿼리는 "38 ib score to gpa", "40 ib score to gpa", "34/35/36/37 ib score to gpa", "ib diploma score to gpa", "ibdp score to gpa", "ib points to gpa" 등 **총점으로 묻는 쿼리가 다수**. 총점→GPA 근사 대응표 + FAQ 추가. **차별화 포인트(경쟁사 7곳이 안 하는 것): TOK/EE 보너스 3점 때문에 같은 42점이라도 과목점수 42인지 보너스 포함 42인지에 따라 GPA가 달라진다는 점을 표에 명시**하고, 총점 변환은 어디까지나 근사치이며 과목별 변환이 정식 방법이라는 헤지를 유지할 것.
 - **B. percentage↔GPA 3중 카니발라이제이션 정리**. `percentage-to-gpa-converter.html`(숫자/타 스케일 → 4.0 변환 도구)와 `gpa-to-letter-grade-converter.html`(letter↔GPA 변환 도구)의 역할을 title/meta/H1/상호링크에서 명시적으로 분리하고, 서로를 "이 쿼리는 저쪽으로" 유도하도록 내부링크 문구를 정리. **`gpa-scale.html`은 08-10까지 보류 중이라 이번엔 손대지 말 것** — 허브 역할 재정의는 다음 세션으로 이월.
 - **C. `blog/what-is-the-deans-list-gpa-requirement.html` — 롱테일 FAQ 보강**. 499노출/38.77위. 확인된 공백 3종: (1) **"cumulative vs semester" 정확 표현 쿼리**가 15~62위로 이미 가까움("is dean's list based on cumulative or by semester" 15위, "is dean's list by semester or cumulative" 20위, "do you get dean's list every semester" 41위) — 본문 H2엔 개념이 있으나 이 표현의 FAQ가 없음 (2) **"what percentage of students make the dean's list"**(64위) 커버 0 (3) **필리핀식 표현 "Dean's Lister" / "GWA"가 사이트 전체에 0건**인데 관련 쿼리 12회+ 잡히고 필리핀 국가별 노출이 100회. 광고 단가는 낮지만 경쟁이 사실상 없어 공짜로 먹는 순위. 추가로 "president's list gpa"/"chancellor's list gpa" 계열도 비교표에만 있고 FAQ가 없음.
-- **D. IndexNow 도입 (기술)**. GA4상 **Bing(7)+Yahoo(9) 유입이 Google(5)보다 많음**. 정적 사이트라 루트에 키 파일 하나 올리면 끝이고, Google 색인 병목과 무관하게 Bing/Yahoo 색인 속도를 올릴 수 있음. 랜덤 hex 키 생성 → `/{key}.txt` 루트 배치 → Bing/IndexNow 엔드포인트로 sitemap URL 제출. **주의: 이 키 파일은 sitemap.xml에 넣지 말 것**(콘텐츠 페이지가 아님, 404 스텁을 sitemap에서 뺐던 것과 같은 논리).
+- **D. IndexNow 도입 (기술)**. GA4상 **Bing(7)+Yahoo(9) 유입이 Google(5)보다 많음**. 정적 사이트라 루트에 키 파일 하나 올리면 끝이고, Google 색인 병목과 무관하게 Bing/Yahoo 색인 속도를 올릴 수 있음. 랜덤 hex 키 생성 → `/{key}.txt` 루트 배치 → Bing/IndexNow 엔드포인트로 sitemap URL 제출. **주의: 이 키 파일은 sitemap.xml에 넣지 말 것**(콘텐츠 페이지가 아님, 404 스텁을 sitemap에서 뺐던 것과 같은 논리). **[무효 — 2026-08-17 확정: 색인 수동 제출 금지. 문서 최상단 "절대 하지 말 것" 참고.]**
 
 **보류(다음 세션 이후)**: `gpa-scale.html` 허브 재정의(08-10 이후), 제휴 링크·`affiliate-disclosure.html`(프로그램 승인 후), 홈페이지 이탈률 73% 개선.
 
@@ -494,7 +509,7 @@ A~D 전부 완료. 신규 페이지 0건(지시 준수). 커밋/푸시 완료, P
 
 **C. `blog/what-is-the-deans-list-gpa-requirement.html`** — 신규 H2 "Dean's Lister and GWA"(필리핀) 섹션 추가: GWA 1.75 기준(다수 소스 교차검증: gwacalculator.blog, gwacalculatr.com, gwacal.com 등 5곳+ 일치), GPA와 반대로 낮을수록 우수하다는 점, UP은 명칭이 다르다(University/College Scholar)는 예외까지 반영. FAQ 4개 신규(cumulative vs semester 정확 표현 매칭 / "몇 %가 받나" — BestColleges·Scholarships360·JobLoving 등 교차검증해 "10~25%"로 범위 표기, 특정 블로그 하나의 단정적 수치는 인용 안 함 / President's·Chancellor's List / Dean's Lister·GWA), 본문 FAQ와 JSON-LD 9/9 개수·내용 일치 확인. 1,216→1,771단어. blog/index.html cat-academics 최상단 재배치 완료(카드 53개, 중복 0).
 
-**D. IndexNow** — 랜덤 hex 키(64자) 생성, `/{key}.txt` 루트에 배치해서 이번 커밋에 포함(sitemap.xml에는 미포함, 지시 준수). **단, 실제 IndexNow API로 URL을 제출하는 POST/GET 호출 자체는 이번 세션에서 실행하지 못함** — bash_tool 네트워크 egress 허용목록에 `api.indexnow.org`/`bing.com`이 없어서 시도 시 `403 host_not_allowed`(우리 쪽 egress 프록시가 막은 것, IndexNow 서버 응답 아님) 반환됨. web_fetch 툴도 "이전 검색/fetch 결과에 없는 URL은 못 연다"는 제약이 있어 우회 불가. 키 파일 자체는 이번 커밋으로 정상 배포됐고(Actions 성공 확인), **제출만 남은 상태**.
+**D. IndexNow** — 랜덤 hex 키(64자) 생성, `/{key}.txt` 루트에 배치해서 이번 커밋에 포함(sitemap.xml에는 미포함, 지시 준수). **단, 실제 IndexNow API로 URL을 제출하는 POST/GET 호출 자체는 이번 세션에서 실행하지 못함** — bash_tool 네트워크 egress 허용목록에 `api.indexnow.org`/`bing.com`이 없어서 시도 시 `403 host_not_allowed`(우리 쪽 egress 프록시가 막은 것, IndexNow 서버 응답 아님) 반환됨. web_fetch 툴도 "이전 검색/fetch 결과에 없는 URL은 못 연다"는 제약이 있어 우회 불가. 키 파일 자체는 이번 커밋으로 정상 배포됐고(Actions 성공 확인), **제출만 남은 상태**. **[무효 — 2026-08-17 확정: 색인 수동 제출 금지. 문서 최상단 "절대 하지 말 것" 참고.]**
 
 **다음 사람(사용자 또는 향후 세션)이 해야 할 일 — 매우 간단, 5분 이내:**
 ```bash
@@ -1224,7 +1239,7 @@ GSC Performance/Coverage export (07-13) + GA4 리포트(06-15~07-12) 분석 후 
 17. **★ 수익화 방침(08-07 사용자 확정): AdSense에 의존하지 않는다.** 제휴/광고사 중 되는 건 전부 한다. AdSense 재심사 여부도, 다른 제휴/광고사 채택 여부도 **Opus가 데이터로 판단**한다(사용자에게 "재심사 하셨어요?"라고 매 세션 묻는 관성 폐기). AdSense보다 유리한 대안이 있으면 먼저 능동적으로 추천할 것. 08-07 판정 = **제휴 1순위(트래픽 하한 없음), 디스플레이는 월 1,000세션 도달 시 Journey by Mediavine, AdSense 재심사는 "색인 60개+월 500세션" 전까지 보류.** 상세 근거는 맨 위 v17 섹션 참고.
 18. **제휴 프로그램 승인 전에는 사이트에 제휴 링크도, `affiliate-disclosure.html`도 만들지 말 것** — 실체 없는 고지문은 허위 표시다. 승인 후 체크리스트는 v17 섹션에 정리해둠.
 19. **`git clone --depth`(얕은 클론) 금지.** 얕게 받으면 모든 파일 히스토리가 "신규 생성"으로 보여서 2주 재작업 보류 계산이 통째로 틀어진다(08-07 세션에 실제로 겪음). 이미 얕게 받았으면 `git fetch --unshallow` 후 계산할 것.
-20. **Bing/Yahoo 유입이 Google보다 많다는 사실을 잊지 말 것**(08-07 GA4: Bing 7 + Yahoo 9 vs Google 5). Google 색인 병목에만 매달리지 말고 Bing 쪽 최적화(IndexNow, Bing Webmaster Tools)도 같이 챙길 것. **08-08 갱신: IndexNow 키 파일은 배포됨(`/4ecbb2cc89f059e8138b521308eb76716c0ce520c587b424a65a5b2d171fd774.txt`), 실제 URL 제출은 샌드박스 네트워크 제한으로 아직 안 됨 — "Sonnet 실행 결과" 섹션의 curl 명령 참고해서 다음 사람이 실행할 것.**
+20. **Bing/Yahoo 유입이 Google보다 많다는 사실을 잊지 말 것**(08-07 GA4: Bing 7 + Yahoo 9 vs Google 5). Google 색인 병목에만 매달리지 말고 Bing 쪽 최적화(IndexNow, Bing Webmaster Tools)도 같이 챙길 것. **08-08 갱신: IndexNow 키 파일은 배포됨(`/4ecbb2cc89f059e8138b521308eb76716c0ce520c587b424a65a5b2d171fd774.txt`), 실제 URL 제출은 샌드박스 네트워크 제한으로 아직 안 됨 — "Sonnet 실행 결과" 섹션의 curl 명령 참고해서 다음 사람이 실행할 것.** **[무효 — 2026-08-17 확정: 색인 수동 제출 금지. 문서 최상단 "절대 하지 말 것" 참고.]**
 21. **"크롤링됨 — 현재 색인이 생성되지 않음" 건수를 매 세션 반드시 확인할 것.** 이 수치가 늘고 있으면 신규 페이지 확장을 멈추고 기존 페이지 통합/강화로 전환하는 신호다(08-07에 0→11로 신규 발생해서 그 세션 신규를 0건으로 결정함).
 
 
