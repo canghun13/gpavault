@@ -1,3 +1,137 @@
+# GPA Vault 인수인계 문서 v21 (2026-08-24 세션 — 구글 색인 이탈의 기계적 원인 규명 + Bing 3배 성장 확인)
+
+이전 v20 문서를 대체함. v20 이하 본문은 아래에 그대로 보존.
+
+### 0단계 대조 결과
+최신 커밋 `8f177bf`(08-18 handover v20)과 v20 기록 일치 — 소급 기록 불필요.
+
+### ★ 먼저 확인할 것
+v19 본문 최상단의 **"절대 하지 말 것 — 색인 수동 제출 금지"**는 그대로 유효. IndexNow·구글 색인 요청은 하지 않는다. **아래에서 색인 이탈 31건을 다루지만, 그 대응도 수동 제출이 아니다.**
+
+---
+
+## ★★★★★★ 결론 1: 구글 노출 붕괴의 기계적 원인을 찾았다 — 색인 이탈
+
+사용자가 이번에 **"크롤링됨 - 현재 색인이 생성되지 않음"** 드릴다운을 처음 제공했다(v19가 요청했던 항목). 결과:
+
+**11건 → 31건, 3배 증가.**
+
+포함된 페이지가 심각하다 — 구글 노출 상위권이 거의 그대로 들어있다:
+`gpa-scale.html`(노출 678, 사이트 1위), `gpa-to-letter-grade-converter`(438), `college-cost-calculator`(356), `act-score-calculator`(297), `sat-score-calculator`(202), `loan-repayment-calculator`(166), `ib-gpa-calculator`(548), `what-is-the-deans-list-gpa-requirement`(504), `weighted-gpa-calculator`, `final-exam-calculator`, `financial-aid-calculator`, `gpa-calculator`, `r2t4-calculator`, `about`, `contact`, `glossary`, `editorial-policy`, `tools/` 등.
+
+**즉 v19가 "노출 집계 축소"로 해석했던 현상의 실제 메커니즘은 색인 이탈이었다.** 노출이 준 게 아니라 페이지가 색인에서 빠졌다. 3개월 누적 노출 수치는 8월 초 이전의 잔존값이다.
+
+### ★ 그런데 "얇아서" 빠진 게 아니다 (중요 — 패닉 재작성 금지 근거)
+분량으로 검증했더니 가설이 깨졌다:
+- 색인 **유지** 중: `study-abroad-financial-aid-guide` 617단어, `what-is-pslf` 749단어, `ap-credit-calculator` 1,127단어
+- 색인 **이탈**: `gpa-scale` 1,815단어, `how-much-student-loan-debt-is-too-much` 1,802단어, `glossary` 1,742단어
+
+얇은 페이지(`contact` 92단어)와 두꺼운 페이지가 함께 빠졌고, 도구와 블로그 양쪽에 걸쳐 있으며, 08-12에 보강한 `gpa-scale`도 보강 후에 빠졌다. **페이지별 콘텐츠 품질 문제가 아니라 사이트 레벨 권위 판단으로 봐야 한다.**
+
+### ★★ 결정적 반증: Bing은 같은 콘텐츠를 전부 색인하고 1~10위에 올린다
+`gpa-raise-calculator`는 구글에서 "발견됨-미색인"(크롤조차 안 됨)인데 **Bing에서는 31노출 5.13위에 클릭 1**이다. `sap-calculator`는 Bing 8.7% CTR. 같은 HTML, 정반대 결과.
+
+**따라서 콘텐츠를 갈아엎는 대응은 근거가 없다.** 신생 저권위 도메인에 대한 구글의 색인 기준이 Bing보다 훨씬 높을 뿐이다. 시간과 외부 신호(자연 유입 링크, 브랜드 검색)로 풀리는 문제이지 리라이팅으로 풀리는 문제가 아니다.
+
+**대응 원칙(다음 세션도 유지):** 색인 이탈을 이유로 ① 대규모 재작성 ② 페이지 삭제/통합 ③ 확장 중단 — **셋 다 하지 않는다.** 사용자 지시(공격적 확장 유지)와도 일치하고 데이터와도 일치한다.
+
+---
+
+## ★★★★★ 결론 2: Bing이 3배 성장했다 — 여기가 사업이다
+
+| | 구글 (3개월) | Bing (같은 기간) |
+|---|---|---|
+| 노출 | 5,626 (지난주 5,644) | **1,115** (지난주 354 → **3.1배**) |
+| 클릭 | 7 (변화 없음) | **20** (지난주 7 → **2.9배**) |
+| CTR | 0.12% | **1.79%** |
+| 평균 순위 | 53 | **약 5** |
+
+GA4(07-27~08-23): **활성 사용자 100명**(72 → 83 → 100, 3주 연속 증가).
+소스: direct 48 / **bing 28 + yahoo 13 + duckduckgo 4 = 45** / google **3**.
+세션 기준으로도 bing 34 + yahoo 14 + ddg 4 + copilot.com(ai-assistant) 2 vs google 3.
+
+**구글 유입은 3명, Bing 생태계는 45명이다. 15배.** 구글 일별 노출은 3~8로 계속 바닥(08-15는 0).
+
+### Bing 상위 페이지 (이번 주)
+| 페이지 | 노출 | 클릭 | 순위 |
+|---|---|---|---|
+| blog/does-retaking-a-class-replace-your-gpa | **450** (지난주 146) | 3 | 5.36 |
+| blog/what-is-the-deans-list-gpa-requirement | 203 (75) | 0 | 5.34 |
+| tools/pell-lifetime-eligibility-calculator | 183 (54) | 3 | 5.51 |
+| blog/what-gpa-do-you-need-for-nursing-school | 34 | 1 | 4.35 |
+| tools/gpa-raise-calculator | 31 | 1 | 5.13 |
+| tools/sap-calculator | 23 | 2 | **8.7% CTR** |
+| blog/average-student-loan-debt-by-major | 22 | 2 | **9.09% CTR** |
+| blog/what-gpa-to-keep-scholarship | 5 | 2 | **40% CTR** |
+
+---
+
+## 08-24 세션 작업 (커밋 `e5e6027`, push + Actions `completed/success` 확인)
+
+### 신규 1건: `tools/employer-tuition-assistance-calculator.html` (1,520단어)
+
+v20 백로그 1순위였던 Section 127. **GPA 계산기 변형이 아니라 교육 세금 클러스터 확장**이라, 유사 페이지 누적으로 인한 색인 리스크를 키우지 않는 선택이기도 하다.
+
+**경쟁조사**: 검색 결과가 BDO, BCLP, Cerini, CapinCrouse, Horton Group, BLR, Instead, Forbes 등 **전부 고용주/HR/회계법인용 컴플라이언스 문서**다. 직원 관점 계산기는 확인되지 않았다. "쓰여 있긴 한데 독자가 다른" 유형의 공백.
+
+**규정 (IRS FS-2026-10 / IR-2026-55, 26 USC 127 교차 확인)**
+- 연 **$5,250** 비과세. 1978년부터 동결이었으나 OBBBA로 **2026년 이후 과세연도부터 물가연동**
+- ★ **등록금과 학자금 대출상환이 별도 한도가 아니라 합산 한도**다. IRS 예시 그대로: 대출에 $2,000 쓰면 등록금에는 $3,250만 남는다. 미사용분 이월 불가
+- 대출상환 옵션은 OBBBA로 **영구화**(기존 2025년 말 일몰 삭제). **입사 前에 받은 대출도 대상**이고 고용주가 대주에게 직접 지급 가능
+- 한도 초과분은 일반 임금 → 소득세 + **급여세(7.65%)**까지 부과
+- 비과세 지원금으로 낸 등록금은 교육 크레딧 대상 불가(장학금과 동일한 double-dipping 금지)
+- Section 127로 제외된 이자는 학자금 이자공제(§221)와 중복 불가
+- 직무 관련성 불필요(학부·대학원 모두). 스포츠·게임·취미 과정, 식비·숙박·교통은 제외
+
+**차별화 — 배분 최적화**: 등록금이 낮을수록 지원금을 **대출상환에 돌리는 게 유리**하다.
+등록금 $4,000 + 지원금 $5,250이면 전액 등록금 사용 시 AOTC 0원, 대출로 돌리면 $4,000이 크레딧 대상으로 남아 **$2,500 차이**. 등록금 $6,000이면 $1,750 차이, $8,000이면 $312 차이, 약 $9,250 초과면 차이 없음(어차피 $4,000 이상 자기부담). **현금 이동액은 양쪽 동일**하므로 공정한 비교다.
+
+**검증**: 파이썬 모델 ↔ jsdom 11개 시나리오 결과 일치. 한도초과, 소득제한, 부부합산, 대출배분 초과 입력, 전부 0 입력 방어 확인. getComputedStyle(display) 3경로 확인.
+
+### 보강 1건: `blog/does-retaking-a-class-replace-your-gpa.html` (2,169 → 2,729단어)
+
+Bing 최대 자산(450노출, 5.36위). 08-15 보류 해제됐고 v20이 보강 1순위로 지정한 건.
+**Bing 롱테일 쿼리가 가리킨 실제 빈틈 2개**를 채웠다(우리 추측이 아니라 데이터 근거):
+- `university transcript repeated course d then f then retake impact`(5.67위) → **재수강 성적이 더 나쁠 때**. most-recent-grade 정책이면 GPA가 오히려 나빠지고 highest-grade 정책이면 보호된다는 차이. 기존 본문에 전혀 없던 내용
+- Clemson 학업사면 질문(**12노출, Bing 키워드 리포트 전체 1위**) + dual enrollment 재수강 질문 → **다른 학교에서 재수강 후 학점 이전으로 성적 대체가 되는가**. 편입학점은 grade point 없이 들어오므로 대체 불가. 역시 없던 내용
+
+FAQ 2개 추가(본문·스키마 8:8), dateModified·sitemap lastmod 갱신.
+
+---
+
+## ★ 다음 세션이 확인/처리할 것
+
+1. **색인 수동 제출 금지 — 유효.** 색인 이탈 31건을 봐도 마찬가지다. 다시 액션으로 올리지 말 것.
+2. **색인 이탈에 대규모 재작성으로 반응하지 말 것.** 위 결론 1의 근거(분량 무관, Bing은 정상 색인) 참고. 31건이 40~50건으로 더 늘어도 **Bing 지표와 GA4가 성장 중이면 전략 유지**가 맞다. 판단 기준을 구글 색인 수가 아니라 GA4 활성 사용자 + Bing 클릭으로 둘 것.
+3. **Bing 상위 페이지 보강 계속.** 다음 후보 순서: `blog/what-is-the-deans-list-gpa-requirement`(Bing 203노출 5.34위, **08-22 보류 해제됨**), `tools/pell-lifetime-eligibility-calculator`(183노출, 클릭 3), `blog/what-gpa-do-you-need-for-nursing-school`(34노출 4.35위, 클릭 1).
+4. **CTR이 높은 소형 페이지를 눈여겨볼 것.** `what-gpa-to-keep-scholarship` 40%, `average-student-loan-debt-by-major` 9.09%, `sap-calculator` 8.7%. 노출은 적지만 전환율이 높아 노출만 늘면 바로 클릭이 된다. 이 3개는 보강 가성비가 좋다.
+5. **교육 세금 클러스터는 1~4월에 판정.** (v20 항목 유지) 지금 성과 없다고 접지 말 것.
+6. **수익화 — v18 정정 유지.** 월 세션 500 또는 월 검색 클릭 50 도달 전까지 제휴·광고 액션을 사용자에게 요구하지 말 것. 현재 GA4 세션 약 128/4주, Bing+구글 검색 클릭 27. **임계치에 근접하고 있다** — Bing 성장 속도(주당 3배)가 유지되면 다음 1~2세션 안에 도달할 수 있다. 도달하면 그때 제휴 가입을 제안할 것.
+
+## 2주 재작업 보류 현황 (08-24 기준)
+- **08-26까지**: `tools/r2t4-calculator.html`, `tools/gpa-scale.html`, `methodology.html`, `editorial-policy.html`
+- **08-31까지**: `tools/repeat-coursework-aid-calculator.html`, `tools/gpa-raise-calculator.html`
+- **09-01까지**: `tools/scholarship-tax-calculator.html`, `blog/1098-t-box-5-exceeds-box-1.html`
+- **09-07까지**: 이번 세션분 — `tools/employer-tuition-assistance-calculator.html`, `blog/does-retaking-a-class-replace-your-gpa.html`
+- **보류 해제**: `blog/what-is-the-deans-list-gpa-requirement`, `tools/ib-gpa-calculator`, `tools/percentage-to-gpa-converter`, `tools/gpa-to-letter-grade-converter`(08-22 해제), 그리고 08-01 이전 전체
+  (이번 세션에 **상호링크만** 추가한 5개는 보류 예외, lastmod 미갱신)
+
+## 파일 현황 (08-24 기준)
+- tools **43개** + index / blog 56개 + index / 루트 7개
+- sitemap URL **105개**, tool-card 43개(미등록 도구 0), blog-card 54개
+- 전체 109개 HTML JSON-LD 오류 0, 내부링크 broken 0
+- 클러스터 8개(v20 목록 유지, 교육 세금이 3페이지로 확대)
+
+## 체크리스트 추가분 (v20 32~36번에 이어서)
+37. **"크롤링됨-미색인"을 콘텐츠 품질 문제로 단정하지 말 것.** 08-24에 분량과 색인 여부가 무관함을 확인했고(617단어 유지 vs 1,815단어 이탈), 같은 콘텐츠를 Bing은 전부 색인해 5위권에 올렸다. 색인 이탈은 신생 도메인의 권위 문제일 수 있고, 그 경우 리라이팅으로 풀리지 않는다. **반드시 다른 검색엔진의 색인 상태를 대조 확인한 뒤 판단할 것.**
+38. **사이트 건강 판단 지표를 GA4 활성 사용자 + Bing 클릭으로 둘 것.** 구글 색인 수·노출은 참고 지표다. 08-24 기준 구글 노출은 바닥인데 GA4는 3주 연속 성장(72→83→100)했다.
+39. **보강 대상은 추측이 아니라 Bing 키워드 리포트에서 고를 것.** 08-24에 "재수강이 더 나쁠 때", "타교 재수강 후 학점 이전"이라는 두 빈틈은 전부 실제 Bing 쿼리에서 나왔고, 그중 하나는 키워드 리포트 전체 1위(12노출)였다. 내부 브레인스토밍으로는 안 나왔을 주제다.
+40. **신규 주제를 고를 때 "기존 페이지와 형태가 유사한가"를 함께 볼 것.** 색인 이탈이 진행 중인 상황에서 10번째 GPA 계산기 변형을 추가하는 것과, 다른 클러스터를 확장하는 것은 리스크가 다르다. 08-24에 Section 127을 고른 이유 중 하나가 이것이다.
+
+---
+
+## [보존] 이전 문서 v20 본문 (2026-08-18 세션까지)
+
 # GPA Vault 인수인계 문서 v20 (2026-08-18 세션 — 신규 클러스터 "교육 세금" 개설)
 
 이전 v19 문서를 대체함. v19 이하 본문은 아래에 그대로 보존.
