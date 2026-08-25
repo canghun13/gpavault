@@ -1,3 +1,104 @@
+# GPA Vault 인수인계 문서 v22 (2026-08-25 세션 — 신규 클러스터 "이중등록" 개설, LSAC 규정 변경 선점)
+
+이전 v21 문서를 대체함. v21 이하 본문은 아래에 그대로 보존.
+
+### 0단계 대조 결과
+최신 커밋 `10d74b2`(08-24 handover v21)와 v21 기록 일치 — 소급 기록 불필요.
+
+### ★ 먼저 확인할 것 (계속 유효)
+- v19 최상단 **"절대 하지 말 것 — 색인 수동 제출 금지"**: IndexNow·구글 색인 요청 하지 않는다.
+- v21 결론: **구글 색인 이탈(31건)에 패닉 재작성으로 반응하지 않는다.** 판단 지표는 GA4 활성 사용자 + Bing 클릭.
+
+### 이번 세션의 성격
+사용자 지시: "신규를 폭넓게. 키워드 뽑고 → 리스트 → 경쟁 강도 → 강하면 롱테일. 가능하면 새 클러스터. **GSC/우리 데이터 안에서만 보지 말고** 구글·네이버·레딧 등에서 문서 수는 적은데 관심 있는 걸 찾아라."
+→ 체크리스트 32번대로 **자체 데이터를 근거로 쓰지 않고** 인벤토리 빈칸 → 외부 검색 검증 순서로 진행. 이번 주 GSC/Bing/GA4 자료는 제공되지 않았고 참조하지도 않았다.
+
+---
+
+## ★★★★★ 신규 클러스터 개설: 이중등록(Dual Enrollment / Early College Credit)
+
+기존 8개 클러스터에 이어 **9번째**. v21 "아직 비어 있는 영역" 목록에 있던 항목이다.
+
+### 후보 4개 → 3개 기각 (다음 세션이 재조사하지 말 것)
+
+| 후보 | 판정 | 근거 |
+|---|---|---|
+| 유학생 F-1 재정증명(I-20) | 기각 | 전부 .edu(조지아텍·FAU·TAMU·UCI·UMN·콜로라도 등)인데, **증명 금액이 학교별 COA라 범용 계산기가 성립하지 않는다.** 경쟁이 약해도 도구가 성립 안 하면 무의미 |
+| 근로장학 vs 일반 알바 | 기각 | collegelens(3편), levelall, kidtocollege, collegefinance, degreecalc, research.com(2편), collegehelpguide 등 **9곳+ 포화** |
+| Academic renewal | 기각 | v20에서 이미 기각 — 재조사하지 않았다 |
+| **이중등록 GPA 영향** | **채택** | 아래 |
+
+### 왜 채택했나
+- 검색 결과가 **SDN 포럼 3건(2008·2019·2021), College Confidential, 7sage 3건** 등 포럼 Q&A 위주. AAMC·LSAC 공식 정책 페이지는 있으나 **학생용 정리 문서도 계산기도 없다.** 체크리스트 33번 판정("포럼 Q&A만 있으면 포화가 아니라 문서 부재 신호")에 정확히 해당.
+- **18년간 같은 질문이 반복** 등장한다는 건 수요가 확실한데 아무도 안 채운 영역이라는 뜻.
+- ★★ **결정적: LSAC이 2026-07-28자로 규정을 바꿨다.** 고교 재학 중 이수한 대학 과목을 LSAC GPA에서 **제외**하기 시작(제출 트랜스크립트 기준, 실질적으로 2027-2028 지원 사이클부터). **한 달도 안 된 변경**이라 기존 문서 다수(spiveyconsulting, LawHub 등)가 여전히 옛 규정을 서술 중이다. 반면 **AMCAS는 여전히 포함**한다. 두 제도가 갈라진 상태를 정리한 문서가 없다.
+
+### 신규 2건 (쿼리셋 분리)
+
+**1. `tools/dual-enrollment-gpa-calculator.html` (1,288단어)**
+AMCAS 방식(포함) / LSAC 방식(제외) / 소속대학 institutional GPA를 나란히 산출.
+★ 차별화 = **"상쇄에 필요한 A학점 수"**. 공식: `필요학점 = 이중등록학점 × (대학GPA − 이중등록GPA) ÷ (4 − 대학GPA)`.
+3.7 학생이 15학점 B급 이중등록을 상쇄하려면 **A학점 약 35학점(2학기 이상)**이 필요하다. 삭제가 아니라 희석이라는 걸 수치로 보여주는 게 핵심. 대학GPA가 4.0이면 수학적으로 상쇄 불가라는 분기도 처리했다.
+
+**2. `blog/does-dual-enrollment-affect-your-gpa.html` (1,395단어)**
+"GPA가 하나가 아니다"(고교 / 소속대학 / 입시기관 3종) 구조 정리 + LSAC 변경 + AMCAS 존치.
+★ 경계 조건 명시: **LSAC 제외는 "프로그램 명칭"이 아니라 "언제 수강했는가" 기준**이다. 대학 재학 중 커뮤니티칼리지에서 들은 과목은 이중등록이라 불렸어도 여전히 포함된다. 7sage에서 실제로 학생이 혼동한 지점이라 FAQ로 넣었다.
+AP/IB는 시험점수 기반이라 성적이 대학 트랜스크립트에 남지 않는다는 비대칭도 정리.
+
+### 사실 확인 (교차 검증한 것)
+- AMCAS: **미전학 학점도 GPA 포함**, "High School" 연도 표기 — AAMC 공식 페이지
+- LSAC: 2026-07-28 시행, 제출 트랜스크립트 기준 — LSAC transcript-summarization 페이지 + LSAC 공지 원문(7sage 인용) + LawHub
+- 재수강 시 **전 시도 평균**(대체 아님) — MedEdits/AAMC
+- 기관 grade forgiveness는 입시 GPA에 무효
+- 이중등록 성적은 고교·대학 트랜스크립트 양쪽에 기재 — UF 이중등록 FAQ
+
+### 중복 확인
+`dual enrollment` 언급은 기존 5개 파일에서 부수적 언급뿐이고, `what-gpa-do-you-need-for-med-school`에는 **0건**이었다. LSAC/AMCAS 언급도 2개 파일 부수적. 신규 주제로 확인.
+체크리스트 40번(형태 유사성) 고려: GPA 계산기 변형이 아니라 **두 입시기관 GPA 체계 비교**라는 별개 계산이고, 클러스터 주력 자산을 블로그로 두어 유사성 리스크를 낮췄다.
+
+### 검증
+파이썬 모델 ↔ jsdom 9개 시나리오 일치(4.3 클램프, 0 나눗셈, 이중등록이 더 높은 경우, GPA 4.0 경계). getComputedStyle(display) 3경로 확인. node --check 통과.
+
+---
+
+## ★ 다음 세션이 확인/처리할 것
+
+1. **색인 수동 제출 금지 / 패닉 재작성 금지** — v19·v21 원칙 유지.
+2. **★ LSAC 규정 변경 추적.** 이 클러스터의 핵심 자산은 "2026-07-28 변경"이다. 시행 초기라 **세부 운용이 바뀔 수 있다.** 다음에 이 페이지를 손볼 때 반드시 LSAC 공식 페이지를 재확인하고, 바뀌었으면 즉시 갱신할 것. 우리가 선점한 이유가 최신성이므로 낡으면 가치가 역전된다.
+3. **이중등록 클러스터 확장 후보** — 이번엔 2페이지로만 열었다. 여지 있는 하위 주제: 이중등록 학점의 전학 인정률, 이중등록 vs AP 비용 비교, 이중등록 학생의 신입생 지위(non-degree seeking) 문제. 다만 **성과 확인 후에 확장**할 것.
+4. **Bing 상위 페이지 보강 계속**(v21 목록 유지): `what-is-the-deans-list-gpa-requirement`(Bing 203노출), `pell-lifetime-eligibility-calculator`(183), `what-gpa-do-you-need-for-nursing-school`(34노출 4.35위). CTR 높은 소형 페이지 3개도 유효: `what-gpa-to-keep-scholarship`(40%), `average-student-loan-debt-by-major`(9.09%), `sap-calculator`(8.7%).
+5. **교육 세금 클러스터는 1~4월 판정**(v20 유지).
+6. **수익화 — v18 정정 유지.** 월 세션 500 또는 월 검색 클릭 50 도달 전까지 요구하지 말 것. v21 기준 세션 약 128/4주, 검색 클릭 27로 근접 중.
+
+## 2주 재작업 보류 현황 (08-25 기준)
+- **08-31까지**: `tools/repeat-coursework-aid-calculator.html`, `tools/gpa-raise-calculator.html`
+- **09-01까지**: `tools/scholarship-tax-calculator.html`, `blog/1098-t-box-5-exceeds-box-1.html`
+- **09-07까지**: `tools/employer-tuition-assistance-calculator.html`, `blog/does-retaking-a-class-replace-your-gpa.html`
+- **09-08까지**: 이번 세션분 — `tools/dual-enrollment-gpa-calculator.html`, `blog/does-dual-enrollment-affect-your-gpa.html`
+- **보류 해제**: `tools/r2t4-calculator`, `tools/gpa-scale`, `methodology.html`, `editorial-policy.html`(08-26), `what-is-the-deans-list-gpa-requirement`, `ib-gpa-calculator`, `percentage-to-gpa-converter`, `gpa-to-letter-grade-converter`, 그 외 08-01 이전 전체
+  (이번 세션에 **상호링크만** 추가한 6개는 보류 예외, lastmod 미갱신)
+
+## 파일 현황 (08-25 기준)
+- tools **44개** + index / blog **57개** + index / 루트 7개
+- sitemap URL **107개**, tool-card 44개(미등록 도구 0), blog-card 55개(미등록 1건 = 404 스텁 `how-to-raise-your-gpa.html`)
+- 전체 111개 HTML JSON-LD 오류 0, 내부링크 broken 0
+
+## 클러스터 현황 (9개)
+GPA 계산/변환 · 시험점수 · 연방지원 규정 · 학자금대출 · 전공·커리어 ROI · 유학 · 학사경고·복학 · 교육 세금 · **이중등록(신규)**
+
+### 아직 비어 있는 영역 (경쟁조사 미실시)
+재향군인 GI Bill · 홈스쿨 성적증명 · 장애 학생 편의제공 · 로스쿨 준비(LSAT/GPA) · 대학원 조교(TA/RA) 학비면제 과세 · CLEP/사전학습인정(CPL)
+→ **유학생 F-1 재정증명과 근로장학은 이번에 기각했으므로 목록에서 제외했다.**
+
+## 체크리스트 추가분 (v21 37~40번에 이어서)
+41. **규정이 최근 바뀐 주제를 우선 노려볼 것.** 08-25에 LSAC 2026-07-28 변경을 찾았고, 이 한 건이 클러스터 전체의 차별화 근거가 됐다. 기존 상위 문서들이 아직 옛 규정을 서술 중이라 신생 도메인도 정확성만으로 앞설 수 있다. **단 최신성이 무기이므로 갱신 책임이 따른다**(위 항목 2 참고).
+42. **경쟁이 약해도 "도구가 성립하는가"를 먼저 볼 것.** F-1 재정증명은 .edu만 있어서 공백처럼 보였지만, 증명 금액이 학교별이라 범용 계산기를 만들 수 없어 기각했다. 공백 ≠ 기회다.
+43. **두 기관이 같은 사안을 다르게 처리할 때가 좋은 소재다.** AMCAS는 포함하고 LSAC은 제외하는 상황처럼, 제도 간 불일치는 검색 수요가 크고 정리된 문서가 잘 없다.
+
+---
+
+## [보존] 이전 문서 v21 본문 (2026-08-24 세션까지)
+
 # GPA Vault 인수인계 문서 v21 (2026-08-24 세션 — 구글 색인 이탈의 기계적 원인 규명 + Bing 3배 성장 확인)
 
 이전 v20 문서를 대체함. v20 이하 본문은 아래에 그대로 보존.
