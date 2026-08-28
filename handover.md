@@ -1,3 +1,112 @@
+# GPA Vault 인수인계 문서 v23 (2026-08-26 세션 — 신규 클러스터 "대학원 조교 펀딩" 개설)
+
+이전 v22 문서를 대체함. v22 이하 본문은 아래에 그대로 보존.
+
+### 0단계 대조 결과
+최신 커밋 `8946432`(08-25 handover v22)와 v22 기록 일치 — 소급 기록 불필요.
+
+### ★ 먼저 확인할 것 (계속 유효)
+- v19 최상단 **"절대 하지 말 것 — 색인 수동 제출 금지"**: IndexNow·구글 색인 요청 하지 않는다.
+- v21 결론: **구글 색인 이탈에 패닉 재작성으로 반응하지 않는다.** 판단 지표는 GA4 활성 사용자 + Bing 클릭.
+- v22 항목: **LSAC 2026-07-28 규정 변경 추적 의무** — 이중등록 페이지를 손볼 때 LSAC 공식 페이지 재확인 필수.
+
+### 이번 세션의 성격
+사용자 지시는 08-25와 동일(신규·폭넓게·경쟁강도·클러스터 추가·외부 소스). 이번 주도 GSC/Bing/GA4 자료는 제공되지 않았고 **참조하지 않았다.** 체크리스트 32번대로 v22의 "비어 있는 영역" 목록에서 출발해 외부 검색으로만 검증했다.
+
+---
+
+## ★★★★★ 신규 클러스터 개설: 대학원 조교 펀딩 (Graduate Assistantship Funding)
+
+기존 9개에 이어 **10번째 클러스터**. v22 "비어 있는 영역" 목록의 "대학원 조교(TA/RA) 학비면제 과세" 항목이다.
+
+### 후보 2개 정밀조사 → 1개 기각
+
+| 후보 | 판정 | 근거 |
+|---|---|---|
+| **Workforce Pell** (OBBBA, 2026-07-01 시행) | 기각 | 체크리스트 41번(최근 규정 변경 선점)에 딱 맞아 유력했으나, **workforcepellmatch.com이 5만개 주정부 승인 프로그램 DB 기반 학생용 검색 도구를 이미 운영 중.** 체크리스트 33번대로 전용 DB 도구는 강한 경쟁(v20 MeritPlaybook 기각과 동일 판단). collegehelpguide·TICAS·UPCEA·AIR·NASFAA·prentus도 존재 |
+| **대학원 조교 학비면제 과세** | **채택** | 아래 |
+
+**★ Workforce Pell 관련 메모(다음 세션용)**: 기각했지만 **한 가지 각도는 아직 비어 있다** — TICAS가 우려하는 "단기 프로그램에 평생 Pell 한도(LEU)를 소진하는 문제"다. 우리 `pell-lifetime-eligibility-calculator`가 Bing 3위 자산(183노출, 5.5위)이라 연결 가능성이 있다. 다만 이건 **신규 클러스터가 아니라 기존 Pell 클러스터 확장**이므로, 클러스터 우선 지시가 없을 때 검토할 것.
+
+### 왜 조교 학비면제가 통과했나
+- 검색 결과가 **.edu 페이롤 FAQ(SIU, UIC, UIUC 등) + LegalClarity 1건 + Claimyr 포럼 1건**뿐. UIC가 자체 계산기를 두고 있으나 **소속 학생 전용**이고 공개 학생용 계산기는 확인되지 않았다.
+- 체크리스트 43번(기관 간 불일치가 좋은 소재)에도 해당한다. 여기서는 기관 간이 아니라 **조항 간 불일치**다.
+
+### ★ 핵심 규정 (이 클러스터의 존재 이유)
+**IRC §117(d)(5)는 TA/RA의 대학원 학비면제를 상한 없이 소득에서 제외한다. 그런데 행정직 GA는 그 조항에서 의도적으로 제외돼 §127 적용을 받아 연 $5,250까지만 비과세다.**
+
+동일한 패키지가 **직함만으로** 세금이 갈린다. 검증 예시(학비면제 $25,000 + 수수료 $1,200, 12% 세율):
+- TA/RA → 추가 세금 **$144**
+- 행정 GA → 추가 세금 **$2,514**
+
+부수 규정(정확도상 중요):
+- **면제된 수수료(lab/health/tech)는 TA/RA도 과세 대상**이다. 117(d)(5)는 tuition만 커버한다.
+- 스티펜드는 직함 무관 항상 과세 임금(W-2).
+- **학생 FICA 예외**로 추가 원천징수는 통상 소득세만이고 급여세(7.65%)는 빠진다. → 이 점이 `employer-tuition-assistance-calculator`와 결정적으로 다르다.
+- 오분류가 실제로 발생한다. 방향은 한쪽이다 — **TA/RA인데 §127 $5,250 상한으로 처리**되는 경우.
+
+### 신규 2건 (쿼리셋 분리)
+
+**1. `tools/graduate-assistantship-tax-calculator.html` (1,137단어)**
+차별화 = **"0원 급여" 산출**. 대학이 원천징수를 학기 말 소수 급여에 몰아서(통상 10~12월, 3~5월) 집행하기 때문에, 비현금 소득의 세금이 현금 급여를 잠식한다. SIU 등 대학 FAQ가 zero-paycheck 가능성을 명시하고 있어 근거가 확실하다. 계산기는 두 직함을 나란히 비교하고 해당 월 실수령액까지 산출한다.
+
+**2. `blog/why-did-my-grad-stipend-paycheck-drop.html` (1,223단어)**
+도구는 "내 면제가 과세 대상인가", 블로그는 "왜 이번 달 급여가 줄었나"로 쿼리셋 분리.
+실행 지침 3가지를 명확히 했다: ① W-4 문제가 아니다 ② **원천징수 시작 前에 페이롤 연락**이 유일하게 유효한 조치(사후는 어렵다) ③ TA/RA면 오분류 여부를 임용장 들고 확인.
+
+### 중복 확인 (체크리스트 40번)
+기존 `employer-tuition-assistance-calculator`와 **§127 $5,250 조항이 겹친다.** 그러나:
+- 대상: 일반 직장인 vs 대학원 조교
+- 핵심 질문: AOTC 배분 최적화 vs 과세 여부 판정
+- 급여세: 부과 vs 학생 FICA 예외
+
+세 축이 모두 달라 별개로 성립한다고 판단했고, **양방향 상호링크로 역할을 명시**했다. 다음 세션이 이 둘을 중복으로 오판하지 말 것.
+
+### 검증
+파이썬 모델 ↔ jsdom 8개 시나리오 일치(TA/RA, 행정 GA, 0원 급여 발생, 상한 미달, 징수 분산 6회, 면제 0, 전부 0, spread=0 가드). getComputedStyle(display) 3경로 확인. node --check 통과.
+세무 자문 아님 고지를 본문·FAQ·스키마 3곳에 명시하고 캠퍼스 VITA 안내 포함(체크리스트 36번).
+
+---
+
+## ★ 다음 세션이 확인/처리할 것
+
+1. **색인 수동 제출 금지 / 패닉 재작성 금지 / LSAC 추적** — v19·v21·v22 원칙 유지.
+2. **★ 데이터를 받으면 신규 4개 클러스터의 성과를 함께 볼 것.** 최근 4세션 동안 교육 세금(3p) → 이중등록(2p) → 대학원 조교(2p)로 빠르게 확장했는데 **아직 어느 것도 성과 데이터를 본 적이 없다.** 다음에 GSC/Bing 자료를 받으면 신규분이 Bing에 색인·랭크되는지부터 확인할 것. Bing은 통상 빠르게 잡히므로 2주면 신호가 나온다.
+3. **계절성 주의.** 교육 세금 클러스터는 1~4월 판정(v20). **대학원 조교 클러스터는 10~12월과 3~5월**이 성수기다(원천징수가 그때 집행되므로 검색이 그때 몰린다). 지금(8월)은 저점이므로 비수기 데이터로 실패 판정하지 말 것.
+4. **Bing 상위 페이지 보강 계속**(v21 목록 유지): `what-is-the-deans-list-gpa-requirement`(203노출), `pell-lifetime-eligibility-calculator`(183), `what-gpa-do-you-need-for-nursing-school`(34노출 4.35위). CTR 높은 소형 3개도 유효: `what-gpa-to-keep-scholarship`(40%), `average-student-loan-debt-by-major`(9.09%), `sap-calculator`(8.7%).
+5. **수익화 — v18 정정 유지.** 월 세션 500 또는 월 검색 클릭 50 도달 전까지 요구하지 말 것.
+
+## 2주 재작업 보류 현황 (08-26 기준)
+- **08-31까지**: `tools/repeat-coursework-aid-calculator.html`, `tools/gpa-raise-calculator.html`
+- **09-01까지**: `tools/scholarship-tax-calculator.html`, `blog/1098-t-box-5-exceeds-box-1.html`
+- **09-07까지**: `tools/employer-tuition-assistance-calculator.html`, `blog/does-retaking-a-class-replace-your-gpa.html`
+- **09-08까지**: `tools/dual-enrollment-gpa-calculator.html`, `blog/does-dual-enrollment-affect-your-gpa.html`
+- **09-09까지**: 이번 세션분 — `tools/graduate-assistantship-tax-calculator.html`, `blog/why-did-my-grad-stipend-paycheck-drop.html`
+- **보류 해제**: 08-12 이전 전체(`r2t4-calculator`, `gpa-scale`, `methodology.html`, `editorial-policy.html`, `what-is-the-deans-list-gpa-requirement`, `ib-gpa-calculator`, `percentage-to-gpa-converter`, `gpa-to-letter-grade-converter` 등)
+  (이번 세션에 **상호링크만** 추가한 5개는 보류 예외, lastmod 미갱신)
+
+## 파일 현황 (08-26 기준)
+- tools **45개** + index / blog **58개** + index / 루트 7개
+- sitemap URL **109개**, tool-card 45개(미등록 도구 0), blog-card 56개(미등록 1건 = 404 스텁 `how-to-raise-your-gpa.html`)
+- 전체 113개 HTML JSON-LD 오류 0, 내부링크 broken 0
+
+## 클러스터 현황 (10개)
+GPA 계산/변환 · 시험점수 · 연방지원 규정 · 학자금대출 · 전공·커리어 ROI · 유학 · 학사경고·복학 · 교육 세금 · 이중등록 · **대학원 조교 펀딩(신규)**
+
+### 아직 비어 있는 영역 (경쟁조사 미실시)
+재향군인 GI Bill · 홈스쿨 성적증명 · 장애 학생 편의제공 · 로스쿨 준비(LSAT/GPA) · CLEP/사전학습인정(CPL)
+→ 유학생 F-1 재정증명, 근로장학, Academic renewal, Workforce Pell, PhD 스티펜드 비교, NCAA 자격, 장학금 displacement, 리테이크 GPA 계산기는 **모두 기각 완료** — 재조사하지 말 것.
+
+## 체크리스트 추가분 (v22 41~43번에 이어서)
+44. **"최근 규정 변경"이라도 전용 DB 도구가 이미 있으면 기각할 것.** 08-26에 Workforce Pell(2026-07-01 시행)은 체크리스트 41번에 완벽히 부합했지만 workforcepellmatch.com이 5만개 프로그램 DB를 이미 갖고 있어 기각했다. **신규성과 경쟁강도는 별개로 평가해야 한다.**
+45. **같은 법 조항을 다루더라도 대상·질문·부수규정이 다르면 별개 페이지로 성립한다.** §127 $5,250은 `employer-tuition-assistance`와 `graduate-assistantship-tax` 양쪽에 나오지만, 대상(직장인 vs 조교)·질문(AOTC 배분 vs 과세 판정)·급여세(부과 vs 학생 FICA 예외)가 달라 중복이 아니다. **단 반드시 양방향 상호링크로 역할을 명시할 것.**
+46. **신규 클러스터를 열 때 성수기를 handover에 적을 것.** 교육 세금은 1~4월, 대학원 조교는 10~12월·3~5월이다. 적어두지 않으면 다음 세션이 비수기 데이터로 멀쩡한 클러스터를 실패 판정한다.
+47. **확장 속도 대비 검증 부채를 인지할 것.** 08-18부터 4세션 연속으로 신규 클러스터를 열었고 **아직 어느 것도 성과 데이터를 확인하지 못했다.** 다음에 데이터를 받으면 신규 확장을 계속하기 전에 기존 신규분의 Bing 색인·랭크부터 점검하는 것이 맞다.
+
+---
+
+## [보존] 이전 문서 v22 본문 (2026-08-25 세션까지)
+
 # GPA Vault 인수인계 문서 v22 (2026-08-25 세션 — 신규 클러스터 "이중등록" 개설, LSAC 규정 변경 선점)
 
 이전 v21 문서를 대체함. v21 이하 본문은 아래에 그대로 보존.
