@@ -1,3 +1,114 @@
+# GPA Vault 인수인계 문서 v24 (2026-08-31 세션 — 신규 9페이지의 Bing 노출이 전부 0으로 확인, 보강 우선 주간)
+
+이전 v23 문서를 대체함. v23 이하 본문은 아래에 그대로 보존.
+
+### 0단계 대조 결과
+최신 커밋 `aeec497`(08-26 handover v23)와 v23 기록 일치 — 소급 기록 불필요.
+
+### ★ 먼저 확인할 것 (계속 유효)
+- v19 **색인 수동 제출 금지**(IndexNow·구글 색인 요청 안 함).
+- v21 **구글 색인 이탈에 패닉 재작성 금지.** 판단 지표는 GA4 활성 사용자 + Bing 클릭.
+- v22 **LSAC 2026-07-28 규정 추적 의무**(이중등록 페이지 수정 시 공식 페이지 재확인).
+
+---
+
+## ★★★★★★ 결론 1: 신규 9페이지가 Bing에서 노출 0이다 (v23 체크리스트 47번의 답)
+
+v23이 "4세션 연속 신규 확장했는데 성과를 한 번도 확인 못 했다"고 남겼다. **이번에 확인했고, 결과가 명확하다.**
+
+최근 4세션 신규분 — `r2t4-calculator`(08-12), `repeat-coursework-aid-calculator`(08-17), `scholarship-tax-calculator`·`1098-t-box-5-exceeds-box-1`(08-18), `employer-tuition-assistance-calculator`(08-24), `dual-enrollment-gpa-calculator`·`does-dual-enrollment-affect-your-gpa`(08-25), `graduate-assistantship-tax-calculator`·`why-did-my-grad-stipend-paycheck-drop`(08-26) — 은 **Bing Page Traffic 리포트(37개 페이지)에 단 하나도 없다. 전부 노출 0이다.** r2t4는 3주가 지났는데도 0이다.
+
+GA4에는 잡힌다(r2t4 9조회, repeat-coursework 2, scholarship-tax 1, employer-tuition 1, graduate-assistantship 1, 1098-t 1, why-did-my-grad-stipend 1). 즉 사람이 아예 안 오는 건 아니고 **검색엔진 노출이 아직 안 붙은 상태**다.
+
+### 반대로 성장은 전부 기존 페이지의 성숙에서 나왔다
+| 페이지 | 지난주 → 이번주 Bing 노출 |
+|---|---|
+| does-retaking-a-class-replace-your-gpa | 450 → **931** |
+| what-is-the-deans-list-gpa-requirement | 203 → **415** |
+| pell-lifetime-eligibility-calculator | 183 → **348** |
+| what-gpa-do-you-need-for-nursing-school | 34 → **120** |
+| gpa-raise-calculator | 31 → **83** |
+| sap-calculator | 23 → **53** |
+
+전체 Bing: 노출 1,115 → **2,369(2.1배)**, 클릭 20 → **32**. GA4 활성 사용자 100 → **128**.
+소스: bing 40 + yahoo 13 + duckduckgo 7 + ecosia 1 = **61** vs google **2**.
+
+### → 그래서 이번 주는 신규 0건, 보강 3건으로 갔다
+**전략은 바꾸지 않았다.** 공격적 확장은 유지한다. 다만 이번 주 한계 효용이 보강 쪽에 명백히 몰려 있었다: 신규는 3주째 노출 0인데 기존 자산은 주당 2배로 크고 있다. 사용자 지시("진짜로 할 거 없으면 안 하는 게 맞지만 전략은 바꾸지 마라")에 부합하는 판단으로 봤다.
+
+**다음 세션 판단 기준**: 신규분이 Bing에 잡히기 시작하면(= Page Traffic 리포트에 등장) 신규 확장 재개가 맞다. 여전히 0이면 **신규 페이지가 Bing 색인에 붙는 데 걸리는 시간이 우리 예상보다 길다**는 뜻이므로, 확장 속도를 유지하되 세션당 배분을 보강 쪽으로 더 두는 게 합리적이다. 페이지를 지우거나 전략을 바꾸는 선택지는 아니다.
+
+### 구글 / 색인 현황 (사용자 제공 자료 기준)
+- 일별 노출 2~8 유지, 3개월 클릭 7. 회복 없음.
+- **404 = 0건**(이번에 처음 확인, 깨끗함)
+- 크롤링됨-미색인 **31 → 30**(사실상 정체)
+- 발견됨-미색인 **5건**: `1098-t-box-5-exceeds-box-1`, `methodology.html`, `gpa-raise-calculator`, `repeat-coursework-aid-calculator`, `scholarship-tax-calculator` (전부 크롤 이력 없음)
+- ★ **`gpa-raise-calculator` 가설 반증**: v21/v22가 "중복 판정 때문에 크롤 거부"로 보고 08-17에 차별화했는데, **여전히 크롤조차 안 됐다.** 중복 가설은 기각. 그런데 같은 페이지가 Bing에서는 83노출 6.4위에 클릭 1건이다. → 구글 고유의 크롤 예산/권위 문제로 결론. **더 손대지 말 것.**
+
+---
+
+## 08-31 세션 작업 (커밋 `5672f87`, push + Actions `completed/success` 확인)
+
+### 보강 1: `tools/obbba-loan-limit-calculator.html` (954 → 1,462단어) — 수익화 1순위
+**근거**: Bing 키워드 2위 `aggregate student loan limit graduate calculator`(20노출, **8위**, 클릭 0). 대학원 대출이라 수익화 가치 최상.
+
+**발견한 문제**: 페이지에 pre-OBBBA 총액 한도 **$138,500 / $224,000 언급이 0건**이었고, 계산기는 legacy를 선택하면 aggregate를 `null`로 두어 **계산 자체를 안 했다.**
+
+**FSA 공식 확인**(fsapartners.ed.gov NSLDS 발표, 2026-05-07 갱신):
+- interim exception 대상자는 학부 sub/unsub 대출이 pre-OBBBA $138,500(보건계열 $224,000)에 **계속 산입**된다.
+- 반면 신규 $100,000 / $200,000 총액에는 **학부 대출이 산입되지 않는다.**
+- ★ **따라서 학부 대출이 많으면 grandfathered 지위가 오히려 불리하다.** 검증: 학부 $57,500 + 대학원 $20,000 → legacy 잔여 **$61,000** vs 신규 잔여 **$80,000**. 이 반직관적 결론을 설명하는 곳이 없어 차별화 포인트로 삼았다. 단 Grad PLUS 접근권이 그 격차보다 대개 크다는 균형 서술을 함께 넣었다.
+- 보건계열 $224,000은 exception에 붙어 다니므로 exception 종료 시 $100k/$200k로 회귀.
+- 2026-07-01 이전 Grad PLUS도 exception 종료 후 $257,500 평생한도에 산입(**ED 입장 번복분** — 오래된 기사들은 반대로 적혀 있으니 다음에 이 페이지 손볼 때 재확인).
+
+**작업**: 계산기를 학부/대학원 대출 분리 입력 + 보건계열 토글로 개편해 legacy 총액 한도를 실제 산출하도록 재작성. 결과창 기본 표시 + 전 입력 즉시 재계산 + scrollIntoView 가드(체크리스트 28번) 적용. 비교표와 "구 한도가 아직 많은 사람에게 적용된다" 섹션 신설, FAQ 2개 추가.
+
+### 보강 2: `tools/pell-lifetime-eligibility-calculator.html` (623 → 1,231단어)
+**근거**: Bing 3위 자산(348노출, 클릭 6, CTR 1.72%)인데 **623단어로 얇았다.** Bing 쿼리 `does pel grant start back from 0 after 6 years`(**2위**)가 전혀 커버 안 됨(reset/expire/restore 언급 0건).
+
+**FSA Handbook 2026-27 vol7 ch8 확인**:
+- LEU는 **시간으로 리셋되지 않는다.** 전학·휴학·학점이전·성인학습자 복귀 전부 무관.
+- **복원 경로 3가지**: ① 폐교(1995년 이후 공식 폐교 + **미졸업**) ② 적격 대출탕감(2017-07-01 이후, 동일 OPEID·동일 award year) ③ LEU 분쟁.
+- 학교가 신청할 필요 없이 **COD에서 자동 조정**되고 결과는 NSLDS에 표시된다. 그래서 해당되는 학생도 모르고 지나간다.
+- 비연방 장학금이 COA 이상이라 Pell을 반환한 경우에도 LEU가 조정된다(현행 규정).
+
+### 보강 3: `blog/what-is-the-deans-list-gpa-requirement.html` — CTR 최적화(메타만)
+**근거**: Bing 415노출인데 **클릭 1건(CTR 0.24%)**, 평균 5.25위. 순위 대비 전환이 무너져 있었다. 해당 Bing 쿼리가 전부 숫자를 묻는 짧은 질의(`dean's list gpa`, `what gpa is needed for dean's list` 등)인데 **title에 정답 수치가 없었다.**
+title/description을 "3.5, 학기 GPA 기준"이라는 답을 앞세우는 형태로 교체하고 Article 스키마 description·dateModified 동기화. **본문은 이미 충분해 미변경**(1,587단어).
+
+---
+
+## ★ 다음 세션이 확인/처리할 것
+
+1. **금지 원칙 3종 유지**(색인 수동 제출 / 패닉 재작성 / LSAC 추적).
+2. **★ 신규 9페이지의 Bing 노출 재확인이 이번 주 최우선 점검항목.** Page Traffic 리포트에 하나라도 등장하면 신규 확장 재개. 여전히 0이면 위 "결론 1"의 판단대로 배분을 조정할 것.
+3. **CTR 최적화 효과 확인.** Dean's List title 교체(08-31)가 CTR을 움직였는지. 415노출 / 0.24%가 기준선이다. 효과가 있으면 **같은 처방을 다른 고노출·저CTR 페이지에 확대**할 것 — 현재 후보: `what-gpa-do-you-need-to-graduate-college`(Bing 91노출 3.56위 **클릭 0**), `new-act-format-2025-2026-changes`(29노출 6.59위 클릭 0), `weighted-gpa-calculator-ap-classes`(25노출 8위 클릭 0).
+4. **`gpa-raise-calculator`는 더 손대지 말 것.** 중복 가설 기각됐고 Bing에서는 잘 돌아간다(83노출 6.4위).
+5. **수익화 — 임계치 근접.** v18 기준은 월 세션 500 또는 월 검색 클릭 50. 현재 GA4 세션 **151/4주**, 검색 클릭 **Bing 32 + 구글 ~1 = 33**. 클릭 기준 66% 도달. **Bing 성장 속도(주당 1.6~2배)가 유지되면 1~2세션 내 50 돌파 가능성이 높다.** 돌파하면 그때 제휴 가입을 제안할 것. 그 전에는 요구하지 말 것.
+6. **계절성**(v20·v23): 교육 세금 1~4월, 대학원 조교 10~12월·3~5월. 비수기 데이터로 실패 판정 금지.
+
+## 2주 재작업 보류 현황 (08-31 기준)
+- **09-01까지**: `tools/scholarship-tax-calculator.html`, `blog/1098-t-box-5-exceeds-box-1.html`
+- **09-07까지**: `tools/employer-tuition-assistance-calculator.html`, `blog/does-retaking-a-class-replace-your-gpa.html`
+- **09-08까지**: `tools/dual-enrollment-gpa-calculator.html`, `blog/does-dual-enrollment-affect-your-gpa.html`
+- **09-09까지**: `tools/graduate-assistantship-tax-calculator.html`, `blog/why-did-my-grad-stipend-paycheck-drop.html`
+- **09-14까지**: 이번 세션분 — `tools/obbba-loan-limit-calculator.html`, `tools/pell-lifetime-eligibility-calculator.html`, `blog/what-is-the-deans-list-gpa-requirement.html`
+- **보류 해제**: `tools/repeat-coursework-aid-calculator`, `tools/gpa-raise-calculator`(단 항목 4 참고), 그 외 08-17 이전 전체
+
+## 파일 현황 (08-31 기준)
+- tools 45개 + index / blog 58개 + index / 루트 7개
+- sitemap URL 109개, tool-card 45개(미등록 도구 0), blog-card 56개
+- 전체 113개 HTML JSON-LD 오류 0, 내부링크 broken 0, 구글 404 0건
+
+## 체크리스트 추가분 (v23 44~47번에 이어서)
+48. **신규 페이지가 Bing에 잡히는 데는 3주 이상 걸린다(관측치).** 08-31 기준 08-12 생성 페이지도 노출 0이었다. 신규 클러스터를 열고 1~2주 만에 성과를 판정하지 말 것. 반대로 **기존 페이지는 주당 2배씩 성숙**하므로, 어느 주에 무엇을 할지는 이 시간차를 감안해 배분할 것.
+49. **고노출·저CTR 페이지를 별도로 추적할 것.** 순위가 5위인데 CTR이 0.2%면 콘텐츠가 아니라 title/description 문제일 가능성이 높다. 특히 Bing 쿼리가 숫자를 묻는 짧은 질의인데 title에 답이 없으면 그렇다. 본문을 건드리지 않고 메타만 고치는 것이 가장 싼 개선이다.
+50. **계산기를 보강할 때 "그 분기를 계산하기는 하는가"부터 볼 것.** obbba 계산기는 legacy를 고르면 aggregate를 `null`로 두고 아무것도 계산하지 않고 있었다. 본문에 규정이 적혀 있어도 계산기가 그 경우를 비워두면 사용자에게는 없는 기능이다.
+
+---
+
+## [보존] 이전 문서 v23 본문 (2026-08-26 세션까지)
+
 # GPA Vault 인수인계 문서 v23 (2026-08-26 세션 — 신규 클러스터 "대학원 조교 펀딩" 개설)
 
 이전 v22 문서를 대체함. v22 이하 본문은 아래에 그대로 보존.
