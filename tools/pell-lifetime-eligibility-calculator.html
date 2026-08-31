@@ -24,13 +24,76 @@
 }
 </script>
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
-{"@type": "Question", "name": "What is Pell Grant Lifetime Eligibility Used (LEU)?", "acceptedAnswer": {"@type": "Answer", "text": "LEU is the cumulative percentage of your total lifetime Pell Grant eligibility you've used, tracked across every school and award year you've received Pell funding since it began. The lifetime limit is 600% — roughly the equivalent of 12 full-time semesters, or about 6 years. Once your LEU reaches 600%, you can no longer receive any Pell Grant funding, regardless of financial need."}},
-{"@type": "Question", "name": "How many semesters of Pell Grant do I have left?", "acceptedAnswer": {"@type": "Answer", "text": "Subtract your current LEU from 600%, then divide by 50 — since one full-time semester at a standard 2-semester academic year typically uses 50% of your lifetime eligibility. For example, a student at 300% LEU has 300% remaining, which is 6 more full-time semesters (3 more years) before hitting the cap."}},
-{"@type": "Question", "name": "Can I appeal my Pell Grant lifetime eligibility limit?", "acceptedAnswer": {"@type": "Answer", "text": "No. Unlike Satisfactory Academic Progress (SAP), which has a formal appeals process, Pell LEU is a hard limit set by federal law (the Consolidated Appropriations Act of 2012) and applies to every student regardless of when their first Pell funds were received. There is no institutional appeal or professional judgment override available for LEU specifically."}},
-{"@type": "Question", "name": "What happens when I get close to 600% LEU?", "acceptedAnswer": {"@type": "Answer", "text": "The Department of Education notifies students by email once their LEU reaches 450%. Between 500% and 600% LEU, you're no longer eligible for a full scheduled award — your remaining award is capped at whatever percentage you have left. At 600% or higher, you're no longer eligible for any Pell Grant funding at all."}},
-{"@type": "Question", "name": "Where do I find my current Pell Grant LEU?", "acceptedAnswer": {"@type": "Answer", "text": "Log into studentaid.gov with your FSA ID — your current LEU percentage is listed in your federal student aid history. Your school's financial aid office can also look this up for you using the National Student Loan Data System (NSLDS)."}}
-]}
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Pell Grant Lifetime Eligibility Used (LEU)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LEU is the cumulative percentage of your total lifetime Pell Grant eligibility you've used, tracked across every school and award year you've received Pell funding since it began. The lifetime limit is 600% — roughly the equivalent of 12 full-time semesters, or about 6 years. Once your LEU reaches 600%, you can no longer receive any Pell Grant funding, regardless of financial need."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many semesters of Pell Grant do I have left?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Subtract your current LEU from 600%, then divide by 50 — since one full-time semester at a standard 2-semester academic year typically uses 50% of your lifetime eligibility. For example, a student at 300% LEU has 300% remaining, which is 6 more full-time semesters (3 more years) before hitting the cap."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I appeal my Pell Grant lifetime eligibility limit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Unlike Satisfactory Academic Progress (SAP), which has a formal appeals process, Pell LEU is a hard limit set by federal law (the Consolidated Appropriations Act of 2012) and applies to every student regardless of when their first Pell funds were received. There is no institutional appeal or professional judgment override available for LEU specifically."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when I get close to 600% LEU?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Department of Education notifies students by email once their LEU reaches 450%. Between 500% and 600% LEU, you're no longer eligible for a full scheduled award — your remaining award is capped at whatever percentage you have left. At 600% or higher, you're no longer eligible for any Pell Grant funding at all."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do I find my current Pell Grant LEU?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Log into studentaid.gov with your FSA ID — your current LEU percentage is listed in your federal student aid history. Your school's financial aid office can also look this up for you using the National Student Loan Data System (NSLDS)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the Pell Grant reset after six years or after a break in school?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. There is no time-based reset of Pell lifetime eligibility. Changing colleges, transferring credits, stopping out for years, or returning later as an adult learner all leave the counter exactly where it was, and percentages disbursed a decade ago still count against the 600% limit today. The figure only moves down through the Department's specific restoration processes or a successful dispute."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Pell lifetime eligibility ever be restored?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, in three situations. First, if you received Pell at a school that has since officially closed and you did not graduate from that program, the eligibility used there can be restored. Second, if you received a qualifying loan discharge on or after 1 July 2017 and had a Pell disbursement at the same school for the same award year. Third, through an LEU dispute if the recorded figure is wrong. The Department applies the first two automatically through its systems, so the corrected figure appears in NSLDS without your school having to file anything."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I find out exactly how much Pell eligibility I have left?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sign in to studentaid.gov and look for your Lifetime Eligibility Used percentage. Subtract that from 600% and divide by 100 to get roughly how many more full-time years of Pell remain. A student showing 75% has used about a semester and a half of eligibility and still has the large majority intact. That figure is the one that governs, rather than any estimate including this calculator."
+      }
+    }
+  ]
+}
 </script>
 </head>
 <body>
@@ -72,7 +135,28 @@
 
     <div class="highlight-box"><p><strong>Unlike SAP, there's no appeal.</strong> If you fail Satisfactory Academic Progress, your school has a formal appeals process for extenuating circumstances. Pell LEU doesn't work that way — it's a hard limit set directly by federal statute, and no institutional appeal or professional judgment override can extend it, no matter the circumstances.</p></div>
 
+    <h2>Does it ever reset?</h2>
+    <p>No — and this is the single most common hope students bring to the question. There is no waiting period that clears the counter. Changing colleges does not reset it, transferring credits does not reset it, and stopping out for five or ten years and returning as an adult learner does not reset it. Percentages disbursed a decade ago still count today. The 600% is a lifetime figure in the literal sense.</p>
+    <p>What does move the number is arithmetic rather than time. Your LEU changes whenever a Pell disbursement is made, and it can also change if your Scheduled Award is adjusted up or down for a year you have already been paid — including, under the current rules, when a school has to return Pell funds because non-federal grants or scholarships equalled or exceeded your cost of attendance.</p>
+
+    <h2>Three ways eligibility can actually be restored</h2>
+    <p>The Department does restore LEU in specific situations, and because the adjustments are made automatically most students never learn they qualified. All three run through the COD system; your school does not have to file anything, and the corrected figure appears in NSLDS.</p>
+
+    <p class="table-scroll-hint">Scroll to see all columns →</p>
+    <table>
+      <tr><th>Restoration path</th><th>Who qualifies</th><th>What comes back</th></tr>
+      <tr><td>Closed school</td><td>You received Pell at a school that has since officially closed (1995 or later) and you did <strong>not</strong> graduate from that program</td><td>The eligibility used at that school, one adjustment per school per award year</td></tr>
+      <tr><td>Eligible loan discharge</td><td>You received a qualifying loan discharge on or after 1 July 2017 and had a Pell disbursement at the same school for the same award year</td><td>The eligibility tied to that school and year</td></tr>
+      <tr><td>LEU dispute</td><td>You believe the recorded figure is wrong — a disbursement you never received, or one later returned</td><td>Whatever the correction establishes</td></tr>
+    </table>
+
+    <p>The closed-school path is the one worth checking if any part of your history sits at a school that no longer exists. For it to apply you generally need to have been enrolled during the year the school closed or the award year immediately before, and the eligibility is not restored if you completed the credential — the rule exists for students left with nothing to show for the money, not for graduates.</p>
+    <p>Because these adjustments happen without you asking, the practical move is simply to check the current figure rather than assume the one you remember is still accurate. Your LEU is shown in your account on studentaid.gov, and it is the number that governs — not any estimate, including this one.</p>
+
     <h2>Frequently Asked Questions</h2>
+    <p><strong>Does the Pell Grant reset after six years or after a break in school?</strong> No. There is no time-based reset. Changing schools, stopping out, transferring credits, or returning years later as an adult learner all leave the counter exactly where it was. The only ways it moves down are the specific restoration and dispute processes below.</p>
+    <p><strong>Can lifetime eligibility ever be restored?</strong> Yes, in three situations: attendance at a school that later closed without you graduating, a qualifying loan discharge on or after 1 July 2017 tied to the same school and award year, or a successful LEU dispute. The Department applies these automatically through its systems, so the corrected figure appears in NSLDS without your school filing anything.</p>
+    <p><strong>How do I find out exactly how much I have left?</strong> Sign in to studentaid.gov and look for your Lifetime Eligibility Used percentage. Subtract it from 600% and divide by 100 to get roughly how many more full-time years of Pell remain. A student showing 75% has used about a semester and a half and has the large majority of their eligibility intact.</p>
     <p><strong>What is Pell Grant Lifetime Eligibility Used (LEU)?</strong> The cumulative percentage of your total lifetime Pell Grant eligibility you've used, tracked since your first Pell disbursement. The lifetime limit is 600% — about 12 full-time semesters or 6 years. At 600% you can no longer receive Pell funding at all.</p>
     <p><strong>How many semesters of Pell Grant do I have left?</strong> Subtract your current LEU from 600%, then divide by 50 (one full-time semester typically uses 50% of lifetime eligibility). A student at 300% LEU has 6 full-time semesters left.</p>
     <p><strong>Can I appeal my Pell Grant lifetime eligibility limit?</strong> No. Unlike SAP, LEU is a hard federal limit with no appeals process or professional judgment override, regardless of when your first Pell funds were received.</p>
