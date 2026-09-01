@@ -1,3 +1,106 @@
+# GPA Vault 인수인계 문서 v25 (2026-09-01 세션 — 신규 클러스터 "과목 결과 선택(Incomplete/W/F)" 개설)
+
+이전 v24 문서를 대체함. v24 이하 본문은 아래에 그대로 보존.
+
+### 0단계 대조 결과
+최신 커밋 `fb5f4af`(08-31 handover v24)와 v24 기록 일치 — 소급 기록 불필요.
+
+### ★ 먼저 확인할 것 (계속 유효)
+- v19 **색인 수동 제출 금지**(IndexNow·구글 색인 요청 안 함).
+- v21 **구글 색인 이탈에 패닉 재작성 금지.** 판단 지표는 GA4 활성 사용자 + Bing 클릭.
+- v22 **LSAC 2026-07-28 규정 추적 의무**(이중등록 페이지 수정 시 공식 페이지 재확인).
+- v24 **`gpa-raise-calculator`는 더 손대지 말 것**(중복 가설 기각, Bing에서는 정상 작동).
+
+### 이번 세션의 성격
+사용자 지시는 08-25·08-26과 동일(신규·폭넓게·경쟁강도·클러스터 추가·외부 소스). **이번 주도 GSC/Bing/GA4 자료는 제공되지 않았고 참조하지 않았다.**
+
+---
+
+## ★★★★★ 신규 클러스터 개설: 과목 결과 선택 (Incomplete / Withdrawal / Failing)
+
+기존 10개에 이어 **11번째 클러스터**. 우리 Bing 최강 영역(학사 상태 + SAP + 재수강)에 바로 인접한 빈칸이다.
+
+### 후보 4개 → 3개 기각 (재조사하지 말 것)
+
+| 후보 | 판정 | 근거 |
+|---|---|---|
+| 재향군인 GI Bill MHA | 기각 | veteran.com·collegerecon·vetcalc가 **ZIP코드 BAH DB 기반 전용 계산기** 보유. military.com·bestmilitaryresume 등 해설도 다수. 체크리스트 44번 적용(Workforce Pell 기각과 동일 구조) |
+| 성적증명 보류 / stranded credits | 기각 | **LegalClarity가 주별 임계금액까지 포함해 상세 선점**(테네시 $100, 미네소타 $250, 메인 $500/$2,500 등). SoFi·USNews·Ithaka도 존재. 게다가 계산 가능한 형태로 만들기 어려움 — 체크리스트 42번(도구 성립성) |
+| Incomplete **전용 계산기** | 기각 | research.com이 해설 선점. 무엇보다 **우리 sap-calculator와 pace 계산이 정면 중복**(체크리스트 40번). 계산기 형태를 포기하고 아래로 전환 |
+| **Incomplete / 철회 / 낙제 3자 선택** | **채택** | .edu SAP 페이지가 각각 단편적으로만 다루고, collegevaluesonline은 W vs F만 비교. **세 선택지를 GPA·완료율·등록금·기본값 축으로 한자리에 놓은 문서가 없음** |
+
+### ★ 이번 세션의 방법론적 의의
+후보 3번에서 **계산기 형태를 포기하고 블로그로 전환한 판단**이 핵심이다. 주제 자체는 좋았지만 계산기로 만들면 `sap-calculator`와 pace 계산이 겹친다. v24에서 확인했듯 구글 색인 이탈이 진행 중인 상황이라 유사 형태 페이지를 늘리는 건 리스크다. **"주제가 좋다"와 "그 형태로 만들어야 한다"는 별개 판단이다.**
+
+### 신규 2건 (쿼리셋 분리)
+
+**1. `blog/incomplete-vs-withdrawal-vs-failing.html` (1,529단어)** — 질문: "어느 쪽을 골라야 하나"
+6행 비교표(GPA / SAP 완료율 / 학점 / 등록금 / 기본값 / 승인 필요)로 정리.
+
+★ 핵심 인사이트 2가지:
+1. **세 선택지 모두 SAP 완료율에는 동일하게 불리하다.** 완료율이 문제라면 셋 중 고르는 것으로는 아무것도 해결되지 않는다 — 해법은 다른 데서 와야 한다. 이 사실을 명시한 문서가 없었다.
+2. **Incomplete만 유일하게 "방치하면 저절로 나빠지는" 선택지다.** 마감일에 자동으로 낙제로 전환되고(학교별 다음 학기말~1년), 일부 학교는 IF/FINC로 사유가 영구히 남는다. W와 F는 안정적 종료 상태인데 I만 아니다.
+
+추가로 **Incomplete는 R2T4를 유발하지 않는다**(전체 철회가 아니므로)는 점을 명시해 기존 `r2t4-calculator`와 연결했다.
+
+**2. `blog/how-to-ask-for-an-incomplete-grade.html` (1,143단어)** — 질문: "어떻게 요청하나"
+★ 핵심: **Incomplete는 권리가 아니라 교수 재량**이다. 공표된 요건을 다 충족해도 승인 의무가 없다. 따라서 **철회 마감 前에 요청해야 거절당해도 W라는 대안이 남는다**는 타이밍 규칙이 결론이 된다.
+요청서 4요소(잔여 과제 / 사유 / 증빙 / **제출 확정일**)와 승인 前 서면 확인 3가지(전환일, 강의실 폐쇄 시 제출 방법, 연장 가능 여부). 거절 시 late/retroactive withdrawal 청원 경로 안내.
+
+### 사실 확인 (교차 검증)
+UC Davis · 애리조나 · USF · KBCC(CUNY) · St. Thomas SAP 정책 페이지에서 확인:
+- Incomplete는 GPA 미산입이나 **attempted-not-earned로 완료율에 산입**
+- 미해결 시 자동 낙제 전환, 전환 후 **IF/FINC 별도 표기** 사례 존재
+- Incomplete 해소 후에도 **다음 정기 심사까지 SAP 재평가 보류**
+- 승인 요건 3종: 요청 시점에 passing / 대부분의 과제 완료 / 통제 밖 사유
+정책 편차가 매우 큰 주제라 "일반적 패턴"임을 **두 페이지 모두 별도 섹션으로 명시**했다.
+
+### 중복 확인
+`incomplete` 언급은 기존 6개 파일에서 1~4회 부수적 언급뿐(sap-calculator 2회, does-withdrawing 1회). 전용 문서 없음.
+
+---
+
+## ★ 다음 세션이 확인/처리할 것
+
+1. **금지 원칙 4종 유지**(색인 수동 제출 / 패닉 재작성 / LSAC 추적 / gpa-raise-calculator 손대지 않기).
+2. **★ 최우선 점검: 신규 11페이지의 Bing 노출.** v24에서 신규 9페이지가 전부 Bing 노출 0으로 확인됐고, 이번에 2페이지가 더 늘어 **11페이지**가 됐다. 다음에 데이터를 받으면 이것부터 볼 것.
+   - **하나라도 잡히면** 신규 확장 재개가 맞다.
+   - **여전히 0이면** 08-12 생성분이 3주가 넘도록 0이라는 뜻이므로, 세션 배분을 보강 쪽으로 더 옮길 것. **페이지를 지우거나 전략을 바꾸는 선택지는 아니다.**
+3. **08-31 보강 3건의 효과 확인**: `obbba-loan-limit-calculator`(기준선 Bing 23노출/7.5위, 키워드 "aggregate student loan limit graduate calculator" 20노출/8위/클릭 0), `pell-lifetime-eligibility-calculator`(348노출/클릭 6), `what-is-the-deans-list-gpa-requirement`(**CTR 0.24%가 기준선** — title 교체 효과 측정).
+4. **CTR 처방 확대 후보**(체크리스트 49번): `what-gpa-do-you-need-to-graduate-college`(Bing 91노출 3.56위 **클릭 0**), `new-act-format-2025-2026-changes`(29노출 6.59위 클릭 0), `weighted-gpa-calculator-ap-classes`(25노출 8위 클릭 0). Dean's List 처방이 통했다면 여기에 같은 방식 적용.
+5. **수익화 — 임계치 근접.** v18 기준 월 세션 500 또는 월 검색 클릭 50. 08-31 기준 세션 151/4주, 검색 클릭 33(66%). **돌파하면 그때 제휴 가입 제안. 그 전에는 요구하지 말 것.**
+6. **계절성**(v20·v23): 교육 세금 1~4월, 대학원 조교 10~12월·3~5월. **이번 신규 클러스터도 계절성이 있다 — 학기말(12월, 5월)과 철회 마감 직전(10월, 3월)이 성수기다.** 비수기 데이터로 실패 판정 금지.
+
+## 2주 재작업 보류 현황 (09-01 기준)
+- **09-07까지**: `tools/employer-tuition-assistance-calculator.html`, `blog/does-retaking-a-class-replace-your-gpa.html`
+- **09-08까지**: `tools/dual-enrollment-gpa-calculator.html`, `blog/does-dual-enrollment-affect-your-gpa.html`
+- **09-09까지**: `tools/graduate-assistantship-tax-calculator.html`, `blog/why-did-my-grad-stipend-paycheck-drop.html`
+- **09-14까지**: `tools/obbba-loan-limit-calculator.html`, `tools/pell-lifetime-eligibility-calculator.html`, `blog/what-is-the-deans-list-gpa-requirement.html`
+- **09-15까지**: 이번 세션분 — `blog/incomplete-vs-withdrawal-vs-failing.html`, `blog/how-to-ask-for-an-incomplete-grade.html`
+- **보류 해제**: `tools/scholarship-tax-calculator`, `blog/1098-t-box-5-exceeds-box-1`, 그 외 08-18 이전 전체
+  (이번 세션에 **상호링크만** 추가한 6개는 보류 예외, lastmod 미갱신)
+
+## 파일 현황 (09-01 기준)
+- tools 45개 + index / blog **60개** + index / 루트 7개
+- sitemap URL **111개**, tool-card 45개(미등록 도구 0), blog-card **58개**(미등록 1건 = 404 스텁 `how-to-raise-your-gpa.html`)
+- 전체 115개 HTML JSON-LD 오류 0, 내부링크 broken 0
+
+## 클러스터 현황 (11개)
+GPA 계산/변환 · 시험점수 · 연방지원 규정 · 학자금대출 · 전공·커리어 ROI · 유학 · 학사경고·복학 · 교육 세금 · 이중등록 · 대학원 조교 펀딩 · **과목 결과 선택(신규)**
+
+### 아직 비어 있는 영역 (경쟁조사 미실시)
+홈스쿨 성적증명 · 장애 학생 편의제공 · 로스쿨 준비(LSAT/GPA) · CLEP/사전학습인정(CPL)
+→ **기각 완료 목록(재조사 금지)**: 유학생 F-1 재정증명, 근로장학, Academic renewal, Workforce Pell, PhD 스티펜드 비교, NCAA 자격, 장학금 displacement, 리테이크 GPA 계산기, **GI Bill MHA, 성적증명 보류(stranded credits), Incomplete 전용 계산기**
+
+## 체크리스트 추가분 (v24 48~50번에 이어서)
+51. **"주제가 좋다"와 "그 형태로 만들어야 한다"는 별개 판단이다.** 09-01에 Incomplete 주제는 채택했지만 계산기 형태는 기각했다 — sap-calculator와 pace 계산이 겹치기 때문이다. 좋은 주제를 만나면 **계산기/블로그 중 어느 형태가 기존 자산과 덜 겹치는지**를 먼저 정하고 만들 것.
+52. **비교 문서를 만들 때 "모든 선택지가 동일한 축"을 먼저 찾을 것.** 09-01 Incomplete/W/F 비교에서 가장 유용한 발견은 "셋 다 완료율에는 똑같이 불리하다"였다. 차이점만 나열하는 비교표는 흔하지만, **어느 축에서는 선택이 무의미한지**를 알려주는 문서는 드물고 실제로 더 유용하다.
+53. **"방치하면 저절로 나빠지는 선택지"는 강력한 콘텐츠 각도다.** Incomplete가 자동으로 낙제로 전환되는 구조가 이 클러스터의 핵심 훅이 됐다. 기본값(default outcome)이 사용자에게 불리한 제도는 대체로 설명이 부실하고 검색 수요가 크다.
+
+---
+
+## [보존] 이전 문서 v24 본문 (2026-08-31 세션까지)
+
 # GPA Vault 인수인계 문서 v24 (2026-08-31 세션 — 신규 9페이지의 Bing 노출이 전부 0으로 확인, 보강 우선 주간)
 
 이전 v23 문서를 대체함. v23 이하 본문은 아래에 그대로 보존.
