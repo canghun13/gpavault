@@ -1,3 +1,124 @@
+# GPA Vault 인수인계 문서 v27 (2026-09-08 세션 — 구글이 신규 13페이지를 한 번도 크롤하지 않았음을 확인, CTR 처방 확대)
+
+이전 v26 문서를 대체함. v26 이하 본문은 아래에 그대로 보존.
+
+### 0단계 대조 결과
+최신 커밋 `512dced`(09-04 handover v26)와 v26 기록 일치 — 소급 기록 불필요.
+
+### ★ 먼저 확인할 것 (계속 유효)
+- v19 **색인 수동 제출 금지**(IndexNow·구글 색인 요청 안 함). **이번 발견을 보고도 마찬가지다.**
+- v21 **구글 색인 이탈에 패닉 재작성 금지.** 판단 지표는 GA4 활성 사용자 + Bing 클릭.
+- v22 **LSAC 2026-07-28 규정 추적 의무.**
+- v24 **`gpa-raise-calculator`는 더 손대지 말 것.**
+- v26 **건강보험 계산기의 "타 보험 없음 → waive하지 말라" 분기를 제거하지 말 것.**
+
+---
+
+## ★★★★★★ 결론 1: 구글이 신규 13페이지를 단 한 번도 크롤하지 않았다
+
+v24부터 3주 연속 "신규 페이지가 왜 안 잡히나"를 물어왔다. **이번에 답이 나왔다.**
+
+`발견됨 - 현재 색인이 생성되지 않음`이 5 → **14건**으로 늘었는데, 최근 5세션 신규분 13개가 전부 여기 있고 **최종 크롤링이 모두 `1970-01-01`(= 크롤 이력 없음)**이다.
+
+미크롤 목록: `1098-t-box-5-exceeds-box-1`, `does-dual-enrollment-affect-your-gpa`, `how-to-ask-for-an-incomplete-grade`, `incomplete-vs-withdrawal-vs-failing`, `student-health-insurance-waiver-deadline`, `why-did-my-grad-stipend-paycheck-drop`, `dual-enrollment-gpa-calculator`, `employer-tuition-assistance-calculator`, `graduate-assistantship-tax-calculator`, `health-insurance-waiver-calculator`, `repeat-coursework-aid-calculator`, `scholarship-tax-calculator` (+ 기존 `methodology.html`, `gpa-raise-calculator`)
+
+**그런데 구글은 기존 페이지는 계속 크롤하고 있다** — 크롤링됨-미색인 목록에 08-30자 크롤이 2건 있다. 즉 크롤 예산을 **기존 페이지 재크롤에 쓰면서 색인은 거부**하고(크롤링됨-미색인 30 → **36**), 신규는 아예 보지 않는다.
+
+시점도 명확하다. `r2t4-calculator`(08-12 생성)는 08-12에 크롤됐고, **그 이후 만든 것은 하나도 크롤되지 않았다 → 08-18경부터 신규 크롤 중단.**
+
+**Bing도 4주 넘게 신규 13페이지 노출 0이다**(Page Traffic 41개 페이지 중 신규분 0건).
+
+### → 해석과 대응 (전략 변경 아님)
+현재 신규 페이지는 **어느 엔진에서도 유입을 만들지 못하고 있다.** 이건 콘텐츠 품질 문제로 볼 근거가 없다 — 같은 기간 기존 페이지는 Bing에서 계속 성장 중이고, 신규분은 평가조차 받지 못한 상태다.
+
+**대응은 v26과 동일하다: 확장 전략은 유지하되 세션 배분을 보강 쪽으로 둔다.** 페이지 삭제, 대규모 재작성, 색인 수동 제출은 전부 선택지가 아니다. 신규 페이지는 이미 만들어져 있고 사이트맵에도 있으므로, 크롤 재개 시 한꺼번에 평가받는다. 지금 추가로 만드는 것의 한계 효용이 낮을 뿐이다.
+
+**다음 세션 판단 기준**: `발견됨-미색인`에서 신규분이 빠지기 시작하면(= 크롤 개시) 신규 확장 재개. 여전히 전부 `1970-01-01`이면 보강 배분 유지.
+
+---
+
+## ★★★★★ 결론 2: CTR 처방이 실제로 작동했다 (08-31 실험 결과)
+
+v26이 "Dean's List title 교체 효과를 확인하라"고 남겼다. **결과가 나왔다.**
+
+| | 08-31(처방 전) | 09-08(처방 후) |
+|---|---|---|
+| Bing 노출 | 415 | 680 |
+| Bing 클릭 | **1** | **3** |
+| CTR | 0.24% | **0.44%** |
+| 평균 순위 | 5.25 | 5.24 (변화 없음) |
+
+**순위는 그대로인데 클릭이 3배.** 표본이 작아 단정할 수는 없지만, 순위 변화 없이 CTR만 오른 것은 제목/설명 처방의 효과로 보는 것이 자연스럽다. v26 체크리스트 49번의 예측대로다.
+
+### 전체 지표
+- Bing 노출 2,369 → **3,679**(1.55배), 클릭 32 → **43**(1.34배)
+- GA4 활성 사용자 128 → **130**(정체), 세션 소스 **bing 55 + yahoo 14 + duckduckgo 8 + ecosia 1 = 78 vs google 1**
+- 구글: 3개월 클릭 7, 일별 노출 1~8이고 **09-04·09-05는 0**
+
+---
+
+## 09-08 세션 작업 (커밋 `d255829`, push + Actions `completed/success` 확인)
+
+### CTR 처방 4건 (전부 보류 해제 상태, 3건은 메타만 수정)
+
+| 파일 | 기준선(Bing) | 처방 |
+|---|---|---|
+| `blog/what-gpa-do-you-need-to-graduate-college.html` | **144노출 3.57위 클릭 0** (+구글 175노출 클릭 0) | title에 정답 `Usually 2.0` 전진 배치. 쿼리 "what gpa do you need to graduate"가 2.4위인데 클릭 0이었음 — **사이트 최대 CTR 손실 건** |
+| `blog/weighted-gpa-calculator-ap-classes.html` | 48노출 7.2위 클릭 0 | title에 `AP Adds 1.0, Honors 0.5` 수치 전진 배치 |
+| `tools/sat-percentile-calculator.html` | 65노출 6.7위 클릭 0 | 백분위는 단일 정답이 없어 수치 대신 **구체 앵커(1200/1400/1500)**를 제목에 |
+| `blog/new-act-format-2025-2026-changes.html` | 29노출 6.6위 클릭 0 | 제목의 `2025–2026`이 현시점(2026-09)에 **지난 연도로 읽혀** CTR을 깎는 것으로 판단. 연도를 빼고 `Enhanced vs Legacy` 대조로 교체. **URL과 본문은 유지해 쿼리 매칭 보존** |
+
+전부 Article/WebApplication 스키마 description·dateModified 동기화 + sitemap lastmod 갱신.
+
+### 본문 보강 1건: `blog/weighted-gpa-calculator-ap-classes.html` (2,099 → 2,502단어)
+Bing 쿼리가 **중간 성적대**를 묻는데(`what weighted gpa is b- average with an ap and 3 honors classes` 8노출 6.5위, `how much is a a worth on a weighted scale for ap calss` 4노출) 기존 예시가 전부 A~B+ 우등생 케이스뿐이라 답하는 대목이 없었다.
+
+★ 추가한 계산: **B− 평균(2.7) + AP 1 + 명예 3 + 일반 1 = 가중 3.20 / 비가중 2.70**
+핵심 인사이트는 **보너스가 성적이 아니라 과목에 붙는다**는 점이다 — 그래서 격차(0.50)가 우등생 케이스와 정확히 같다. 부수적으로 straight-B는 3.50, C+는 2.80이 되어 2.5/2.75 자격 기준을 넘길 수 있다는 실용 정보도 넣었다. 선발형 대학은 보너스를 걷어내고 재산정한다는 균형 서술 병기. FAQ 2개 추가(6:6).
+
+---
+
+## ★ 다음 세션이 확인/처리할 것
+
+1. **금지 원칙 5종 유지**(위 "먼저 확인할 것" 참고).
+2. **★★ 최우선: `발견됨-미색인` 목록의 최종 크롤링 날짜.** 여전히 전부 `1970-01-01`이면 크롤 재개 안 된 것 → 보강 배분 유지. 날짜가 찍히기 시작하면 신규 확장 재개.
+3. **★ CTR 처방 4건의 효과 측정(기준선 위 표에 기록됨).** 특히 `what-gpa-do-you-need-to-graduate-college`(144노출 클릭 0)가 핵심 검증 대상이다. 효과가 확인되면 다음 후보로 확대:
+   - `tools/gpa-scale.html`(구글 678노출 83위, Bing 17노출 클릭 0) — 구글 최대 노출인데 클릭 0
+   - `tools/gpa-to-letter-grade-converter.html`(구글 438노출 클릭 0)
+   - `tools/ib-gpa-calculator.html`(구글 548노출 40위 클릭 0)
+   - `tools/college-cost-calculator.html`(구글 356노출 클릭 0)
+4. **`obbba-loan-limit-calculator` 제목 처방** — 09-14 보류 해제. Bing 쿼리 `aggregate student loan limit graduate calculator`가 20노출 8위 클릭 0인데, 현재 제목이 `OBBBA Federal Student Loan Limit Calculator (2026-27) – Am I Grandfathered?`라 **쿼리와 매칭되지 않는다.** 08-31 본문 보강 효과와 함께 확인 후 제목에 "aggregate" 계열 표현을 넣을 것. 수익화 우선순위 최상위 건.
+5. **수익화 — 임계치 88% 도달.** v18 기준 월 세션 500 또는 월 검색 클릭 50. 현재 세션 약 158/4주, **월 검색 클릭 약 44(Bing 43 + 구글 1)**. Bing 클릭 증가 속도(32→43)가 유지되면 **다음 세션에 50 돌파 가능성이 높다.** 돌파하면 그때 제휴 가입을 제안할 것. 그 전에는 요구하지 말 것.
+6. **계절성**(v26 총정리 유지): 교육 세금 1~4월 / 대학원 조교 10~12월·3~5월 / 과목 결과 선택 12월·5월·10월·3월 / 건강보험 waiver 7~9월·12~1월.
+
+## 2주 재작업 보류 현황 (09-08 기준)
+- **09-09까지**: `tools/graduate-assistantship-tax-calculator.html`, `blog/why-did-my-grad-stipend-paycheck-drop.html`
+- **09-14까지**: `tools/obbba-loan-limit-calculator.html`, `tools/pell-lifetime-eligibility-calculator.html`, `blog/what-is-the-deans-list-gpa-requirement.html`
+- **09-15까지**: `blog/incomplete-vs-withdrawal-vs-failing.html`, `blog/how-to-ask-for-an-incomplete-grade.html`
+- **09-16까지**: `tools/health-insurance-waiver-calculator.html`, `blog/student-health-insurance-waiver-deadline.html`
+- **09-22까지**: 이번 세션분 — `blog/what-gpa-do-you-need-to-graduate-college.html`, `blog/weighted-gpa-calculator-ap-classes.html`, `tools/sat-percentile-calculator.html`, `blog/new-act-format-2025-2026-changes.html`
+- **보류 해제**: 08-25 이전 전체
+
+## 파일 현황 (09-08 기준)
+- tools 46개 + index / blog 61개 + index / 루트 7개
+- sitemap URL 113개, tool-card 46개(미등록 도구 0), blog-card 59개
+- 전체 117개 HTML JSON-LD 오류 0, 내부링크 broken 0
+- 구글 색인 상태: 크롤링됨-미색인 **36**, 발견됨-미색인 **14**(전부 미크롤), 404 0건
+
+## 클러스터 현황 (12개) / 미개척 영역
+v26과 동일. 미개척: 홈스쿨 성적증명 · 로스쿨 준비(LSAT/GPA) · CLEP/사전학습인정(CPL)
+기각 완료(재조사 금지): 유학생 F-1 재정증명, 근로장학, Academic renewal, Workforce Pell, PhD 스티펜드, NCAA 자격, 장학금 displacement, 리테이크 GPA 계산기, GI Bill MHA, 성적증명 보류, Incomplete 전용 계산기, 장애 학생 편의제공
+
+## 체크리스트 추가분 (v26 54~56번에 이어서)
+57. **"발견됨-미색인"과 "크롤링됨-미색인"은 완전히 다른 문제다.** 전자의 최종 크롤링이 `1970-01-01`이면 구글이 URL을 알지만 **한 번도 방문하지 않았다**는 뜻이고, 콘텐츠는 평가조차 받지 않은 상태다. 이 경우 페이지를 고치는 것은 아무 의미가 없다 — 고칠 대상을 구글이 본 적이 없기 때문이다. **반드시 최종 크롤링 날짜 열을 확인하고 두 문제를 분리해서 판단할 것.**
+58. **제목에 들어간 연도는 시간이 지나면 CTR을 깎는 부채가 된다.** 09-08에 `New ACT Format 2025–2026`이 2026년 9월 시점에 지난 연도로 읽히는 문제를 정리했다. 연도를 제목에 넣을 때는 **URL과 본문은 유지하고 제목만 갱신 가능한 구조**로 둘 것(URL을 바꾸면 기존 신호를 잃는다).
+59. **CTR 처방은 "정답이 있는 질의"에만 수치를 넣을 것.** GPA 졸업요건(2.0)이나 AP 가중(1.0)처럼 단일 정답이 있으면 제목에 숫자를 넣는다. SAT 백분위처럼 정답이 입력값에 따라 달라지면 숫자 대신 **구체적 앵커(1200/1400/1500)**를 쓴다. 없는 정답을 제목에 박으면 기대와 내용이 어긋나 오히려 이탈을 만든다.
+60. **효과 측정을 위해 처방 전 기준선을 handover 표로 남길 것.** 08-31 Dean's List 기준선(415노출/클릭 1/0.24%)을 적어둔 덕분에 이번에 효과를 정량 확인할 수 있었다. 이번 4건 기준선도 위 표에 기록해 뒀다.
+
+---
+
+## [보존] 이전 문서 v26 본문 (2026-09-02 세션까지)
+
 # GPA Vault 인수인계 문서 v26 (2026-09-02 세션 — 신규 클러스터 "학생 건강보험 waiver" 개설)
 
 이전 v25 문서를 대체함. v25 이하 본문은 아래에 그대로 보존.
