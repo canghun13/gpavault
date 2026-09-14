@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pell Grant Enrollment Intensity Calculator | GPA Vault</title>
-  <meta name="description" content="See exactly what percentage of the full Pell Grant you get at your credit load, what you're giving up by taking fewer credits, and what one more credit is actually worth in dollars.">
+  <title>Pell Enrollment Intensity Chart &amp; Calculator – Dollars per Credit | GPA Vault</title>
+  <meta name="description" content="Full Pell enrollment intensity chart with dollar amounts at every credit load, from 12 credits down to 1. See exactly what each additional credit is worth and how the percentage is rounded.">
   <link rel="canonical" href="https://gpavault.com/tools/pell-enrollment-intensity-calculator.html">
   <link rel="stylesheet" href="../assets/css/style.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
@@ -15,22 +15,93 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Pell Grant Enrollment Intensity Calculator",
-  "description": "Calculates your Pell Grant enrollment intensity percentage based on credits enrolled, shows your prorated award for the term, and the dollar value of taking one more credit.",
+  "description": "Full Pell enrollment intensity chart with dollar amounts at every credit load, from 12 credits down to 1. See exactly what each additional credit is worth and how the percentage is rounded.",
   "url": "https://gpavault.com/tools/pell-enrollment-intensity-calculator.html",
   "applicationCategory": "EducationalApplication",
   "operatingSystem": "Web",
-  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-  "provider": {"@type": "Organization", "name": "GPA Vault", "url": "https://gpavault.com"}
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "GPA Vault",
+    "url": "https://gpavault.com"
+  }
 }
 </script>
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
-{"@type": "Question", "name": "How is Pell Grant enrollment intensity calculated?", "acceptedAnswer": {"@type": "Answer", "text": "Enrollment intensity is your credits enrolled divided by your school's full-time credit threshold (usually 12), rounded to the nearest whole percent, capped at 100%. For example, 9 credits at a 12-credit full-time standard is 9 ÷ 12 = 75%. Your Pell Grant for that term is your scheduled award multiplied by that percentage — there's no half-time or three-quarter-time bucket the way there is for other federal aid."}},
-{"@type": "Question", "name": "Does every federal aid program use enrollment intensity?", "acceptedAnswer": {"@type": "Answer", "text": "No — this is unique to the Pell Grant. Every other Title IV program (subsidized and unsubsidized loans, work-study, SEOG) still uses the older category system: full-time, three-quarter-time, half-time, or less-than-half-time. Only Pell prorates per credit hour with this precision, so it's possible for your Pell amount and your loan eligibility to be calculated on completely different scales in the same term."}},
-{"@type": "Question", "name": "Can enrollment intensity ever exceed 100%?", "acceptedAnswer": {"@type": "Answer", "text": "No. Even if you're enrolled in more credits than your school's full-time threshold, your enrollment intensity for Pell purposes is capped at 100% — taking 18 credits instead of 12 doesn't increase your per-term Pell award beyond the full scheduled amount."}},
-{"@type": "Question", "name": "Can I get Pell Grant for summer classes too?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Since the 2017-18 award year, Pell-eligible students can receive up to 150% of their scheduled award within a single award year, which effectively opens up a third disbursement for summer enrollment on top of fall and spring, as long as you're still within your 600% lifetime eligibility limit."}},
-{"@type": "Question", "name": "Does my school's full-time credit threshold have to be 12?", "acceptedAnswer": {"@type": "Answer", "text": "12 credits is the federal minimum threshold for undergraduate full-time status, and it's what most schools use, but individual schools can set a higher standard for their own definition of full-time enrollment. Check with your financial aid office for your school's exact number before relying on this calculator's default."}}
-]}
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is Pell Grant enrollment intensity calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Enrollment intensity is your credits enrolled divided by your school's full-time credit threshold (usually 12), rounded to the nearest whole percent, capped at 100%. For example, 9 credits at a 12-credit full-time standard is 9 ÷ 12 = 75%. Your Pell Grant for that term is your scheduled award multiplied by that percentage — there's no half-time or three-quarter-time bucket the way there is for other federal aid."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does every federal aid program use enrollment intensity?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No — this is unique to the Pell Grant. Every other Title IV program (subsidized and unsubsidized loans, work-study, SEOG) still uses the older category system: full-time, three-quarter-time, half-time, or less-than-half-time. Only Pell prorates per credit hour with this precision, so it's possible for your Pell amount and your loan eligibility to be calculated on completely different scales in the same term."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can enrollment intensity ever exceed 100%?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Even if you're enrolled in more credits than your school's full-time threshold, your enrollment intensity for Pell purposes is capped at 100% — taking 18 credits instead of 12 doesn't increase your per-term Pell award beyond the full scheduled amount."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I get Pell Grant for summer classes too?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Since the 2017-18 award year, Pell-eligible students can receive up to 150% of their scheduled award within a single award year, which effectively opens up a third disbursement for summer enrollment on top of fall and spring, as long as you're still within your 600% lifetime eligibility limit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does my school's full-time credit threshold have to be 12?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "12 credits is the federal minimum threshold for undergraduate full-time status, and it's what most schools use, but individual schools can set a higher standard for their own definition of full-time enrollment. Check with your financial aid office for your school's exact number before relying on this calculator's default."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much Pell do I get at 9 credits?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "75% of your scheduled award, assuming your school defines full-time as 12 credits. At the 2026-27 maximum Pell award of $7,395 that works out to $5,546.25 for the full year, or about $2,773 per semester. If your scheduled award is smaller than the maximum, the same 75% applies to your own figure rather than to the maximum."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is 11 credits 92% and not 91.67%?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because enrollment intensity is rounded to the nearest whole percent. Eleven credits divided by a twelve-credit full-time standard is 91.67%, which rounds to 92%. The same rounding produces 67% for eight credits and 58% for seven. It always goes to the nearest whole number, so it can fall marginally in your favour or against you depending on the credit load."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does dropping below 6 credits only cost me Pell money?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, and the loan consequence is far larger than the Pell one. Pell now scales smoothly with each credit, so moving from six credits to five costs roughly $296 for the term at the maximum award. Direct Loans, by contrast, work on a cliff: they require at least half-time enrollment, normally six credits, and below that they stop entirely for the term. If you are near six credits, plan around the loan threshold rather than the Pell percentage."
+      }
+    }
+  ]
+}
 </script>
 </head>
 <body>
@@ -45,13 +116,13 @@
   <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
   <div class="calc-card">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end;">
-      <div class="form-group"><label>Credits Enrolled This Term</label><input type="number" id="credits" placeholder="e.g. 9" min="0" step="1" value="9"></div>
-      <div class="form-group"><label>Full-Time Credit Threshold</label><input type="number" id="fulltime" min="1" step="1" value="12"></div>
-      <div class="form-group"><label>Annual Scheduled Pell Award ($)</label><input type="number" id="award" min="0" step="1" value="7395"></div>
-      <div class="form-group"><label>Terms Per Year</label><input type="number" id="terms" min="1" max="4" step="1" value="2"></div>
+      <div class="form-group"><label>Credits Enrolled This Term</label><input type="number" id="credits" oninput="calculate()" placeholder="e.g. 9" min="0" step="1" value="9"></div>
+      <div class="form-group"><label>Full-Time Credit Threshold</label><input type="number" id="fulltime" oninput="calculate()" min="1" step="1" value="12"></div>
+      <div class="form-group"><label>Annual Scheduled Pell Award ($)</label><input type="number" id="award" oninput="calculate()" min="0" step="1" value="7395"></div>
+      <div class="form-group"><label>Terms Per Year</label><input type="number" id="terms" oninput="calculate()" min="1" max="4" step="1" value="2"></div>
     </div>
-    <button class="calc-btn" onclick="calculate()">Calculate My Pell Award</button>
-    <div class="result-box" id="result">
+    <button class="calc-btn" onclick="calculate();scrollToResult();">Calculate My Pell Award</button>
+    <div class="result-box show" id="result">
       <div class="result-num" id="result-main">—</div>
       <div class="result-label" id="result-label">Enrollment Intensity</div>
       <div class="result-detail" id="result-detail"></div>
@@ -80,10 +151,42 @@
     </table>
     <p>This table assumes your school defines full-time as 12 credit hours, which is the federal minimum and what most schools use. If your school sets a higher threshold, use the calculator above with your school's actual number.</p>
 
+    <h2>The same chart in dollars (2026&ndash;27 maximum award)</h2>
+    <p>Percentages are hard to act on. Here is the identical chart converted to money at the $7,395 maximum Pell award for 2026&ndash;27, split across two semesters. If your award is smaller, scale it proportionally &mdash; a student with a $4,000 award receives the same percentages of a smaller number.</p>
+
+    <p class="table-scroll-hint">Scroll to see all columns →</p>
+    <table>
+      <tr><th>Credits</th><th>Intensity</th><th>Per term</th><th>Full year</th></tr>
+      <tr><td>12+</td><td>100%</td><td>$3,697.50</td><td>$7,395.00</td></tr>
+      <tr><td>11</td><td>92%</td><td>$3,401.70</td><td>$6,803.40</td></tr>
+      <tr><td>10</td><td>83%</td><td>$3,068.93</td><td>$6,137.85</td></tr>
+      <tr><td>9</td><td>75%</td><td>$2,773.13</td><td>$5,546.25</td></tr>
+      <tr><td>8</td><td>67%</td><td>$2,477.33</td><td>$4,954.65</td></tr>
+      <tr><td>7</td><td>58%</td><td>$2,144.55</td><td>$4,289.10</td></tr>
+      <tr><td>6</td><td>50%</td><td>$1,848.75</td><td>$3,697.50</td></tr>
+      <tr><td>5</td><td>42%</td><td>$1,552.95</td><td>$3,105.90</td></tr>
+      <tr><td>4</td><td>33%</td><td>$1,220.18</td><td>$2,440.35</td></tr>
+      <tr><td>3</td><td>25%</td><td>$924.38</td><td>$1,848.75</td></tr>
+      <tr><td>2</td><td>17%</td><td>$628.58</td><td>$1,257.15</td></tr>
+      <tr><td>1</td><td>8%</td><td>$295.80</td><td>$591.60</td></tr>
+    </table>
+
+    <h2>Why the percentages are not round numbers</h2>
+    <p>Enrollment intensity is credits divided by your school's full-time standard, expressed as a percentage and <strong>rounded to the nearest whole percent</strong>. That is why 11 credits gives 92% rather than 91.67%, and 8 credits gives 67% rather than 66.67%. The rounding is always to the nearest whole number, so it can work slightly for or against you depending on the credit load.</p>
+    <p>The full-time standard is the part students get wrong. The chart above assumes 12 credits, which is the federal minimum and what most schools use. If your school defines full-time as 15 credits, every figure shifts down &mdash; 12 credits becomes 80% rather than 100%, and 9 credits becomes 60% rather than 75%. Use the calculator above with your school's actual number rather than assuming 12.</p>
+
+    <h2>Pell and loan thresholds do not move together</h2>
+    <p>This is the interaction that catches people planning a reduced course load. Pell now scales smoothly with every credit, but <strong>Direct Loans still work on a cliff</strong>: you need at least half-time enrollment, normally six credits, and below that they stop entirely.</p>
+    <p>So dropping from 6 credits to 5 costs you about $296 in Pell for the term &mdash; a modest amount &mdash; while simultaneously ending your loan eligibility for that term outright. The Pell loss is the small part of that decision. If you are anywhere near six credits, the loan threshold is the number to plan around, not the Pell percentage.</p>
+    <p>One further timing note: your intensity is generally locked at your school's census date, so adding a class in week one and dropping it in week six usually does not increase your Pell, while dropping before census does reduce it. Confirm your school's recalculation date before making changes, because the deadline is institutional rather than federal.</p>
+
     <h2>One credit can be worth hundreds of dollars</h2>
     <p>Because Pell is now calculated to the exact credit, the jump between credit loads isn't always small. Going from 9 to 10 credits moves your intensity from 75% to 83% — an 8-point jump worth roughly $296 per term at the 2026–27 maximum award, just for one additional credit hour. If you're on the fence about adding a class, it's worth checking what that specific credit is worth in Pell dollars before deciding it isn't worth the extra workload.</p>
 
     <h2>Frequently Asked Questions</h2>
+    <p><strong>How much Pell do I get at 9 credits?</strong> 75% of your scheduled award. At the 2026&ndash;27 maximum of $7,395 that is $5,546.25 for the year, or about $2,773 per semester. If your award is smaller, apply the same 75%.</p>
+    <p><strong>Why is 11 credits 92% and not 91.67%?</strong> Enrollment intensity is rounded to the nearest whole percent. 11 divided by 12 is 91.67%, which rounds to 92%.</p>
+    <p><strong>Does dropping below 6 credits only cost me Pell?</strong> No, and this is the bigger risk. Pell scales smoothly, so 6 to 5 credits costs roughly $296 a term. But Direct Loans require at least half-time enrollment, so below six credits they stop completely.</p>
     <p><strong>How is Pell Grant enrollment intensity calculated?</strong> Credits enrolled divided by your school's full-time threshold (usually 12), rounded to the nearest whole percent, capped at 100%. Your Pell Grant for the term is your scheduled award multiplied by that percentage.</p>
     <p><strong>Does every federal aid program use enrollment intensity?</strong> No — this is unique to Pell. Every other Title IV program still uses the older full-time/three-quarter/half-time/less-than-half-time categories, so your Pell amount and your loan eligibility can be calculated on completely different scales in the same term.</p>
     <p><strong>Can enrollment intensity ever exceed 100%?</strong> No. Taking more credits than your school's full-time threshold doesn't increase your per-term Pell award beyond the full scheduled amount.</p>
@@ -104,6 +207,12 @@
 <div id="footer-placeholder"></div>
 <script src="../assets/js/components.js"></script>
 <script>
+function scrollToResult(){
+  try {
+    var b = document.getElementById('result');
+    if (b && typeof b.scrollIntoView === 'function') { b.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+  } catch (e) { /* cosmetic only */ }
+}
 function calculate(){
   var credits = parseFloat(document.getElementById('credits').value);
   var fulltime = parseFloat(document.getElementById('fulltime').value);
@@ -134,8 +243,9 @@ function calculate(){
   }
 
   document.getElementById('result-detail').innerHTML = detail;
-  var res = document.getElementById('result'); res.classList.add('show'); res.scrollIntoView({behavior:'smooth', block:'nearest'});
+  var res = document.getElementById('result'); if (res) { res.classList.add('show'); }
 }
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', calculate); } else { calculate(); }
 </script>
 </body>
 </html>
