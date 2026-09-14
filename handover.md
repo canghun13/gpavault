@@ -1,3 +1,140 @@
+# GPA Vault 인수인계 문서 v28 (2026-09-15 세션 — 수익화 임계치 돌파 / 신규 페이지 첫 Bing 노출 / CTR 처방 가설 하향)
+
+이전 v27 문서를 대체함. v27 이하 본문은 아래에 그대로 보존.
+
+### 0단계 대조 결과
+최신 커밋 `825f4e3`(09-08 handover v27)와 v27 기록 일치 — 소급 기록 불필요.
+
+### ★ 먼저 확인할 것 (계속 유효)
+- v19 **색인 수동 제출 금지**(IndexNow·구글 색인 요청 안 함).
+- v21 **구글 색인 이탈에 패닉 재작성 금지.**
+- v22 **LSAC 2026-07-28 규정 추적 의무.**
+- v24 **`gpa-raise-calculator`는 더 손대지 말 것.**
+- v26 **건강보험 계산기의 "타 보험 없음 → waive하지 말라" 분기를 제거하지 말 것.**
+
+---
+
+## ★★★★★★ 결론 1: 수익화 임계치를 넘겼다 — 사용자 액션이 필요한 시점
+
+v18에서 정한 기준은 **월 세션 500 또는 월 검색 클릭 50** 중 하나였다. 클릭 기준이 돌파됐다.
+
+| | 08-31 | 09-08 | 09-15 |
+|---|---|---|---|
+| Bing 클릭 | 32 | 43 | **71** |
+| 구글 클릭(3개월 누적) | 7 | 7 | 7 |
+| **월 검색 클릭** | 33 (66%) | 44 (88%) | **약 72 (144%)** |
+| GA4 활성 사용자 | 128 | 130 | **186** |
+| GA4 세션 | 151 | 158 | **약 214** |
+
+세션은 아직 214/500이지만 **클릭 기준은 명확히 넘겼고**, v18 규정은 "둘 중 하나"였다.
+
+**→ 다음 세션에서 사용자에게 제휴 프로그램 가입을 제안해야 한다.** v18~v27이 6세션 연속 "아직 이르다"로 보류해 온 항목이고, 이제 근거가 생겼다.
+- 제안 대상: Impact.com / CJ / ShareASale / Awin 중 1곳. W-8BEN 세금정보가 필요해 **사용자만 할 수 있는 액션**이다.
+- **승인 전에는 제휴 링크나 `affiliate-disclosure.html`을 절대 만들지 말 것**(v17 원칙 유지 — 허위 표시가 된다).
+- 수익화 가치가 가장 높은 트래픽은 대출·지원금 계열이고, 실제로 Bing에서 그쪽이 전환된다(`pell-lifetime` 671노출 13클릭, `average-student-loan-debt-by-major` CTR 2.63%, `income protection allowance fafsa 2026` 4노출 4클릭 = 100%).
+
+---
+
+## ★★★★★ 결론 2: 신규 페이지가 처음으로 Bing 노출을 얻었다
+
+v24~v27이 4주 연속 "신규 13페이지 노출 0"을 기록해 왔다. **이번에 `r2t4-calculator`가 Bing Page Traffic에 처음 등장했다 — 1노출 2클릭 3위.**
+
+노출 1건이라 통계적 의미는 없지만, **0에서 벗어났다는 것 자체가 신호**다. r2t4는 08-12 생성으로 신규분 중 가장 오래됐고, 구글이 유일하게 크롤한 신규 페이지이기도 하다.
+
+**다음 세션 판단**: 다른 신규 페이지들도 Bing에 등장하기 시작하면 신규 확장 재개가 맞다. 여전히 r2t4 하나뿐이면 보강 배분 유지.
+
+### 구글은 여전히 정지 상태
+- 발견됨-미색인 **14건 전부 최종 크롤링 `1970-01-01` 유지** (크롤 재개 안 됨)
+- 크롤링됨-미색인 **36건**, 최신 크롤이 **08-30에서 멈춤**
+- 즉 구글은 08-30 이후 이 사이트를 사실상 방문하지 않는다. 일별 노출 0~3이고 09-04/05/07/10/12는 0.
+
+---
+
+## ★★★ 결론 3: CTR 처방 가설을 하향 조정한다 (v27 판단 수정)
+
+v27이 "08-31 Dean's List 처방으로 클릭 1→3, 처방 효과 확인"이라고 기록했다. **1주 더 관측한 결과 그 판단은 성립하지 않는다.**
+
+- **Dean's List**: 노출 680 → **995**로 늘었는데 클릭은 **3에서 그대로**. CTR 0.44% → **0.30%로 하락**. 즉 v27이 본 "클릭 1→3"은 표본 3건짜리 노이즈였을 가능성이 크다.
+- **09-08 처방 4건 전부 1주 시점에 클릭 0**: `what-gpa-do-you-need-to-graduate-college` 144→211노출 클릭 0, `weighted-gpa-calculator-ap-classes` 48→89 클릭 0, `sat-percentile-calculator` 65→81 클릭 0, `new-act-format` 29→35 클릭 0.
+
+### 반면 본문 보강은 작동한다
+`does-retaking-a-class-replace-your-gpa`(08-24 본문 보강, 재수강 성적 악화·타교 재수강 섹션 추가):
+**클릭 7 → 18, CTR 0.53% → 1.07%, 노출 1,323 → 1,682.**
+
+**→ 처방 우선순위를 조정한다: 제목 교체보다 본문 보강이 근거가 강하다.** 제목 처방은 이미 적용한 5건의 2~3주 관측 결과를 기다리고, **추가 확대는 보류한다.** v27 체크리스트 59번(제목에 수치 넣기)은 폐기하지 않되 "검증된 처방"으로 취급하지 말 것.
+
+---
+
+## 09-15 세션 작업 (커밋 `4cf9fd1`, push + Actions `completed/success` 확인)
+
+### 보강 1: `tools/pell-enrollment-intensity-calculator.html` (644 → 1,176단어)
+**근거**: Bing 쿼리 `pell intensity chart`(7노출 9.3위) + `enrollment intensity chart`(7노출 7.0위) + `pell grant enrollment intensity chart`(2노출 6.0위) = **16노출 전부 클릭 0.** 퍼센트 차트는 있었으나 **금액이 없어** "차트를 찾는" 의도를 충족하지 못한 것으로 판단.
+
+추가한 것:
+- **2026-27 최대 $7,395 기준 12→1학점 전 구간 금액 차트**(학기당/연간). 검산: 9학점 75% → 연 $5,546.25 / 학기 $2,773.13. 1학점(8%) 학기당 $295.80으로 기존 본문의 "약 $296" 서술과 일치 확인.
+- **반올림 규칙**(11/12 = 91.67% → 92%). full-time을 15학점으로 정의하는 학교는 12학점이 80%로 떨어진다는 점 명시.
+- ★ **Pell과 대출 임계값이 함께 움직이지 않는다**는 섹션: Pell은 학점당 연속이라 6→5학점이 학기당 약 $296 손실에 불과하지만 **Direct Loan은 half-time(6학점) 절벽**이라 그 아래로는 전면 중단된다. 6학점 근처에서는 Pell 퍼센트가 아니라 대출 임계값으로 판단해야 한다는 실용 결론.
+- census date 기준 intensity 고정 타이밍 주의. FAQ 3개(8:8). title/description을 "chart" 쿼리에 맞춰 교체.
+
+★ **회귀 테스트에서 이 페이지가 체크리스트 28번 미적용 상태였음을 발견**(결과창 클릭 전 숨김 + 가드 없는 scrollIntoView, 08-01 생성으로 체크리스트 28번보다 앞섬)해 함께 수정: 결과창 기본 표시, 입력 4개 `oninput` 연결, 로드 시 1회 실행, `scrollToResult`를 try/catch + typeof 가드로 분리.
+
+### 보강 2: `tools/obbba-loan-limit-calculator.html` — 쿼리 정합 제목 교체 (수익화 1순위)
+**근거**: Bing 쿼리 `aggregate student loan limit graduate calculator`가 **3주 연속 20노출 8위 클릭 0**. 페이지도 23노출 7.52위 클릭 0으로 08-31 본문 보강 후에도 변화 없음.
+
+**원인 진단**: 쿼리의 핵심어 **`aggregate`가 title/h1/리드에 전혀 없었다.** 본문에는 $138,500/$100,000 총액 한도가 있는데 제목이 이를 드러내지 않는 상태. 기존 제목은 `OBBBA Federal Student Loan Limit Calculator (2026-27) – Am I Grandfathered?`.
+
+- title → `Aggregate Student Loan Limit Calculator – Graduate, Professional & Undergrad`
+- h1 → `Aggregate Student Loan Limit Calculator`
+- 리드 문단을 "연간+총액 두 축 / 잔여 한도 / 학부 대출 산입 여부"로 재작성
+- description에 $100,000 / $200,000 / $138,500 / $257,500 전진 배치, 스키마 동기화
+- 본문은 08-31 보강분이라 미변경(09-14 보류 해제 확인 후 메타만 수정)
+
+### ★ 사이트 전체 scrollIntoView 감사 (기록용 — 수정하지 않음)
+계산기 42개 중 **34개가 가드 없는 `scrollIntoView`**를 쓴다. **다만 실제 브라우저에서는 모든 요소에 `scrollIntoView`가 존재하므로 프로덕션 버그가 아니고 jsdom 한정 현상이다.** 34개 일괄 수정은 사용자 이득 없이 lastmod만 흔드는 churn이라 하지 않았다.
+**다음 세션이 회귀 테스트에서 `res.scrollIntoView is not a function` 에러를 보고 사이트 장애로 오판하지 말 것.** 새로 만들거나 크게 보강하는 페이지에만 가드를 적용한다.
+
+---
+
+## ★ 다음 세션이 확인/처리할 것
+
+1. **금지 원칙 5종 유지**(위 "먼저 확인할 것").
+2. **★★ 제휴 가입 제안 — 이번엔 해야 한다.** 결론 1 참고. 임계치를 넘겼고 6세션 연속 보류해 온 항목이다. 승인 전 제휴 링크·고지문 생성은 금지.
+3. **★ 신규 페이지의 Bing 등장 추이.** r2t4 외에 다른 신규분이 등장하면 신규 확장 재개. 여전히 r2t4 하나면 보강 유지.
+4. **발견됨-미색인 14건의 최종 크롤링 날짜.** 여전히 1970이면 구글은 계속 무시 중.
+5. **제목 처방 5건의 2~3주 관측**(기준선은 v27 표 + 이번 문서에 기록). 여전히 클릭 0이면 제목 처방을 무효 처방으로 결론내고 본문 보강에만 집중할 것.
+6. **다음 본문 보강 후보**(Bing 노출 대비 클릭 0 + 수익화 순):
+   - `what-gpa-do-you-need-to-graduate-college` 211노출 3.32위 클릭 0 — 사이트 최대 손실 건. 제목은 이미 고쳤으니 **본문 보강**으로 접근할 차례
+   - `blog/double-major-vs-minor-vs-switching-majors` 16노출 9.31위 + 쿼리 `double major vs minor pros and cons` 8노출 9.6위
+   - `blog/how-to-calculate-unweighted-gpa` 150노출 3클릭인데 쿼리 `how to calculate unweighted gpa`가 14노출 7.3위 클릭 0
+   - 미탐색 쿼리: `you earned a d in a course that is required for your major...`(25노출 8.2위 클릭 0) — 교재 문제로 보이나 3주 연속 최상위 노출
+7. **계절성**(v26 총정리 유지): 교육 세금 1~4월 / 대학원 조교 10~12월·3~5월 / 과목 결과 선택 12월·5월·10월·3월 / 건강보험 waiver 7~9월·12~1월.
+
+## 2주 재작업 보류 현황 (09-15 기준)
+- **09-16까지**: `tools/health-insurance-waiver-calculator.html`, `blog/student-health-insurance-waiver-deadline.html`
+- **09-22까지**: `blog/what-gpa-do-you-need-to-graduate-college.html`, `blog/weighted-gpa-calculator-ap-classes.html`, `tools/sat-percentile-calculator.html`, `blog/new-act-format-2025-2026-changes.html`
+- **09-29까지**: 이번 세션분 — `tools/pell-enrollment-intensity-calculator.html`, `tools/obbba-loan-limit-calculator.html`
+- **보류 해제**: 09-01 이전 전체(`incomplete-vs-withdrawal-vs-failing`, `how-to-ask-for-an-incomplete-grade`, `does-retaking`, `pell-lifetime-eligibility-calculator`, `what-is-the-deans-list-gpa-requirement` 등)
+
+## 파일 현황 (09-15 기준)
+- tools 46개 + index / blog 61개 + index / 루트 7개
+- sitemap URL 113개, tool-card 46개(미등록 도구 0), blog-card 59개
+- 전체 117개 HTML JSON-LD 오류 0, 내부링크 broken 0
+- 구글 색인: 크롤링됨-미색인 36 / 발견됨-미색인 14(전부 미크롤) / 404 0건
+
+## 클러스터 현황 (12개) / 미개척 영역
+v26과 동일. 미개척: 홈스쿨 성적증명 · 로스쿨 준비(LSAT/GPA) · CLEP/사전학습인정(CPL)
+기각 완료(재조사 금지): 유학생 F-1 재정증명, 근로장학, Academic renewal, Workforce Pell, PhD 스티펜드, NCAA 자격, 장학금 displacement, 리테이크 GPA 계산기, GI Bill MHA, 성적증명 보류, Incomplete 전용 계산기, 장애 학생 편의제공
+
+## 체크리스트 추가분 (v27 57~60번에 이어서)
+61. **클릭 수가 한 자릿수인 페이지의 CTR 변화는 노이즈로 취급할 것.** 09-15에 v27의 "클릭 1→3 = 처방 효과" 판단이 뒤집혔다(다음 주 클릭 3 유지, CTR 하락). **최소 2~3주, 클릭 10건 이상 쌓인 뒤 판단할 것.** 한 주 데이터로 처방을 검증했다고 선언하지 말 것.
+62. **본문 보강과 제목 교체의 효과 근거는 다르다.** 현재까지 본문 보강은 실측 근거가 있고(does-retaking 클릭 7→18) 제목 교체는 없다. 둘 중 하나만 할 수 있으면 본문 보강을 고를 것.
+63. **쿼리의 핵심어가 title/h1/리드에 있는지 먼저 확인할 것.** 09-15에 3주 연속 20노출 클릭 0이던 `aggregate student loan limit graduate calculator` 건은, 본문에 답이 다 있는데 `aggregate`라는 단어가 제목에 한 번도 안 나온 경우였다. 본문을 더 쓰기 전에 **쿼리 어휘와 제목 어휘가 겹치는지**부터 볼 것.
+64. **오래된 계산기를 크게 보강할 때는 체크리스트 28번 적용 여부를 함께 점검할 것.** 08-01 이전 생성 페이지들은 결과창이 클릭 전까지 숨겨져 있고 가드가 없다. 보강하는 김에 같이 맞추면 추가 비용이 거의 없다. 단 **보강하지 않는 페이지를 이 목적만으로 건드리지는 말 것**(churn).
+
+---
+
+## [보존] 이전 문서 v27 본문 (2026-09-08 세션까지)
+
 # GPA Vault 인수인계 문서 v27 (2026-09-08 세션 — 구글이 신규 13페이지를 한 번도 크롤하지 않았음을 확인, CTR 처방 확대)
 
 이전 v26 문서를 대체함. v26 이하 본문은 아래에 그대로 보존.
