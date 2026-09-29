@@ -1,3 +1,116 @@
+# GPA Vault 인수인계 문서 v30 (2026-09-29 세션 — 보강 2건 / 쿼리→페이지 매칭으로 대상 교정 / 구글 크롤 1건 재개)
+
+이전 v29 문서를 대체함. v29 이하 본문은 아래에 그대로 보존.
+
+### 0단계 대조 결과
+최신 커밋 `6d0648c`(handover v29)와 v29 기록 일치 — 소급 기록 불필요.
+
+### ★ 먼저 확인할 것 (계속 유효)
+- v19 **색인 수동 제출 금지**(IndexNow·구글 색인 요청 일절 안 함). v21 **패닉 재작성 금지**. v22 **LSAC 추적 의무**. v24 **gpa-raise-calculator 손대지 말 것**. v26 **건강보험 "waive하지 말라" 분기 유지**.
+- **제휴**: 여전히 사용자 가입 대기. 승인 전 제휴 링크·`affiliate-disclosure.html` 생성 금지. 보고 때 한 줄만 재상기.
+- ★ **push 방법이 바뀌었다(09-29)**: 토큰을 URL에 넣은 remote로 push하면 세션 git 프록시가 403으로 막는다. `add_repo(owner=canghun13, repo=gpavault, access=push)` 호출 → `register_repo_root` → remote를 `https://github.com/canghun13/gpavault`(토큰 없이)로 바꾼 뒤 push하면 된다. Actions 폴링은 기존대로 토큰 헤더로 GitHub API 호출.
+- 이 컨테이너에서 **gpavault.com 직접 접속은 정책상 차단**(CONNECT 403). 배포 확인은 Actions `completed/success`로 한다. 재시도하지 말 것.
+
+---
+
+## 09-29 데이터 요약
+
+| | 09-08 | 09-15 | 09-22 | **09-29** |
+|---|---|---|---|---|
+| Bing 페이지 노출 합계 | 3,679 | 4,994 | 6,391 | **7,789** |
+| Bing 클릭 합계 | 43 | 71 | 96 | **119** |
+| GA4 활성 사용자(4주) | 130 | 186 | 266 | **321** |
+
+- Bing 상위: does-retaking 2,518/30(1.19%) · deans-list 1,444/6 · pell-lifetime 941/13 · nursing 469/5 · graduate-college 363/**1**(첫 클릭) · unweighted 345/8 · ap-gpa 255/3 · weighted-ap 215/0 · sap 160/7 · ib-gpa 106/1 · pell-intensity 101/5(4.95%) · **obbba 35/4(11.43%)** · deans-vs-latin 23/6(26%).
+- `what-gpa-do-you-need-to-graduate-college`는 363노출에 첫 클릭 1건. CTR 0.28%라 v29의 zero-click 추정과 여전히 부합한다. **처방 제외 유지.**
+- **GA4 주의**: 싱가포르 133명·파리 27명은 데이터센터·봇 트래픽으로 보인다. 321명을 그대로 수익화 판단 근거로 쓰지 말 것. Bing 클릭(119)이 더 믿을 만한 지표다.
+- **신규 페이지 Bing 등장 2건**: `does-dual-enrollment-affect-your-gpa` 7노출(첫 등장), `r2t4-calculator` 1노출 2클릭. 13개 중 2개. v28 기준("다른 신규분도 등장하면 신규 확장 재개")에 걸리기 시작했지만 표본이 작다. **다음 주에 3개 이상이 되거나 dual-enrollment 노출이 20을 넘으면 신규 확장 재개를 판단할 것.**
+
+### 구글
+- 발견됨-미색인 14건 **전부 `1970-01-01` 유지**(dual-enrollment·incomplete·건강보험·조교 세금·장학금 세금·repeat-coursework·employer TA·1098-T·grad stipend·methodology·gpa-raise 등).
+- 크롤링됨-미색인 **42 → 48건**.
+- ★ **08-30 이후 첫 크롤이 나왔다**: `blog/fafsa-id-verification-2026.html` 최종 크롤 **2026-09-21**. 한 건이라 재개라고 단정할 수 없지만 "구글이 08-30 이후 방문하지 않는다"는 v29 서술은 더 이상 정확하지 않다.
+- 구글 일별 노출 0~7, 클릭 0. 대응 없음(v21).
+
+---
+
+## 09-29 세션 작업 (커밋 `1dd4513`, push + Actions `completed/success` 확인)
+
+### ★ 대상 교정: obbba 계산기가 아니라 Parent PLUS 블로그
+v29는 이번 주 1순위로 `obbba-loan-limit-calculator` 본문 보강을 올렸다. 데이터를 보니 **그 페이지는 CTR 11.43%(35노출 4클릭)로 이미 작동하고 있다**. 반면 KeywordReport의 `ob3 parent plus loans count against parent agg loan limit`(**1노출 2클릭 7.0위**)가 PageTraffic의 `blog/parent-plus-old-vs-new-rules.html`(**1노출 2클릭 7.0위**)과 수치가 정확히 일치했다. 이 쿼리는 계산기가 아니라 블로그로 들어온 것이다. 블로그는 897단어로 얇았고, 쿼리가 묻는 "부모별인가 학생별인가"에 대한 답이 없었다.
+→ obbba 계산기는 손대지 않고(churn 회피) Parent PLUS 블로그를 보강했다. (체크리스트 71번)
+
+### 보강 1: `blog/parent-plus-old-vs-new-rules.html` (897 → 1,659단어, FAQ 4 → 7, 스키마 7:7)
+**핵심 규정**(USC·Baker·WVU·Evansville·Ferris State·Kiplinger 교차 확인):
+- 연 $20,000 / 총 $65,000는 **부양 학생 1명 기준, 부모 합산**. 부모 두 명이 같은 자녀에게 빌려도 한도는 하나.
+- **자녀마다 별도 한도**. 부모 1인당 자녀 합산 상한은 없다(자녀 2명 $130,000, 3명 $195,000).
+- Parent PLUS는 학생 본인의 학부 총액($31,000/$57,500)과 $257,500 평생 한도에 **들어가지 않는다**.
+- ★ **4년차 절벽**: $20,000×4 = $80,000 > $65,000이라 매년 최대로 빌리면 4년차 $5,000, 5년차 $0. 연 $16,250로 나눠 계획하라는 실용 결론.
+- **유예(interim exception)**: 2026-06-30 기준 재학 + 07-01 이전 Direct Loan 지급, 기간은 **3학년도와 남은 과정 기간 중 짧은 쪽**, 같은 학교·같은 과정 연속 재학 조건. 입학 연도별 예시(2025 가을 입학 → 2028-29까지 = 정시 졸업, 5년차는 신규 규정).
+- ★ **동생 함정**: 유예는 학생의 과정에 붙으므로 2026-07-01 이후 입학하는 동생은 첫해부터 신규 한도로 읽힌다. 부모가 한 자녀는 무제한, 다른 자녀는 연 $20,000인 상태가 동시에 가능.
+- **미확정으로 명시**: 유예 종료 후 기존(구 규정) Parent PLUS가 $65,000에 산입되는지는 학교 공개 자료가 다루지 않는다 → "학자금 사무실에 서면으로 확인"으로 안내. **확정된 사실처럼 고쳐 쓰지 말 것.**
+- 기존 highlight box(신규 차입자 여부)는 새 유예 섹션에 흡수. 표 2개 추가(가구 시나리오 / 연도별), 기존 비교표와 행 키가 겹치지 않음을 확인(체크리스트 65·69).
+- description·dateModified·blog-meta 갱신. 제목은 변경 안 함(체크리스트 67).
+
+### 보강 2: `tools/pell-lifetime-eligibility-calculator.html` (1,436 → 2,043단어, FAQ 8 → 11, 스키마 11:11)
+**근거**: 941노출 페이지(Bing 3위)인데 본문이 가장 얇았다. 쿼리 `pell lifetime eligibility used` 7노출 8.29위 0클릭, `how is lifetime pell grant calculated and how do i figure what i have left` 5노출. **09-15 pell-intensity에서 효과를 본 방식(금액 차트 추가)을 그대로 적용.**
+- 신설 H2 "Reading your number: semesters and dollars left": StudentAid.gov → FSA ID 로그인 → **My Aid**에 LEU 표시(ASU·KCTCS 확인). 지급 후 **최대 15일 보고 지연**(FSA Handbook). 잔여% × Scheduled Award, **원 단위 절사**. 533% → 67% → **$4,954**(2026-27 최대 $7,395 기준).
+- 금액 환산표: LEU 100/200/300/400/450/500/550/575% → 잔여 학기·최대 잔여 금액($36,975 … $1,848). "상한이지 예측이 아님" 명시. 최대액은 2023-24 이후 $7,395 동결.
+- 신설 H2 "How fast different schedules use up 600%": 풀타임 2학기 100%/6년 · **여름 포함 150%/4년** · ¾ 75%/8년 · 하프 50%/12년 · 쿼터제 풀타임 3쿼터 100%(쿼터당 약 33.3%). **여름 Pell은 학기당 비용이 더 들지 않고 속도만 빠르다** — 전공 변경·편입 학점 손실·복귀 학생만 주의하라는 결론. `12-vs-15-credits` 블로그와 중복되지 않게 학점 페이스는 링크로 넘김.
+- 기존 FAQ "Where do I find…" 답변을 My Aid로 정정(본문·스키마 동시). "processes below" → "above" 오기 수정.
+- ★ **체크리스트 28번 소급 적용**: 결과창 기본 표시(`result-box show`), 입력 2개 `oninput`, 로드 시 1회 실행, `scrollToResult` try/catch + typeof 가드, 빈값·음수 가드(—). 결과표에 **"Max for one school year"**(= min(잔여, 100%) × award, 절사) 행 추가. 달러 표시는 소수점 → 원 단위 절사로 변경.
+- ★ **모바일 결과표 잘림을 배포 전에 발견해 수정**: 375px에서 결과표 라벨이 길어 값 열이 화면 밖으로 밀렸다(모바일 CSS의 `white-space:nowrap` 때문). 라벨 단축(`Dollars left` / `Full-time semesters left` / `Max for one school year`)과 본문 표 헤더 단축 후 **375·414px에서 신규 표 5개 전부 스크롤 없이 들어감을 측정으로 확인**(320px에서는 약간 스크롤, 사이트 공통 패턴). 결과창 안 2열 표에는 스크롤 힌트를 넣지 않았다(맞는데 "스크롤하라"고 뜨는 오표시 방지). (체크리스트 72번)
+
+### 검증
+- Playwright + 실제 Chromium(데스크톱 1280 / 모바일 375): 결과창 `display:block`이 로드·입력·클릭 3경로 모두 유지. 300% → $22,185 / 6.0 / $7,395, 533% → $4,954, 550% → $3,697, 610% → $0, 빈값 → "—". 페이지 에러 0. 가로 페이지 스크롤 0.
+- 전체 115개 HTML JSON-LD 오류 0, 내부링크 broken 0(`/favicon.ico` 절대경로 2건은 검사기 한계, 실제 파일 존재).
+- sitemap lastmod 2건 → 2026-09-29.
+
+---
+
+## 이번 주 보류한 후보 (기록용 — 다음 세션이 재발견에 시간 쓰지 않도록)
+1. **IB→GPA 쿼리군** — 구글 3개월 `ib-gpa-calculator` 548노출 40위 클릭 0, Bing 106노출 1클릭. 쿼리 대부분이 **특정 점수 환산**(`45 ib score in gpa`, `what is a 33/45 in ib in gpa`, `ib score 40 translates to what on 4 point unweighted gpa`). 그런데 페이지에 이미 **"IB diploma total score (24–45) to GPA" 표가 있다**(1,808단어). 내용 공백이 아니라 순위 문제로 판단해 보류. 손댄다면 `most accurate / most accepted ib to gpa conversion`(공식 환산표가 없다는 점) 한 가지 정도만 근거가 있다.
+2. **does-retaking에 "credit recovery" 0회** — `what is grade replacement and is it credit recovery` 6노출 9.33위 0클릭. 사이트 1위 페이지(2,966단어)라 6노출로는 보강 근거가 약해 보류. 10노출 넘으면 grade replacement(대학 GPA 재계산) vs credit recovery(고교 학점 회복) 구분 섹션 추가 검토.
+3. **weighted GPA 특정 조합 쿼리** — `what weighted gpa is b- average with an ap and 3 honors classes` 8노출 6.5위 등. 09-08에 B/B− 예시를 이미 넣은 페이지라 보류.
+4. **obbba 계산기** — 작동 중(11.43%). `aggregate student loan limit graduate calculator` 20노출 8.0위 0클릭은 4주째 그대로지만 본문에 해당 내용이 다 있다. 더 손대지 말 것.
+
+---
+
+## ★ 다음 세션이 확인/처리할 것
+1. 금지 원칙 유지 + push 절차(위).
+2. **제휴** — 한 줄 재상기.
+3. **신규 확장 재개 판단**: Bing에 신규 페이지 3개 이상, 또는 dual-enrollment 노출 20 초과. 10월은 대학원 조교·과목 결과 선택(I/W/F) 성수기 — 해당 신규 페이지(`graduate-assistantship-tax-calculator`, `why-did-my-grad-stipend-paycheck-drop`, `incomplete-vs-withdrawal-vs-failing`, `how-to-ask-for-an-incomplete-grade`)가 Bing에 잡히는지 특히 볼 것.
+4. **구글 크롤 재개 여부**: 크롤링됨-미색인 목록의 최신 크롤 날짜가 09-21 이후로 더 생기는지, 발견됨-미색인 중 `1970-01-01`이 아닌 게 나오는지.
+5. **효과 측정**(2~3주, 클릭 10건 이상 쌓인 뒤 — 체크리스트 61):
+   - 복수전공(09-22): 기준 `double major vs minor pros and cons` 20노출 7.65위 0클릭 / 페이지 29노출 8.07위 0클릭.
+   - Parent PLUS 블로그(09-29): 기준 페이지 1노출 2클릭 7위. 쿼리 `ob3 parent plus…` 1노출 2클릭.
+   - Pell 평생한도(09-29): 기준 페이지 941노출 13클릭 1.38% 5.31위. 쿼리 `pell lifetime eligibility used` 7노출 8.29위 0클릭.
+6. **처방 제외**: `what-gpa-do-you-need-to-graduate-college`, `gpa-raise-calculator`, `obbba-loan-limit-calculator`(작동 중).
+7. 계절성(v26): 교육 세금 1~4월 / 대학원 조교 10~12월·3~5월 / 과목 결과 선택 12월·5월·10월·3월 / 건강보험 waiver 7~9월·12~1월.
+
+## 2주 재작업 보류 현황 (09-29 기준)
+- **10-06까지**: `blog/double-major-vs-minor-vs-switching-majors.html`
+- **10-13까지**: 이번 세션분 — `blog/parent-plus-old-vs-new-rules.html`, `tools/pell-lifetime-eligibility-calculator.html`
+- **보류 해제**: 09-29 해제분(`tools/pell-enrollment-intensity-calculator.html`, `tools/obbba-loan-limit-calculator.html`) 포함 그 이전 전체
+
+## 파일 현황 (09-29 기준)
+- tools 46개 + index / blog 61개 + index / 루트 7개 (변동 없음)
+- sitemap URL 113개, tool-card 46개, blog-card 59개
+- 구글: 크롤링됨-미색인 **48** / 발견됨-미색인 14(전부 미크롤) / 404 0건
+
+## 클러스터 현황 (12개) / 미개척 영역
+v26과 동일. 미개척: 홈스쿨 성적증명 · 로스쿨 준비(LSAT/GPA) · CLEP/사전학습인정(CPL). 기각 완료(재조사 금지): v28 목록 동일.
+
+## 체크리스트 추가분 (v29 67~70번에 이어서)
+71. **Bing KeywordReport에는 페이지 열이 없다. 보강 대상을 정하기 전에 쿼리의 노출·클릭·순위를 PageTraffic 행과 대조해 실제 착지 페이지를 찾을 것.** 09-29에 `ob3 parent plus…`(1/2/7.0)가 블로그(1/2/7.0)와 일치해, 계획했던 obbba 계산기 대신 블로그를 보강했다. 이미 CTR이 높은 페이지는 쿼리가 비슷해 보여도 손대지 말 것.
+72. **결과창 안 표는 모바일에서 `white-space:nowrap`이 강제된다. 라벨이 길면 값 열이 화면 밖으로 밀린다.** 결과표 라벨은 짧게(약 24자 이하) 쓰고, 배포 전 Playwright로 375·414px에서 각 표의 `scrollWidth`와 `clientWidth`를 비교할 것. 들어가는 2열 결과표에는 스크롤 힌트를 넣지 말 것.
+73. **이 컨테이너에는 jsdom이 없고 Playwright + Chromium이 있다.** 실제 브라우저로 `getComputedStyle(display)`(로드·입력·클릭) + 스크린샷 + 페이지 가로 스크롤을 한 번에 확인하는 것이 더 정확하다. `python3 -m http.server`로 로컬 서빙, 광고·gtag 요청은 route abort.
+74. **규정의 미확정 부분은 미확정이라고 쓸 것.** Parent PLUS 구 차입액의 $65,000 산입 여부처럼 공개 자료가 다루지 않는 점은 추론으로 메우지 말고 "학자금 사무실에 확인"으로 안내한다. 동생 함정처럼 조건 문구에서 논리적으로 따라오는 결론은 "읽힌다/보인다"로 표현한다.
+
+---
+
+## [보존] 이전 문서 v29 본문 (2026-09-22 세션까지)
+
 # GPA Vault 인수인계 문서 v29 (2026-09-22 세션 — 본문 보강 효과 재확인 / 제목 처방 무효 결론 / zero-click 진단)
 
 이전 v28 문서를 대체함. v28 이하 본문은 아래에 그대로 보존.
