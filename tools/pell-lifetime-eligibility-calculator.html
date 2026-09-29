@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pell Grant Lifetime Eligibility Calculator (600% LEU) | GPA Vault</title>
-  <meta name="description" content="See how much Pell Grant eligibility you have left, in both percentage and dollars, based on your current Lifetime Eligibility Used (LEU) — and how many full-time semesters that translates to.">
+  <meta name="description" content="See how much Pell Grant eligibility you have left in percent, dollars and full-time semesters from your LEU, with a 2026–27 dollar chart and how summer Pell speeds up the 600% limit.">
   <link rel="canonical" href="https://gpavault.com/tools/pell-lifetime-eligibility-calculator.html">
   <link rel="stylesheet" href="../assets/css/style.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
@@ -65,7 +65,7 @@
       "name": "Where do I find my current Pell Grant LEU?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Log into studentaid.gov with your FSA ID — your current LEU percentage is listed in your federal student aid history. Your school's financial aid office can also look this up for you using the National Student Loan Data System (NSLDS)."
+        "text": "Log into studentaid.gov with your FSA ID and open My Aid, where the Lifetime Eligibility Used percentage is shown. Your financial aid office can also look it up via NSLDS."
       }
     },
     {
@@ -91,6 +91,30 @@
         "@type": "Answer",
         "text": "Sign in to studentaid.gov and look for your Lifetime Eligibility Used percentage. Subtract that from 600% and divide by 100 to get roughly how many more full-time years of Pell remain. A student showing 75% has used about a semester and a half of eligibility and still has the large majority intact. That figure is the one that governs, rather than any estimate including this calculator."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "How much Pell money do I have left in dollars?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Subtract your LEU from 600%, then multiply what's left by your Scheduled Award. At the 2026–27 maximum of $7,395, a student at 300% LEU has up to $22,185 left. That is a ceiling: it assumes you qualify for the maximum award, and a smaller Scheduled Award lowers it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does summer Pell count toward the 600% limit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every Pell disbursement counts, including summer. With year-round Pell you can use up to 150% in one award year, which reaches 600% in four years instead of six."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why doesn't my LEU include the Pell I just received?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Schools have up to 15 days after a disbursement to report it, so a recent payment may not appear yet. Add that term's percentage yourself if you are planning around the number."
+      }
     }
   ]
 }
@@ -108,11 +132,11 @@
   <div class="ad-banner" style="margin-bottom:1.5rem;">Advertisement · Google AdSense</div>
   <div class="calc-card">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end;">
-      <div class="form-group"><label>Current Pell LEU (%, from studentaid.gov)</label><input type="number" id="leu" placeholder="e.g. 300" min="0" max="600" step="0.001" value="300"></div>
-      <div class="form-group"><label>Annual Scheduled Pell Award ($)</label><input type="number" id="award" min="0" step="1" value="7395"></div>
+      <div class="form-group"><label>Current Pell LEU (%, from studentaid.gov)</label><input type="number" id="leu" oninput="calculate()" placeholder="e.g. 300" min="0" max="600" step="0.001" value="300"></div>
+      <div class="form-group"><label>Annual Scheduled Pell Award ($)</label><input type="number" id="award" oninput="calculate()" min="0" step="1" value="7395"></div>
     </div>
-    <button class="calc-btn" onclick="calculate()">Check My Remaining Eligibility</button>
-    <div class="result-box" id="result">
+    <button class="calc-btn" onclick="calculate();scrollToResult();">Check My Remaining Eligibility</button>
+    <div class="result-box show" id="result">
       <div class="result-num" id="result-main">—</div>
       <div class="result-label" id="result-label">Remaining Pell Eligibility</div>
       <div class="result-detail" id="result-detail"></div>
@@ -139,6 +163,38 @@
     <p>No — and this is the single most common hope students bring to the question. There is no waiting period that clears the counter. Changing colleges does not reset it, transferring credits does not reset it, and stopping out for five or ten years and returning as an adult learner does not reset it. Percentages disbursed a decade ago still count today. The 600% is a lifetime figure in the literal sense.</p>
     <p>What does move the number is arithmetic rather than time. Your LEU changes whenever a Pell disbursement is made, and it can also change if your Scheduled Award is adjusted up or down for a year you have already been paid — including, under the current rules, when a school has to return Pell funds because non-federal grants or scholarships equalled or exceeded your cost of attendance.</p>
 
+    <h2>Reading your number: semesters and dollars left</h2>
+    <p>Sign in at studentaid.gov with your FSA ID and open <strong>My Aid</strong>. Your Pell Grant Lifetime Eligibility Used appears there as a percentage. Your financial aid office sees the same figure through NSLDS.</p>
+    <p>The figure can lag. Schools have up to 15 days after a disbursement to report it, so a Pell payment you received in the last couple of weeks may not be counted yet. If you were just paid for a term, add that term's percentage yourself before planning around the number.</p>
+    <p>To turn the percentage into something you can plan with, subtract it from 600%. Each 50% left is about one full-time semester. For dollars, multiply the remaining percentage by your Scheduled Award; the Department truncates the result to whole dollars. A student at 533% has 67% left, which at the 2026–27 maximum of $7,395 is $4,954 for the year.</p>
+    <p class="table-scroll-hint">Scroll to see all columns →</p>
+    <table>
+      <tr><th>Your LEU</th><th>Left</th><th>FT terms</th><th>Max Pell left</th></tr>
+      <tr><td>100%</td><td>500%</td><td>10</td><td>$36,975</td></tr>
+      <tr><td>200%</td><td>400%</td><td>8</td><td>$29,580</td></tr>
+      <tr><td>300%</td><td>300%</td><td>6</td><td>$22,185</td></tr>
+      <tr><td>400%</td><td>200%</td><td>4</td><td>$14,790</td></tr>
+      <tr><td>450%</td><td>150%</td><td>3</td><td>$11,092</td></tr>
+      <tr><td>500%</td><td>100%</td><td>2</td><td>$7,395</td></tr>
+      <tr><td>550%</td><td>50%</td><td>1</td><td>$3,697</td></tr>
+      <tr><td>575%</td><td>25%</td><td>½</td><td>$1,848</td></tr>
+    </table>
+    <p>The dollar column is a ceiling, not a forecast. It assumes you qualify for the maximum award and that the maximum stays at $7,395. The maximum has not changed since 2023–24, so the ceiling is a reasonable planning figure, but a smaller Scheduled Award lowers every row in proportion.</p>
+
+    <h2>How fast different schedules use up 600%</h2>
+    <p>LEU is charged by how much of a Scheduled Award you receive, so the calendar speed depends on your enrollment pattern. Summer Pell counts toward the limit like any other term, and year-round Pell lets you receive up to 150% of a Scheduled Award in a single award year. At a quarter-system school, each full-time quarter uses about 33.3%.</p>
+    <p class="table-scroll-hint">Scroll to see all columns →</p>
+    <table>
+      <tr><th>Pattern</th><th>LEU a year</th><th>Years to 600%</th></tr>
+      <tr><td>Full-time, 2 semesters</td><td>100%</td><td>6</td></tr>
+      <tr><td>Full-time + summer</td><td>150%</td><td>4</td></tr>
+      <tr><td>¾-time, 2 semesters</td><td>75%</td><td>8</td></tr>
+      <tr><td>Half-time, 2 semesters</td><td>50%</td><td>12</td></tr>
+      <tr><td>Full-time, 3 quarters</td><td>100%</td><td>6</td></tr>
+    </table>
+    <p>Summer Pell does not cost more per term. It spends eligibility on a faster calendar. If you are on track to finish your degree well inside 600%, taking it simply gets you the money sooner and can shorten the time to graduation.</p>
+    <p>It needs more thought if you are likely to need more than twelve full-time semesters in total: you switched majors, lost credits in a transfer, or are returning with LEU already on your record. For those students, a summer term that does not move the degree forward spends eligibility that a later, required term will need. The <a href="../tools/transfer-credit-loss-calculator.html" style="color:var(--indigo);">transfer credit loss calculator</a> and the <a href="../blog/12-vs-15-credits-financial-aid-trap.html" style="color:var(--indigo);">12-credit trap</a> cover the two most common ways students end up short.</p>
+
     <h2>Three ways eligibility can actually be restored</h2>
     <p>The Department does restore LEU in specific situations, and because the adjustments are made automatically most students never learn they qualified. All three run through the COD system; your school does not have to file anything, and the corrected figure appears in NSLDS.</p>
 
@@ -154,14 +210,17 @@
     <p>Because these adjustments happen without you asking, the practical move is simply to check the current figure rather than assume the one you remember is still accurate. Your LEU is shown in your account on studentaid.gov, and it is the number that governs — not any estimate, including this one.</p>
 
     <h2>Frequently Asked Questions</h2>
-    <p><strong>Does the Pell Grant reset after six years or after a break in school?</strong> No. There is no time-based reset. Changing schools, stopping out, transferring credits, or returning years later as an adult learner all leave the counter exactly where it was. The only ways it moves down are the specific restoration and dispute processes below.</p>
+    <p><strong>Does the Pell Grant reset after six years or after a break in school?</strong> No. There is no time-based reset. Changing schools, stopping out, transferring credits, or returning years later as an adult learner all leave the counter exactly where it was. The only ways it moves down are the specific restoration and dispute processes above.</p>
     <p><strong>Can lifetime eligibility ever be restored?</strong> Yes, in three situations: attendance at a school that later closed without you graduating, a qualifying loan discharge on or after 1 July 2017 tied to the same school and award year, or a successful LEU dispute. The Department applies these automatically through its systems, so the corrected figure appears in NSLDS without your school filing anything.</p>
     <p><strong>How do I find out exactly how much I have left?</strong> Sign in to studentaid.gov and look for your Lifetime Eligibility Used percentage. Subtract it from 600% and divide by 100 to get roughly how many more full-time years of Pell remain. A student showing 75% has used about a semester and a half and has the large majority of their eligibility intact.</p>
     <p><strong>What is Pell Grant Lifetime Eligibility Used (LEU)?</strong> The cumulative percentage of your total lifetime Pell Grant eligibility you've used, tracked since your first Pell disbursement. The lifetime limit is 600% — about 12 full-time semesters or 6 years. At 600% you can no longer receive Pell funding at all.</p>
     <p><strong>How many semesters of Pell Grant do I have left?</strong> Subtract your current LEU from 600%, then divide by 50 (one full-time semester typically uses 50% of lifetime eligibility). A student at 300% LEU has 6 full-time semesters left.</p>
     <p><strong>Can I appeal my Pell Grant lifetime eligibility limit?</strong> No. Unlike SAP, LEU is a hard federal limit with no appeals process or professional judgment override, regardless of when your first Pell funds were received.</p>
     <p><strong>What happens when I get close to 600% LEU?</strong> You get an email notification at 450%. Between 500% and 600%, your award is capped at your remaining percentage rather than the full scheduled amount. At 600% or higher, no Pell eligibility remains.</p>
-    <p><strong>Where do I find my current Pell Grant LEU?</strong> Log into studentaid.gov with your FSA ID — it's listed in your federal student aid history. Your financial aid office can also look it up via NSLDS.</p>
+    <p><strong>Where do I find my current Pell Grant LEU?</strong> Log into studentaid.gov with your FSA ID and open My Aid, where the Lifetime Eligibility Used percentage is shown. Your financial aid office can also look it up via NSLDS.</p>
+    <p><strong>How much Pell money do I have left in dollars?</strong> Subtract your LEU from 600%, then multiply what's left by your Scheduled Award. At the 2026–27 maximum of $7,395, a student at 300% LEU has up to $22,185 left. That is a ceiling: it assumes you qualify for the maximum award, and a smaller Scheduled Award lowers it.</p>
+    <p><strong>Does summer Pell count toward the 600% limit?</strong> Yes. Every Pell disbursement counts, including summer. With year-round Pell you can use up to 150% in one award year, which reaches 600% in four years instead of six.</p>
+    <p><strong>Why doesn't my LEU include the Pell I just received?</strong> Schools have up to 15 days after a disbursement to report it, so a recent payment may not appear yet. Add that term's percentage yourself if you are planning around the number.</p>
 
     <h2>Related tools and guides</h2>
     <p>
@@ -177,14 +236,29 @@
 <div id="footer-placeholder"></div>
 <script src="../assets/js/components.js"></script>
 <script>
+function scrollToResult(){
+  try {
+    var b = document.getElementById('result');
+    if (b && typeof b.scrollIntoView === 'function') { b.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+  } catch (e) { /* cosmetic only */ }
+}
 function calculate(){
   var leu = parseFloat(document.getElementById('leu').value);
   var annualAward = parseFloat(document.getElementById('award').value);
 
+  if (isNaN(leu) || isNaN(annualAward) || leu < 0 || annualAward < 0) {
+    document.getElementById('result-main').textContent = '\u2014';
+    document.getElementById('result-label').textContent = 'Enter your LEU % and Scheduled Award';
+    document.getElementById('result-detail').innerHTML = '';
+    return;
+  }
+
   var remainingPct = 600 - leu;
   if (remainingPct < 0) remainingPct = 0;
-  var remainingDollars = remainingPct / 100 * annualAward;
+  var remainingDollars = Math.floor(remainingPct / 100 * annualAward);
   var remainingSemesters = remainingPct / 50;
+  var thisYearPct = Math.min(remainingPct, 100);
+  var thisYearMax = Math.floor(thisYearPct / 100 * annualAward);
   var warningZone = leu >= 450 && leu < 500;
   var partialAwardZone = leu >= 500 && leu < 600;
   var exhausted = leu >= 600;
@@ -196,23 +270,26 @@ function calculate(){
   if (exhausted) {
     status = 'You have no remaining Pell Grant eligibility. You\'ve reached the 600% lifetime limit.';
   } else if (partialAwardZone) {
-    status = 'You are past 500% LEU — you no longer qualify for a full scheduled award. Your remaining eligibility caps this year\'s award below the maximum, even if your financial need would otherwise support the full amount.';
+    status = 'You are past 500% LEU \u2014 you no longer qualify for a full scheduled award. Your remaining eligibility caps this year\'s award below the maximum, even if your financial need would otherwise support the full amount.';
   } else if (warningZone) {
-    status = 'You are past 450% LEU — the Department of Education notifies students by email at this point, though your award is not yet reduced.';
+    status = 'You are past 450% LEU \u2014 the Department of Education notifies students by email at this point, though your award is not yet reduced.';
   } else {
-    status = 'You are within your full-award zone — no reduction to your scheduled award from LEU at this level.';
+    status = 'You are within your full-award zone \u2014 no reduction to your scheduled award from LEU at this level.';
   }
 
-  var detail = '<table style="width:100%;border-collapse:collapse;font-size:0.88rem;margin-top:0.75rem;">';
-  detail += '<tr style="background:var(--bg-alt);"><th style="text-align:left;padding:0.5rem;border-bottom:1px solid var(--border);">Remaining</th><th style="text-align:left;padding:0.5rem;border-bottom:1px solid var(--border);">Amount</th></tr>';
-  detail += '<tr><td style="padding:0.5rem;border-bottom:1px solid var(--border);">Dollar value remaining (at current award rate)</td><td style="padding:0.5rem;border-bottom:1px solid var(--border);">$' + remainingDollars.toFixed(2) + '</td></tr>';
-  detail += '<tr><td style="padding:0.5rem;border-bottom:1px solid var(--border);">Full-time semesters remaining (approx.)</td><td style="padding:0.5rem;border-bottom:1px solid var(--border);">' + remainingSemesters.toFixed(1) + '</td></tr>';
+  function fmt(n){ return '$' + n.toLocaleString('en-US'); }
+  var detail = '<table>';
+  detail += '<tr><th>Remaining</th><th>Amount</th></tr>';
+  detail += '<tr><td>Dollars left</td><td>' + fmt(remainingDollars) + '</td></tr>';
+  detail += '<tr><td>Full-time semesters left</td><td>' + remainingSemesters.toFixed(1) + '</td></tr>';
+  detail += '<tr><td>Max for one school year</td><td>' + fmt(thisYearMax) + '</td></tr>';
   detail += '</table>';
   detail += '<p style="margin-top:1rem;font-size:0.88rem;color:var(--slate-mid);">' + status + '</p>';
 
   document.getElementById('result-detail').innerHTML = detail;
-  var res = document.getElementById('result'); res.classList.add('show'); res.scrollIntoView({behavior:'smooth', block:'nearest'});
+  document.getElementById('result').classList.add('show');
 }
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', calculate); } else { calculate(); }
 </script>
 </body>
 </html>
