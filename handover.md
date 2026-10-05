@@ -1,3 +1,99 @@
+# GPA Vault 인수인계 문서 v31 (2026-10-05 세션 — 신규 확장 재개 / 13번째 클러스터 "학점인정시험(CLEP)" 개설)
+
+이전 v30 문서를 대체함. v30 이하 본문은 아래에 그대로 보존.
+
+### 0단계 대조 결과
+최신 커밋 `039c756`(ads.txt)과 v30 + 09-29·10-01 추가 기록 일치 — 소급 기록 불필요.
+
+### ★ 먼저 확인할 것 (계속 유효)
+- v19 **색인 수동 제출 금지**(IndexNow·구글 색인 요청 일절 안 함). v21 **패닉 재작성 금지**. v22 **LSAC 추적 의무**. v24 **gpa-raise-calculator 손대지 말 것**. v26 **건강보험 "waive하지 말라" 분기 유지**.
+- **애드센스**: 신청 시점은 사용자가 정한다. 색인을 이유로 말리지 말 것(09-29 사용자 결정). 빈 광고 자리는 제거됨, `ads.txt` 있음(10-01). 승인 후 광고 단위는 `<ins class="adsbygoogle">`로 새로 넣을 것.
+- **제휴**: 사용자 가입 대기. 승인 전 링크·고지문 생성 금지. 보고 때 한 줄만.
+- **push**: 세션에 저장소가 연결돼 있으면 토큰 없이 `git push origin HEAD:main`, Actions 확인은 `gh api repos/canghun13/gpavault/actions/runs?per_page=1`. 새 세션에서 403이 나면 `add_repo(access=push)` → `register_repo_root` 후 remote를 토큰 없는 URL로.
+- gpavault.com 직접 접속은 컨테이너 정책상 차단. 배포 확인은 Actions `completed/success`.
+
+---
+
+## 10-05 데이터 요약
+
+| | 09-15 | 09-22 | 09-29 | **10-05** |
+|---|---|---|---|---|
+| Bing 페이지 노출 합계 | 4,994 | 6,391 | 7,789 | **10,275** |
+| Bing 클릭 합계 | 71 | 96 | 119 | **145** |
+| GA4 활성 사용자(4주) | 186 | 266 | 321 | **432** (싱가포르 178·파리 27 = 봇 추정 → 실사용자 약 225) |
+
+- Bing 상위: does-retaking 2,917/34 · deans-list 1,799/7 · pell-lifetime **1,028/16(1.56%, 09-29 보강 직후 941/13)** · nursing 580/9 · ap-gpa 521/3 · unweighted 512/10 · graduate-college 452/1 · weighted-ap 273/0 · sap 224/7 · pell-intensity 192/7 · obbba 134/5 · ib-gpa 131/1.
+- Pell LEU 롱테일 쿼리가 폭발적으로 늘었다: `i have used 583.474% of my pell grant` 2/2, `596 percent pell grant used, how much left` 1/1, `425 percent … how much aid do i have left` 1/1, `ive used 300% out of 600%` 1/1, `how many semesters … if i used 577%`, `(galeup) leu limit 500% =< 599%` 3노출 등. 09-29 보강 효과 판단은 10-13 이후(체크리스트 61).
+- ★ **신규 페이지 Bing 등장 기준 충족** → v30 규칙대로 **신규 확장 재개**: `does-dual-enrollment-affect-your-gpa` **22노출 1클릭**(기준 20 초과), `repeat-coursework-aid-calculator` 2/1, `r2t4` 1/2, `parent-plus` 1/2, `fafsa-id-verification` 7/1. 신규 13개 중 3개 이상 등장.
+- **구글**: 발견됨-미색인 14건 전부 `1970-01-01` 그대로. 크롤링됨-미색인 47건(최신 크롤 여전히 09-21 1건). 일별 노출 0~4, 클릭 0. 대응 없음(v21).
+
+---
+
+## 10-05 세션 작업 (커밋 `80e7e5a`, push + Actions `completed/success` 확인)
+
+### 신규 클러스터 13번: 학점인정시험(CLEP) — 재정지원 연결형
+**후보 비교**
+- 로스쿨 GPA(LSAC CAS GPA 계산기): 전용 계산기 9개 이상(7Sage, Magoosh, num8ers, test-ninjas 등) + PowerScore 블로그 → **기각(경쟁 과포화)**. 롱테일("LSAC GPA가 성적표보다 낮은 이유")도 PowerScore가 선점. 재조사 금지 목록에 추가.
+- CLEP 절감액 계산기 자체: transfercredit.org·speedyprep·cumgpacalculator 등 이미 있음 → **정면 경쟁 회피**.
+- ★ **CLEP × 재정지원 상호작용**: SERP가 포럼(degreeforum)·CollegeVine Q&A·개별 학교 SAP 정책뿐. CollegeVine은 "CLEP은 aid에 영향 없다"고 답해 사실상 틀림(SAP·학년·등록상태 영향 누락) → **공백 + 차별화 포인트**. 체크리스트 33(포럼만 있는 SERP = 공백) 적용.
+
+**확인한 사실(출처)**
+- CLEP 시험료 **$97**(College Board 등록 페이지, 10-05 확인. 2차 자료의 $93은 구버전) + 시험장/원격감독 수수료 별도(통상 $15–$40). 불합격 시 **3개월** 후 재응시.
+- Modern States 바우처: 시험료만 커버, 시험장 수수료 미포함. 조건 = 13세 이상, 무료 과정 이수, 퀴즈 평균 75%·기말 75%.
+- FSA Handbook Vol 1: 시험 기반 학점은 **SAP pace(이수율)에 반드시 산입**, GPA 산입은 학교 재량. 학교 정책(CCCC)은 최대기간에도 포함.
+- FSA Handbook Vol 8 ch6: 대출 한도용 **학년은 학교 학업기준으로 결정**, 기준 없으면 120학점/4년 = 학년당 30학점 예시. MSU: 28학점(편입학점 포함)부터 2학년.
+- 학부 연간 한도(OBBBA로 변경 없음): 의존 $5,500/$6,500/$7,500, 독립 $9,500/$10,500/$12,500. 총액 $31,000/$57,500.
+- **등록상태 미산입**은 Handbook에서 명시 문구를 못 찾았다. 본문은 "Pell·대출은 그 학기 등록한 과목 기준으로 지급되고 시험 학점은 등록 과목이 아니다"라는 메커니즘 서술로 썼고, CCCC 정책("CE 학점에는 aid 지급 불가")이 뒷받침한다. **"연방 규정상 금지"처럼 강하게 고쳐 쓰지 말 것.**
+
+### 신규 1: `tools/clep-financial-aid-calculator.html` (1,363단어, FAQ 6:6)
+- 입력 10개: 시험 수·시험당 학점·그중 학위 적용 학점·학점당 등록금·시험장 수수료·시험료($97 / Modern States $0)·기취득 학점·학위 요구학점·학년당 학점(기본 30)·의존/독립.
+- 결과: 순절감액(메인) / CLEP 학점 / 시험 비용 / 대체 등록금 / 단축 학기(적용학점÷15) / 현재·CLEP 후 학년 / 현재·CLEP 후 연간 대출한도 / **SAP 여유학점 = 학위×50% − 비적용 CLEP 학점**.
+- 안내문 분기: 학년 상승+한도 상승 시 증가액 / 이미 3학년 이상이면 "최고 한도라 더 안 오름" / 비적용 학점이 있으면 SAP 여유 축소 경고 / 순손실이면 원인 안내 / 항상 "등록 학기 중 CLEP으로 수업을 줄이면 Pell 감소" 경고.
+- 체크리스트 28 적용(결과 기본 표시·oninput/onchange·로드 실행·가드된 scroll). **결과표는 행을 "현재/CLEP 후"로 쪼개 375px에서 스크롤 없이 들어가게 함**(처음엔 "Freshman → Sophomore" 한 칸이라 넘쳤음, 체크리스트 72 적용해 배포 전 수정).
+- 검증(Playwright 실 Chromium): 기본값 순절감 $2,446(6학점×$450 − 2×$127), 10시험 → 비용 $1,270·SAP 여유 36, 독립+바우처 → $9,500→$10,500, 기취득 70 → 3학년 메시지, 빈값 → $0. 에러 0.
+
+### 신규 2: `blog/does-clep-affect-financial-aid.html` (1,662단어, FAQ 7:7)
+- 섹션: 요약표(6개 규칙) / ① 등록상태 미산입 — 4과목 중 1개를 CLEP으로 빼고 9학점 등록 시 Pell 75% → 학기 $3,697 → $2,773(−$924), 6학점 미만이면 대출 중단 / ② SAP — 이수율 예시 18/30(60%) + CLEP 9 → 27/39(69%), 최대기간 180 중 비적용 24학점이면 여유 60 → 36 / ③ 학년·대출한도 표 / ④ Pell 600% 미사용 / 비용·Modern States·DANTES / 시험 전 확인 5항목.
+- 표 2개 문구를 짧게 만들어 375px 전부 fit(320px은 사이트 공통으로 약간 스크롤).
+
+### 9항목 체크리스트
+페이지 2 / canonical / 스키마(WebApplication+FAQ, Article+FAQ) / 헤더 드롭다운(Tuition & Loans, repeat-coursework 다음) / noscript 113파일(College Cost 링크 다음 삽입. editorial-policy·glossary·methodology는 4링크짜리 짧은 nav라 제외) / tools 카드(loans) / blog 카드(최상단) / sitemap 113 → 115 / llms.txt 2줄 / 인터링크: ap-credit-calculator·sap-calculator·ap-credit-vs-placement Related에 1줄씩(보류 예외, lastmod 미변경). 전체 JSON-LD 오류 0, broken 0.
+
+---
+
+## ★ 다음 세션이 확인/처리할 것
+1. 금지 원칙·push 절차(위).
+2. **제휴** 한 줄.
+3. **신규 확장 계속**(기준 충족 상태). 남은 미개척: 홈스쿨 성적증명. CLEP 클러스터 확장 후보: DSST(군인·성인학습자), 사전학습인정(CPL/포트폴리오), "AP vs CLEP vs 이중등록 중 무엇이 학점으로 더 잘 인정되나". 반드시 SERP 경쟁 확인 후.
+4. **Pell LEU 롱테일**: 특정 퍼센트 질의(583%·596%·577%·425%·300%)가 계속 늘면, 10-13 보류 해제 후 pell-lifetime에 "500~600% 구간 학기별 금액" 같은 세부를 고려(지금은 보강 직후라 측정 먼저).
+5. **효과 측정**(2~3주·클릭 10건 이상): 복수전공(09-22) / Parent PLUS(09-29) / Pell 평생(09-29, 기준 941/13) / CLEP 2페이지(10-05, 기준 0).
+6. **처방 제외**: graduate-college, gpa-raise, obbba(작동 중).
+7. 계절성: 대학원 조교 10~12월 / 과목 결과 선택(I/W/F) 10월·12월 → 해당 신규 페이지 Bing 등장 주시.
+
+## 2주 재작업 보류 현황 (10-05 기준)
+- **10-06까지**: `blog/double-major-vs-minor-vs-switching-majors.html`
+- **10-13까지**: `blog/parent-plus-old-vs-new-rules.html`, `tools/pell-lifetime-eligibility-calculator.html`
+- **10-19까지**: `tools/clep-financial-aid-calculator.html`, `blog/does-clep-affect-financial-aid.html`
+- 09-29 빈 광고 자리 제거(107파일)·10-05 noscript 스윕은 레이아웃/내비 변경이라 보류 대상 아님.
+
+## 파일 현황 (10-05 기준)
+- tools 47개 + index / blog 62개 + index / 루트 7개 + ads.txt
+- sitemap URL 115개, tool-card 47개, blog-card 60개
+- 구글: 크롤링됨-미색인 47 / 발견됨-미색인 14(전부 미크롤)
+
+## 클러스터 현황 (13개)
+GPA 계산·변환 · 시험점수 · 연방 지원 규정 · 학자금 대출 · 전공·진로 ROI · 유학 · 학사경고 · 교육 세금 · 이중등록 · 대학원 조교 재정 · 과목 결과 선택(I/W/F) · 학생 건강보험 waiver · **학점인정시험(CLEP)**.
+미개척: 홈스쿨 성적증명. 기각 완료(재조사 금지): v28 목록 + **로스쿨 LSAC GPA 계산기(10-05, 경쟁 과포화)**.
+
+## 체크리스트 추가분 (v30 71~74번에 이어서)
+75. **정면 경쟁이 있는 주제는 "그 주제 × 재정지원 규정" 교차점에서 공백을 찾을 것.** CLEP 절감 계산기는 경쟁이 있었지만 CLEP×SAP/학년/등록상태는 포럼뿐이었다. 사이트의 강점(연방 지원 규정)과 겹치는 교차점이 차별화와 수익화(지원금·대출 클러스터 유입)를 동시에 준다.
+76. **시험료·한도 같은 수치는 1차 출처(발행 기관 페이지)를 직접 열어 확인할 것.** CLEP 시험료는 2차 자료 다수가 $93, College Board 공식은 $97이었다.
+77. **결과표에 "A → B" 형식 값을 넣지 말 것.** 모바일 nowrap 때문에 열이 넘친다. "현재 / ~후" 두 행으로 쪼갠다(체크리스트 72의 구체 사례).
+
+---
+
+## [보존] 이전 문서 v30 본문 (2026-09-29 세션까지)
+
 # GPA Vault 인수인계 문서 v30 (2026-09-29 세션 — 보강 2건 / 쿼리→페이지 매칭으로 대상 교정 / 구글 크롤 1건 재개)
 
 이전 v29 문서를 대체함. v29 이하 본문은 아래에 그대로 보존.
