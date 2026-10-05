@@ -78,7 +78,7 @@
 
 ## 파일 현황 (10-05 기준)
 - tools 47개 + index / blog 62개 + index / 루트 7개 + ads.txt
-- sitemap URL 115개, tool-card 47개, blog-card 60개
+- sitemap URL 115개(contact 추가·privacy 제외, 전부 lastmod 있음), tool-card 47개, blog-card 60개
 - 구글: 크롤링됨-미색인 47 / 발견됨-미색인 14(전부 미크롤)
 
 ## 클러스터 현황 (13개)
@@ -89,6 +89,7 @@ GPA 계산·변환 · 시험점수 · 연방 지원 규정 · 학자금 대출 �
 75. **정면 경쟁이 있는 주제는 "그 주제 × 재정지원 규정" 교차점에서 공백을 찾을 것.** CLEP 절감 계산기는 경쟁이 있었지만 CLEP×SAP/학년/등록상태는 포럼뿐이었다. 사이트의 강점(연방 지원 규정)과 겹치는 교차점이 차별화와 수익화(지원금·대출 클러스터 유입)를 동시에 준다.
 76. **시험료·한도 같은 수치는 1차 출처(발행 기관 페이지)를 직접 열어 확인할 것.** CLEP 시험료는 2차 자료 다수가 $93, College Board 공식은 $97이었다.
 77. **결과표에 "A → B" 형식 값을 넣지 말 것.** 모바일 nowrap 때문에 열이 넘친다. "현재 / ~후" 두 행으로 쪼갠다(체크리스트 72의 구체 사례).
+78. **세션 마감 전 공통 감사를 스크립트로 돌릴 것(10-05 사용자 지적 후 도입).** 확인 항목: ① noindex 아닌 모든 HTML이 sitemap에 있는지 ② sitemap에 noindex 페이지가 없는지 ③ lastmod 없는 항목 0 ④ sitemap XML 파싱 ⑤ 모든 도구가 헤더 드롭다운·tools 카드·llms.txt에 있는지 ⑥ 모든 블로그가 blog 카드·llms.txt에 있는지 ⑦ 링크 10개 넘는 noscript 내비에 도구 전부 있는지 ⑧ canonical ⑨ 내부링크 broken 0. 10-05 감사에서 이전부터 있던 누락 4건을 고쳤다: contact.html sitemap 누락, noindex인 privacy-policy가 sitemap에 있음, lastmod 없는 항목 1개, noscript 8파일에 도구 5개 누락(커밋 `35e1586`). editorial-policy·glossary·methodology의 4링크짜리 짧은 noscript는 의도된 것이라 대상 아님.
 
 ---
 
