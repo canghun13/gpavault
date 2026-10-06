@@ -61,6 +61,15 @@
 
 ---
 
+### ★ 10-06 추가 작업 — 애드센스 승인 걸림돌 2차 점검 (커밋 `b0b68df`)
+사용자 요청: "애드센스 승인에 문제되는 게 있으면 점검해서 수정". 09-29 1차(빈 광고 자리·About·Privacy)에 이어 처리:
+- **얇은 계산기 6개 보강**(설명이 "How this is calculated" + FAQ뿐인 템플릿 페이지): credit-overload 387→764, grad-school-application-cost 397→751, minor-value 415→722, study-abroad-cost 422→694, cosigner-release 426→741, transfer-credit-loss 441→762단어. 각 페이지에 계산 예시 표 + 재정지원 연결 섹션. 사실 출처: ETS GRE 요금표(2026-08-01 시행, 대부분 지역 $249, 추가 성적표 $40, 감면 $100), GAO-17-574(편입 시 학점 평균 43% 손실, 공립→공립 37%, 영리→공립 94%, 29% 학교가 articulation agreement 미게시).
+- **6개 계산기에 체크리스트 28 소급 적용**: 결과 기본 표시, 모든 입력 oninput/select onchange, 로드 시 실행, 가드된 scrollToResult. 로드·입력·빈값·클릭 4경로 검증, NaN·에러·alert 없음. grad-school 기본값 GRE $220/$27 → $249/$40.
+- **홈 하단 배지 2개 제거**: boostdomainrating.com("Domain Rating" 표시), sellwithboost.com. SEO 조작 서비스 홍보로 보임. 나머지 런칭 디렉터리 배지 7개는 유지(전부 nofollow sponsored).
+- 이 6개 도구는 **10-20까지 2주 보류**. 제목·FAQ는 안 건드림.
+- **점검했지만 문제 아님**: 한글 텍스트 0, 페이지 간 중복 문단 0, alt 없는 이미지 0, 깨진 링크 0, 스키마 오류 0. title·description 길이 초과 86건은 SEO 표시 문제일 뿐 애드센스 사유가 아니고 제목 처방은 무효로 결론났으므로(v29) 손대지 않음. 루트의 `4ecbb2cc…txt`는 예전 IndexNow 키 파일로 무해(IndexNow는 계속 사용 금지, 파일 삭제도 불필요).
+- 남은 개선 여지(사유는 아님): 본문에서 1차 출처를 서술하지만 외부 출처 링크는 거의 없음(studentaid.gov 2건). 신뢰 신호 강화용으로 향후 보강 시 출처 링크를 넣는 것을 고려.
+
 ## ★ 다음 세션이 확인/처리할 것
 1. 금지 원칙·push 절차(위).
 2. **제휴** 한 줄.
