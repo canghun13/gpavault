@@ -43,15 +43,15 @@
   </div>
   <div class="calc-card">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end;">
-      <div class="form-group"><label>Program Fee (tuition + fees, $)</label><input type="number" id="program-fee" value="12000" min="0"></div>
-      <div class="form-group"><label>Round-Trip Flights ($)</label><input type="number" id="flights" value="1000" min="0"></div>
-      <div class="form-group"><label>Housing per Month ($, if not included in program fee)</label><input type="number" id="housing" value="0" min="0"></div>
-      <div class="form-group"><label>Food & Living per Month ($)</label><input type="number" id="food" value="500" min="0"></div>
-      <div class="form-group"><label>Program Length (months)</label><input type="number" id="months" value="4" min="1" max="12"></div>
-      <div class="form-group"><label>Visa, Insurance & Misc. Fees ($)</label><input type="number" id="misc" value="800" min="0"></div>
+      <div class="form-group"><label>Program Fee (tuition + fees, $)</label><input type="number" oninput="calculate()" id="program-fee" value="12000" min="0"></div>
+      <div class="form-group"><label>Round-Trip Flights ($)</label><input type="number" oninput="calculate()" id="flights" value="1000" min="0"></div>
+      <div class="form-group"><label>Housing per Month ($, if not included in program fee)</label><input type="number" oninput="calculate()" id="housing" value="0" min="0"></div>
+      <div class="form-group"><label>Food & Living per Month ($)</label><input type="number" oninput="calculate()" id="food" value="500" min="0"></div>
+      <div class="form-group"><label>Program Length (months)</label><input type="number" oninput="calculate()" id="months" value="4" min="1" max="12"></div>
+      <div class="form-group"><label>Visa, Insurance & Misc. Fees ($)</label><input type="number" oninput="calculate()" id="misc" value="800" min="0"></div>
     </div>
-    <button class="calc-btn" onclick="calculate()">Calculate Total Cost</button>
-    <div class="result-box" id="result">
+    <button class="calc-btn" onclick="calculate();scrollToResult();">Calculate Total Cost</button>
+    <div class="result-box show" id="result">
       <div class="result-num" id="result-main">—</div>
       <div class="result-label">Total Estimated Cost</div>
       <div class="result-detail" id="result-detail"></div>
@@ -63,6 +63,27 @@
 
     <h2>What people forget to budget for</h2>
     <p>Visa and immigration application fees, mandatory international health insurance (often required by the host country, not optional), a housing security deposit, local transportation passes, and a phone/data plan are the most commonly underestimated line items. Even a program fee marketed as "all-inclusive" is worth reading closely for what it actually excludes.</p>
+
+
+    <h2>A sample semester budget</h2>
+    <p>Round numbers for a four-month semester through a third-party program that does not include housing:</p>
+    <p class="table-scroll-hint">Scroll to see all columns →</p>
+    <table>
+      <tr><th>Item</th><th>Example</th><th>Total</th></tr>
+      <tr><td>Program fee</td><td>Tuition and fees</td><td>$15,000</td></tr>
+      <tr><td>Flights</td><td>Round trip</td><td>$1,200</td></tr>
+      <tr><td>Housing</td><td>4 × $900</td><td>$3,600</td></tr>
+      <tr><td>Food and living</td><td>4 × $500</td><td>$2,000</td></tr>
+      <tr><td>Visa, insurance, misc.</td><td>One time</td><td>$800</td></tr>
+      <tr><td><strong>Total</strong></td><td></td><td><strong>$22,600</strong></td></tr>
+    </table>
+    <p>Compare that with what the same semester costs at home, not with zero. If you would have paid $14,000 in tuition and $5,000 in housing and food on campus, the real extra cost of going abroad here is about $3,600, not $22,600.</p>
+
+    <h2>Exchange vs. third-party programs</h2>
+    <p>Direct exchange programs usually have you keep paying your home school's tuition while you study at the partner school, so the program fee can be close to what you already pay. Third-party provider programs charge their own fee, which is often higher but can bundle housing, excursions and support. Faculty-led short programs have the lowest total cost but often the highest cost per week. Check which type you are looking at before comparing prices.</p>
+
+    <h2>Using financial aid abroad</h2>
+    <p>Federal aid, including Pell and Direct Loans, can generally be used for a study abroad program that is approved for credit toward your degree, often through a consortium agreement between your school and the host. Your school can also raise your cost of attendance to reflect the higher cost of the program, which can increase the aid you are eligible for. Institutional scholarships are a different story: some don't travel with you, especially for third-party programs. The <a href="../blog/study-abroad-financial-aid-guide.html" style="color:var(--indigo);">study abroad financial aid guide</a> covers what moves with you and what doesn't.</p>
 
     <h2>Frequently Asked Questions</h2>
     <p><strong>Can I use financial aid and student loans for study abroad?</strong> Usually yes, if the program is run through your home university or an approved partner — most federal and institutional aid can be applied, though work-study typically cannot. See our full guide on <a href="../blog/study-abroad-financial-aid-guide.html" style="color:var(--indigo);">study abroad financial aid</a> for details.</p>
@@ -104,8 +125,15 @@ function calculate(){
     + 'Visa, insurance & misc.: <strong>' + fmt(misc) + '</strong><br>'
     + '<span style="color:var(--slate-light);font-size:0.85rem;">Check whether housing/meals are already bundled into your program fee before adding them separately.</span>';
 
-  var res = document.getElementById('result'); res.classList.add('show'); res.scrollIntoView({behavior:'smooth', block:'nearest'});
+  document.getElementById('result').classList.add('show');
 }
+function scrollToResult(){
+  try {
+    var b = document.getElementById('result');
+    if (b && typeof b.scrollIntoView === 'function') { b.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+  } catch (e) { /* cosmetic only */ }
+}
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', calculate); } else { calculate(); }
 </script>
 </body>
 </html>

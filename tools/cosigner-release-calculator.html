@@ -43,9 +43,9 @@
   </div>
   <div class="calc-card">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end;">
-      <div class="form-group"><label>Consecutive On-Time Payments Made So Far</label><input type="number" id="made" value="6" min="0"></div>
+      <div class="form-group"><label>Consecutive On-Time Payments Made So Far</label><input type="number" oninput="calculate()" id="made" value="6" min="0"></div>
       <div class="form-group"><label>Payments Your Lender Requires</label>
-        <select id="required">
+        <select id="required" onchange="calculate()">
           <option value="12">12 payments</option>
           <option value="24" selected>24 payments</option>
           <option value="36">36 payments</option>
@@ -53,14 +53,14 @@
         </select>
       </div>
       <div class="form-group"><label>Have You Had Any Late Payment in the Required Window?</label>
-        <select id="hadlate">
+        <select id="hadlate" onchange="calculate()">
           <option value="no" selected>No</option>
           <option value="yes">Yes</option>
         </select>
       </div>
     </div>
-    <button class="calc-btn" onclick="calculate()">Calculate My Countdown</button>
-    <div class="result-box" id="result">
+    <button class="calc-btn" onclick="calculate();scrollToResult();">Calculate My Countdown</button>
+    <div class="result-box show" id="result">
       <div class="result-num" id="result-main">—</div>
       <div class="result-label">Payments Remaining</div>
       <div class="result-detail" id="result-detail"></div>
@@ -72,6 +72,31 @@
 
     <h2>A late payment resets the clock</h2>
     <p>Because lenders require <em>consecutive</em> on-time payments, a single late payment inside the required window typically resets your count back to zero, even if you'd made 20 out of 24 payments on time before it. If you've had a recent late payment, your countdown effectively restarts from your most recent on-time streak — double check your servicer's account portal for your actual current streak rather than relying on memory.</p>
+
+
+    <h2>What lenders check besides the payment count</h2>
+    <p>Reaching the required number of payments makes you eligible to apply, not approved. Lenders typically also review:</p>
+    <ul>
+      <li><strong>Your credit.</strong> A credit check on you alone, as if you were applying without a cosigner. A thin credit file is one of the most common reasons for denial.</li>
+      <li><strong>Your income.</strong> Proof that you can make the payments yourself, often recent pay stubs or tax returns.</li>
+      <li><strong>Payment history.</strong> No late payments in the required window, and at some lenders no forbearance or reduced payments either, since those can interrupt the count.</li>
+      <li><strong>Status.</strong> Many lenders require that you have graduated and that you are a US citizen or permanent resident.</li>
+    </ul>
+    <p>Requirements and the number of payments vary by lender and sometimes by loan. Your lender's cosigner release form lists the exact rules for your loan.</p>
+
+    <h2>Cosigner release vs. refinancing</h2>
+    <p class="table-scroll-hint">Scroll to see all columns →</p>
+    <table>
+      <tr><th></th><th>Cosigner release</th><th>Refinancing</th></tr>
+      <tr><td>Rate</td><td>Stays the same</td><td>New rate</td></tr>
+      <tr><td>Wait</td><td>12–48 payments</td><td>Any time</td></tr>
+      <tr><td>Credit needed</td><td>Yours alone</td><td>Yours alone</td></tr>
+      <tr><td>Loan type</td><td>Private only</td><td>Private or federal</td></tr>
+    </table>
+    <p>Refinancing into a new loan in your name alone also removes your cosigner, and it doesn't make you wait. The tradeoff: refinancing federal loans into a private loan permanently gives up federal protections such as income-driven repayment and forgiveness programs, so it only makes sense for private loans or for borrowers who are sure they won't need those protections.</p>
+
+    <h2>If your application is denied</h2>
+    <p>Ask for the reason in writing. Lenders that deny a credit application generally have to tell you why. If it was credit score or income, keep paying on time and reapply once that changes; check whether the lender requires a waiting period first. If it was a late payment, your count starts again from the next on-time payment, so the date this calculator shows moves back by the number of payments you have to make up.</p>
 
     <h2>Frequently Asked Questions</h2>
     <p><strong>Where do I find how many payments my lender requires?</strong> Check your original promissory note, or log into your loan servicer's online account and look for a "cosigner release" section — most servicers list your specific requirement and current progress there directly.</p>
@@ -112,8 +137,15 @@ function calculate(){
     + 'At your current pace, you could be eligible to apply around <strong>' + eligibleText + '</strong> (assuming no missed payments between now and then).<br>'
     + '<span style="color:var(--slate-light);font-size:0.85rem;">Confirm your exact requirement and current streak with your loan servicer\'s account portal — this is an estimate.</span>';
 
-  var res = document.getElementById('result'); res.classList.add('show'); res.scrollIntoView({behavior:'smooth', block:'nearest'});
+  document.getElementById('result').classList.add('show');
 }
+function scrollToResult(){
+  try {
+    var b = document.getElementById('result');
+    if (b && typeof b.scrollIntoView === 'function') { b.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+  } catch (e) { /* cosmetic only */ }
+}
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', calculate); } else { calculate(); }
 </script>
 </body>
 </html>

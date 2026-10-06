@@ -43,14 +43,14 @@
   </div>
   <div class="calc-card">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end;">
-      <div class="form-group"><label>Credits Earned at Your Current School</label><input type="number" id="credits" value="60" min="0"></div>
-      <div class="form-group"><label>Estimated % That Will Transfer</label><input type="number" id="transfer-pct" value="70" min="0" max="100"></div>
-      <div class="form-group"><label>Tuition per Credit at New School ($)</label><input type="number" id="cost-per-credit" value="500" min="0"></div>
-      <div class="form-group"><label>Room & Board per Semester ($, optional)</label><input type="number" id="room-board" value="7000" min="0"></div>
-      <div class="form-group"><label>Credits per Semester</label><input type="number" id="credits-per-term" value="15" min="1" max="24"></div>
+      <div class="form-group"><label>Credits Earned at Your Current School</label><input type="number" oninput="calculate()" id="credits" value="60" min="0"></div>
+      <div class="form-group"><label>Estimated % That Will Transfer</label><input type="number" oninput="calculate()" id="transfer-pct" value="70" min="0" max="100"></div>
+      <div class="form-group"><label>Tuition per Credit at New School ($)</label><input type="number" oninput="calculate()" id="cost-per-credit" value="500" min="0"></div>
+      <div class="form-group"><label>Room & Board per Semester ($, optional)</label><input type="number" oninput="calculate()" id="room-board" value="7000" min="0"></div>
+      <div class="form-group"><label>Credits per Semester</label><input type="number" oninput="calculate()" id="credits-per-term" value="15" min="1" max="24"></div>
     </div>
-    <button class="calc-btn" onclick="calculate()">Calculate My Transfer Cost</button>
-    <div class="result-box" id="result">
+    <button class="calc-btn" onclick="calculate();scrollToResult();">Calculate My Transfer Cost</button>
+    <div class="result-box show" id="result">
       <div class="result-num" id="result-main">—</div>
       <div class="result-label">Extra Cost From Lost Credits</div>
       <div class="result-detail" id="result-detail"></div>
@@ -62,6 +62,31 @@
 
     <h2>Get a real number before you commit</h2>
     <p>Your actual transfer rate can vary enormously — some public in-state 2+2 pathways with a formal articulation agreement accept nearly everything, while transfers between very different institution types (especially from a for-profit school) can lose 80% or more. Before finalizing a transfer decision, request a formal transfer credit evaluation from the receiving school's registrar so you can replace the estimate above with your real number.</p>
+
+
+    <h2>What the federal data shows</h2>
+    <p>The Government Accountability Office's 2017 study of students who transferred between 2004 and 2009 found they lost an estimated 43% of their credits on average. The path mattered a great deal:</p>
+    <p class="table-scroll-hint">Scroll to see all columns →</p>
+    <table>
+      <tr><th>Transfer path</th><th>Credits lost</th></tr>
+      <tr><td>All transfers</td><td>About 43%</td></tr>
+      <tr><td>Public to public</td><td>About 37%</td></tr>
+      <tr><td>For-profit to public</td><td>About 94%</td></tr>
+    </table>
+    <p>GAO also found that about 29% of schools didn't list their articulation agreements on their websites, which makes it hard to know your number before you apply.</p>
+
+    <h2>Accepted is not the same as applied</h2>
+    <p>Credits can be lost in two ways. Some are rejected outright, for example a course with no equivalent or a grade below the school's minimum, often a C. Others are accepted as general electives but don't satisfy any requirement in your major. Those still show up as transfer credit, but you have to take the required course anyway. When you enter a transfer percentage above, count only credits that will apply to your degree, not just credits that will be accepted.</p>
+
+    <h2>A worked example</h2>
+    <p>You have 60 credits and expect 75% to apply. You lose 15 credits, which is one full semester at 15 credits a term. At $450 a credit plus $6,000 for housing and food, that semester costs $12,750. If only 50% apply, you lose 30 credits and two semesters, or $25,500.</p>
+
+    <h2>Financial aid effects</h2>
+    <ul>
+      <li><strong>SAP maximum timeframe.</strong> Accepted transfer credits count toward the 150% cap on attempted credits. Electives that don't apply use up room without moving you toward graduation, which can leave you short of aid before you finish. Check with the <a href="sap-calculator.html" style="color:var(--indigo);">SAP calculator</a>.</li>
+      <li><strong>Pell lifetime eligibility.</strong> Each extra semester on Pell uses about 50% of your 600% lifetime limit. The <a href="pell-lifetime-eligibility-calculator.html" style="color:var(--indigo);">Pell lifetime calculator</a> shows how much you have left.</li>
+      <li><strong>Loan limits.</strong> Extra semesters mean more borrowing toward the undergraduate aggregate limit of $31,000 for dependent students and $57,500 for independent students.</li>
+    </ul>
 
     <h2>Frequently Asked Questions</h2>
     <p><strong>How many of my credits will actually transfer?</strong> It depends heavily on your specific schools. Public in-state transfers with a formal articulation agreement often accept most or all credits. Transfers across state lines or from a for-profit school frequently see much larger losses. Ask the receiving school's registrar for a formal transfer credit evaluation.</p>
@@ -102,8 +127,15 @@ function calculate(){
     + 'Extra tuition + room & board: <strong>' + fmt(extraCost) + '</strong><br>'
     + '<span style="color:var(--slate-light);font-size:0.85rem;">Get a formal transfer credit evaluation from your target school to replace this estimate with a real number.</span>';
 
-  var res = document.getElementById('result'); res.classList.add('show'); res.scrollIntoView({behavior:'smooth', block:'nearest'});
+  document.getElementById('result').classList.add('show');
 }
+function scrollToResult(){
+  try {
+    var b = document.getElementById('result');
+    if (b && typeof b.scrollIntoView === 'function') { b.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+  } catch (e) { /* cosmetic only */ }
+}
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', calculate); } else { calculate(); }
 </script>
 </body>
 </html>

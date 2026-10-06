@@ -43,15 +43,15 @@
   </div>
   <div class="calc-card">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end;">
-      <div class="form-group"><label>Number of Schools You're Applying To</label><input type="number" id="num-schools" value="6" min="1"></div>
-      <div class="form-group"><label>Average Application Fee per School ($)</label><input type="number" id="app-fee" value="80" min="0"></div>
-      <div class="form-group"><label>Standardized Test Fee, One-Time (GRE/GMAT/LSAT/MCAT) ($)</label><input type="number" id="test-fee" value="220" min="0"></div>
-      <div class="form-group"><label>Extra Score Report Fee per School ($)</label><input type="number" id="score-fee" value="27" min="0"></div>
-      <div class="form-group"><label>Transcript Fee per School ($)</label><input type="number" id="transcript-fee" value="10" min="0"></div>
-      <div class="form-group"><label>Campus Visits (number × avg. cost)</label><input type="number" id="visit-cost" value="0" min="0"></div>
+      <div class="form-group"><label>Number of Schools You're Applying To</label><input type="number" oninput="calculate()" id="num-schools" value="6" min="1"></div>
+      <div class="form-group"><label>Average Application Fee per School ($)</label><input type="number" oninput="calculate()" id="app-fee" value="80" min="0"></div>
+      <div class="form-group"><label>Standardized Test Fee, One-Time (GRE/GMAT/LSAT/MCAT) ($)</label><input type="number" oninput="calculate()" id="test-fee" value="249" min="0"></div>
+      <div class="form-group"><label>Extra Score Report Fee per School ($)</label><input type="number" oninput="calculate()" id="score-fee" value="40" min="0"></div>
+      <div class="form-group"><label>Transcript Fee per School ($)</label><input type="number" oninput="calculate()" id="transcript-fee" value="10" min="0"></div>
+      <div class="form-group"><label>Campus Visits (number × avg. cost)</label><input type="number" oninput="calculate()" id="visit-cost" value="0" min="0"></div>
     </div>
-    <button class="calc-btn" onclick="calculate()">Calculate Total Cost</button>
-    <div class="result-box" id="result">
+    <button class="calc-btn" onclick="calculate();scrollToResult();">Calculate Total Cost</button>
+    <div class="result-box show" id="result">
       <div class="result-num" id="result-main">—</div>
       <div class="result-label">Total Application Season Cost</div>
       <div class="result-detail" id="result-detail"></div>
@@ -60,6 +60,31 @@
   <div class="explainer">
     <h2>How this is calculated</h2>
     <p>Application fees get most of the attention, but they're rarely the whole bill. This calculator adds the per-school application fee, a one-time standardized test fee, per-school score report fees (most tests include a handful of free reports at registration, with each additional one billed separately), per-school transcript fees, and any campus visit costs you enter — across every school on your list at once.</p>
+
+
+    <h2>A typical bill, line by line</h2>
+    <p>Here is how the costs add up for an applicant sending 8 applications, using round numbers. Your own figures go into the calculator above.</p>
+    <p class="table-scroll-hint">Scroll to see all columns →</p>
+    <table>
+      <tr><th>Item</th><th>Example</th><th>Total</th></tr>
+      <tr><td>Application fees</td><td>8 × $90</td><td>$720</td></tr>
+      <tr><td>Test fee (once)</td><td>GRE</td><td>$249</td></tr>
+      <tr><td>Extra score reports</td><td>4 × $40</td><td>$160</td></tr>
+      <tr><td>Transcripts</td><td>8 × $15</td><td>$120</td></tr>
+      <tr><td><strong>Total</strong></td><td></td><td><strong>$1,249</strong></td></tr>
+    </table>
+    <p>The test figures above use ETS's fee schedule effective August 1, 2026: $249 to take the GRE General Test in most of the world and $40 for each additional score report. Score reports you choose when you test are included; reports you send later are billed one by one, so deciding your list before test day saves money. Visits, retakes and interview travel come on top.</p>
+
+    <h2>Ways to cut the total</h2>
+    <ul>
+      <li><strong>Ask for application fee waivers.</strong> Many graduate programs waive the fee for applicants with financial need, for members of programs such as McNair Scholars, or for people who attend a recruitment event. Waivers often have to be requested before you submit, so check each program's admissions page early.</li>
+      <li><strong>Use the GRE Fee Reduction Program.</strong> ETS cuts the registration fee to $100 for eligible applicants, including people who show financial need, receive unemployment benefits, or serve in the Peace Corps.</li>
+      <li><strong>Send unofficial transcripts first.</strong> A lot of programs accept unofficial transcripts for review and only ask for official ones after admission, which saves the per-school transcript fee on schools that reject you.</li>
+      <li><strong>Trim the list on fit, not fear.</strong> Each extra application adds a fee, a score report and a transcript. Two well-chosen schools you would actually attend cost less and help more than five safety applications.</li>
+    </ul>
+
+    <h2>Is this cost covered by financial aid?</h2>
+    <p>Generally no. Application costs come before you enroll, so they are not part of any school's cost of attendance and federal student aid can't pay them. Budget for them from savings, and keep in mind that the real money question comes after admission: whether the program funds you through an assistantship or fellowship. The <a href="graduate-assistantship-tax-calculator.html" style="color:var(--indigo);">graduate assistantship tax calculator</a> helps you compare funding offers once they arrive.</p>
 
     <h2>Frequently Asked Questions</h2>
     <p><strong>How much does the average grad school application cost?</strong> Application fees alone typically run $60 to $100 per school, and most advisors recommend applying to four to six programs — so fees alone often total $300 to $600 before test fees, score reports, or transcripts. Professional programs often cost more per application.</p>
@@ -102,8 +127,15 @@ function calculate(){
     + (visitCost > 0 ? 'Campus visits: <strong>' + fmt(visitCost) + '</strong><br>' : '')
     + '<span style="color:var(--slate-light);font-size:0.85rem;">Ask each program about fee waivers before paying — need-based and diversity waivers are common.</span>';
 
-  var res = document.getElementById('result'); res.classList.add('show'); res.scrollIntoView({behavior:'smooth', block:'nearest'});
+  document.getElementById('result').classList.add('show');
 }
+function scrollToResult(){
+  try {
+    var b = document.getElementById('result');
+    if (b && typeof b.scrollIntoView === 'function') { b.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+  } catch (e) { /* cosmetic only */ }
+}
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', calculate); } else { calculate(); }
 </script>
 </body>
 </html>

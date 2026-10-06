@@ -43,18 +43,18 @@
   </div>
   <div class="calc-card">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end;">
-      <div class="form-group"><label>Extra Credits Over Full-Time (e.g. 21 instead of 18 = 3)</label><input type="number" id="extra-credits" value="3" min="1" max="10"></div>
-      <div class="form-group"><label>Overload Fee per Credit ($)</label><input type="number" id="overload-fee" value="450" min="0"></div>
-      <div class="form-group"><label>Cost of One Full Extra Semester ($, tuition + room & board)</label><input type="number" id="semester-cost" value="13000" min="0"></div>
+      <div class="form-group"><label>Extra Credits Over Full-Time (e.g. 21 instead of 18 = 3)</label><input type="number" oninput="calculate()" id="extra-credits" value="3" min="1" max="10"></div>
+      <div class="form-group"><label>Overload Fee per Credit ($)</label><input type="number" oninput="calculate()" id="overload-fee" value="450" min="0"></div>
+      <div class="form-group"><label>Cost of One Full Extra Semester ($, tuition + room & board)</label><input type="number" oninput="calculate()" id="semester-cost" value="13000" min="0"></div>
       <div class="form-group"><label>Will these credits actually eliminate a full future semester?</label>
-        <select id="eliminates">
+        <select id="eliminates" onchange="calculate()">
           <option value="yes" selected>Yes — I've mapped this against my remaining requirements</option>
           <option value="no">No / not sure — it just lightens a future semester</option>
         </select>
       </div>
     </div>
-    <button class="calc-btn" onclick="calculate()">Calculate</button>
-    <div class="result-box" id="result">
+    <button class="calc-btn" onclick="calculate();scrollToResult();">Calculate</button>
+    <div class="result-box show" id="result">
       <div class="result-num" id="result-main">—</div>
       <div class="result-label">Net Result of Overloading</div>
       <div class="result-detail" id="result-detail"></div>
@@ -63,6 +63,28 @@
   <div class="explainer">
     <h2>How this is calculated</h2>
     <p>The overload fee itself is simple: extra credits times your school's per-credit overload rate. The part people get wrong is assuming that fee automatically pays for itself. It only does if those extra credits genuinely remove an entire semester from your time to degree — not if they just make some future semester lighter while you're still enrolled either way. This calculator asks you to confirm which case you're in before showing a net dollar figure.</p>
+
+
+    <h2>Check whether you're on flat-rate tuition first</h2>
+    <p>Many colleges charge one flat price for a range of credits, often somewhere between 12 and 18 a semester. Inside that band, the 15th, 16th or 17th credit costs nothing extra, so the overload question only starts once you go past the top of it. Other schools charge per credit for every credit, and some add a separate overload fee on top. Your tuition and fees page will say which model you are on, and it changes the math completely.</p>
+    <p class="table-scroll-hint">Scroll to see all columns →</p>
+    <table>
+      <tr><th>Model</th><th>Credit 19</th><th>Pays off</th></tr>
+      <tr><td>Flat 12–18</td><td>Rate or fee</td><td>Above 18</td></tr>
+      <tr><td>Per credit</td><td>Normal rate</td><td>Saves a term</td></tr>
+      <tr><td>Credit + fee</td><td>Rate + fee</td><td>Saves a term</td></tr>
+    </table>
+
+    <h2>A worked example</h2>
+    <p>Say your school charges a $400 overload fee per credit above 18, and you take 21 credits for two semesters to finish a semester early. That is 6 extra credits, or $2,400 in fees. If one full semester of tuition, housing and food costs $14,000, finishing early saves $11,600 net. The same $2,400 buys nothing if those 6 credits only make a later semester lighter while you still enroll in it. That is why the calculator asks whether a full semester actually disappears.</p>
+
+    <h2>What an overload does to financial aid</h2>
+    <ul>
+      <li><strong>Pell stops growing at full-time.</strong> Pell is paid by enrollment intensity, which tops out at 100% at your school's full-time load. Credits 13 through 21 add cost but no Pell. See the <a href="pell-enrollment-intensity-calculator.html" style="color:var(--indigo);">Pell enrollment intensity calculator</a>.</li>
+      <li><strong>Withdrawals count against you.</strong> If an overloaded schedule forces you to drop a class after the deadline, the W counts as attempted but not completed in Satisfactory Academic Progress. Too many and your completion rate can fall below the usual 67%.</li>
+      <li><strong>Finishing early saves aid eligibility.</strong> A semester you don't need is a semester of Pell lifetime eligibility and loan borrowing you don't use.</li>
+    </ul>
+    <p>The academic cost is real too. Most schools require advisor or dean approval above a set credit limit, often with a minimum GPA, because grades tend to slip when the load gets heavy. A semester early is not worth a GPA drop that costs you a scholarship.</p>
 
     <h2>Frequently Asked Questions</h2>
     <p><strong>What counts as a credit overload?</strong> Most schools set full-time tuition to cover up to 18 credits per semester. Anything beyond that — commonly up to 20 or 21 — is billed as an overload, usually at your school's normal per-credit rate.</p>
@@ -99,8 +121,15 @@ function calculate(){
         : 'Since these credits don\'t eliminate a full future semester, this overload fee is a pure added cost of <strong>' + fmt(overloadCost) + '</strong>, with no offsetting savings.')
     + '<br><span style="color:var(--slate-light);font-size:0.85rem;">Confirm with your advisor exactly which future semester, if any, this removes before overloading.</span>';
 
-  var res = document.getElementById('result'); res.classList.add('show'); res.scrollIntoView({behavior:'smooth', block:'nearest'});
+  document.getElementById('result').classList.add('show');
 }
+function scrollToResult(){
+  try {
+    var b = document.getElementById('result');
+    if (b && typeof b.scrollIntoView === 'function') { b.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+  } catch (e) { /* cosmetic only */ }
+}
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', calculate); } else { calculate(); }
 </script>
 </body>
 </html>

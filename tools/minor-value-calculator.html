@@ -43,13 +43,13 @@
   </div>
   <div class="calc-card">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end;">
-      <div class="form-group"><label>Credits Required for the Minor</label><input type="number" id="minor-credits" value="18" min="1"></div>
-      <div class="form-group"><label>Credits That Overlap With Your Major/Gen-Ed</label><input type="number" id="overlap-credits" value="6" min="0"></div>
-      <div class="form-group"><label>Tuition per Credit ($)</label><input type="number" id="cost-per-credit" value="450" min="0"></div>
-      <div class="form-group"><label>Extra Room in Your Schedule per Semester (credits)</label><input type="number" id="spare-capacity" value="3" min="0" max="10"></div>
+      <div class="form-group"><label>Credits Required for the Minor</label><input type="number" oninput="calculate()" id="minor-credits" value="18" min="1"></div>
+      <div class="form-group"><label>Credits That Overlap With Your Major/Gen-Ed</label><input type="number" oninput="calculate()" id="overlap-credits" value="6" min="0"></div>
+      <div class="form-group"><label>Tuition per Credit ($)</label><input type="number" oninput="calculate()" id="cost-per-credit" value="450" min="0"></div>
+      <div class="form-group"><label>Extra Room in Your Schedule per Semester (credits)</label><input type="number" oninput="calculate()" id="spare-capacity" value="3" min="0" max="10"></div>
     </div>
-    <button class="calc-btn" onclick="calculate()">Calculate the Real Cost</button>
-    <div class="result-box" id="result">
+    <button class="calc-btn" onclick="calculate();scrollToResult();">Calculate the Real Cost</button>
+    <div class="result-box show" id="result">
       <div class="result-num" id="result-main">—</div>
       <div class="result-label">Genuinely Extra Credits</div>
       <div class="result-detail" id="result-detail"></div>
@@ -58,6 +58,28 @@
   <div class="explainer">
     <h2>How this is calculated</h2>
     <p>The credits a minor requires aren't the same as the credits it actually adds — any course that also counts toward your major, a general education requirement, or a free elective you'd take anyway is not really an extra cost. This calculator subtracts that overlap to find your genuinely extra credit count, then checks whether your normal "spare capacity" per semester (room in your schedule beyond your usual course load) can absorb them without delaying graduation. If it can't, it estimates the extra semester and cost.</p>
+
+
+    <h2>A worked example</h2>
+    <p>A business minor requires 18 credits. Two of its courses also satisfy your general education requirements, so 6 credits overlap and only 12 are really extra. If your normal schedule leaves room for 3 extra credits a semester and you have four semesters left, you can absorb all 12 without adding time. You still pay for those 12 credits if your school charges per credit ($5,400 at $450 a credit), but you don't pay for an extra semester of housing and food. Under flat-rate tuition they may cost nothing at all.</p>
+    <p>Now change one number: you have two semesters left. You can absorb 6 of the 12 credits, and the other 6 push you into an extra semester. Now the cost is no longer just the credits: it is another term of rent, food and fees, plus a semester of earnings you don't make. That is the case the calculator flags.</p>
+    <p class="table-scroll-hint">Scroll to see all columns →</p>
+    <table>
+      <tr><th>Situation</th><th>Extra cr.</th><th>Adds time?</th></tr>
+      <tr><td>Big overlap, early</td><td>6–9</td><td>Usually no</td></tr>
+      <tr><td>Small overlap, early</td><td>15–18</td><td>Sometimes</td></tr>
+      <tr><td>Small overlap, late</td><td>15–18</td><td>Often yes</td></tr>
+    </table>
+
+    <h2>Cheaper ways to fit a minor in</h2>
+    <ul>
+      <li><strong>Pick courses that count twice.</strong> Ask your advisor which minor courses also meet gen-ed or major elective requirements. Overlap is the single biggest factor in what a minor costs.</li>
+      <li><strong>Use summer or winter terms.</strong> A summer course at a community college, if your school accepts it, can be much cheaper than a full extra semester.</li>
+      <li><strong>Check flat-rate tuition.</strong> If your school charges one price for 12 to 18 credits, adding a minor course to a 15-credit semester may cost nothing.</li>
+    </ul>
+
+    <h2>The financial aid side</h2>
+    <p>Minor credits count as attempted credits for Satisfactory Academic Progress, including the 150% maximum timeframe, and an extra semester uses another 50% of your Pell lifetime eligibility if you receive Pell. Most students stay well inside those limits, but if you have also changed majors or lost credits in a transfer, check your room with the <a href="sap-calculator.html" style="color:var(--indigo);">SAP calculator</a> before adding a minor late.</p>
 
     <h2>Frequently Asked Questions</h2>
     <p><strong>Do minors always cost extra money?</strong> Not always. If most of the minor's required courses overlap with electives or general education requirements you'd take anyway, a minor can add close to zero extra cost. The cost climbs when the minor requires courses that don't count toward anything else you're already taking.</p>
@@ -98,8 +120,15 @@ function calculate(){
         : 'With no spare capacity entered, these credits would likely need to be added on top of your normal course load or push into an extra semester.')
     + '<br><span style="color:var(--slate-light);font-size:0.85rem;">Overlap credits (' + overlap + ') are treated as free — they count toward your degree either way.</span>';
 
-  var res = document.getElementById('result'); res.classList.add('show'); res.scrollIntoView({behavior:'smooth', block:'nearest'});
+  document.getElementById('result').classList.add('show');
 }
+function scrollToResult(){
+  try {
+    var b = document.getElementById('result');
+    if (b && typeof b.scrollIntoView === 'function') { b.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+  } catch (e) { /* cosmetic only */ }
+}
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', calculate); } else { calculate(); }
 </script>
 </body>
 </html>
