@@ -86,6 +86,12 @@
 - 팝언더·리다이렉트형(Adsterra·Monetag·PropellerAds)은 승인은 쉬우나 사용자 경험·신뢰도 훼손 → 권하지 않음.
 - 제휴(Impact/CJ 등)는 여전히 사용자 가입 대기.
 
+### 10-07 운영자 도메인 메일 개설
+- Cloudflare Email Routing으로 **contact@gpavault.com → canghun13@gmail.com** 전달 설정(수신 전용, 테스트 수신 확인). DNS(Cloudflare)에 MX 3개 + SPF/DKIM TXT가 자동 추가됨. 사이트 A 레코드(GitHub Pages)는 무관.
+- 사이트 연락처 5페이지(about, contact, privacy-policy, editorial-policy, methodology)의 naver 주소를 contact@gpavault.com으로 교체. 앞으로 새 페이지·문서에도 이 주소를 쓸 것.
+- Media.net은 문의 양식("Get in Touch")만 있고 무료 메일(naver·gmail)을 막아서 이 주소로 제출. 회사명 GPA Vault, Region APAC-excluding Japan, Publisher/Media Owner. 답장 대기.
+- 발신(답장을 contact@로 보내기)은 아직 미설정. 필요하면 Gmail "다른 주소로 메일 보내기" + 별도 SMTP(예: Zoho 무료) 필요.
+
 ## ★ 다음 세션이 확인/처리할 것
 1. 금지 원칙·push 절차(위).
 2. **제휴** 한 줄.
