@@ -32,7 +32,7 @@
 }
 </script>
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do all high schools weight AP courses the same way?", "acceptedAnswer": {"@type": "Answer", "text": "No. The +1.0 bonus is the most common convention, but some schools use different scales (like a straight 5.0 A regardless of the +1.0 math, or a smaller +0.5 bonus). Check your school's specific weighting policy — it's usually in the student handbook or course catalog."}}, {"@type": "Question", "name": "Will taking more AP courses always raise my GPA?", "acceptedAnswer": {"@type": "Answer", "text": "Only if you maintain strong grades. Taking on too many AP courses at once and earning C's or D's can lower both your weighted and unweighted GPA compared to earning A's in fewer, more manageable AP courses."}}, {"@type": "Question", "name": "Does AP Capstone or AP Seminar get weighted the same as other AP courses?", "acceptedAnswer": {"@type": "Answer", "text": "Generally yes — most schools apply the same +1.0 bonus to any College Board-designated AP course, including AP Capstone and AP Seminar, though policies vary by district."}}, {"@type": "Question", "name": "How many AP courses should I take for competitive college admissions?", "acceptedAnswer": {"@type": "Answer", "text": "There's no universal number — admissions officers evaluate your course rigor relative to what's offered at your specific high school. Taking the most challenging schedule you can handle while maintaining strong grades matters more than hitting a specific AP course count."}}]}
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do all high schools weight AP courses the same way?", "acceptedAnswer": {"@type": "Answer", "text": "No. The +1.0 bonus is the most common convention, but some schools use different scales (like a straight 5.0 A regardless of the +1.0 math, or a smaller +0.5 bonus). Check your school's specific weighting policy — it's usually in the student handbook or course catalog."}}, {"@type": "Question", "name": "Will taking more AP courses always raise my GPA?", "acceptedAnswer": {"@type": "Answer", "text": "Only if you maintain strong grades. Taking on too many AP courses at once and earning C's or D's can lower both your weighted and unweighted GPA compared to earning A's in fewer, more manageable AP courses."}}, {"@type": "Question", "name": "Does AP Capstone or AP Seminar get weighted the same as other AP courses?", "acceptedAnswer": {"@type": "Answer", "text": "Generally yes — most schools apply the same +1.0 bonus to any College Board-designated AP course, including AP Capstone and AP Seminar, though policies vary by district."}}, {"@type": "Question", "name": "How many AP courses should I take for competitive college admissions?", "acceptedAnswer": {"@type": "Answer", "text": "There's no universal number — admissions officers evaluate your course rigor relative to what's offered at your specific high school. Taking the most challenging schedule you can handle while maintaining strong grades matters more than hitting a specific AP course count."}}, {"@type": "Question", "name": "What GPA is an 89 in an AP class?", "acceptedAnswer": {"@type": "Answer", "text": "On a common high school scale an 89 is a B+, worth 3.3 unweighted and 4.3 weighted with the usual +1.0 AP bonus. On a 10-point scale where 80–89 is a B, it is worth 4.0 weighted."}}, {"@type": "Question", "name": "Do D and F grades get the AP bonus?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the school. Many give no AP bonus below a C, so a D stays at 1.0, while others add the full point. An F is 0.0 everywhere."}}]}
 </script>
 </head>
 <body>
@@ -48,9 +48,9 @@
   <div class="calc-card">
     <p style="font-size:0.83rem;color:var(--slate-mid);margin-bottom:1.25rem;">Enter your current courses. Mark each as AP, Honors, or Regular — the calculator applies the correct weight automatically.</p>
     <div id="courses-container"></div>
-    <button onclick="addCourse()" style="background:none;border:1px dashed var(--border);border-radius:8px;width:100%;padding:0.625rem;color:var(--slate-mid);font-size:0.83rem;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:1.25rem;" onmouseover="this.style.borderColor='var(--indigo-light)';this.style.color='var(--indigo)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--slate-mid)'">+ Add another course</button>
-    <button class="calc-btn" onclick="calculateGPA()">Calculate AP GPA</button>
-    <div class="result-box" id="result">
+    <button onclick="addCourse();calculateGPA();" style="background:none;border:1px dashed var(--border);border-radius:8px;width:100%;padding:0.625rem;color:var(--slate-mid);font-size:0.83rem;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:1.25rem;" onmouseover="this.style.borderColor='var(--indigo-light)';this.style.color='var(--indigo)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--slate-mid)'">+ Add another course</button>
+    <button class="calc-btn" onclick="calculateGPA();scrollToResult();">Calculate AP GPA</button>
+    <div class="result-box show" id="result">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;text-align:center;margin-bottom:1rem;">
         <div>
           <div class="result-num" id="result-weighted">—</div>
@@ -73,7 +73,7 @@
 
     <h2>AP weight by grade</h2>
     <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
-      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Grade</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Regular GPA Points</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">AP Weighted Points (+1.0)</th></tr>
+      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Grade</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Regular</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">AP (+1.0)</th></tr>
       <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">A+ / A</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">5.0</td></tr>
       <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">A−</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.7</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.7</td></tr>
       <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">B+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.3</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.3</td></tr>
@@ -83,16 +83,39 @@
       <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">C</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2.0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3.0</td></tr>
     </table>
 
+    <h2>Turning a percentage grade in an AP class into GPA points</h2>
+    <p>Report cards often show a percentage, not a letter. To convert an AP grade, find the letter your school assigns to the percentage, then add the AP bonus. The table uses a common high school scale; many schools use these cutoffs, but check your handbook, because some count 90–100 as a plain A with no minus.</p>
+    <p class="table-scroll-hint">Scroll to see all columns →</p>
+    <table>
+      <tr><th>Percent</th><th>Grade</th><th>Regular</th><th>AP</th></tr>
+      <tr><td>93–100</td><td>A</td><td>4.0</td><td>5.0</td></tr>
+      <tr><td>90–92</td><td>A−</td><td>3.7</td><td>4.7</td></tr>
+      <tr><td>87–89</td><td>B+</td><td>3.3</td><td>4.3</td></tr>
+      <tr><td>83–86</td><td>B</td><td>3.0</td><td>4.0</td></tr>
+      <tr><td>80–82</td><td>B−</td><td>2.7</td><td>3.7</td></tr>
+      <tr><td>77–79</td><td>C+</td><td>2.3</td><td>3.3</td></tr>
+      <tr><td>73–76</td><td>C</td><td>2.0</td><td>3.0</td></tr>
+      <tr><td>70–72</td><td>C−</td><td>1.7</td><td>2.7</td></tr>
+      <tr><td>60–69</td><td>D</td><td>1.0</td><td>1.0 or 2.0</td></tr>
+      <tr><td>Below 60</td><td>F</td><td>0.0</td><td>0.0</td></tr>
+    </table>
+    <p>So an 89 in AP Biology is a B+, worth 3.3 unweighted and 4.3 weighted. A 90 is an A−, worth 4.7 weighted, unless your school counts 90 as a full A, in which case it is 5.0. On the 10-point scale some schools use (90–100 A, 80–89 B, 70–79 C), an 89 is a B and earns 4.0 in an AP class.</p>
+    <p><strong>D and F grades:</strong> schools split here. Many give no AP bonus below a C, so a D stays at 1.0; others add the full point. An F is 0.0 everywhere. If you are at risk of a D, it is worth checking your school's rule before deciding whether to stay in the class.</p>
+    <p><strong>Half-credit AP classes:</strong> a semester-long AP course worth 0.5 credits gets the same bonus per grade, but it counts half as much in the average. The <a href="weighted-gpa-calculator.html" {L}>weighted GPA calculator</a> lets you enter credits for each class.</p>
+
+    <h2>How much does one AP class raise your GPA?</h2>
+    <p>One AP class adds 1.0 point to that class's grade, then the bonus is spread across all your classes. With 6 classes in a term, one A in an AP class raises a 4.0 unweighted average to about 4.17 weighted (1.0 ÷ 6). With 7 classes it adds about 0.14, and with 8 it adds 0.125. Across a full high school record of 24 to 32 year-long courses, each AP class moves your cumulative weighted GPA by only about 0.03 to 0.04, which is why a long run of APs matters more than any single one.</p>
+
     <h2>How many AP classes do you need to raise your weighted GPA?</h2>
     <p>The +1.0 bonus per AP course looks significant, but its impact on your overall weighted GPA depends on how many total courses you take and what grades you earn. Here is what different AP course loads produce when you earn all A's:</p>
     <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
-      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">AP Courses (out of 6 total)</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Weighted GPA (all A's)</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Unweighted GPA</th></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">0 AP courses</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1 AP course</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.17</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2 AP courses</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.33</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3 AP courses</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.50</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4 AP courses</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.67</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
-      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">6 AP courses (all)</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">5.00</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
+      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">AP classes (of 6)</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Weighted</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Unweighted</th></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">0</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.17</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">2</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.33</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.50</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.67</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
+      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">6 (all)</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">5.00</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">4.00</td></tr>
     </table>
     <p>Notice that the unweighted GPA stays at 4.0 in every scenario — the AP bonus only affects the weighted number. This is why colleges use both: weighted GPA signals rigor, unweighted GPA provides a standardized baseline for comparison.</p>
 
@@ -122,6 +145,8 @@
     <p><strong>Will taking more AP courses always raise my GPA?</strong> Only if you maintain strong grades. Taking on too many AP courses at once and earning C's or D's can lower both your weighted and unweighted GPA compared to earning A's in fewer, more manageable AP courses.</p>
     <p><strong>Does AP Capstone or AP Seminar get weighted the same as other AP courses?</strong> Generally yes — most schools apply the same +1.0 bonus to any College Board-designated AP course, including AP Capstone and AP Seminar, though policies vary by district.</p>
     <p><strong>How many AP courses should I take for competitive college admissions?</strong> There's no universal number — admissions officers evaluate your course rigor relative to what's offered at your specific high school. Taking the most challenging schedule you can handle while maintaining strong grades matters more than hitting a specific AP course count.</p>
+    <p><strong>What GPA is an 89 in an AP class?</strong> On a common high school scale an 89 is a B+, worth 3.3 unweighted and 4.3 weighted with the usual +1.0 AP bonus. On a 10-point scale where 80–89 is a B, it is worth 4.0 weighted.</p>
+    <p><strong>Do D and F grades get the AP bonus?</strong> It depends on the school. Many give no AP bonus below a C, so a D stays at 1.0, while others add the full point. An F is 0.0 everywhere.</p>
 
     <h2>Related tools and guides</h2>
     <p>
@@ -156,6 +181,7 @@ function addCourse(g,t){
 function removeCourse(id){
   document.getElementById(id).remove();
   renumberCourses();
+  calculateGPA();
 }
 function renumberCourses(){
   var labels=document.getElementById('courses-container').querySelectorAll('.course-label');
@@ -170,7 +196,7 @@ function calculateGPA(){
     if(!gEl||!tEl)continue;
     var pts=gs[gEl.value];
     var type=tEl.value;
-    var bonus=type==='ap'?1.0:type==='honors'?0.5:0;
+    var bonus=pts===0?0:(type==='ap'?1.0:type==='honors'?0.5:0);
     var wPts=pts+bonus;
     wp+=wPts;up+=pts;tot++;
     if(type==='ap')apCount++;
@@ -190,9 +216,17 @@ function calculateGPA(){
     bHtml+='Course '+(idx+1)+': '+b.grade+' ('+b.type+') → Unweighted: '+b.up+' / Weighted: '+b.wp+'<br>';
   });
   document.getElementById('result-breakdown').innerHTML=bHtml;
-  var r=document.getElementById('result');r.classList.add('show');r.scrollIntoView({behavior:'smooth',block:'nearest'});
+  document.getElementById('result').classList.add('show');
+}
+function scrollToResult(){
+  try {
+    var b=document.getElementById('result');
+    if(b&&typeof b.scrollIntoView==='function'){b.scrollIntoView({behavior:'smooth',block:'nearest'});}
+  } catch(e){ /* cosmetic only */ }
 }
 addCourse('A','ap');addCourse('B+','ap');addCourse('A','honors');addCourse('A-','regular');
+document.getElementById('courses-container').addEventListener('change',calculateGPA);
+calculateGPA();
 </script>
 </body>
 </html>
