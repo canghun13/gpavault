@@ -1,3 +1,94 @@
+# GPA Vault 인수인계 문서 v32 (2026-10-12 세션 — 수익화 페이지 수치 정정 / AP 계산기 버그 수정)
+
+이전 v31 문서를 대체함. v31 이하 본문(10-06·10-07 추가 기록 포함)은 아래에 그대로 보존.
+
+### 0단계 대조 결과
+최신 커밋 `3fbace4`(연락처 이메일 교체)와 v31 + 10-06/10-07 추가 기록 일치 — 소급 기록 불필요.
+
+### ★ 먼저 확인할 것 (계속 유효)
+- v19 **색인 수동 제출 금지**(IndexNow·구글 색인 요청·유효성 검사 재클릭 권유 금지). v21 **패닉 재작성 금지**. v22 **LSAC 추적 의무**. v24 **gpa-raise-calculator 손대지 말 것**. v26 **건강보험 "waive하지 말라" 분기 유지**.
+- **연락처는 contact@gpavault.com**(Cloudflare Email Routing → canghun13@gmail.com). naver 주소 쓰지 말 것.
+- **수익화 현황**: 애드센스는 사용자가 신청 시점 결정. Media.net 문의 양식 제출(10-07, gpavault 단독) — 답장 대기. 실패 시 사용자는 다른 사이트 3개로 계정 승인 후 gpavault 추가 예정. 제휴는 가입 대기.
+- **push**: 세션에 저장소 연결 시 토큰 없이 `git push origin HEAD:main`, Actions 확인 `gh api repos/canghun13/gpavault/actions/runs?per_page=1`.
+- gpavault.com 직접 접속은 컨테이너에서 차단(라이브 확인은 WebFetch나 dns.google 사용).
+
+---
+
+## 10-12 데이터 요약
+
+| | 09-22 | 09-29 | 10-05 | **10-12** |
+|---|---|---|---|---|
+| Bing 페이지 노출 | 6,391 | 7,789 | 10,275 | **13,606** |
+| Bing 클릭 | 96 | 119 | 145 | **189** |
+| GA4 활성 사용자(4주) | 266 | 321 | 432 | **509** (싱가포르 227 봇 → 실사용자 약 280) |
+
+- Bing 상위: does-retaking 3,426/38 · deans-list 2,127/9 · pell-lifetime 1,176/17 · ap-gpa 834/6(521→) · nursing 770/10 · unweighted 683/13 · graduate-college 535/1 · weighted-ap 352/0 · sap 315/11 · pell-intensity 301/10 · gpa-to-letter 297/2(90→) · obbba 251/6 · **average-student-loan-debt-by-major 232/12(97/3→, CTR 5.17%)** · average-starting-salary 72/5.
+- 신규 페이지 Bing: does-dual-enrollment 64/2(22→), repeat-coursework 2/1, r2t4 1/2, parent-plus 1/2. CLEP 2개는 GA4 조회 각 2회, Bing 노출 아직 없음.
+- **복수전공 보강(09-22) 3주 측정: 쿼리 `double major vs minor pros and cons` 27노출 8.07위 클릭 0, 페이지 34/0 → 효과 없음.** 더 손대지 말고 처방 제외 목록에 추가.
+- `calculating final results...` 88노출 5.8위: **우리 사이트 문자열 아님**(전체 grep 0건). 기회로 오판하지 말 것.
+- 구글: 크롤링됨-미색인 82 → **85**(10-09에 how-does-financial-aid-work·study-abroad-cost-calculator 크롤 후 미색인). 발견됨-미색인 14 → **17**(CLEP 2개, how-much-student-loan-debt-is-too-much 추가). 일별 노출 0~2. 대응 없음(v21).
+
+---
+
+## 10-12 세션 작업 (커밋 `91856fd`, push + Actions `completed/success` 확인)
+
+### ★ 핵심 발견: 수익화 페이지의 숫자에 출처가 없고 부풀려져 있었다
+- `average-student-loan-debt-by-major`: 전공별 부채가 "$28,000–$55,000" 같은 출처 없는 범위, 전국 평균 "$37,000". 실제(College Scorecard 기반 EDI 집계) 전공별 연방 부채 중앙값은 **$22,500~29,400**, College Board 2023–24 학사 대출자 평균 **$29,560**(연방 평균 $20,460, 사적대출 10%가 평균 $42,170). 페이지 FAQ에는 "$30,000"이라 써서 본문과도 모순이었다.
+- `how-much-student-loan-debt-is-too-much`: "2026년 졸업생 평균 연방 부채 $37,500" 3곳 — 사실과 다름.
+- `average-starting-salary-by-major`: 출처 없는 연봉 범위 + 근거 없는 mid-career 열. 컴퓨터공학 "$85,000–$95,000" 등.
+→ **체크리스트 79번 신설. 남은 페이지도 같은 문제가 있을 수 있으니 다음 세션부터 수익화 페이지 순으로 숫자 출처 감사를 진행할 것.**
+
+### 정정 1: `blog/average-student-loan-debt-by-major.html` (1,200 → 1,341단어, FAQ 4 → 6, 스키마 6:6)
+- 15개 전공 표(전공 / 중앙값 부채 / 월 상환액): 그래픽커뮤니케이션 $29,383 … 동물과학 $22,514. 월 상환액 = 10년 표준, 2026–27 학부 금리 6.52%로 직접 계산($256~$334).
+- "전공별 부채 차이는 생각보다 작다(월 약 $80), 차이를 만드는 건 연봉·학교·사적대출" 박스. 사람들이 묻는 전공(환경과학·그래픽디자인·법과학·동물/수의예) 근접 분류 매핑 섹션.
+- 출처 없는 연봉 열 제거 → NACE Winter 2026(CS $81,535, 사회과학 $66,155) 인용 + 초봉 페이지 링크. 로스쿨 부채·변호사 초봉 등 근거 없는 수치 삭제, OBBBA 대학원 한도로 대체.
+- **Sources 섹션 신설**(College Board, EDI, College Scorecard, FSA 금리 공지, Inside Higher Ed/NACE) — 외부 출처 링크 첫 도입.
+
+### 정정 2: `blog/average-starting-salary-by-major.html` (1,324 → 1,268단어, FAQ 6:6)
+- 6개 표를 **뉴욕 연준 초기 경력 중앙값 임금**(22~27세, 학사, 정규직, ACS; 전체 $58,000)으로 교체, 2열(전공/임금)로 단순화. 컴퓨터공학 $90,000, CS $87,000, 간호 $70,000, 마케팅 $60,000, 심리 $45,000, 생물 $45,000 등 약 50개 전공.
+- "실제 임금 vs 고용주 제시 초봉(NACE)" 차이 설명. 약학 $40,000이 낮은 이유(PharmD 미포함) 명시. Sources 섹션.
+
+### 정정 3: `blog/how-much-student-loan-debt-is-too-much.html`
+- $37,500 문구 3곳 → College Board 수치. 전공별 1x 표를 뉴욕 연준 임금으로, 학교 유형 표를 College Board 2025–26(공립 in-state $11,950/순 약 $2,300, 사립 $45,000/순 약 $16,910, 2년제 $4,150)으로 교체. 대학원 부채 목록(출처 없음) → OBBBA 한도. 기회비용 계산 오류 수정($750×10년 @7% = 32세 약 $13만, 65세 100만 달러 이상; 기존 "$250,000"은 과소). Sources 섹션.
+
+### 보강+버그 수정: `tools/ap-gpa-calculator.html` (1,105 → 1,546단어, FAQ 4 → 6)
+- 근거: 노출 521 → 834, 쿼리 `what gpa is an 89 in an ap class`, `what grade is a b+ in a weighted ap class`, `how many points do ap classes add` 등.
+- 백분율 → 등급 → 일반/AP 점수 표(93–100 A … D는 학교마다 1.0 또는 2.0), 10점 스케일 차이, 0.5학점 AP, "AP 한 과목이 GPA를 얼마나 올리나"(6과목 기준 +0.17, 누적 24~32과목이면 0.03~0.04).
+- ★ **버그: AP 과목 F가 가중 1.0으로 계산되던 것 수정**(F는 보너스 0). 체크리스트 28 적용(결과 기본 표시, 선택 변경·추가·삭제 시 즉시 재계산, 가드된 scroll).
+- 구표 2개 헤더 단축으로 375px fit.
+
+### 검증
+- Playwright 375/1280: 4페이지 표 전부 fit, 에러 0. AP 계산기 로드 W 4.38/U 3.75 → F 선택 시 3.13(버그 수정 확인) → 추가/삭제 즉시 반영.
+- JSON-LD 오류 0, 내부링크 broken 0, sitemap 115개 전부 lastmod(4건 10-12로 갱신), llms.txt 4줄 갱신.
+
+---
+
+## ★ 다음 세션이 확인/처리할 것
+1. 금지 원칙·연락처·push 절차(위). Media.net 답장 오면 ads.txt에 줄 추가 + 광고 자리(계산기 아래·본문 중간) 작업.
+2. **숫자 출처 감사 계속**(체크리스트 79): 수익화 순 — student-loan-repayment-plans-2026, college-cost-calculator 설명, degree-roi, is-college-degree-worth-the-debt, what-gpa-do-you-need-for-nursing-school/med-school(요구 GPA 수치), what-is-a-good-sat/act-score(백분위). 범위로만 쓰인 출처 없는 수치는 1차 출처로 교체하고 Sources 섹션 추가.
+3. **pell-lifetime 보류 10-13 해제** → LEU 롱테일 대응 검토: `(galeup) leu limit 500% =< 599%`, `pell grant summer quarter percentage calculation leu`, `two associates degrees how much LEU`, `how is the maximum pell divided for a trimester`, 특정 퍼센트 질의(583%, 596%, 577%, 425%, 300%).
+4. **신규 확장**: 기준 충족 상태 유지. 이번 주는 정확성 정정이 우선이라 신규 0건. 다음 주 신규 1개 이상(후보: 홈스쿨 성적증명, CLEP 확장 DSST/CPL — SERP 확인 필수).
+5. 효과 측정: Parent PLUS·Pell 평생(09-29) / CLEP 2개(10-05) / 얇은 계산기 6개(10-06) / 이번 4페이지(10-12, 기준: debt-by-major 232/12, salary 72/5, ap-gpa 834/6, too-much 3/1).
+6. 처방 제외: graduate-college, gpa-raise, obbba(작동 중), **double-major(3주 무효)**.
+
+## 2주 재작업 보류 현황 (10-12 기준)
+- **10-13까지**: parent-plus-old-vs-new-rules, pell-lifetime-eligibility-calculator
+- **10-19까지**: clep-financial-aid-calculator, does-clep-affect-financial-aid
+- **10-20까지**: credit-overload, grad-school-application-cost, minor-value, study-abroad-cost, cosigner-release, transfer-credit-loss
+- **10-26까지**: average-student-loan-debt-by-major, average-starting-salary-by-major, how-much-student-loan-debt-is-too-much, ap-gpa-calculator
+
+## 파일 현황 (10-12 기준)
+- tools 47 + index / blog 61 + index(+리다이렉트 1) / 루트 7 + ads.txt. sitemap 115.
+- 외부 출처 링크가 있는 페이지: 위 3개 블로그(+privacy의 구글 정책 링크).
+
+## 체크리스트 추가분 (v31 75~78번에 이어서)
+79. **수치는 범위로 뭉뚱그리지 말고 1차 출처의 단일 값과 연도를 쓸 것. 출처는 본문 하단 Sources 섹션에 링크로 남길 것.** 10-12에 부채·연봉 페이지가 출처 없는 부풀린 범위를 쓰고 있었고, 같은 사이트 안에서 평균 부채가 $30,000/$37,000/$37,500으로 서로 달랐다. 새 페이지를 만들거나 보강할 때 다른 페이지와 같은 지표를 쓰면 숫자를 grep으로 대조할 것.
+80. **계산기를 손볼 때 경계값(F, 0, 빈칸)을 반드시 넣어볼 것.** AP 계산기는 F에 AP 보너스를 붙여 1.0으로 계산하고 있었다.
+
+---
+
+## [보존] 이전 문서 v31 본문 (2026-10-05 세션 및 10-06·10-07 추가 기록까지)
+
 # GPA Vault 인수인계 문서 v31 (2026-10-05 세션 — 신규 확장 재개 / 13번째 클러스터 "학점인정시험(CLEP)" 개설)
 
 이전 v30 문서를 대체함. v30 이하 본문은 아래에 그대로 보존.
