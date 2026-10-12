@@ -8,7 +8,7 @@
 ### ★ 먼저 확인할 것 (계속 유효)
 - v19 **색인 수동 제출 금지**(IndexNow·구글 색인 요청·유효성 검사 재클릭 권유 금지). v21 **패닉 재작성 금지**. v22 **LSAC 추적 의무**. v24 **gpa-raise-calculator 손대지 말 것**. v26 **건강보험 "waive하지 말라" 분기 유지**.
 - **연락처는 contact@gpavault.com**(Cloudflare Email Routing → canghun13@gmail.com). naver 주소 쓰지 말 것.
-- **수익화 현황**: 애드센스는 사용자가 신청 시점 결정. Media.net 문의 양식 제출(10-07, gpavault 단독) — 답장 대기. 실패 시 사용자는 다른 사이트 3개로 계정 승인 후 gpavault 추가 예정. 제휴는 가입 대기.
+- **수익화 현황**: 애드센스는 사용자가 신청 시점 결정. **Media.net: 10-07 문의 양식 제출 → 10-12까지 무응답 = 사실상 거절로 판단(사용자 결정).** 11월 중순~12월 중순(1~2개월 후)에 재시도 예정 — 그때 다른 사이트 3개로 계정부터 승인받고 gpavault를 추가하는 방안도 사용자 검토 중. 그 전엔 Media.net 재신청을 먼저 권하지 말 것. 제휴는 가입 대기.
 - **push**: 세션에 저장소 연결 시 토큰 없이 `git push origin HEAD:main`, Actions 확인 `gh api repos/canghun13/gpavault/actions/runs?per_page=1`.
 - gpavault.com 직접 접속은 컨테이너에서 차단(라이브 확인은 WebFetch나 dns.google 사용).
 
