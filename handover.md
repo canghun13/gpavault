@@ -63,6 +63,32 @@
 
 ---
 
+### ★★ 10-14 구조 정리 — "계산기 + 짝 가이드" 반복 패턴 축소 (사용자 승인, 즉시 실행)
+배경: 구글 사이트 단위 품질 하락 요인 중 하나로 "같은 틀의 대량 생산" 패턴을 지목. 사용자가 추천안 전부 바로 진행 지시.
+
+**새 원칙 (계속 적용)**
+- **짝 가이드를 기본으로 만들지 않는다.** 새 주제는 계산기 한 페이지에 충분히 담고, 가이드는 계산기와 **다른 검색 질문**에 답할 때만 따로 만든다(예: 1098-T "박스5 > 박스1"은 별도 질문이라 유지). 페이지 수 확장 속도는 유지하되 같은 틀 반복을 피한다.
+- 반복 섹션 제목("How this is calculated", "Important limits of this estimate") 쓰지 말 것. 페이지 성격에 맞는 제목으로.
+- 수치는 1차 출처 + Sources 섹션(체크리스트 79).
+- **noscript 대체 메뉴는 4링크(Tools·Blog·Glossary·About)로 통일.** 새 페이지 만들 때 noscript에 계산기 링크 추가하는 작업(9항목 체크리스트의 "noscript 스윕")은 폐기. 계산기 노출 경로는 tools/ 카드와 헤더 드롭다운.
+
+**통합 4쌍** (블로그 → 계산기, 블로그 URL은 meta refresh + canonical + noindex 리다이렉트 스텁, sitemap·llms·블로그 카드에서 제거, 내부 링크 재연결):
+| 없앤 블로그 | 합친 곳 | 옮긴 내용 |
+|---|---|---|
+| does-clep-affect-financial-aid | clep-financial-aid-calculator | 이수율 예시, Pell 평생 600%, 비용·Modern States·DANTES, 학점 반영 시점, FAQ 2, Sources |
+| why-did-my-grad-stipend-paycheck-drop | graduate-assistantship-tax-calculator | $25k 면제/$12k 스티펜드 예시, 대처법(payroll·W-4·달력 예산), 환급 안내, FAQ 3, Sources(26 USC 117·127, IRS Pub 970) |
+| student-health-insurance-waiver-deadline | health-insurance-waiver-calculator | 학점 기준·서류·거절 사유, 늦은 창구 기간, COA 포함, FAQ 3 |
+| is-college-degree-worth-the-debt | degree-roi-calculator | 출처 없는 연봉 표 → 뉴욕 연준 임금표, 부채/소득 비율표(6.52% 재계산), PSLF, 직접 계산 방법, FAQ 3, Sources |
+- 판단 기준: 내용 겹침 높음 + 블로그 Bing 노출 0. **기말시험 가이드(89노출)·이중등록 가이드(64노출)는 Bing 유입이 있어 유지.**
+- sitemap 115 → **111**. 리다이렉트 스텁은 how-to-raise-your-gpa 포함 5개.
+
+**기타**
+- 반복 제목 16개를 페이지별 제목으로 교체(8개 "How this is calculated", 8개 "Important limits of this estimate").
+- Sources 섹션 추가: pell-lifetime(FSA 핸드북 LEU 장, GEN-26-01, ASU, CCCC), parent-plus(USC·Baker·WVU·Evansville), obbba(USC·Baker), transfer-credit-loss(GAO-17-574), grad-school-application-cost(ETS). 출처 링크 보유 페이지 총 12개.
+- ★ **학위 ROI 계산기 버그**: "Total Degree Cost" 입력이 계산에 안 쓰였다. "대출 아닌 본인 부담액"으로 바꿔 대출 총상환액과 합산(중복 방지), **회수 기간(payback) 결과 추가**, 음수 표기 수정, 체크리스트 28 적용.
+- health-waiver FAQ 본문/스키마 문구 불일치 1건 수정.
+- 보류: 위 4개 계산기 + pell-lifetime·parent-plus·obbba·transfer-credit-loss·grad-school-application-cost는 **10-28까지**.
+
 ## ★ 다음 세션이 확인/처리할 것
 1. 금지 원칙·연락처·push 절차(위). Media.net 답장 오면 ads.txt에 줄 추가 + 광고 자리(계산기 아래·본문 중간) 작업.
 2. **숫자 출처 감사 계속**(체크리스트 79): 수익화 순 — student-loan-repayment-plans-2026, college-cost-calculator 설명, degree-roi, is-college-degree-worth-the-debt, what-gpa-do-you-need-for-nursing-school/med-school(요구 GPA 수치), what-is-a-good-sat/act-score(백분위). 범위로만 쓰인 출처 없는 수치는 1차 출처로 교체하고 Sources 섹션 추가.
