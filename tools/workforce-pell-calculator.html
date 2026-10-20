@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workforce Pell Grant Calculator (2026–27) – Award for Short-Term Programs | GPA Vault</title>
+  <meta name="description" content="Estimate your Workforce Pell Grant for an 8- to 15-week training program. Uses the 2026–27 proration rule (lesser of weeks or clock hours), your SAI, and shows the lifetime Pell eligibility it uses.">
+  <link rel="canonical" href="https://gpavault.com/tools/workforce-pell-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Workforce Pell Grant Calculator",
+  "description": "Estimate your Workforce Pell Grant for an 8- to 15-week training program using the 2026–27 proration rule, your SAI, and the lifetime Pell eligibility it uses.",
+  "url": "https://gpavault.com/tools/workforce-pell-calculator.html",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "provider": {"@type": "Organization", "name": "GPA Vault", "url": "https://gpavault.com"}
+}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much is the Workforce Pell Grant?", "acceptedAnswer": {"@type": "Answer", "text": "It is your regular scheduled Pell award (up to $7,395 for 2026–27) multiplied by the smaller of the program's share of an academic year in weeks or in clock hours. At the maximum award and a 26-week, 900-hour academic year, an 8-week, 150-hour program gets about $1,233 and a 14-week, 599-hour program about $3,982."}}, {"@type": "Question", "name": "Can I get Workforce Pell if I already have a bachelor's degree?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Unlike regular Pell, a bachelor's degree does not disqualify you, as long as you have lifetime Pell eligibility left. Students who hold a graduate credential, or are enrolled in or admitted to a graduate program, are not eligible."}}, {"@type": "Question", "name": "Does Workforce Pell count toward the lifetime Pell limit?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Indiana's Commission for Higher Education states that it counts toward the 600% lifetime limit. Using the standard Pell calculation, a grant equal to 41.7% of your scheduled award uses about 41.7% of a year's eligibility."}}, {"@type": "Question", "name": "Can I take out student loans for a Workforce Pell program?", "acceptedAnswer": {"@type": "Answer", "text": "No. Students in a Workforce Pell program cannot receive other federal student aid for it, including Direct Loans, and cannot receive a regular Pell Grant for another program at the same time."}}, {"@type": "Question", "name": "How do I find programs approved for Workforce Pell?", "acceptedAnswer": {"@type": "Answer", "text": "Programs need your governor's certification and federal approval, so check your state's workforce or higher education agency and ask the school's financial aid office whether the specific program is approved. Indiana, for example, lists Ivy Tech's Clinical Medical Assistant program and is piloting with two schools in 2026–27."}}, {"@type": "Question", "name": "What if my SAI is too high for Pell?", "acceptedAnswer": {"@type": "Answer", "text": "If your SAI is $14,790 or more you are ineligible. If $7,395 minus your SAI is under $740, you do not qualify for an SAI-based award, though some students still receive the $740 minimum under the income-based minimum Pell rules."}}]}
+</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<noscript><nav style="padding:0.75rem 1rem;font-size:0.75rem;line-height:1.8;background:#f8fafc;border-bottom:1px solid #e2e8f0;"><a href="../tools/">Tools</a> | <a href="../blog/">Blog</a> | <a href="../glossary.html">Glossary</a> | <a href="../about.html">About</a></nav></noscript>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Tuition &amp; Loans</div>
+    <h1>Workforce Pell Grant Calculator (2026–27)</h1>
+    <p>Workforce Pell pays for short job-training programs of 8 to 15 weeks. Enter the program's length and your Student Aid Index to estimate the grant, how much of the cost it covers, and how much lifetime Pell eligibility it uses.</p>
+  </div>
+  <div class="calc-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end;">
+      <div class="form-group"><label for="sai">Your SAI (from FAFSA)</label><input type="number" id="sai" oninput="calculate()" min="-1500" step="1" value="0"></div>
+      <div class="form-group"><label for="tuition">Program Tuition &amp; Fees ($)</label><input type="number" id="tuition" oninput="calculate()" min="0" step="1" value="3500"></div>
+      <div class="form-group"><label for="weeks">Program Length (weeks)</label><input type="number" id="weeks" oninput="calculate()" min="0" step="0.5" value="11"></div>
+      <div class="form-group"><label for="hours">Program Clock Hours</label><input type="number" id="hours" oninput="calculate()" min="0" step="1" value="375"></div>
+      <div class="form-group"><label for="ayweeks">School's Academic Year (weeks)</label><input type="number" id="ayweeks" oninput="calculate()" min="1" step="1" value="26"></div>
+      <div class="form-group"><label for="ayhours">School's Academic Year (clock hours)</label><input type="number" id="ayhours" oninput="calculate()" min="1" step="1" value="900"></div>
+    </div>
+    <button class="calc-btn" onclick="calculate();scrollToResult();">Estimate My Workforce Pell</button>
+    <div class="result-box show" id="result">
+      <div class="result-num" id="result-main">—</div>
+      <div class="result-label" id="result-label">Estimated Workforce Pell Grant</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>How the grant is prorated</h2>
+    <p>Workforce Pell starts from the same scheduled award as a regular Pell Grant. For 2026–27 that is the $7,395 maximum minus your Student Aid Index (SAI), rounded to the nearest $5, with a $740 minimum. Students who qualify for the maximum Pell based on income and family size get $7,395 regardless of SAI, and anyone with an SAI of $14,790 or more is ineligible.</p>
+    <p>That scheduled award is then multiplied by the <strong>smaller</strong> of two fractions: the program's weeks divided by the weeks in the school's academic year, or the program's clock hours divided by the clock hours in its academic year. The Congressional Research Service gives this example: an 11-week, 375-clock-hour program at a school whose full-time year is 26 weeks and 900 clock hours gets $7,395 × the lesser of 11/26 (42.3%) or 375/900 (41.7%) = <strong>$3,081.25</strong>.</p>
+    <p>Twenty-six weeks and 900 clock hours are the federal minimums for a clock-hour academic year, which is why the calculator uses them as defaults. A school with a longer academic year divides by a bigger number, so the same program earns a smaller grant there. Ask the financial aid office for its numbers if you want an exact figure.</p>
+
+    <h2>Award by program length</h2>
+    <p>Estimates below use a 26-week, 900-clock-hour academic year. The "SAI 0" column is the maximum award; the second column shows a student with an SAI of $3,000, whose scheduled award is $4,395.</p>
+    <table>
+      <tr><th>Program</th><th>SAI 0</th><th>SAI $3,000</th></tr>
+      <tr><td>8 wk, 150 hr<br>(hours limit)</td><td>$1,232.50</td><td>$732.50</td></tr>
+      <tr><td>8 wk, 300 hr<br>(weeks limit)</td><td>$2,275.38</td><td>$1,352.31</td></tr>
+      <tr><td>10 wk, 300 hr<br>(hours limit)</td><td>$2,465.00</td><td>$1,465.00</td></tr>
+      <tr><td>11 wk, 375 hr<br>(hours limit)</td><td>$3,081.25</td><td>$1,831.25</td></tr>
+      <tr><td>12 wk, 450 hr<br>(weeks limit)</td><td>$3,413.08</td><td>$2,028.46</td></tr>
+      <tr><td>14 wk, 599 hr<br>(weeks limit)</td><td>$3,981.92</td><td>$2,366.54</td></tr>
+    </table>
+    <p>Because programs must be shorter than 15 weeks, the weeks fraction can never reach 58% of a 26-week year, so a Workforce Pell Grant tops out a little above $4,200 even at the maximum scheduled award. That is the main difference from regular Pell: it is designed to cover part of a short program's cost, not a full year.</p>
+
+    <h2>Which programs and students qualify</h2>
+    <p>The <strong>program</strong> has to meet all of these:</p>
+    <ul>
+      <li>An undergraduate program of at least 150 and fewer than 600 clock hours (or the credit-hour equivalent), lasting at least 8 and fewer than 15 weeks.</li>
+      <li>Offered by a public, private nonprofit or for-profit school that participates in federal student aid, and not by correspondence, direct assessment or study abroad.</li>
+      <li>Certified by your state's governor as training for a high-skill, high-wage or in-demand occupation, leading to a recognized credential that counts as credit toward a further certificate or degree.</li>
+      <li>Approved by the Education Department on outcomes: at least 70% of students completing within 150% of normal time, at least 70% placed in jobs, and value-added earnings (median completer earnings minus 150% of the poverty line, $23,940 in 2026) at least equal to the published tuition and fees.</li>
+    </ul>
+    <p>The <strong>student</strong> needs the usual Pell basics: a FAFSA, an SAI under $14,790, citizenship or eligible noncitizen status and remaining lifetime Pell eligibility. Unlike regular Pell, a bachelor's degree does not disqualify you, but holding a graduate credential or being enrolled in or admitted to a graduate program does. You cannot receive a regular Pell Grant for another program at the same time, and you cannot take federal Direct Loans for a Workforce Pell program.</p>
+
+    <h2>Can you get one yet?</h2>
+    <p>The law took effect July 1, 2026, and the Education Department's final rule took effect July 20, 2026, with schools allowed to start early on July 1. That date opened the approval process, not the money: schools began applying on July 1, and each program needs the governor's certification and then federal approval based on its outcomes. Early estimates expected only a small share of existing short-term programs to qualify at first.</p>
+    <p>States are moving at different speeds. Indiana, for example, lists one eligible program, Ivy Tech Community College's Clinical Medical Assistant program, is running 2026–27 as a pilot with Ivy Tech and Vincennes University, and plans to open applications to all eligible schools in early to mid-2027. Before enrolling, ask the school's financial aid office whether the specific program is approved for Workforce Pell, not just whether the school offers it.</p>
+
+    <h2>What it does to your lifetime Pell limit</h2>
+    <p>Everyone gets a lifetime cap of 600% of a full-year scheduled award, about 12 semesters. Indiana's Commission for Higher Education states that Workforce Pell counts toward that limit. Under the standard Pell calculation, the share used equals the grant divided by your full-year scheduled award, so the $3,081.25 example uses about 41.7% of a year, roughly 0.8 of a semester. The calculator shows that figure as an estimate; the Department has not published a separate conversion for Workforce Pell in the sources we reviewed.</p>
+    <p>That matters if you plan to go on to an associate or bachelor's degree. A student who has already used 500% or more should check the <a href="pell-lifetime-eligibility-calculator.html" style="color:var(--indigo);">Pell Lifetime Eligibility Calculator</a> before spending part of the remaining eligibility on a short program.</p>
+
+    <div class="cta-box" style="background:var(--indigo-faint);border:1px solid var(--indigo-light);border-radius:12px;padding:1.5rem;margin:2rem 0;text-align:center;">
+      <p style="margin-bottom:0.75rem;">Going on to a degree program afterward? See how regular Pell scales with each credit you take.</p>
+      <a href="pell-enrollment-intensity-calculator.html" style="display:inline-block;background:var(--indigo);color:white;padding:0.625rem 1.5rem;border-radius:8px;text-decoration:none;font-size:0.85rem;font-weight:600;">Pell Enrollment Intensity Calculator →</a>
+    </div>
+
+    <h2>Sources</h2>
+    <ul>
+      <li><a href="https://www.everycrsreport.com/files/2026-06-23_IF13253_d273c999c873a03ddb4b945e3650eb28cb4f2831.pdf" style="color:var(--indigo);" rel="noopener">Congressional Research Service, Workforce Pell Grants (IF13253, June 2026)</a> — program and student criteria, outcome tests, proration rule and the $3,081.25 example.</li>
+      <li><a href="https://fsapartners.ed.gov/knowledge-center/library/dear-colleague-letters/2026-01-30/2026-27-federal-pell-grant-maximum-and-minimum-award-amounts" style="color:var(--indigo);" rel="noopener">Federal Student Aid, GEN-26-01: 2026–27 Pell maximum and minimum awards</a> — $7,395 maximum, $740 minimum, SAI rounding and the $14,790 cutoff.</li>
+      <li><a href="https://fsapartners.ed.gov/knowledge-center/library/electronic-announcements/2026-06-04/effective-dates-workforce-pell-and-federal-pell-grant-ineligibility-provisions" style="color:var(--indigo);" rel="noopener">Federal Student Aid, GENERAL-26-32: Effective dates for Workforce Pell</a> — July 1, 2026 effective date and program applications.</li>
+      <li><a href="https://www.nasfaa.org/news-item/38943/NASFAA_Deep_Dive_ED_Releases_Final_Rule_for_Pell_Grant_Provisions_of_OBBBA" style="color:var(--indigo);" rel="noopener">NASFAA, Deep Dive on the final rule for OBBBA Pell provisions</a> — July 20, 2026 effective date with early implementation from July 1.</li>
+      <li><a href="https://www.in.gov/che/state-financial-aid/state-financial-aid-by-program/workforce-pell" style="color:var(--indigo);" rel="noopener">Indiana Commission for Higher Education, Workforce Pell</a> — approved program, pilot timeline, degree-holder eligibility and lifetime Pell counting.</li>
+      <li><a href="https://thecollegeinvestor.com/80871/workforce-pell-grant-final-rule-locks-in-july-2026-launch-for-short-term-training-aid/" style="color:var(--indigo);" rel="noopener">The College Investor, Workforce Pell final rule</a> — graduate-credential exclusion and approval steps.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <p><strong>How much is the Workforce Pell Grant?</strong> It is your regular scheduled Pell award (up to $7,395 for 2026–27) multiplied by the smaller of the program's share of an academic year in weeks or in clock hours. At the maximum award and a 26-week, 900-hour academic year, an 8-week, 150-hour program gets about $1,233 and a 14-week, 599-hour program about $3,982.</p>
+    <p><strong>Can I get Workforce Pell if I already have a bachelor's degree?</strong> Yes. Unlike regular Pell, a bachelor's degree does not disqualify you, as long as you have lifetime Pell eligibility left. Students who hold a graduate credential, or are enrolled in or admitted to a graduate program, are not eligible.</p>
+    <p><strong>Does Workforce Pell count toward the lifetime Pell limit?</strong> Yes. Indiana's Commission for Higher Education states that it counts toward the 600% lifetime limit. Using the standard Pell calculation, a grant equal to 41.7% of your scheduled award uses about 41.7% of a year's eligibility.</p>
+    <p><strong>Can I take out student loans for a Workforce Pell program?</strong> No. Students in a Workforce Pell program cannot receive other federal student aid for it, including Direct Loans, and cannot receive a regular Pell Grant for another program at the same time.</p>
+    <p><strong>How do I find programs approved for Workforce Pell?</strong> Programs need your governor's certification and federal approval, so check your state's workforce or higher education agency and ask the school's financial aid office whether the specific program is approved. Indiana, for example, lists Ivy Tech's Clinical Medical Assistant program and is piloting with two schools in 2026–27.</p>
+    <p><strong>What if my SAI is too high for Pell?</strong> If your SAI is $14,790 or more you are ineligible. If $7,395 minus your SAI is under $740, you do not qualify for an SAI-based award, though some students still receive the $740 minimum under the income-based minimum Pell rules.</p>
+
+    <h2>Related tools and guides</h2>
+    <p>
+      <a href="pell-lifetime-eligibility-calculator.html" style="color:var(--indigo);">Pell Lifetime Eligibility Calculator</a> — how many semesters of Pell you have left under the 600% cap.<br>
+      <a href="pell-enrollment-intensity-calculator.html" style="color:var(--indigo);">Pell Enrollment Intensity Calculator</a> — regular Pell at every credit load.<br>
+      <a href="../blog/pell-grant-changes-2026-27.html" style="color:var(--indigo);">Pell Grant Changes for 2026–27</a> — the $14,790 SAI cutoff and other OBBBA changes.<br>
+      <a href="financial-aid-calculator.html" style="color:var(--indigo);">Financial Aid Calculator</a> — separate grants from loans in an award letter.
+    </p>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+function scrollToResult(){
+  try {
+    var b = document.getElementById('result');
+    if (b && typeof b.scrollIntoView === 'function') { b.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+  } catch (e) { /* cosmetic only */ }
+}
+var MAX_PELL = 7395, MIN_PELL = 740, SAI_CUTOFF = 14790;
+function money(n){ return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2, maximumFractionDigits:2}); }
+function num(id){ var v = document.getElementById(id).value; return v === '' ? NaN : parseFloat(v); }
+function row(a,b){ return '<tr><td style="padding:0.5rem;border-bottom:1px solid var(--border);">'+a+'</td><td style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:right;">'+b+'</td></tr>'; }
+function calculate(){
+  var sai = num('sai'), tuition = num('tuition'), weeks = num('weeks'), hours = num('hours'), ayw = num('ayweeks'), ayh = num('ayhours');
+  var main = document.getElementById('result-main'), label = document.getElementById('result-label'), detail = document.getElementById('result-detail');
+  var res = document.getElementById('result'); if (res) { res.classList.add('show'); }
+  if (isNaN(sai) || isNaN(weeks) || isNaN(hours) || isNaN(ayw) || isNaN(ayh) || ayw <= 0 || ayh <= 0) {
+    main.textContent = '—'; label.textContent = 'Estimated Workforce Pell Grant';
+    detail.innerHTML = '<p style="font-size:0.88rem;color:var(--slate-mid);margin-top:0.75rem;">Enter your SAI, the program\'s weeks and clock hours, and the school\'s academic year to see an estimate.</p>';
+    return;
+  }
+  var notes = [];
+  if (sai >= SAI_CUTOFF) {
+    main.textContent = '$0'; label.textContent = 'Not eligible: SAI is $14,790 or more';
+    detail.innerHTML = '<p style="font-size:0.88rem;color:var(--slate-mid);margin-top:0.75rem;">Under the 2026–27 rules, applicants with an SAI at or above twice the maximum Pell Grant ($14,790) cannot receive Pell, including Workforce Pell.</p>';
+    return;
+  }
+  var sched = Math.min(MAX_PELL, Math.round((MAX_PELL - sai) / 5) * 5);
+  var minOnly = false;
+  if (sched < MIN_PELL) { minOnly = true; }
+  var fw = weeks / ayw, fh = hours / ayh;
+  var frac = Math.max(0, Math.min(1, fw, fh));
+  var limiter = fw <= fh ? 'weeks (' + weeks + ' ÷ ' + ayw + ')' : 'clock hours (' + hours + ' ÷ ' + ayh + ')';
+  if (weeks < 8 || weeks >= 15) notes.push('Workforce Pell programs must last at least 8 and fewer than 15 weeks; ' + weeks + ' weeks is outside that range, so this program would not qualify.');
+  if (hours < 150 || hours >= 600) notes.push('Workforce Pell programs must have at least 150 and fewer than 600 clock hours; ' + hours + ' hours is outside that range, so this program would not qualify.');
+  if (minOnly) {
+    main.textContent = '$0';
+    label.textContent = 'No SAI-based Pell: $7,395 − SAI is under $740';
+    detail.innerHTML = '<p style="font-size:0.88rem;color:var(--slate-mid);margin-top:0.75rem;">Your scheduled award would be ' + money(Math.max(0, MAX_PELL - sai)) + ', below the $740 minimum. Some students still qualify for the $740 minimum Pell based on income and family size; if you do, your Workforce Pell would be about <strong>' + money(MIN_PELL * frac) + '</strong> for this program.</p>' + (notes.length ? '<p style="font-size:0.85rem;color:#b45309;margin-top:0.5rem;">' + notes.join(' ') + '</p>' : '');
+    return;
+  }
+  var award = sched * frac;
+  var leu = frac * 100;
+  if (notes.length) {
+    main.textContent = '$0';
+    label.textContent = 'This program length would not qualify';
+    detail.innerHTML = '<p style="font-size:0.88rem;color:#b45309;margin-top:0.75rem;">' + notes.join(' ') + '</p><p style="font-size:0.85rem;color:var(--slate-mid);">For comparison, the proration formula would give ' + money(award) + ' if the program were eligible.</p>';
+    return;
+  }
+  main.textContent = money(award);
+  label.textContent = 'Estimated Workforce Pell Grant';
+  var h = '<table style="width:100%;border-collapse:collapse;font-size:0.88rem;margin-top:0.75rem;">';
+  h += row('Scheduled award', money(sched));
+  h += row('Share of a year', (frac*100).toFixed(1) + '%');
+  if (!isNaN(tuition) && tuition > 0) {
+    var gap = tuition - award;
+    h += row('Tuition &amp; fees', money(tuition));
+    h += row(gap > 0 ? 'Left to pay' : 'Grant above tuition', money(Math.abs(gap)));
+  }
+  h += row('Lifetime Pell used', leu.toFixed(1) + '%');
+  h += '</table>';
+  h += '<p style="margin-top:0.75rem;font-size:0.85rem;color:var(--slate-mid);">Scheduled award = $7,395 minus your SAI, rounded to $5. The share of a year comes from ' + limiter + ', the smaller fraction. Lifetime Pell used is an estimate out of your 600% cap, about ' + (leu/50).toFixed(2) + ' of a full-time semester. Schools may round the award to the nearest dollar or $5.</p>';
+  detail.innerHTML = h;
+}
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', calculate); } else { calculate(); }
+</script>
+</body>
+</html>
