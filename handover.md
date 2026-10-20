@@ -1,3 +1,97 @@
+# GPA Vault 인수인계 문서 v33 (2026-10-20 세션 — 신규 Workforce Pell 계산기 / 상환 플랜·딘스리스트·간호 GPA 출처 감사)
+
+이전 v32 문서를 대체함. v32 이하 본문(10-14 구조 정리 포함)은 아래에 그대로 보존.
+
+### 0단계 대조 결과
+최신 커밋 `92587dd`(10-14 구조 정리)와 v32 + 10-14 기록 일치 — 소급 기록 불필요.
+
+### ★ 먼저 확인할 것 (계속 유효)
+- v19 **색인 수동 제출 금지**(IndexNow·구글 색인 요청·유효성 검사 재클릭 권유 금지). v21 **패닉 재작성 금지**. v22 **LSAC 추적 의무**. v24 **gpa-raise-calculator 손대지 말 것**. v26 **건강보험 "waive하지 말라" 분기 유지**.
+- **연락처는 contact@gpavault.com**. 운영자 실명은 넣지 않는다(10-14 사용자 결정). Editorial Policy의 AI 보조 작성 문구는 **그대로 둔다**(10-14 결정: 애드센스·Media.net 승인과 무관, 숨기는 것보다 밝히는 편이 낫다).
+- **수익화 현황**: 애드센스는 사용자가 신청 시점 결정. Media.net은 10-07 신청 후 무응답 = 사실상 거절. **11월 중순~12월 중순 재시도 예정**, 그 전엔 먼저 권하지 말 것. 제휴는 가입 대기.
+- **push**: 토큰 없이 `git push origin HEAD:main`, Actions 확인 `gh api repos/canghun13/gpavault/actions/runs?per_page=1`.
+- 사용자에게 묻지 않은 도구 실행 금지(대화성 질문엔 텍스트로만 답할 것).
+
+---
+
+## 10-20 데이터 요약
+
+| | 09-29 | 10-05 | 10-12 | **10-20** |
+|---|---|---|---|---|
+| Bing 페이지 노출 | 7,789 | 10,275 | 13,606 | **16,691** |
+| Bing 클릭 | 119 | 145 | 189 | **220** |
+| GA4 활성 사용자(4주) | 321 | 432 | 509 | **519** (싱가포르 220 봇 → 실사용자 약 300) |
+
+- GA4 유입: direct 305, **bing 134**(세션 168), duckduckgo 31, yahoo 24, ecosia 15, copilot 5, chatgpt 1. 구글 자연 유입 사실상 0.
+- ★ **10-12 출처 기반 정정 효과 확인**: average-starting-salary **72/5 → 213/13(CTR 6.1%)**, average-student-loan-debt-by-major 232/12 → 299/13, ap-gpa 834/6 → 1,013/8. 출처 붙인 재작성이 Bing에서 작동한다 → 이번 세션도 같은 처방을 고노출 페이지에 적용.
+- Bing 상위: does-retaking 3,943/40 · deans-list 2,428/9(CTR 0.37%) · pell-lifetime 1,288/19 · ap-gpa 1,013/8 · nursing 911/11 · unweighted 837/13 · graduate-college 609/1 · gpa-to-letter 492/2 · good-gpa 443/2 · sap 415/13 · weighted-ap 408/0 · pell-intensity 375/12 · ap-credit 322/1 · debt-by-major 299/13 · obbba 298/6.
+- 소형 고CTR: student-income-protection 10/5(`income protection allowance fafsa 2026` 4/4), deans-vs-latin 109/9, how-to-raise-one-semester 18/7, fafsa-id-verification 39/4, lower-interest 38/4.
+- Pell LEU 롱테일 계속 유입: `i have used 583.474% of my pell grant`(2/2), `how many semesters of pell grant do i have left if i used 577%`, `does pel grant start back from 0 after 6 years`, `how do i find out how much pell grant i used`. pell-lifetime 보류 10-28 해제 후 대응 후보.
+- 구글: 크롤링됨-미색인 85 → **86**(10-10), 발견됨-미색인 17. 일별 노출 0~3. 3개월 클릭 4. 대응 없음(v21). 구글 쿼리는 전부 40~90위(IB 환산 21~16노출 37~40위, `how to add up sat score` 95위).
+
+---
+
+## 10-20 세션 작업 (커밋 `4e05097`, push + Actions `completed/success` 확인)
+
+### 신규 1: `tools/workforce-pell-calculator.html` (14번째 축 아님 — Pell 클러스터 확장)
+- **선정 근거**: OBBBA Workforce Pell(150~599 클록시간, 8~15주 미만 단기 직업훈련)이 2026-07-01 시행. 기존 파일 grep 0건(중복 없음). SERP에 **금액 계산기 없음**(정책 기사뿐: New America, NCAN, College Investor, 주정부) → 경쟁 회피 롱테일. Pell 3종(평생·강도·변경)과 클러스터 연결, 금융·교육훈련 광고 단가.
+- **공식(CRS IF13253, 2026-06)**: 예정 지급액(7,395 − SAI, $5 반올림, 최소 740, SAI ≥14,790 불가) × min(프로그램 주 ÷ 학년도 주, 클록시간 ÷ 학년도 시간). CRS 예시 11주/375시간, 26주/900시간 → **$3,081.25** 재현 확인. 26주·900시간은 연방 최소 학년도라 기본값.
+- 결과: 지급액, 연간 대비 비율, 등록금 차액, **평생 Pell 사용 추정치**(인디애나 CHE가 "LEU에 포함" 명시, 환산식은 연방 미공개라 표준 LEU 방식 추정으로 표기).
+- 본문: 비례 계산 설명, 길이별 금액 표(SAI 0 / SAI 3,000), 프로그램·학생 자격(학사 소지자 가능, 대학원 학위자 불가, Direct Loan 불가, 일반 Pell 동시 수령 불가), 시행 현황(7-20 규정 발효·7-01 조기 시행, 주지사 인증 + 연방 승인, 인디애나 Ivy Tech 1개·2026-27 파일럿), LEU 영향, FAQ 6, Sources 6.
+- 경계값: SAI −1500/0/3000/7000(최소 Pell 안내)/20000(불가), 주·시간 범위 밖(20주, 100시간 → $0 + 사유), 빈칸, 0주 확인.
+- 연결: header 드롭다운(Pell Lifetime 다음), tools 카드(loans), sitemap 111 → **112**, llms.txt, 인터링크 3곳(pell-intensity·pell-lifetime·pell-grant-changes Related, lastmod 미변경).
+
+### 감사 1: `blog/student-loan-repayment-plans-2026.html` (수익화 1순위, 2,193 → 2,782단어)
+- **오류 정정**: SAVE "항소법원이 무효화(vacated)" → **합의 판결**(8순회 03-09 명령, 지방법원 03-10 최종 판결). "자동 전환 안 됨" → 90일 통지 순차 발송, 09-29 이전 퇴출 없음, 미선택 시 Standard 배정. **Graduated "PSLF 가능" → 불가**. **"IBR은 대학원 대출 있으면 25년" 삭제**(SAVE/REPAYE 규칙과 혼동). "Standard로 PSLF 받으면 잔액 탕감" 논리 오류 수정(10년 Standard면 남는 잔액 없음). RAP "이자 미자본화" → **미납 이자 면제 + 원금 최대 $50 매칭**.
+- 추가: Tiered Standard(2026-07 이후 신규 대출, 잔액별 10/15/20/25년), RAP 정확 구간·$50 부양가족 차감·360회·이전 IDR 납부 인정, PAYE·ICR 2028-07-01 종료, **IDR 탕감 2026년부터 연방 과세 복귀**(PSLF는 비과세).
+- 출처 없는 "RAP vs IBR ~$25–50" 범위 표 → **2026 빈곤선($15,960, +$5,680) 기준 실계산 표**(3개 소득 × 1인/자녀 1): 예 $50k 1인 IBR $217.17 vs RAP $166.67. 1인 기준 RAP가 유리한 구간 약 $34k~$70k로 계산.
+- 표 2개 모바일 맞춤(셀 안 `<br>` 줄바꿈). Sources 5(CRS IF13075, JMU, studentaid SAVE 소송 페이지, College Investor, HHS).
+
+### 감사 2: `tools/loan-repayment-calculator.html`
+- SAVE FAQ 정정, Parent PLUS FAQ를 OBBBA 기준으로(2026-07 이전 통합+IDR 가입자만 IBR 경로, 그 외 Tiered Standard). 과세 문구 정정.
+- 체크리스트 28 적용(결과 기본 표시, 입력 즉시 재계산, 로드 시 계산, 클릭 시만 가드된 scroll). 기본 월납 389 → **398**(35,000·6.52%·10년 실제값). 경계값: 빈칸 안내, 월납 < 첫 달 이자면 "잔액이 줄지 않음" 안내(기존엔 600개월 루프로 잘못된 결과).
+- RAP 구간표·결과표 라벨 단축으로 375px fit.
+
+### 감사 3: `blog/what-is-the-deans-list-gpa-requirement.html` (Bing 2위 2,428노출)
+- 출처 없는 "3.3~3.7, 3.5 최다", "상위 10~20%", "10~25%가 받음", "President's List 4.0" → **9개 학교 실제 규정 표**: Penn State 3.50, Ohio State 3.5/12시간(S/U 3시간까지), Ohio U 3.5–3.999(4.0 President's, 6~11.99시간 Provost's), Missouri State 3.50/12, DePaul 3.500/12, Texas A&M 3.75 Dean's Honor Roll·3.50–3.74 Distinguished/15, Arizona 3.500–3.999/15(4.000 Distinction, 12단위 Honorable Mention), **Purdue는 누적 3.5 + 학기 3.0**(유일한 누적 기준), GNTC 3.5–3.79/12.
+- 쿼리 대응: `3.39 cum gpa is it deans list`, `does deans list apply to one semester or both`, `how many students can be on the dean's list`, `4.0 deans list no merit aid`, 파트타임 리스트. 필리핀 GWA는 Bukidnon State(1.75, 2.00 미만 없음, 18단위)로 근거 부여.
+- title "Semester Only" → "Usually 3.5 Semester GPA"(퍼듀 예외와 모순 방지). FAQ 9:9. Sources 10.
+
+### 감사 4: `blog/what-gpa-do-you-need-for-nursing-school.html` (Bing 911노출 3.9위)
+- 출처 없는 최소/경쟁 범위 표 전부 교체 → **실제 합격자 평균**: UCF 오를란도 BSN 2025 가을 3.69 전체/3.61 과학/TEAS 88.2(408명 중 140), 데이토나 3.49, 학사 후 BSN 3.52, CSUSM 편입 3.91 + **공시 최저선** 목록(UCF 최저 약 3.0·TEAS 78, GVSU 2.7, CSN ADN 2.50부터 점수, Amarillo ADN 2.0·TEAS 58.7%).
+- ATI TEAS 구간표(Proficient 58.7~77.3, Advanced 78.0~90.0, Exemplary 90.7+, 전국 평균 약 65%), CSN 점수표(첫 시도 B 이상만 점수), AACN 2024 자격 지원서 65,398건 탈락. "80th percentile", "100~200시간" 등 근거 없는 수치 삭제. 의대 GPA 수치(출처 없음) 삭제 → 의대 페이지 링크로 대체. FAQ 3 → 5. Sources 7.
+
+### 검증
+- Playwright 375/1280: 6페이지 표 전부 fit(셀 `<br>` 줄바꿈으로 해결), 페이지 가로 스크롤 0, 콘솔 에러 0, 헤더 드롭다운에 신규 링크 확인.
+- 공통 감사 스크립트(체크리스트 78): sitemap 112 전부 lastmod, 누락·noindex 혼입 0, 도구 48개 헤더·카드·llms 전부 등재, 블로그 56개 카드·llms 전부, canonical 누락 0, JSON-LD 오류 0, 내부 링크 broken 0.
+- 수치 대조(체크리스트 79): IDR 탕감 과세 문구 사이트 내 grep — 상환 플랜·상환 계산기 일치, what-is-pslf는 "may be taxable" 일반론이라 모순 없음.
+
+## ★ 다음 세션이 확인/처리할 것
+1. 금지 원칙·연락처·push 절차(위). Media.net 재시도는 11월 중순 이후.
+2. **효과 측정 기준선**(10-20 Bing): deans-list 2,428/9(CTR 0.37%) · nursing 911/11 · repayment-plans 22/0 · loan-repayment-calculator 0(Bing 없음, 구글 28노출 82위) · workforce-pell 신규. 10-12분: salary 213/13, debt-by-major 299/13, ap-gpa 1,013/8, too-much 3/1.
+3. **숫자 출처 감사 계속**(체크리스트 79): what-gpa-do-you-need-for-med-school(AAMC 수치, aamc.org는 JS 차단이라 WebFetch 실패 — 대학 공시 PDF나 다른 1차 출처 찾을 것), what-is-a-good-sat/act-score(백분위), college-cost-calculator 설명, how-to-lower-your-student-loan-payments, what-is-pslf, federal-vs-private-student-loans.
+4. **pell-lifetime 10-28 보류 해제** → LEU 롱테일(583%·577%·"6년 후 리셋되나"·"얼마 썼는지 확인 방법"). Workforce Pell의 LEU 연결 문단 추가 후보.
+5. **Workforce Pell 추적**: 주별 승인 프로그램 목록이 나오면 표로 보강(인디애나 외 주, 연방 VAE 공표). 이 페이지는 시행 초기 정보라 분기마다 사실 확인.
+6. 신규 후보(롱테일·경쟁 낮음 확인 필수): SAVE 90일 통지 대응(경쟁 높음 — 차별점 없으면 보류), 홈스쿨 성적증명 GPA, DSST/CPL. 원칙: 짝 가이드 만들지 말고 한 페이지로.
+7. 처방 제외: graduate-college, gpa-raise, obbba(작동 중), double-major(3주 무효).
+
+## 2주 재작업 보류 현황 (10-20 기준)
+- **10-26까지**: average-student-loan-debt-by-major, average-starting-salary-by-major, how-much-student-loan-debt-is-too-much, ap-gpa-calculator
+- **10-28까지**: clep-financial-aid-calculator, graduate-assistantship-tax-calculator, health-insurance-waiver-calculator, degree-roi-calculator, pell-lifetime-eligibility-calculator, parent-plus-old-vs-new-rules, obbba-loan-limit-calculator, transfer-credit-loss-calculator, grad-school-application-cost-calculator
+- **11-03까지**: student-loan-repayment-plans-2026, loan-repayment-calculator, what-is-the-deans-list-gpa-requirement, what-gpa-do-you-need-for-nursing-school, workforce-pell-calculator
+- 해제: CLEP 계산기(10-19), 얇은 계산기 6개(10-20: credit-overload, minor-value, study-abroad-cost, cosigner-release 등)
+
+## 파일 현황 (10-20 기준)
+- tools 48 + index / blog 56(+리다이렉트 스텁 5) / 루트 7 + ads.txt. sitemap 112.
+- Sources 섹션 보유 페이지 16개(이번 세션 +4: 상환 플랜, 딘스리스트, 간호, Workforce Pell).
+
+## 체크리스트 추가분 (v32 79~80번에 이어서)
+81. **본문 표는 모바일에서 `white-space:nowrap`이 강제되므로, 셀 문장이 길면 `<br>`로 셀 안에서 줄을 나누거나 열을 줄일 것.** 10-20에 학교명·규정 표가 375px에서 800px 넘게 밀렸다. 3열 이하 + 셀당 약 18자 이하가 안전. 배포 전 Playwright로 각 표 scrollWidth/clientWidth 비교.
+82. **법원·정책 사건은 동사까지 1차 출처대로 쓸 것.** SAVE를 "vacated(무효화)"라고 썼지만 실제는 합의 판결이었다. "자동 전환 안 됨"도 실제(90일 통지 후 Standard 배정)와 달랐다. 정책 페이지는 날짜·주체·절차를 출처 문장 그대로 대조.
+
+---
+
+## [보존] 이전 문서 v32 본문 (2026-10-12 세션 및 10-14 구조 정리까지)
 # GPA Vault 인수인계 문서 v32 (2026-10-12 세션 — 수익화 페이지 수치 정정 / AP 계산기 버그 수정)
 
 이전 v31 문서를 대체함. v31 이하 본문(10-06·10-07 추가 기록 포함)은 아래에 그대로 보존.
