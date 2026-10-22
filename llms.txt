@@ -29,7 +29,7 @@ GPA Vault (gpavault.com) helps US college and high school students calculate GPA
 - [Grade Calculator](https://gpavault.com/tools/grade-calculator.html): Track weighted course grades and calculate what score is needed on remaining assignments to hit a target grade.
 - [Final Exam Calculator](https://gpavault.com/tools/final-exam-calculator.html): Calculate the minimum score needed on a final exam to reach a target course grade.
 - [SAT Score Calculator](https://gpavault.com/tools/sat-score-calculator.html): Convert SAT section scores to a scaled total (400–1600) and see percentile rankings.
-- [ACT Score Calculator](https://gpavault.com/tools/act-score-calculator.html): Calculate ACT composite score from four section scores and see percentile rankings.
+- [ACT Score Calculator](https://gpavault.com/tools/act-score-calculator.html): Calculates the enhanced ACT composite (average of English, Math and Reading; Science optional and excluded since 2025) plus the STEM score, with ACT national ranks for 2022–2024 graduates and the class of 2025 average of 19.4.
 - [ACT Superscore Calculator](https://gpavault.com/tools/act-superscore-calculator.html): Combine your best English, Math, and Reading section scores across up to 3 ACT test dates into a superscore composite, under the 2026 Enhanced ACT format.
 
 ---
