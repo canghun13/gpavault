@@ -41,10 +41,11 @@
       <div class="form-group"><label>Consecutive On-Time Payments Made So Far</label><input type="number" oninput="calculate()" id="made" value="6" min="0"></div>
       <div class="form-group"><label>Payments Your Lender Requires</label>
         <select id="required" onchange="calculate()">
+          <option value="6">6 payments</option>
           <option value="12">12 payments</option>
           <option value="24" selected>24 payments</option>
+          <option value="30">30 payments</option>
           <option value="36">36 payments</option>
-          <option value="48">48 payments</option>
         </select>
       </div>
       <div class="form-group"><label>Have You Had Any Late Payment in the Required Window?</label>
@@ -63,7 +64,7 @@
   </div>
   <div class="explainer">
     <h2>How the countdown is figured</h2>
-    <p>Most private lenders require a specific number of consecutive, on-time principal-and-interest payments before you're even eligible to apply for cosigner release — commonly 12, 24, or 48, depending on the lender. This tool simply subtracts what you've already made from what's required, and estimates the calendar month you'd hit that number if you keep paying on schedule from today. It doesn't guarantee approval — the payment count is the entry requirement, not the whole application.</p>
+    <p>Most private lenders require a specific number of consecutive, on-time principal-and-interest payments before you're even eligible to apply for cosigner release — commonly 12, 24 or 36 (6 at Edly, 12 at Sallie Mae, SoFi and Ascent, 24 at Nelnet and RISLA, 30 at College Ave, 36 at Citizens), depending on the lender. This tool simply subtracts what you've already made from what's required, and estimates the calendar month you'd hit that number if you keep paying on schedule from today. It doesn't guarantee approval — the payment count is the entry requirement, not the whole application.</p>
 
     <h2>A late payment resets the clock</h2>
     <p>Because lenders require <em>consecutive</em> on-time payments, a single late payment inside the required window typically resets your count back to zero, even if you'd made 20 out of 24 payments on time before it. If you've had a recent late payment, your countdown effectively restarts from your most recent on-time streak — double check your servicer's account portal for your actual current streak rather than relying on memory.</p>
@@ -84,7 +85,7 @@
     <table>
       <tr><th></th><th>Cosigner release</th><th>Refinancing</th></tr>
       <tr><td>Rate</td><td>Stays the same</td><td>New rate</td></tr>
-      <tr><td>Wait</td><td>12–48 payments</td><td>Any time</td></tr>
+      <tr><td>Wait</td><td>6–36 payments</td><td>Any time</td></tr>
       <tr><td>Credit needed</td><td>Yours alone</td><td>Yours alone</td></tr>
       <tr><td>Loan type</td><td>Private only</td><td>Private or federal</td></tr>
     </table>
@@ -92,6 +93,12 @@
 
     <h2>If your application is denied</h2>
     <p>Ask for the reason in writing. Lenders that deny a credit application generally have to tell you why. If it was credit score or income, keep paying on time and reapply once that changes; check whether the lender requires a waiting period first. If it was a late payment, your count starts again from the next on-time payment, so the date this calculator shows moves back by the number of payments you have to make up.</p>
+    <h2>Sources</h2>
+    <ul>
+      <li><a href="https://www.credible.com/blog/refinance-student-loans/cosigner-release/" style="color:var(--indigo);" rel="noopener">Credible, Cosigner release</a> — payment counts by lender and required documents.</li>
+      <li><a href="https://www.cnbc.com/select/best-student-loans-with-fastest-co-signer-release/" style="color:var(--indigo);" rel="noopener">CNBC Select, Student loans with the fastest co-signer release (September 2026)</a> — 6- and 12-payment lenders and income requirements.</li>
+    </ul>
+
 
     <h2>Frequently Asked Questions</h2>
     <p><strong>Where do I find how many payments my lender requires?</strong> Check your original promissory note, or log into your loan servicer's online account and look for a "cosigner release" section — most servicers list your specific requirement and current progress there directly.</p>
