@@ -32,7 +32,7 @@
 }
 </script>
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What's the difference between my SAT score and my percentile?", "acceptedAnswer": {"@type": "Answer", "text": "Your score (400–1600) is a fixed number on the College Board's scale. Your percentile tells you what percentage of test-takers you scored higher than. The same score can mean a different percentile from year to year as the testing pool shifts slightly."}}, {"@type": "Question", "name": "Is this the same as the percentile on my official score report?", "acceptedAnswer": {"@type": "Answer", "text": "This tool estimates your percentile using recent published College Board data. Your official score report includes the exact percentile calculated at the time you tested, which may differ slightly since percentiles are recalculated periodically."}}, {"@type": "Question", "name": "Does a higher percentile always mean a better chance of admission?", "acceptedAnswer": {"@type": "Answer", "text": "No. Percentile tells you how you compare to all test-takers nationally, but admissions decisions depend on how your score compares to each specific school's admitted student range, plus your full application. A high national percentile can still be below a selective school's 25th percentile."}}, {"@type": "Question", "name": "What's a good SAT percentile?", "acceptedAnswer": {"@type": "Answer", "text": "Above the 75th percentile (roughly 1250+) is competitive for most colleges. Above the 90th percentile (roughly 1330+) is strong for selective schools. Above the 98th percentile (roughly 1500+) is competitive for the most selective universities in the country."}}]}
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What's the difference between my SAT score and my percentile?", "acceptedAnswer": {"@type": "Answer", "text": "Your score (400–1600) is a fixed number on the College Board's scale. Your percentile tells you what percentage of test-takers you scored higher than. The same score can mean a different percentile from year to year as the testing pool shifts slightly."}}, {"@type": "Question", "name": "Is this the same as the percentile on my official score report?", "acceptedAnswer": {"@type": "Answer", "text": "This tool estimates your percentile using recent published College Board data. Your official score report includes the exact percentile calculated at the time you tested, which may differ slightly since percentiles are recalculated periodically."}}, {"@type": "Question", "name": "Does a higher percentile always mean a better chance of admission?", "acceptedAnswer": {"@type": "Answer", "text": "No. Percentile tells you how you compare to all test-takers nationally, but admissions decisions depend on how your score compares to each specific school's admitted student range, plus your full application. A high national percentile can still be below a selective school's 25th percentile."}}, {"@type": "Question", "name": "What's a good SAT percentile?", "acceptedAnswer": {"@type": "Answer", "text": "Above the 75th percentile (1200+) is above most test-takers; the 89th percentile (1350) and up is in range for many selective public universities such as Ohio State (1360–1500 admitted); the 97th percentile (1500) and up is where the most selective universities' ranges sit."}}]}
 </script>
 </head>
 <body>
@@ -46,12 +46,12 @@
   </div>
   <div class="calc-card">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-      <div class="form-group"><label>Total SAT Score (400–1600)</label><input type="number" id="total" value="1200" min="400" max="1600" step="10"></div>
-      <div class="form-group"><label>Math Score (optional, 200–800)</label><input type="number" id="math" value="" min="200" max="800" step="10" placeholder="e.g. 620"></div>
+      <div class="form-group"><label>Total SAT Score (400–1600)</label><input type="number" id="total" oninput="calculate()" value="1200" min="400" max="1600" step="10"></div>
+      <div class="form-group"><label>Math Score (optional, 200–800)</label><input type="number" id="math" oninput="calculate()" value="" min="200" max="800" step="10" placeholder="e.g. 620"></div>
     </div>
-    <div class="form-group"><label>Reading & Writing Score (optional, 200–800)</label><input type="number" id="rw" value="" min="200" max="800" step="10" placeholder="e.g. 590"></div>
-    <button class="calc-btn" onclick="calculate()">See My Percentile</button>
-    <div class="result-box" id="result">
+    <div class="form-group"><label>Reading & Writing Score (optional, 200–800)</label><input type="number" id="rw" oninput="calculate()" value="" min="200" max="800" step="10" placeholder="e.g. 590"></div>
+    <button class="calc-btn" onclick="calculate(true)">See My Percentile</button>
+    <div class="result-box show" id="result">
       <div class="result-num" id="result-pct">—</div>
       <div class="result-label">National Percentile</div>
       <div class="result-detail" id="result-detail"></div>
@@ -62,49 +62,50 @@
     <p>Your SAT percentile tells you the percentage of test-takers you scored higher than — not the percentage of questions you got right. If you're in the 80th percentile, you outscored 80% of the students in the comparison group. It's a relative ranking, not a grade.</p>
     <p>There are two versions of this ranking: the "SAT User" percentile (compares you only to students who actually took the SAT that year) and the "Nationally Representative" percentile (compares you to all US students in your grade, including those who never took the SAT). The two can differ by several points for the same score — admissions offices mostly reference the SAT User percentile, and that's what this tool estimates.</p>
 
-    <h2>SAT score to percentile table (2026)</h2>
+    <h2>SAT score to percentile table</h2>
+    <p>College Board user percentiles, based on students who graduated in the past three school years and took the SAT.</p>
     <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
       <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Score</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Percentile</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Score</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Percentile</th></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1600</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">99th+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1100</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">58th</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1550</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">99th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1050</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">49th</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1500</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">98th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1000</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">40th</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1450</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">96th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">950</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">32nd</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1400</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">94th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">900</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">25th</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1350</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">91st</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">850</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">18th</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1300</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">87th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">800</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">10th</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1250</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">81st</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">750</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">6th</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1200</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">74th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">700</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3rd</td></tr>
-      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1150</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">66th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">650</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1st</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1600</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">99+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1100</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">62nd</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1550</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">99th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1050</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">55th</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1500</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">97th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1000</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">47th</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1450</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">95th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">950</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">39th</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1400</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">93rd</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">900</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">32nd</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1350</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">89th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">850</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">24th</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1300</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">85th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">800</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">17th</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1250</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">80th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">750</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">11th</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1200</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">75th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">700</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">6th</td></tr>
+      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1150</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">69th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">650</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3rd</td></tr>
     </table>
-    <p>Notice the curve is steepest at the top: going from 1450 to 1550 moves you only 3 percentile points (96th to 99th), while going from 1100 to 1200 moves you 16 points (58th to 74th). Percentile gains get much harder to earn as your score climbs, because so many high scorers cluster together at the top of the distribution.</p>
+    <p>Notice how the curve flattens at the top: going from 1450 to 1550 moves you about 4 percentile points (95th to 99th), while going from 1100 to 1200 moves you 13 points (62nd to 75th). Percentile gains get much harder to earn as your score climbs.</p>
     <p>Already have raw section answers instead of a scaled score? Use the <a href="sat-score-calculator.html" style="color:var(--indigo);">SAT Score Calculator</a> first to get your composite, then come back here for the percentile breakdown.</p>
 
     <h2>Math vs Reading & Writing: percentiles behave differently</h2>
-    <p>The two sections don't have identical percentile curves. Math tends to be harsher at the top — a perfect 800 is roughly the 99th percentile, but a large cohort of high-scoring international and STEM-focused students compresses the upper range, meaning a 750 in Math might rank lower than a 750 in Reading & Writing. Reading & Writing has a wider spread at the high end, so strong verbal scores can sometimes boost your overall national ranking more than an equivalent Math score.</p>
+    <p>The two sections don't have identical percentile curves. Near the top, Math is more crowded: a 750 in Math is the 95th percentile, while a 750 in Reading and Writing is the 98th. In the middle the pattern reverses — a 500 is the 50th percentile in Math but the 43rd in Reading and Writing.</p>
     <p>If your Math and R&W percentiles differ significantly from each other, that gap is useful information: it shows admissions officers (and you) which section represents your stronger academic profile, independent of your composite.</p>
 
-    <h2>Percentile by college admission tier</h2>
-    <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
-      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">College Tier</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Typical Middle 50% Score</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Approx. Percentile Range</th></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Highly selective (Ivy+, top 15)</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1480–1570</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">96th–99th</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Selective (top 50)</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1350–1470</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">91st–96th</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Competitive (top 100)</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1200–1350</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">74th–91st</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Most 4-year public universities</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1000–1200</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">40th–74th</td></tr>
-      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Open-access / community college</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">No minimum</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">—</td></tr>
-    </table>
-    <p>These ranges reflect the 25th–75th percentile of enrolled students at each tier, not an official cutoff. Being below a school's 25th percentile doesn't disqualify you — it means test scores are working against your application there, and other parts (GPA, essays, extracurriculars) need to carry more weight.</p>
+    <h2>What real schools report</h2>
+    <p>National percentiles tell you where you stand among all test-takers; admission depends on each school's own range. Two published examples: Ohio State's Columbus campus admitted students in fall 2025 scored 1360–1500 (roughly the 90th to 97th percentile), and MIT's class of 2029 scored 780–800 in Math and 740–780 in Reading and Writing. Below a school's 25th percentile, test scores work against your application there, and GPA, essays and activities need to carry more weight.</p>
 
     <h2>How percentiles shift year to year</h2>
-    <p>Percentile tables are recalculated periodically using the most recent cohort of test-takers, so the same score can correspond to a slightly different percentile from one year to the next. This isn't because the test changed — it's because the comparison pool shifted. A 1350 that was 89th percentile two years ago might be 91st percentile this year if slightly fewer students scored in that range recently. Always check the year on any percentile table you're using, including this one.</p>
+    <p>Percentile tables are recalculated periodically using the most recent cohort of test-takers, so the same score can correspond to a slightly different percentile from one year to the next. This isn't because the test changed — the comparison pool shifted. Always check the date and comparison group on any percentile table, including this one.</p>
 
     <h2>Should you submit your score if you're below a school's percentile range?</h2>
     <p>Many schools remain test-optional, which makes this a real decision rather than a formality. If your percentile falls at or above a school's published 25th percentile, submitting generally helps your application. If you're meaningfully below the 25th percentile, withholding your score may strengthen your file — especially if the rest of your application (GPA, coursework rigor, essays) is strong. Between the 25th and 50th percentile is more of a judgment call: submitting can still signal transparency and confidence if your other materials are competitive.</p>
+    <h2>Sources</h2>
+    <ul>
+      <li><a href="https://research.collegeboard.org/reports/sat-suite/understanding-scores/sat" style="color:var(--indigo);" rel="noopener">College Board, Understanding SAT scores</a> — user percentiles for total and section scores.</li>
+      <li><a href="https://reports.collegeboard.org/media/pdf/2025-total-group-sat-suite-of-assessments-annual-report.pdf" style="color:var(--indigo);" rel="noopener">College Board, 2025 Total Group SAT Suite Annual Report</a> — 1029 average total score for the class of 2025.</li>
+      <li><a href="https://hscounselors.osu.edu/web_resources/AU25-Outside-Ohio-virtual-Counselor-Breakfast-public-slides_508.pdf" style="color:var(--indigo);" rel="noopener">Ohio State Admissions, Autumn 2025 counselor update</a> — 1360–1500 admitted SAT range.</li>
+      <li><a href="https://mitadmissions.org/apply/process/stats/" style="color:var(--indigo);" rel="noopener">MIT Admissions, Admissions statistics</a> — class of 2029 section ranges.</li>
+    </ul>
+
 
     <h2>Frequently Asked Questions</h2>
     <p><strong>What's the difference between my SAT score and my percentile?</strong> Your score (400–1600) is a fixed number on the College Board's scale. Your percentile tells you what percentage of test-takers you scored higher than. The same score can mean a different percentile from year to year as the testing pool shifts slightly.</p>
     <p><strong>Is this the same as the percentile on my official score report?</strong> This tool estimates your percentile using recent published College Board data. Your official score report includes the exact percentile calculated at the time you tested, which may differ slightly since percentiles are recalculated periodically.</p>
     <p><strong>Does a higher percentile always mean a better chance of admission?</strong> No. Percentile tells you how you compare to all test-takers nationally, but admissions decisions depend on how your score compares to each specific school's admitted student range, plus your full application. A high national percentile can still be below a selective school's 25th percentile.</p>
-    <p><strong>What's a good SAT percentile?</strong> Above the 75th percentile (roughly 1250+) is competitive for most colleges. Above the 90th percentile (roughly 1330+) is strong for selective schools. Above the 98th percentile (roughly 1500+) is competitive for the most selective universities in the country.</p>
+    <p><strong>What's a good SAT percentile?</strong> Above the 75th percentile (1200+) is above most test-takers; the 89th percentile (1350) and up is in range for many selective public universities such as Ohio State (1360–1500 admitted); the 97th percentile (1500) and up is where the most selective universities' ranges sit.</p>
 
     <h2>Related tools and guides</h2>
     <p>
@@ -117,37 +118,29 @@
 <div id="footer-placeholder"></div>
 <script src="../assets/js/components.js"></script>
 <script>
-var percentiles={1600:99,1550:99,1500:98,1450:96,1400:94,1350:91,1300:87,1250:81,1200:74,1150:66,1100:58,1050:49,1000:40,950:32,900:25,850:18,800:10,750:6,700:3,650:1,600:1};
-var mathPercentiles={800:99,750:93,700:85,650:74,600:61,550:47,500:33,450:20,400:9,350:2};
-var rwPercentiles={800:99,750:96,700:90,650:80,600:66,550:51,500:36,450:22,400:10,350:3};
-function lookup(table,score){
-  var keys=Object.keys(table).map(Number).sort(function(a,b){return b-a;});
-  for(var i=0;i<keys.length;i++){if(score>=keys[i])return table[keys[i]];}
-  return 1;
-}
-function calculate(){
-  var total=parseInt(document.getElementById('total').value);
-  var mathVal=document.getElementById('math').value;
-  var rwVal=document.getElementById('rw').value;
+var percentiles={1600:99,1550:99,1500:97,1450:95,1400:93,1350:89,1300:85,1250:80,1200:75,1150:69,1100:62,1050:55,1000:47,950:39,900:32,850:24,800:17,750:11,700:6,650:3,600:2,550:1,500:1,400:1};
+var mathPercentiles={800:99,750:95,700:91,650:84,600:75,550:64,500:50,450:37,400:21,350:8,300:2,250:1,200:1};
+var rwPercentiles={800:99,750:98,700:92,650:84,600:72,550:59,500:43,450:29,400:16,350:6,300:2,250:1,200:1};
+function ord(n){var s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0]);}
+function lookup(table,score){var keys=Object.keys(table).map(Number).sort(function(a,b){return b-a;});for(var i=0;i<keys.length;i++){if(score>=keys[i])return table[keys[i]];}return 1;}
+function num(id){var el=document.getElementById(id);if(!el||el.value==='')return NaN;return parseInt(el.value,10);}
+function pctText(p,score){return (score>=1600||score===800&&p>=99)?'99th+':ord(p);}
+function calculate(doScroll){
+  var total=num('total'),mathVal=num('math'),rwVal=num('rw');
+  var out=document.getElementById('result-pct'),det=document.getElementById('result-detail');
+  var res=document.getElementById('result');res.classList.add('show');
+  if(isNaN(total)||total<400||total>1600){out.textContent='—';det.innerHTML='Enter a total score between 400 and 1600.';return;}
   var pct=lookup(percentiles,total);
-  document.getElementById('result-pct').textContent=pct+(pct>=99?'th+':pct===1?'st':pct===2?'nd':pct===3?'rd':'th');
-  var detail='You scored higher than approximately <strong>'+pct+'%</strong> of test-takers nationally.<br>';
-  if(mathVal){
-    var mp=lookup(mathPercentiles,parseInt(mathVal));
-    detail+='Math percentile: <strong>'+mp+'th</strong><br>';
-  }
-  if(rwVal){
-    var rp=lookup(rwPercentiles,parseInt(rwVal));
-    detail+='Reading & Writing percentile: <strong>'+rp+'th</strong><br>';
-  }
-  detail+=(total>=1480?'Competitive range for highly selective universities (Ivy+/top 15).'
-    :total>=1350?'Competitive range for selective universities (top 50).'
-    :total>=1200?'Competitive range for most 4-year universities.'
-    :total>=1000?'Around the national average — around the middle 50% for many public universities.'
-    :'Below the national average. Focused test prep could meaningfully improve your percentile.');
-  var res=document.getElementById('result');res.classList.add('show');res.scrollIntoView({behavior:'smooth',block:'nearest'});
-  document.getElementById('result-detail').innerHTML=detail;
+  out.textContent=pctText(pct,total);
+  var h='College Board user percentile for '+total+'.<br>';
+  if(!isNaN(mathVal)){h+=(mathVal>=200&&mathVal<=800)?'Math '+mathVal+': <strong>'+pctText(lookup(mathPercentiles,mathVal),mathVal)+'</strong><br>':'Math must be 200–800.<br>';}
+  if(!isNaN(rwVal)){h+=(rwVal>=200&&rwVal<=800)?'Reading and Writing '+rwVal+': <strong>'+pctText(lookup(rwPercentiles,rwVal),rwVal)+'</strong><br>':'Reading and Writing must be 200–800.<br>';}
+  if(!isNaN(mathVal)&&!isNaN(rwVal)&&mathVal+rwVal!==total){h+='Note: your section scores add up to '+(mathVal+rwVal)+', not '+total+'.<br>';}
+  h+=(total>=1360?'Inside or above Ohio State\'s 1360–1500 admitted range.':total>=1029?'Above the class of 2025 average of 1029.':'Below the class of 2025 average of 1029.');
+  det.innerHTML=h;
+  if(doScroll===true){try{if(typeof res.scrollIntoView==='function'){res.scrollIntoView({behavior:'smooth',block:'nearest'});}}catch(err){}}
 }
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){calculate();});}else{calculate();}
 </script>
 </body>
 </html>

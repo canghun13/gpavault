@@ -32,7 +32,7 @@
 }
 </script>
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is this the same as an \"ACT calculator\"?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — this composite score calculator is exactly what most students mean by \"ACT calculator.\" Enter your four section scores to get your composite and national percentile."}}, {"@type": "Question", "name": "Does this account for the ACT's optional Writing section?", "acceptedAnswer": {"@type": "Answer", "text": "No — the Writing (Essay) section is scored separately on a 2–12 scale and does not factor into your composite score. Most colleges that still consider ACT Writing weigh it independently."}}, {"@type": "Question", "name": "Is the ACT curved like the SAT?", "acceptedAnswer": {"@type": "Answer", "text": "Both tests use a scaled scoring system that adjusts for test-form difficulty, but the ACT does not use the SAT's adaptive digital format — every student answers the same fixed set of questions in each ACT administration."}}]}
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is this the same as an \"ACT calculator\"?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — this composite score calculator is what most students mean by \"ACT calculator.\" Enter your English, Math and Reading scores to get your composite and national rank; add Science if you took it to see your STEM score."}}, {"@type": "Question", "name": "Does this account for the ACT's optional Writing section?", "acceptedAnswer": {"@type": "Answer", "text": "No — the Writing (Essay) section is scored separately on a 2–12 scale and does not factor into your composite score. Most colleges that still consider ACT Writing weigh it independently."}}, {"@type": "Question", "name": "Is the ACT curved like the SAT?", "acceptedAnswer": {"@type": "Answer", "text": "Both tests convert raw answers to scaled scores that adjust for form difficulty. The ACT is not adaptive: every student on a given form answers the same questions, while the digital SAT adapts its second module to your first-module performance."}}]}
 </script>
 </head>
 <body>
@@ -42,17 +42,17 @@
   <div class="tool-page-header">
     <div class="section-label">Test Scores</div>
     <h1>ACT Score Calculator</h1>
-    <p>Enter your four section scores to calculate your composite ACT score (1–36) and see your national percentile.</p>
+    <p>Enter your English, Math and Reading scores to calculate your ACT composite (1–36) under the current enhanced ACT, plus your optional Science and STEM scores and your national rank.</p>
   </div>
   <div class="calc-card">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-      <div class="form-group"><label>English (1–36)</label><input type="number" id="english" value="22" min="1" max="36"></div>
-      <div class="form-group"><label>Math (1–36)</label><input type="number" id="math" value="21" min="1" max="36"></div>
-      <div class="form-group"><label>Reading (1–36)</label><input type="number" id="reading" value="23" min="1" max="36"></div>
-      <div class="form-group"><label>Science (1–36)</label><input type="number" id="science" value="22" min="1" max="36"></div>
+      <div class="form-group"><label>English (1–36)</label><input type="number" id="english" oninput="calculate()" value="22" min="1" max="36"></div>
+      <div class="form-group"><label>Math (1–36)</label><input type="number" id="math" oninput="calculate()" value="21" min="1" max="36"></div>
+      <div class="form-group"><label>Reading (1–36)</label><input type="number" id="reading" oninput="calculate()" value="23" min="1" max="36"></div>
+      <div class="form-group"><label>Science (optional, 1–36)</label><input type="number" id="science" oninput="calculate()" value="" min="1" max="36" placeholder="Leave blank if not taken"></div>
     </div>
-    <button class="calc-btn" onclick="calculate()">Calculate ACT Composite</button>
-    <div class="result-box" id="result">
+    <button class="calc-btn" onclick="calculate(true)">Calculate ACT Composite</button>
+    <div class="result-box show" id="result">
       <div class="result-num" id="result-composite">—</div>
       <div class="result-label">ACT Composite Score</div>
       <div class="result-detail" id="result-detail"></div>
@@ -60,60 +60,64 @@
   </div>
   <div class="explainer">
     <h2>How the ACT is scored</h2>
-    <p>The ACT has four sections: English (75 questions, 45 minutes), Mathematics (60 questions, 60 minutes), Reading (40 questions, 35 minutes), and Science (40 questions, 35 minutes). Each section is scored 1–36. Your composite score is the average of all four, rounded to the nearest whole number.</p>
+    <p>Since the 2025 redesign, the ACT has three required sections: English (50 questions, 35 minutes), Math (45 questions, 50 minutes) and Reading (36 questions, 40 minutes). Science (40 questions, 40 minutes) is optional. Each section is scored 1–36, and your composite is the average of English, Math and Reading, rounded to the nearest whole number. If you take Science, ACT also reports a STEM score, the average of Math and Science. The enhanced format reached online national tests in April 2025, paper national tests in September 2025 and state and district testing in spring 2026.</p>
     <p>An optional Writing section is scored separately on a 2–12 scale and does not affect your composite. Some colleges require it, so check before registering.</p>
 
-    <h2>ACT composite score percentiles (2026)</h2>
+    <h2>ACT composite national ranks</h2>
+    <p>National ranks show the percent of ACT-tested graduates (classes of 2022–2024) who scored at or below each composite.</p>
     <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
-      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Score</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Percentile</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Score</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Percentile</th></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">36</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">100th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">24</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">73rd</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">34</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">99th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">22</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">62nd</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">32</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">97th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">20</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">49th</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">30</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">93rd</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">18</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">37th</td></tr>
-      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">28</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">88th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">16</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">24th</td></tr>
+      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Score</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Rank</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Score</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Rank</th></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">36</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">100th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">24</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">79th</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">34</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">99th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">22</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">71st</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">32</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">97th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">20</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">61st</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">30</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">94th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">18</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">49th</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">28</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">91st</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">16</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">37th</td></tr>
+      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">26</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">86th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">14</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">23rd</td></tr>
     </table>
 
     <h2>ACT section scores: what each tests</h2>
-    <p><strong>English:</strong> Grammar, punctuation, sentence structure, and rhetorical skills. The fastest-paced section — 75 questions in 45 minutes. Strong grammar foundation and practice with ACT-style editing questions is the most effective prep.</p>
-    <p><strong>Mathematics:</strong> Covers pre-algebra through basic trigonometry. No penalty for guessing. A calculator is permitted on the full Math section (unlike SAT, which restricts calculator use for some questions).</p>
-    <p><strong>Reading:</strong> Four passages in 35 minutes. Speed matters here — students who struggle on Reading often need to improve reading pace, not comprehension.</p>
-    <p><strong>Science:</strong> Tests data interpretation and scientific reasoning, not science knowledge. The passages present graphs, tables, and experimental results — your job is to read them accurately, not recall biology or chemistry facts.</p>
+    <p><strong>English:</strong> Grammar, punctuation, sentence structure and rhetorical skills — 50 questions in 35 minutes on the enhanced ACT.</p>
+    <p><strong>Mathematics:</strong> Pre-algebra through basic trigonometry, 45 questions in 50 minutes with four answer choices each. No penalty for guessing, and a calculator is permitted throughout.</p>
+    <p><strong>Reading:</strong> 36 questions in 40 minutes. Pace still matters, but the enhanced test allows more time per question than the old four-passage, 35-minute section.</p>
+    <p><strong>Science (optional):</strong> Data interpretation and scientific reasoning from graphs, tables and experiments, 40 questions in 40 minutes. It no longer counts toward the composite but produces a separate Science score and a STEM score that some programs look at.</p>
 
-    <h2>ACT scores by college selectivity tier</h2>
-    <p>ACT middle 50% ranges (25th–75th percentile of enrolled students) vary significantly by school type. These ranges reflect where the majority of admitted and enrolled students fall — not the absolute minimum required.</p>
-    <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
-      <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">School Tier</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">ACT Middle 50%</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Examples</th></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Highly selective (top 25)</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">34–36</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">MIT, Harvard, Stanford</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Selective (top 50)</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">30–34</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">UC Berkeley, Georgetown, Tufts</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Competitive (top 100)</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">25–30</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">University of Oregon, Drexel, DePaul</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Most 4-year public universities</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">19–25</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Many state flagship schools</td></tr>
-      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Open-access / community college</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">No minimum</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">Used for placement only</td></tr>
-    </table>
+    <h2>What real schools report</h2>
+    <p>Middle 50% ranges (25th–75th percentile) are published by each college. Two examples from fall 2025: Ohio State's Columbus campus admitted students scored 29–33, and MIT's class of 2029 scored 34–36. Look up your own target schools rather than relying on a generic tier.</p>
 
     <h2>How to use your section scores strategically</h2>
-    <p>Your composite hides important information. A 26 composite could mean four balanced 26s, or it could mean a 30 in English and Reading with a 22 in Math and Science. These profiles read differently to schools with strong STEM programs versus liberal arts colleges.</p>
-    <p>A low section score pulls down your composite significantly, so it's usually the highest-leverage place to focus prep. A student scoring 28/28/28/20 has a composite of 26 — improving just the Science section from 20 to 28 would push the composite to 28. Some schools also look at section scores directly for course placement: a 28 in Math may place you into calculus while a 22 might place you into remedial algebra regardless of your composite.</p>
+    <p>Your composite hides important information. A 26 composite could mean three balanced 26s, or a 30 in English and Reading with a 19 in Math. These profiles read differently to schools with strong STEM programs versus liberal arts colleges.</p>
+    <p>A low section score pulls down your composite significantly, so it's usually the highest-leverage place to focus prep. A student scoring 28 English, 20 Math and 28 Reading has a composite of 25 — raising just Math from 20 to 28 pushes the composite to 28. Some schools also look at section scores directly for course placement: a 28 in Math may place you into calculus while a 22 might place you into remedial algebra regardless of your composite.</p>
     <p>Superscoring — where schools accept your best section scores across multiple ACT sittings to construct a composite — is offered by many but not all colleges. Check the policy at each school you're applying to before deciding whether to retake.</p>
 
     <h2>What is a good ACT score in 2026?</h2>
-    <p>The national average ACT composite for 2024–2025 graduates was approximately 19.5. Scoring above 20 puts you above the national median. A score of 24 or above places you in the top 27% of test-takers nationally — strong enough for most state university programs. A 30 or above puts you in the top 7%, which is competitive for selective private universities.</p>
+    <p>The average ACT composite for the class of 2025 was 19.4. On ACT's national ranks, a 20 is the 61st percentile, a 24 the 79th (top 21%) and a 30 the 94th (top 6%).</p>
     <p>"Good" is always relative to your target schools. A 28 is an excellent score for most programs but falls below the 25th percentile at highly selective schools. The most useful benchmark is the middle 50% range at your specific target schools, not national averages.</p>
 
     <h2>ACT vs SAT: which to take?</h2>
-    <p>Both are accepted by virtually all four-year colleges in the United States. The ACT has a dedicated Science section and moves at a faster overall pace. The SAT has more reading comprehension and data analysis, and slightly more time per question. Taking a free practice test for each is the most reliable way to find out which suits you — many students score meaningfully higher on one than the other.</p>
+    <p>Both are accepted by virtually all four-year colleges in the United States. The ACT offers an optional Science section and still moves at a faster pace per question. The SAT has more reading comprehension and data analysis, and slightly more time per question. Taking a free practice test for each is the most reliable way to find out which suits you — many students score meaningfully higher on one than the other.</p>
 
     <h2>ACT score improvement strategies</h2>
-    <p>Most students improve their ACT composite by focusing on their single weakest section rather than spreading effort evenly. The math is straightforward: improving one section from 20 to 26 adds 6 points to your composite. Improving four sections from 26 to 27 each adds 4 points total — significantly less efficient. Identify your lowest section and spend 60% of your prep time there.</p>
-    <p>Practice test timing matters more for ACT than SAT. The ACT moves faster — 75 questions in 45 minutes for English alone. Students who struggle on ACT often struggle with pace, not content. Timed full-length practice tests are more useful than untimed content review for most ACT takers.</p>
+    <p>Most students improve their ACT composite by focusing on their single weakest section rather than spreading effort evenly. Because the composite is an average of three sections, raising one section by 6 points lifts the composite by 2, the same as raising all three by 2 — and one weak section usually has the most room to grow. Identify your lowest section and spend 60% of your prep time there.</p>
+    <p>Practice test timing matters more for ACT than SAT. The ACT still moves faster — 50 English questions in 35 minutes. Students who struggle on ACT often struggle with pace, not content. Timed full-length practice tests are more useful than untimed content review for most ACT takers.</p>
 
     <h2>When to retake the ACT</h2>
     <p>A retake makes sense when: your practice scores on full-length tests are consistently higher than your official score (suggesting test-day nerves or logistics affected performance), you have identified specific skill gaps you have addressed since the last test, or your target schools' middle 50% range is clearly above your current score. Most students see improvement on a second attempt after targeted preparation. Diminishing returns typically appear after two or three attempts.</p>
     <p>Test scores are most useful when paired with a strong GPA. See our <a href="gpa-calculator.html" style="color:var(--indigo);">GPA Calculator</a> to track your academic standing alongside test preparation.</p>
+    <h2>Sources</h2>
+    <ul>
+      <li><a href="https://act.org/content/dam/act/unsecured/documents/ACT-Score-National-Ranks-2024-2025.pdf" style="color:var(--indigo);" rel="noopener">ACT, Score National Ranks 2024–2025</a> — composite ranks for 2022–2024 graduates.</li>
+      <li><a href="https://www.act.org/gradclass2025" style="color:var(--indigo);" rel="noopener">ACT, Class of 2025 data</a> — 19.4 average composite.</li>
+      <li><a href="https://act.org/actenhancements" style="color:var(--indigo);" rel="noopener">ACT, Test enhancements</a> — three-section composite and optional Science.</li>
+      <li><a href="https://magoosh.com/act/enhanced-act/" style="color:var(--indigo);" rel="noopener">Magoosh, Enhanced ACT vs. legacy ACT</a> — question counts, timing and rollout dates.</li>
+      <li><a href="https://hscounselors.osu.edu/web_resources/AU25-Outside-Ohio-virtual-Counselor-Breakfast-public-slides_508.pdf" style="color:var(--indigo);" rel="noopener">Ohio State Admissions, Autumn 2025 counselor update</a> — 29–33 admitted ACT range.</li>
+      <li><a href="https://mitadmissions.org/apply/process/stats/" style="color:var(--indigo);" rel="noopener">MIT Admissions, Admissions statistics</a> — 34–36 ACT range for the class of 2029.</li>
+    </ul>
+
 
     <h2>Frequently Asked Questions</h2>
-    <p><strong>Is this the same as an "ACT calculator"?</strong> Yes — this composite score calculator is exactly what most students mean by "ACT calculator." Enter your four section scores to get your composite and national percentile.</p>
+    <p><strong>Is this the same as an "ACT calculator"?</strong> Yes — this composite score calculator is what most students mean by "ACT calculator." Enter your English, Math and Reading scores to get your composite and national rank; add Science if you took it to see your STEM score.</p>
     <p><strong>Does this account for the ACT's optional Writing section?</strong> No — the Writing (Essay) section is scored separately on a 2–12 scale and does not factor into your composite score. Most colleges that still consider ACT Writing weigh it independently.</p>
-    <p><strong>Is the ACT curved like the SAT?</strong> Both tests use a scaled scoring system that adjusts for test-form difficulty, but the ACT does not use the SAT's adaptive digital format — every student answers the same fixed set of questions in each ACT administration.</p>
+    <p><strong>Is the ACT curved like the SAT?</strong> Both tests convert raw answers to scaled scores that adjust for form difficulty. The ACT is not adaptive: every student on a given form answers the same questions, while the digital SAT adapts its second module to your first-module performance.</p>
 
     <h2>Related tools</h2>
     <p>
@@ -126,24 +130,25 @@
 <div id="footer-placeholder"></div>
 <script src="../assets/js/components.js"></script>
 <script>
-var pcts={36:100,35:99,34:99,33:98,32:97,31:95,30:93,29:91,28:88,27:85,26:81,25:77,24:73,23:68,22:62,21:56,20:49,19:43,18:37,17:31,16:24,15:18,14:13,13:8,12:5,11:3,10:1};
-function calculate(){
-  var e=parseInt(document.getElementById('english').value);
-  var m=parseInt(document.getElementById('math').value);
-  var r=parseInt(document.getElementById('reading').value);
-  var s=parseInt(document.getElementById('science').value);
-  var composite=Math.round((e+m+r+s)/4);
+var pcts={36:100,35:99,34:99,33:98,32:97,31:96,30:94,29:93,28:91,27:88,26:86,25:83,24:79,23:75,22:71,21:66,20:61,19:55,18:49,17:43,16:37,15:30,14:23,13:16,12:8,11:3,10:1,9:1,8:1,7:1,6:1,5:1,4:1,3:1,2:1,1:1};
+function ord(n){var s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0]);}
+function val(id){var v=document.getElementById(id).value;if(v==='')return NaN;return parseInt(v,10);}
+function ok(x){return !isNaN(x)&&x>=1&&x<=36;}
+function calculate(doScroll){
+  var e=val('english'),m=val('math'),r=val('reading'),s=val('science');
+  var out=document.getElementById('result-composite'),det=document.getElementById('result-detail');
+  var res=document.getElementById('result');res.classList.add('show');
+  if(!ok(e)||!ok(m)||!ok(r)){out.textContent='—';det.innerHTML='Enter English, Math and Reading scores between 1 and 36.';return;}
+  var composite=Math.round((e+m+r)/3);
   var pct=pcts[composite]||1;
-  document.getElementById('result-composite').textContent=composite;
-  document.getElementById('result-detail').innerHTML=
-    'English: '+e+' &nbsp;·&nbsp; Math: '+m+' &nbsp;·&nbsp; Reading: '+r+' &nbsp;·&nbsp; Science: '+s+'<br>'
-    +'Approximate percentile: <strong>'+pct+'th</strong><br>'
-    +(composite>=30?'Excellent score — competitive for highly selective colleges.'
-      :composite>=24?'Above average — competitive for most 4-year colleges.'
-      :composite>=20?'Around the national average.'
-      :'Below average. Targeted test prep in your weakest sections can help significantly.');
-  var res=document.getElementById('result');res.classList.add('show');res.scrollIntoView({behavior:'smooth',block:'nearest'});
+  out.textContent=composite;
+  var h='English '+e+' · Math '+m+' · Reading '+r+'<br>National rank: <strong>'+ord(pct)+'</strong> (ACT-tested graduates, 2022–2024)<br>';
+  if(!isNaN(s)){ if(ok(s)){h+='Science '+s+' · STEM score <strong>'+Math.round((m+s)/2)+'</strong> (Science is not in the composite)<br>';} else {h+='Science must be between 1 and 36.<br>';} }
+  h+=(composite>=29?'At or above the 25th percentile of admitted students at schools like Ohio State (29–33).':composite>=20?'Above the class of 2025 average of 19.4.':'Below the class of 2025 average of 19.4. Targeted prep on your weakest section helps most.');
+  det.innerHTML=h;
+  if(doScroll===true){try{if(typeof res.scrollIntoView==='function'){res.scrollIntoView({behavior:'smooth',block:'nearest'});}}catch(err){}}
 }
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){calculate();});}else{calculate();}
 </script>
 </body>
 </html>

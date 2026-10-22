@@ -32,7 +32,7 @@
 }
 </script>
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does the SAT essay still matter?", "acceptedAnswer": {"@type": "Answer", "text": "The College Board discontinued the optional SAT Essay in 2021, and it is no longer offered. Some colleges may still ask about writing samples separately as part of the application, but this is unrelated to SAT scoring."}}, {"@type": "Question", "name": "Is the digital SAT scored differently from the paper SAT?", "acceptedAnswer": {"@type": "Answer", "text": "The digital SAT (rolled out fully starting 2024) uses the same 400–1600 scoring scale as the paper version, so scores remain directly comparable. The digital format is adaptive — your performance on the first module of each section determines the difficulty of the second module, which affects your final scaled score."}}, {"@type": "Question", "name": "What SAT score is needed for a full-ride scholarship?", "acceptedAnswer": {"@type": "Answer", "text": "Full-ride scholarship thresholds vary widely by school and program, but many competitive full-ride programs (National Merit, university-specific full-ride scholarships) expect scores in the 1450–1550 range alongside a strong GPA. Some schools set lower thresholds for need-based full-ride programs where GPA and financial need carry more weight than test scores."}}, {"@type": "Question", "name": "What's the difference between this and a \"SAT percentile calculator\"?", "acceptedAnswer": {"@type": "Answer", "text": "This tool converts raw section answers into your scaled composite score. If you already have your score and just want to see your national percentile ranking and section-level breakdown, use the SAT Percentile Calculator instead."}}, {"@type": "Question", "name": "How do you add up your SAT score?", "acceptedAnswer": {"@type": "Answer", "text": "You don't add your two section scores directly the way you would add raw points — each section (EBRW and Math) is first converted from a raw number of correct answers into a scaled score between 200 and 800 using the College Board's official conversion table for that specific test date. Only after both sections are scaled do you add them together for your composite score out of 1600."}}]}
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does the SAT essay still matter?", "acceptedAnswer": {"@type": "Answer", "text": "The College Board discontinued the optional SAT Essay in 2021, and it is no longer offered. Some colleges may still ask about writing samples separately as part of the application, but this is unrelated to SAT scoring."}}, {"@type": "Question", "name": "Is the digital SAT scored differently from the paper SAT?", "acceptedAnswer": {"@type": "Answer", "text": "The digital SAT (rolled out fully starting 2024) uses the same 400–1600 scoring scale as the paper version, so scores remain directly comparable. The digital format is adaptive — your performance on the first module of each section determines the difficulty of the second module, which affects your final scaled score."}}, {"@type": "Question", "name": "What SAT score is needed for a full-ride scholarship?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the program. National Merit status comes from the PSAT/NMSQT, not the SAT, and university scholarships that use test scores publish their own cutoffs — check each school's scholarship page. Many large full-ride programs weigh GPA, essays and financial need as heavily as scores."}}, {"@type": "Question", "name": "What's the difference between this and a \"SAT percentile calculator\"?", "acceptedAnswer": {"@type": "Answer", "text": "This tool converts raw section answers into your scaled composite score. If you already have your score and just want to see your national percentile ranking and section-level breakdown, use the SAT Percentile Calculator instead."}}, {"@type": "Question", "name": "How do you add up your SAT score?", "acceptedAnswer": {"@type": "Answer", "text": "Add your two section scores: Reading and Writing (200–800) plus Math (200–800) equals your total (400–1600). Each section score is itself a scaled score that College Board derives from your answers on both adaptive modules, so you can't compute it by counting correct answers."}}]}
 </script>
 </head>
 <body>
@@ -46,11 +46,11 @@
   </div>
   <div class="calc-card">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-      <div class="form-group"><label>Math Score (200–800)</label><input type="number" id="math" value="600" min="200" max="800" step="10"></div>
-      <div class="form-group"><label>Evidence-Based Reading & Writing (200–800)</label><input type="number" id="ebrw" value="580" min="200" max="800" step="10"></div>
+      <div class="form-group"><label>Math Score (200–800)</label><input type="number" id="math" oninput="calculate()" value="600" min="200" max="800" step="10"></div>
+      <div class="form-group"><label>Reading and Writing (200–800)</label><input type="number" id="ebrw" oninput="calculate()" value="580" min="200" max="800" step="10"></div>
     </div>
-    <button class="calc-btn" onclick="calculate()">Calculate SAT Score</button>
-    <div class="result-box" id="result">
+    <button class="calc-btn" onclick="calculate(true)">Calculate SAT Score</button>
+    <div class="result-box show" id="result">
       <div class="result-num" id="result-total">—</div>
       <div class="result-label">Total SAT Score (400–1600)</div>
       <div class="result-detail" id="result-detail"></div>
@@ -58,33 +58,33 @@
   </div>
   <div class="explainer">
     <h2>How the SAT is scored</h2>
-    <p>The SAT has two sections: Evidence-Based Reading and Writing (EBRW) and Math. Each section is scored 200–800, for a combined total of 400–1600. The national average is approximately 1010. There is no penalty for wrong answers — always fill in every question.</p>
+    <p>The digital SAT, used in the U.S. since March 2024, has two sections: Reading and Writing (54 questions in two 32-minute modules) and Math (44 questions in two 35-minute modules). Each is scored 200–800, for a total of 400–1600. The test is adaptive by section: how you do on the first module sets the difficulty of the second. The class of 2025 averaged 1029. There is no penalty for wrong answers, so answer every question.</p>
 
-    <h2>SAT score percentiles (2026)</h2>
+    <h2>SAT score percentiles</h2>
     <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem;">
       <tr style="background:var(--indigo-faint);"><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Score</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Percentile</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Score</th><th style="padding:0.5rem 0.75rem;text-align:left;border-bottom:2px solid var(--indigo-light);color:var(--indigo-dark);">Percentile</th></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1600</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">99th+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1100</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">58th</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1500</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">98th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1000</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">40th</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1400</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">94th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">900</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">25th</td></tr>
-      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1300</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">87th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">800</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">10th</td></tr>
-      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1200</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">74th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">700</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">3rd</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1600</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">99+</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1100</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">62nd</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1500</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">97th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1000</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">47th</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1400</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">93rd</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">900</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">32nd</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1300</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">85th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">800</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">17th</td></tr>
+      <tr><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">1200</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">75th</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">700</td><td style="padding:0.5rem 0.75rem;color:var(--slate-mid);">6th</td></tr>
     </table>
     <p>Want a deeper percentile breakdown — including section-level percentiles and how they compare to specific college ranges? Use the dedicated <a href="sat-percentile-calculator.html" style="color:var(--indigo);">SAT Percentile Calculator</a>.</p>
 
     <h2>What score do you need?</h2>
-    <p>Competitiveness depends entirely on your target schools. For broad college access, 1000 or above is a reasonable baseline. For selective schools, 1300 or above is generally competitive. For highly selective schools in the top 25 nationally, the middle 50% of admitted students typically falls between 1450 and 1570.</p>
+    <p>Competitiveness depends entirely on your target schools. Above the 1029 average puts you ahead of most test-takers; Ohio State's admitted students in fall 2025 ranged from 1360 to 1500, and the most selective universities sit higher still.</p>
     <p>The most reliable benchmark: look up the middle 50% score range (25th–75th percentile) for each school you're applying to. This is published on every college's Common Data Set. If your score falls in the middle 50%, you're competitive on this metric.</p>
 
     <h2>EBRW vs Math: what each section covers</h2>
-    <p><strong>Evidence-Based Reading and Writing (EBRW):</strong> Combines a Reading Test (52 questions) and a Writing and Language Test (44 questions). Covers reading comprehension across literature, history, social studies, and science passages, plus grammar and rhetorical editing. Strong readers with solid grammar typically score higher on this section.</p>
-    <p><strong>Math:</strong> Covers algebra, problem solving, data analysis, and some advanced topics (passport to advanced math, geometry, trigonometry). A calculator is permitted for most — but not all — Math questions. STEM-focused programs and engineering schools often weigh this section heavily.</p>
-    <p>If one section is significantly lower, targeted prep there produces the fastest composite gains. A student at 650 Math / 700 EBRW (1350 total) who improves Math to 720 reaches a 1420 — the same gain that would take much more work on the EBRW side.</p>
+    <p><strong>Reading and Writing:</strong> 54 short passages, each with one question, covering comprehension, vocabulary in context, evidence, grammar and rhetorical editing. (The old paper SAT's separate 52-question Reading Test and 44-question Writing and Language Test no longer exist.)</p>
+    <p><strong>Math:</strong> Algebra, advanced math, problem solving and data analysis, and geometry and trigonometry, 44 questions. A calculator is allowed on the entire digital Math section, and a graphing calculator is built into the testing app.</p>
+    <p>If one section is significantly lower, targeted prep there produces the fastest composite gains. A student at 650 Math / 700 Reading and Writing (1350 total) who improves Math to 720 reaches a 1420 — the same gain that would take much more work on the Reading and Writing side.</p>
 
     <h2>Using the Common Data Set to benchmark your score</h2>
     <p>Every accredited college publishes a Common Data Set (CDS) each year with detailed admissions statistics, including the 25th and 75th percentile SAT scores for enrolled students. Searching "[school name] Common Data Set" finds it. If your score is above the 75th percentile for a school, you're well-positioned on test scores. If it's below the 25th percentile, test scores are working against you at that school and other parts of your application need to compensate.</p>
 
     <h2>SAT vs ACT</h2>
-    <p>Both are accepted equally by essentially all U.S. colleges. The SAT emphasizes reading comprehension, data interpretation, and extended math problems. The ACT includes a dedicated Science section and moves at a faster pace. Taking a free practice test for each is the most reliable way to determine which format plays to your strengths — many students score meaningfully higher on one than the other.</p>
+    <p>Both are accepted equally by essentially all U.S. colleges. The SAT emphasizes reading comprehension, data interpretation, and extended math problems. The ACT offers an optional Science section and moves at a faster pace. Taking a free practice test for each is the most reliable way to determine which format plays to your strengths — many students score meaningfully higher on one than the other.</p>
 
     <h2>How superscoring works</h2>
     <p>Superscoring means a college combines your highest section scores across multiple SAT sittings to calculate the best possible composite, even if no single sitting produced that combination. A student who scores 650 EBRW / 600 Math in March and 600 EBRW / 690 Math in May would have a superscore of 650 + 690 = 1340, even though neither individual test reached that total.</p>
@@ -95,14 +95,23 @@
     <p>Because most colleges superscore, even modest improvement in one section on a retake can raise your composite without needing to improve everything at once.</p>
 
     <h2>SAT score improvement: where to focus</h2>
-    <p>If one section is significantly lower than the other, targeted improvement on the weaker section produces the fastest composite gains. A student scoring 700 EBRW / 590 Math (1290 total) who improves Math to 680 reaches 1380 — the same 90-point gain that would require much more work across both sections simultaneously. Identify your weaker section and focus there first. For EBRW improvement, reading speed and comprehension practice matter most. For Math, drilling the specific question types you miss most frequently is more efficient than comprehensive review.</p>
+    <p>If one section is significantly lower than the other, targeted improvement on the weaker section produces the fastest composite gains. A student scoring 700 Reading and Writing / 590 Math (1290 total) who improves Math to 680 reaches 1380 — the same 90-point gain that would require much more work across both sections simultaneously. Identify your weaker section and focus there first. For EBRW improvement, reading speed and comprehension practice matter most. For Math, drilling the specific question types you miss most frequently is more efficient than comprehensive review.</p>
+    <h2>Sources</h2>
+    <ul>
+      <li><a href="https://research.collegeboard.org/reports/sat-suite/understanding-scores/sat" style="color:var(--indigo);" rel="noopener">College Board, Understanding SAT scores</a> — user percentiles for total and section scores.</li>
+      <li><a href="https://reports.collegeboard.org/media/pdf/2025-total-group-sat-suite-of-assessments-annual-report.pdf" style="color:var(--indigo);" rel="noopener">College Board, 2025 Total Group SAT Suite Annual Report</a> — 1029 average total score for the class of 2025.</li>
+      <li><a href="https://hscounselors.osu.edu/web_resources/AU25-Outside-Ohio-virtual-Counselor-Breakfast-public-slides_508.pdf" style="color:var(--indigo);" rel="noopener">Ohio State Admissions, Autumn 2025 counselor update</a> — 1360–1500 admitted SAT range.</li>
+      <li><a href="https://mitadmissions.org/apply/process/stats/" style="color:var(--indigo);" rel="noopener">MIT Admissions, Admissions statistics</a> — class of 2029 section ranges.</li>
+      <li><a href="https://satsuite.collegeboard.org/sat/whats-on-the-test/structure" style="color:var(--indigo);" rel="noopener">College Board, SAT test structure</a> — digital SAT question counts and timing.</li>
+    </ul>
+
 
     <h2>Frequently asked questions</h2>
     <p><strong>Does the SAT essay still matter?</strong> The College Board discontinued the optional SAT Essay in 2021, and it is no longer offered. Some colleges may still ask about writing samples separately as part of the application, but this is unrelated to SAT scoring.</p>
     <p><strong>Is the digital SAT scored differently from the paper SAT?</strong> The digital SAT (rolled out fully starting 2024) uses the same 400–1600 scoring scale as the paper version, so scores remain directly comparable. The digital format is adaptive — your performance on the first module of each section determines the difficulty of the second module, which affects your final scaled score.</p>
-    <p><strong>What SAT score is needed for a full-ride scholarship?</strong> Full-ride scholarship thresholds vary widely by school and program, but many competitive full-ride programs (National Merit, university-specific full-ride scholarships) expect scores in the 1450–1550 range alongside a strong GPA. Some schools set lower thresholds for need-based full-ride programs where GPA and financial need carry more weight than test scores.</p>
+    <p><strong>What SAT score is needed for a full-ride scholarship?</strong> It depends on the program. National Merit status comes from the PSAT/NMSQT, not the SAT, and university scholarships that use test scores publish their own cutoffs — check each school's scholarship page. Many large full-ride programs weigh GPA, essays and financial need as heavily as scores.</p>
     <p><strong>What's the difference between this and a "SAT percentile calculator"?</strong> This tool converts raw section answers into your scaled composite score. If you already have your score and just want to see your national percentile ranking and section-level breakdown, use the <a href="sat-percentile-calculator.html" style="color:var(--indigo);">SAT Percentile Calculator</a> instead.</p>
-    <p><strong>How do you add up your SAT score?</strong> You don't add your two section scores directly the way you would add raw points — each section (EBRW and Math) is first converted from a raw number of correct answers into a scaled score between 200 and 800 using the College Board's official conversion table for that specific test date. Only after both sections are scaled do you add them together for your composite score out of 1600. Enter your correct-answer counts above and this calculator handles that conversion for you automatically.</p>
+    <p><strong>How do you add up your SAT score?</strong> Add your two section scores: Reading and Writing (200–800) plus Math (200–800) equals your total (400–1600). Each section score is itself a scaled score that College Board derives from your answers on both adaptive modules, so you can't compute it by counting correct answers.</p>
 
     <h2>Related tools</h2>
     <p>
@@ -115,27 +124,22 @@
 <div id="footer-placeholder"></div>
 <script src="../assets/js/components.js"></script>
 <script>
-var percentiles={1600:99,1550:99,1500:98,1450:96,1400:94,1350:91,1300:87,1250:81,1200:74,1150:66,1100:58,1050:49,1000:40,950:32,900:25,850:18,800:10,750:6,700:3,650:1,600:1};
-function getPercentile(score){
-  var keys=Object.keys(percentiles).map(Number).sort(function(a,b){return b-a;});
-  for(var i=0;i<keys.length;i++){if(score>=keys[i])return percentiles[keys[i]];}
-  return 1;
+var percentiles={1600:99,1550:99,1500:97,1450:95,1400:93,1350:89,1300:85,1250:80,1200:75,1150:69,1100:62,1050:55,1000:47,950:39,900:32,850:24,800:17,750:11,700:6,650:3,600:2,550:1,500:1,400:1};
+function ord(n){var s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0]);}
+function lookup(table,score){var keys=Object.keys(table).map(Number).sort(function(a,b){return b-a;});for(var i=0;i<keys.length;i++){if(score>=keys[i])return table[keys[i]];}return 1;}
+function num(id){var el=document.getElementById(id);if(!el||el.value==='')return NaN;return parseInt(el.value,10);}
+function pctText(p,score){return (score>=1600||score===800&&p>=99)?'99th+':ord(p);}
+function calculate(doScroll){
+  var m=num('math'),e=num('ebrw');
+  var out=document.getElementById('result-total'),det=document.getElementById('result-detail');
+  var res=document.getElementById('result');res.classList.add('show');
+  if(isNaN(m)||isNaN(e)||m<200||m>800||e<200||e>800){out.textContent='—';det.innerHTML='Enter both section scores between 200 and 800.';return;}
+  var total=m+e;var pct=lookup(percentiles,total);
+  out.textContent=total;
+  det.innerHTML='Math: <strong>'+m+'</strong> · Reading and Writing: <strong>'+e+'</strong><br>User percentile: <strong>'+pctText(pct,total)+'</strong><br>'+(total>=1360?'Inside or above Ohio State\'s 1360–1500 admitted range.':total>=1029?'Above the class of 2025 average of 1029.':'Below the class of 2025 average of 1029.');
+  if(doScroll===true){try{if(typeof res.scrollIntoView==='function'){res.scrollIntoView({behavior:'smooth',block:'nearest'});}}catch(err){}}
 }
-function calculate(){
-  var m=parseInt(document.getElementById('math').value);
-  var e=parseInt(document.getElementById('ebrw').value);
-  var total=m+e;
-  var pct=getPercentile(total);
-  document.getElementById('result-total').textContent=total;
-  document.getElementById('result-detail').innerHTML=
-    'Math: <strong>'+m+'</strong> &nbsp;|&nbsp; EBRW: <strong>'+e+'</strong><br>'
-    +'Approximate percentile: <strong>'+pct+'th</strong><br>'
-    +(total>=1400?'Competitive for selective colleges (top 25%).'
-      :total>=1200?'Competitive for most 4-year colleges.'
-      :total>=1000?'Around the national average. Consider test prep to improve.'
-      :'Below average. Focused test prep could significantly improve your score.');
-  var res=document.getElementById('result');res.classList.add('show');res.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){calculate();});}else{calculate();}
 </script>
 </body>
 </html>
