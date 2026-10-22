@@ -1,3 +1,88 @@
+# GPA Vault 인수인계 문서 v34 (2026-10-22 세션 — 구글 색인 98→7 원인 진단 / 사이트 전체 출처·사실 감사)
+
+이전 v33 문서를 대체함. v33 이하 본문은 아래에 그대로 보존.
+
+### ★ 먼저 확인할 것 (계속 유효 + 이번 추가)
+- v19 **색인 수동 제출 금지**(IndexNow·구글 색인 요청·유효성 검사 재클릭 권유 금지). v21 **패닉 재작성 금지**. v22 **LSAC 추적 의무**. v24 **gpa-raise-calculator 손대지 말 것**. v26 **건강보험 "waive하지 말라" 분기 유지**.
+- **연락처 contact@gpavault.com**, 운영자 실명 넣지 않음. Editorial Policy의 AI 보조 작성 문구는 **그대로 둔다**(10-22 재확인: 사용자는 애드센스·Media.net만 되면 상관없음).
+- Media.net **11월 중순~12월 중순 재시도**, 그 전엔 권하지 말 것. push: `git push origin HEAD:main`, Actions 확인 `gh api repos/canghun13/gpavault/actions/runs?per_page=1`.
+- 대화성 질문엔 도구 실행 금지. 대시보드·시각화 만들지 말 것. 화면 확인 링크는 꼭 봐야 할 페이지만.
+
+---
+
+## 10-22 진단: 구글 색인 98 → 7
+
+- **기술 문제 아님**. robots·canonical·sitemap·JSON-LD 정상, 크롤링은 계속됨("크롤링됨-미색인"이 08-15부터 증가).
+- 타임라인: 07-16~08-01 약 55페이지 집중 발행 → **08-04 구글 노출 붕괴** → 08-15 미색인 증가 시작 → 10월 7개만 남음. 사이트 단위 품질 강등 패턴.
+- 원인(복합): ① YMYL(학자금·재정지원) 주제인데 익명 저자 + 외부 출처 거의 없음(10-20 기준 Sources 보유 16페이지) ② **출처 없는 "most/typically" 일반화와 부풀려지거나 낡은 수치**, 계산 표 자체의 수학 오류 ③ **52페이지 FAQ 구조화데이터가 본문과 불일치**(스키마에만 있는 문답) ④ 공개 배포되던 handover.md(내부 작업 문서) ⑤ 리다이렉트 스텁 5개에 noindex + canonical 충돌.
+- Bing은 같은 기간 계속 상승(10-20 노출 16,691) → 페이지 품질 처방(출처 기반 정정)이 Bing에서는 이미 효과 확인(v33 참고).
+
+## 10-22 세션 작업 (커밋 `930a83e` ~ `3ac993b`, 13커밋, 전부 push + Actions 확인)
+
+### 사이트 위생 (`930a83e`)
+- `_config.yml` 신설: handover.md·README.md·IndexNow 키 txt를 Jekyll 배포에서 제외(공개 URL에서 사라짐).
+- 리다이렉트 스텁 5개(does-clep-affect-financial-aid, how-to-raise-your-gpa, is-college-degree-worth-the-debt, student-health-insurance-waiver-deadline, why-did-my-grad-stipend-paycheck-drop) **noindex 제거**(meta refresh + canonical만 유지).
+- blog/index.html H1 추가(style.css `.section-header h1`).
+
+### FAQ 구조화데이터 (`d581b8c` 이후 매 배치)
+- 모든 FAQPage JSON-LD를 **본문 FAQ 그대로 재생성**. 10-22 종료 시점 전수 검사: 불일치 **0**.
+
+### 출처·사실 감사 1~11차 (Sources 보유 16 → **104페이지**, 사이트맵 비색인 메타 페이지 제외 거의 전부)
+주요 **오류 정정**(사실이 틀렸던 것):
+- **LSAC 이중등록 제외**: "2026-07-28 시행"으로 써 있었음 → LSAC가 **08-18 연기 발표, 2027–28 지원 사이클부터 적용**(2026–27은 여전히 포함). 블로그·계산기·llms.txt 모두 수정. (v22 LSAC 추적 의무 — 다음 공지 계속 확인)
+- **GPA 상승 표 수학 오류**: how-many-as 표 9행 중 6행 틀림(예: 2.5/30학점→3.0에 30학점이라 했으나 실제 15학점), 학기별 상승폭 절반으로 과소표기, one-semester 표·2.5/90학점 "3.75 평균이면 3.0 도달"(실제 불가능, 45학점 필요), 누적 GPA 영향표(+0.03→+0.05 등), 라틴 아너스 구간 공백(3.5–3.59/3.7…). 전부 스크립트로 재계산.
+- 편입 학점 손실 "평균 13학점" → GAO-17-574 **43%**(공립 간 37%, 영리→공립 94%).
+- AP 학점당 학비 $411/$1,179/$1,496(출처 불명) → College Board 2025–26 ÷30 = **$398/$1,063/$1,500**(계산기 옵션값도 변경).
+- 기말고사 철회 마감 "학기 마지막 2~4주" → 삭제(대부분 기말 몇 주 전).
+- 학기 GPA 계산기 "대부분 학교가 학기 GPA로 학사경고" → 누적 기준이 일반, 학기 기준은 예외(Tampa).
+- IB 학점 "대부분 4~7점 인정" → UC는 **HL 5점 이상만**, SL 학점 없음.
+- WEF 직업 전망: 2023판 직업명 → 2025판(빅데이터·핀테크·AI/ML).
+- 학사 경고 페이지 "제적은 보통 영구" → 학교마다 다름(Molloy 영구 / Tampa 1년 후 재입학 신청).
+- AI 부정행위: 재수강으로 F 대체 가능 → **XF는 재수강으로 대체 불가**(Southern Miss) 추가, 탐지기 오탐 연구(Patterns 2023, 61%), Vanderbilt 탐지기 비활성화.
+- 용어집: IDR을 "재량소득 기준"으로 일괄 설명 → RAP은 AGI 1–10%·30년, IBR은 재량소득·20/25년. 백분위 정의 "초과" → "이하 포함". 2027-07 이후 대출 유예 축소.
+- 그 외 1~8차(이전 컨텍스트): PSLF 고용주 규정, OBBBA 대출 한도, 자동이체 1%p 인하(**2026-12-31 등록 마감**), 코사이너 해제 회차(6~36), Pell 변경 시행일, FAFSA ID, College Board 비용, SAT/ACT 공식 백분위로 계산기 재작성 등.
+- "most/typically/usually" 일반화는 **실제 학교 규정 예시로 교체하거나 삭제**(Tampa·Molloy·UT Dallas·Alabama State·UMBC·Suffolk·UNO·Drake·Wake Forest·Temple·Ohio State·Colorado State·UNCG 등).
+- editorial-policy에 **"Recent corrections" 섹션** 추가(정정 사실 공개 — 신뢰 신호). methodology의 시험 점수 출처 문구 갱신.
+
+### 검증 (10-22 종료 시점)
+- audit.py: sitemap 112 전부 lastmod, noindex 혼입 0, canonical 누락 0, JSON-LD 오류 0, broken 0(favicon 오탐만).
+- Playwright 375px: 변경 45페이지 페이지 가로 스크롤 0, 콘솔 에러 0. 표 가로 스크롤은 기존 패턴(기존보다 넓어진 표는 셀 문구 줄여 원래 폭 이하로 되돌림).
+- 계산기 JS(SAT·ACT·상환·AP 학점·이중등록) 경계값 테스트 통과.
+
+## ★ 다음 세션이 확인/처리할 것
+1. **색인 요청·유효성 검사 권유 절대 금지**. 이번 처방은 "기다림"이 전제. 구글 재평가는 수주~수개월. 사용자가 준 GSC 자료로만 판단.
+2. **효과 측정**: 다음 GSC 자료에서 색인 수(10-22 기준 7), 크롤링됨-미색인(86) 추이, 일별 노출. Bing 기준선은 v33 표.
+3. **LSAC 이중등록 정책** 추가 공지 확인(2027 여름 시행 전 또 바뀔 수 있음).
+4. **자동이체 1%p 인하 2026-12-31 마감** — 롱테일 신규 후보("student loan autopay 1 percent deadline")였음. 기존 how-to-lower-student-loan-interest-rate에 이미 반영. 별도 페이지는 중복 확인 후 판단(짝 가이드 금지 원칙).
+5. **pell-lifetime 10-28 보류 해제** → LEU 롱테일(583%·577% 등).
+6. Sources 없는 페이지: gpa-raise-calculator(손대지 말 것), 메타 페이지(about·contact·methodology·editorial-policy)·인덱스 2개 — 정상.
+7. Media.net 재시도는 11월 중순 이후.
+
+## 2주 재작업 보류 현황 (10-22 기준)
+- **11-05까지(10-22 감사 페이지 전부)**: 이번 세션에서 출처·정정한 블로그·계산기 약 90페이지 전체. 정확성 수정만 허용.
+- 기존 보류(v33): 10-26 ap-gpa 등 4개, 10-28 pell-lifetime 등 9개, 11-03 repayment-plans 등 5개 — 이번엔 출처 추가·사실 정정만 했으므로 보류일은 기존 것과 11-05 중 늦은 날짜 적용.
+
+## 검증된 출처 라이브러리 (재사용용, 전부 WebFetch로 내용 확인)
+- GPA 계산 규칙: UTC registrar(`utc.edu/academic-affairs/registrar/gpa`), USI(`usi.edu/registrar/grades-grading-policies/grade-point-average`, B+=3.5 학교 예), FCPS 등급표, BigFuture GPA 변환.
+- 가중치: UC A-G GPA, Broward(+1/+2), UCSD IB 학점표 2026.
+- 학적: Tampa 카탈로그(학사경고·제적), Molloy, UT Dallas 2026 전공변경, Alabama State 전공변경, UNCG Incomplete(6개월→F), Temple 수강학점(12–18 정액, 19+ 승인), Ohio State OAC 3335-8-30/9-33/8-27.1.
+- 연방: 34 CFR 668.34(SAP), 34 CFR 685.203(대출 한도), FSA Handbook Vol.1 Ch.1 / Vol.5 Ch.1 / Vol.7 Ch.8 / AVG Ch.5(Professional Judgment: 일괄 거부 정책 금지, 결정은 교육부에 이의 불가), GEN-26-01(Pell), 2026–27 금리 공지(6.52%).
+- 통계: GAO-17-574, NCES 2018-434(전공 변경 1/3), NSC PDP(28%가 1학년 30학점+, 12학점 중 9학점 이수 — Inside Higher Ed 경유), Open Doors 2025(298,180명, 단기 62%), NACE(2024 인턴 62% 오퍼, 2026 전환율 5년 최고), WEF Future of Jobs 2025.
+- 기타: LSAC 블로그(연기 발표 08-18), AMCAS 고교 중 대학과목 장, Southern Miss XF FAQ, Liang et al. arXiv 2304.02819, Vanderbilt 탐지기, Colorado State SAP(130% 경고·156학점 감사), Kettering(Barra), DOL Fact Sheet #71.
+- **WebFetch 막히는 곳**: aamc.org(JS), studentaid.gov(SPA — 본문 "Loading…"), news.microsoft.com·dol.gov(권한 요청 타임아웃). 대체: Medical Economics(AAMC 2025), law.cornell.edu CFR.
+
+## 체크리스트 추가분 (v33 81~82번에 이어서)
+83. **FAQ 구조화데이터 = 본문 그대로.** 문답을 고치면 반드시 스키마 재생성. 세션 끝에 전수 검사(질문명·답 앞 60자가 본문에 있는지).
+84. **수치 표는 손으로 쓰지 말고 스크립트로 재계산해 붙일 것.** 10-22에 GPA 상승 표 다수 행이 틀려 있었다(공식은 맞고 숫자가 틀림).
+85. **"most/typically/usually/at most schools" 금지 수준으로 줄일 것.** 실제 학교·기관 1~3곳을 이름과 링크로 제시하거나 "학교마다 다르다"로 쓴다.
+86. **날짜가 붙은 정책은 시행 직전·직후에 연기·변경 공지를 재확인.** LSAC가 발표 3주 만에 연기했는데 페이지는 원래 날짜로 남아 있었다.
+87. **편집 헬퍼는 `<body` 이후만 치환**(head의 JSON-LD 오염 사고). 문단 교체는 대상 `<p>`/`<li>`를 정확히 지정, div 안 문단 교체 시 중첩 div 생성 여부 확인.
+88. **리다이렉트 스텁에 noindex 넣지 말 것**(retire 절차: meta refresh + canonical만).
+89. **내부 작업 파일은 `_config.yml` exclude에 등록**(handover.md 공개 노출 사고).
+
+---
+
+## [보존] 이전 문서 v33 본문
 # GPA Vault 인수인계 문서 v33 (2026-10-20 세션 — 신규 Workforce Pell 계산기 / 상환 플랜·딘스리스트·간호 GPA 출처 감사)
 
 이전 v32 문서를 대체함. v32 이하 본문(10-14 구조 정리 포함)은 아래에 그대로 보존.
