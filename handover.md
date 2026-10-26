@@ -1,3 +1,56 @@
+# GPA Vault 인수인계 문서 v35 (2026-10-26 세션 — 색인 재점검 / 신규 자동이체 할인 계산기 / 게시일 소급 정정)
+
+이전 v34 문서를 대체함. v34 이하 본문은 아래에 그대로 보존. ★ 금지 원칙·연락처·push 절차·보류 규칙은 v34 "먼저 확인할 것" 그대로 유효(색인 요청·IndexNow·유효성 검사 권유 금지, 패닉 재작성 금지, gpa-raise 손대지 말 것, 운영자 실명 금지, AI 문구 유지, Media.net 11월 중순 이후).
+
+## 10-26 데이터 요약
+- **구글 커버리지(10-19 기준)**: 크롤링됨-미색인 **88**(10-13 +2), 발견됨-미색인 **17**(전부 "최종 크롤링 1970" = 한 번도 크롤링 안 됨: 9~10월 신규 CLEP·1098-T·scholarship-tax·employer-tuition·dual-enrollment 계산기·graduate-assistantship·health-waiver·repeat-coursework·incomplete 2종·methodology·gpa-raise + 스텁 2). 두 목록에 없는 sitemap URL 11개(홈, blog/, percentage-to-gpa, grade-calculator, student-loan-calculator, minor-value, ap-credit, workforce-pell, study-abroad-financial-aid-guide, how-to-calculate-unweighted-gpa, what-is-a-good-sat-score) = 색인 7개는 이 안에 있음.
+- **핵심 발견: 구글이 거의 다시 오지 않는다.** 미색인 88개 중 최종 크롤링이 9월 이후인 페이지는 6개뿐, 나머지는 7~8월. → **10-22 출처 감사 결과를 구글은 아직 한 페이지도 보지 못했다.** 효과 판단은 재크롤링 이후에만 가능.
+- 구글 실적: 일별 노출 10-17 이후 0. 3개월 클릭 3. 쿼리는 IB 환산(37~40위), study abroad loans 계열(40~90위), final exam calculator(67~77위).
+- **Bing**(페이지 보고서): retake 4,502/42 · deans 2,674/10(CTR 0.37%) · pell-lifetime 1,364/20 · ap-gpa 1,143/13 · unweighted 990/16 · nursing 971/11 · gpa-to-letter 702/4 · graduate 694/1(3.2위, CTR 0.14%) · good-gpa 547/2 · sap 522/17 · pell-intensity 516/13 · weighted-ap 433/0(6.5위) · ap-credit 389/3 · salary 326/13 · debt-by-major 324/14 · percentage-to-gpa 308/0(7.2위). 10-20 대비 전반 상승.
+- **GA4(09-28~10-25)**: 활성 592(싱가포르 274 봇 → 실사용자 약 318), direct 374, bing 137, duckduckgo 35, yahoo 21, ecosia 14, copilot 5, chatgpt 1. 구글 0.
+- Bing 키워드 `calculating final results...` 181노출은 우리 문자열 아님(v31 결론 유지).
+
+## 10-26 색인 재점검 (사용자 요청 "꼼꼼하게 다시 확인")
+전부 이상 없음: canonical = sitemap 100% 일치(113), robots 메타는 privacy만, 스텁으로 가는 내부 링크 0, 중복 title·description 0, 페이지 간 중복 문단 최대 14%, 최소 본문 565단어, 숨김 텍스트·가짜 평점·가짜 인물 스키마 0, FAQ 스키마 불일치 0, 홈 배지 7개 nofollow sponsored 유지, components.js 헤더 주입 정상(base 경로 계산 확인), Actions 배포 전부 success. 실서버는 이 환경에서 접근 불가(프록시 403) — 대신 repo·배포 기록으로 확인.
+**새로 찾아 고친 것 1건 — 게시일 소급 표기**: 13페이지의 `datePublished`가 저장소 생성일(2026-05-13)보다 이른 날짜(최대 2026-01-05)로 적혀 있었음 = 사이트가 존재하기 전 날짜. git 최초 추가일로 정정(weighted-ap, how-many-as, too-much, room-board, keep-scholarship, retake, raise-one-semester, salary, repayment-plans, federal-vs-private, med-school, final-exam-grade, find-scholarships). 블로그·홈 카드 날짜도 본문 표기와 일치시킴(51개). new-act-format 본문 날짜 July → Updated September(dateModified와 일치).
+**결론**: 기술 원인 없음. 남은 병목은 ① 구글 재크롤링(사이트맵 lastmod는 10-22에 실제 변경분만 갱신됨, 기다릴 것) ② 외부 신호(백링크가 런칭 디렉터리뿐). ②는 사용자 판단 사항으로 보고만 함(예: r/financialaid·r/StudentLoans 실제 질문에 Pell LEU·SAP 계산기로 답하기, 대학 재정지원 안내 페이지에 도구 소개 요청).
+
+## 10-26 세션 작업 (커밋 `c1a79f2`)
+### 신규: `tools/student-loan-autopay-discount-calculator.html` (49번째 도구)
+- **선정 근거**: 학자금 대출(광고 단가 최상위) + **12-31 마감 임박**으로 11~12월 검색 증가 예상. SERP 상위는 뉴스(Yahoo·WaPo·Boston Globe)와 블로그(College Ave·Experian·Finnita)뿐, **금액 계산기 없음** → 롱테일 `student loan autopay discount calculator`, `how much does the 1% autopay discount save`. 기존 파일 중복 grep: autopay는 이자율 가이드·연방vs사설 본문 언급뿐, 계산기 없음. 짝 가이드는 만들지 않고 기존 이자율 가이드와 상호 링크.
+- **사실(1차 출처)**: ED 보도자료 — 1%p 인하 2026-07-01~2028-06-30, **2012-07-01 이후 발생 Direct Loan만**(Sub·Unsub·PLUS·Consolidation), 기존 가입자 자동 +0.75, 연체자는 정상화 후 가능. 마감 09-30 → **12-31 연장**(Yahoo Finance/CNBC). 상환 상태 대출만, 2028-07 이후 0.25 복귀, 소급 없음(Money Talks News). FFEL·사설 제외(College Ave).
+- 계산: 고정 월납 유지 가정, 월 단위 시뮬레이션, 3가지 비교(자동이체 없음 / 0.25만 / 12-31 전 가입). 결과: 2028-06까지 절감액, 0.25 대비, 대출 전체 절감, 상환 개월 단축. 시작 월 선택(이미 가입·11월·12월·1월), 대출 유형(자격·2012 이전 Direct·FFEL/사설 → 0.25만 계산). 경계값: 빈칸, 금리 20% 초과, 월납 < 월이자(IDR/RAP 안내), 금리 0.5%(0 하한) 확인.
+- 본문: 작동 방식, 자격, 잔액별 절감표(6.52%·10년, 375px fit), IDR/RAP 영향, 가입 방법, Sources 6, FAQ 6(스키마 6:6).
+- 연결: 헤더 드롭다운(Interest Capitalization 다음), tools 카드, sitemap 112 → **113**, llms.txt, 인터링크 3곳(이자율 가이드 본문 + student-loan-calculator·loan-repayment-calculator Related, lastmod 미변경).
+### 정정
+- `how-to-lower-student-loan-interest-rate`: 1%p 할인 자격(2012-07-01 이후 Direct Loan, 상환 상태, FFEL·사설 제외) 추가 + ED 보도자료 출처. dateModified·lastmod 10-26.
+- `loan-repayment-calculator` Related 문구 "SAVE" → "RAP".
+
+### 검증
+- audit.py: sitemap 113 전부 lastmod, 도구 49·블로그 56 헤더/카드/llms 누락 0, canonical·JSON-LD 오류 0. FAQ 스키마 전수 불일치 0. 신규 계산기 375/1280 모든 옵션에서 가로 스크롤 0, 콘솔 에러 0(광고 차단 리소스 제외).
+
+## ★ 다음 세션이 확인/처리할 것
+1. **색인**: 다음 GSC 자료에서 "최종 크롤링" 날짜가 10-22 이후로 바뀐 페이지가 있는지부터 볼 것(재평가 시작 신호). 미색인 수 자체보다 크롤링 재개 여부가 먼저. 요청·유효성 검사는 계속 금지.
+2. **자동이체 계산기 만료 관리**: **2027-01-01 이후** 마감 지난 문구로 수정(신규 가입은 0.25만, 기존 가입자는 2028-06까지 1%p 유지). 마감 전 연장 공지가 또 나오면 즉시 반영.
+3. **pell-lifetime 10-28 보류 해제** → Bing 롱테일(`how is lifetime pell grant calculated and how do I figure what I have left`, 500~599% 구간) 대응.
+4. **11-03/11-05 보류 해제 후 CTR·보강 후보(Bing)**: weighted-gpa-calculator-ap-classes 433/0(6.5위), percentage-to-gpa 308/0(7.2위), gpa-to-letter 702/4, good-gpa 547/2, deans 2,674/10. graduate-college는 제목에 답이 있어 무클릭(처방 제외 유지). **study-abroad-financial-aid-guide**(구글 색인 페이지, 667단어)에 유학 대출 섹션 보강 — 구글 쿼리 `study abroad loans`·`student loan for study abroad`·`loans for american students studying abroad` 수요 확인, 대출 = 고단가.
+5. Media.net 재시도 11월 중순 이후. 제휴 가입 대기.
+
+## 2주 재작업 보류 현황 (10-26 기준)
+- **10-28까지**: pell-lifetime 등 v33 목록 9개
+- **11-03까지**: repayment-plans, loan-repayment-calculator, deans-list, nursing, workforce-pell
+- **11-05까지**: 10-22 감사 페이지 전체(약 90)
+- **11-09까지**: student-loan-autopay-discount-calculator(신규), how-to-lower-student-loan-interest-rate
+- 해제(10-26): average-starting-salary, average-student-loan-debt-by-major, how-much-student-loan-debt-is-too-much, degree-roi, clep-financial-aid(게시일 정정만 있었음)
+
+## 체크리스트 추가분 (v34 83~89번에 이어서)
+90. **`datePublished`는 실제 첫 게시일(git 최초 추가일)과 같아야 한다.** 사이트 생성 전 날짜를 쓰지 말 것(10-26에 13페이지 소급 표기 발견). 신규 페이지는 배포일로.
+91. **본문 날짜를 바꾸면 블로그 목록·홈 카드의 날짜도 같이 바꿀 것.** 카드 날짜가 본문과 3개월 어긋나 있었다.
+92. **기한이 있는 정책 도구는 handover에 만료 점검일을 적는다**(자동이체 계산기: 2027-01-01).
+
+---
+
+## [보존] 이전 문서 v34 본문
 # GPA Vault 인수인계 문서 v34 (2026-10-22 세션 — 구글 색인 98→7 원인 진단 / 사이트 전체 출처·사실 감사)
 
 이전 v33 문서를 대체함. v33 이하 본문은 아래에 그대로 보존.
