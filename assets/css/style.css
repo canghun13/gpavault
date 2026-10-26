@@ -554,6 +554,9 @@ footer {
   letter-spacing: -0.01em;
 }
 .explainer p { font-size: 0.88rem; color: var(--slate-mid); line-height: 1.7; margin-bottom: 1rem; }
+.explainer ul, .explainer ol { margin: 0 0 1rem 1.25rem; padding: 0; }
+.explainer li { font-size: 0.88rem; color: var(--slate-mid); line-height: 1.7; margin-bottom: 0.4rem; overflow-wrap: break-word; }
+.explainer li strong { color: var(--slate); }
 .table-scroll-hint {
   display: none;
   font-size: 0.75rem; color: var(--slate-light);
