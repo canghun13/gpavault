@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Loan Autopay Discount Calculator (1% Through June 2028) | GPA Vault</title>
+  <meta name="description" content="See what the temporary 1-point federal autopay discount saves on your loan if you enroll by Dec. 31, 2026, compared with the regular 0.25 point and with no autopay. Checks which loans qualify.">
+  <link rel="canonical" href="https://gpavault.com/tools/student-loan-autopay-discount-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Student Loan Autopay Discount Calculator",
+  "description": "Estimates the interest saved by the temporary 1-percentage-point federal student loan autopay discount (July 1, 2026 through June 30, 2028, enrollment by December 31, 2026) compared with the standard 0.25-point discount and with no autopay.",
+  "url": "https://gpavault.com/tools/student-loan-autopay-discount-calculator.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "provider": {"@type": "Organization", "name": "GPA Vault", "url": "https://gpavault.com"}
+}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the deadline for the 1% student loan autopay discount?", "acceptedAnswer": {"@type": "Answer", "text": "December 31, 2026. The Education Department originally set September 30, 2026, then extended it. Borrowers enrolled by the deadline, or already enrolled, keep the 1-point reduction through June 30, 2028."}}, {"@type": "Question", "name": "How much does the 1% autopay discount save?", "acceptedAnswer": {"@type": "Answer", "text": "Roughly 1% of your balance for each year it applies. On a $35,000 balance at 6.52% with the standard $398 payment, starting in December 2026 saves about $546 in interest by June 2028 compared with not using autopay."}}, {"@type": "Question", "name": "Do I get the discount if I'm already on autopay?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Borrowers already enrolled kept their 0.25-point discount and their servicer added another 0.75 point automatically starting July 1, 2026. You don't need to re-enroll."}}, {"@type": "Question", "name": "Do Parent PLUS and consolidation loans qualify?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, if they are Direct Loans disbursed on or after July 1, 2012 and in repayment. Older FFEL loans and private loans don't get the extra point."}}, {"@type": "Question", "name": "Is the discount retroactive to July 1, 2026?", "acceptedAnswer": {"@type": "Answer", "text": "No. It applies once you are enrolled, so the months before you sign up don't get the lower rate."}}, {"@type": "Question", "name": "What happens after June 30, 2028?", "acceptedAnswer": {"@type": "Answer", "text": "The reduction is scheduled to return to the standard 0.25 point for borrowers who stay on autopay."}}]}
+</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<noscript><nav style="padding:0.75rem 1rem;font-size:0.75rem;line-height:1.8;background:#f8fafc;border-bottom:1px solid #e2e8f0;"><a href="../tools/">Tools</a> | <a href="../blog/">Blog</a> | <a href="../glossary.html">Glossary</a> | <a href="../about.html">About</a></nav></noscript>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Tuition &amp; Loans</div>
+    <h1>Student Loan Autopay Discount Calculator</h1>
+    <p>Federal borrowers on autopay get a full percentage point off their interest rate through June 30, 2028 — if they enroll by December 31, 2026. Enter your loan to see what that is worth in dollars, compared with the regular 0.25-point discount and with paying manually.</p>
+  </div>
+  <div class="calc-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end;">
+      <div class="form-group"><label for="bal">Current Federal Loan Balance ($)</label><input type="number" id="bal" oninput="calculate()" min="0" step="100" value="35000"></div>
+      <div class="form-group"><label for="rate">Interest Rate Before Discount (%)</label><input type="number" id="rate" oninput="calculate()" min="0" max="20" step="0.01" value="6.52"></div>
+      <div class="form-group"><label for="pay">Monthly Payment ($)</label><input type="number" id="pay" oninput="calculate()" min="0" step="1" value="398"></div>
+      <div class="form-group"><label for="start">Discounted Rate Starts</label>
+        <select id="start" onchange="calculate()">
+          <option value="a20">Already on autopay</option>
+          <option value="20">November 2026</option>
+          <option value="19" selected>December 2026</option>
+          <option value="18">January 2027</option>
+        </select>
+      </div>
+      <div class="form-group" style="grid-column:1 / -1;"><label for="loan">Loan Type</label>
+        <select id="loan" onchange="calculate()">
+          <option value="eligible" selected>Direct Loans disbursed on or after July 1, 2012</option>
+          <option value="olddirect">Direct Loans disbursed before July 1, 2012</option>
+          <option value="ffel">FFEL or private loans</option>
+        </select>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calculate();scrollToResult();">Calculate My Savings</button>
+    <div class="result-box show" id="result">
+      <div class="result-num" id="result-main">—</div>
+      <div class="result-label" id="result-label">Interest saved through June 2028</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>How the 1-point discount works</h2>
+    <p>Federal Direct Loans have long carried a 0.25-percentage-point rate reduction for borrowers who pay by automatic debit. In June 2026 the Education Department announced a temporary increase: from July 1, 2026 through June 30, 2028, the autopay reduction is a full 1 percentage point. Borrowers who were already on autopay got the extra 0.75 point automatically from their servicer. Everyone else has to enroll, and the deadline — originally September 30, 2026 — was extended to <strong>December 31, 2026</strong>.</p>
+    <p>The larger discount is not paid retroactively, so each month you wait is a month of savings you don't get back. After June 30, 2028 the reduction is scheduled to return to the usual 0.25 point for as long as you stay on autopay. The calculator assumes your monthly payment stays the same when your rate drops, so the savings show up as less interest and a slightly earlier payoff.</p>
+
+    <h2>Which loans qualify</h2>
+    <ul>
+      <li><strong>Qualify:</strong> Direct Subsidized, Direct Unsubsidized, Direct PLUS (Grad PLUS and Parent PLUS) and Direct Consolidation Loans disbursed on or after July 1, 2012, in repayment and in good standing.</li>
+      <li><strong>Don't qualify for the extra point:</strong> older FFEL loans and private student loans. Many private lenders offer their own autopay discount, usually 0.25 point, on their own terms.</li>
+      <li><strong>Defaulted loans:</strong> the Education Department says borrowers in default can get the reduction after returning to good standing — by consolidating, applying for a new repayment plan and enrolling in autopay.</li>
+      <li><strong>Not in repayment:</strong> the expanded discount applies to loans in repayment status. During deferment or forbearance there is no automatic payment to draft, so there is nothing to discount.</li>
+    </ul>
+
+    <h2>What it saves by balance</h2>
+    <p>Estimates below assume a 6.52% rate (the 2026–27 undergraduate rate), the 10-year standard payment, a discounted rate starting December 2026, and staying on autopay at 0.25 point after June 2028. "Over the loan" compares autopay with never using autopay.</p>
+    <table>
+      <tr><th>Balance<br>(payment)</th><th>Saved by<br>June 2028</th><th>Saved over<br>the loan</th></tr>
+      <tr><td>$10,000<br>($114/mo)</td><td>$156</td><td>$406</td></tr>
+      <tr><td>$25,000<br>($284/mo)</td><td>$390</td><td>$1,015</td></tr>
+      <tr><td>$35,000<br>($398/mo)</td><td>$546</td><td>$1,421</td></tr>
+      <tr><td>$50,000<br>($568/mo)</td><td>$781</td><td>$2,030</td></tr>
+      <tr><td>$75,000<br>($852/mo)</td><td>$1,171</td><td>$3,045</td></tr>
+      <tr><td>$100,000<br>($1,136/mo)</td><td>$1,561</td><td>$4,060</td></tr>
+    </table>
+    <p>The rule of thumb: the temporary point is worth roughly 1% of your balance for each year it applies, so a borrower who starts in December 2026 gets about 19 months of it. Graduate borrowers with higher balances gain the most in dollars — $60,000 at 7.94% saves about $951 by June 2028.</p>
+
+    <h2>On an income-driven plan or RAP?</h2>
+    <p>If your payment is set by income under IBR or the new Repayment Assistance Plan (RAP), the discount doesn't change what you pay each month. It changes how much interest builds up. When your payment covers all the monthly interest, a lower rate means more of each payment goes to principal. Under RAP, unpaid interest on full, on-time payments is waived and the plan can match up to $50 of principal, so a borrower whose payment is below the monthly interest may see little dollar benefit from the rate cut. Because the payment doesn't follow the balance on these plans, use this calculator only when your payment covers the monthly interest; it will tell you if it doesn't.</p>
+
+    <h2>How to enroll</h2>
+    <p>Log in to your federal loan servicer's website (your StudentAid.gov account lists which servicer holds your loans), find automatic payments or auto debit, and authorize monthly withdrawals from your bank account before December 31, 2026. Keep the bank account funded: missed or reversed drafts can end autopay, and with it the discount. If you have loans at more than one servicer, enroll at each one.</p>
+
+    <div class="cta-box" style="background:var(--indigo-faint);border:1px solid var(--indigo-light);border-radius:12px;padding:1.5rem;margin:2rem 0;text-align:center;">
+      <p style="margin-bottom:0.75rem;">Looking for more ways to cut your rate — refinancing private loans, employer repayment help and what doesn't work?</p>
+      <a href="../blog/how-to-lower-student-loan-interest-rate.html" style="display:inline-block;background:var(--indigo);color:white;padding:0.625rem 1.5rem;border-radius:8px;text-decoration:none;font-size:0.85rem;font-weight:600;">How to Lower Your Student Loan Interest Rate →</a>
+    </div>
+
+    <h2>Sources</h2>
+    <ul>
+      <li><a href="https://www.ed.gov/about/news/press-release/us-department-of-education-announces-student-loan-interest-rate-reduction" style="color:var(--indigo);" rel="noopener">U.S. Department of Education, Announces student loan interest rate reduction</a> — 1-point reduction through June 30, 2028, Direct Loans originated after July 1, 2012, automatic 0.75 point for current enrollees, defaulted-borrower path.</li>
+      <li><a href="https://finance.yahoo.com/economy/policy/articles/student-loan-autopay-interest-rate-175606152.html" style="color:var(--indigo);" rel="noopener">Yahoo Finance, Student loan autopay interest rate discount deadline extended</a> — enrollment deadline moved from Sept. 30 to Dec. 31, 2026; eligible loan types; FFEL and private loans excluded.</li>
+      <li><a href="https://www.moneytalksnews.com/last-call-for-student-loan-borrowers-to-lock-in-added-discount/" style="color:var(--indigo);" rel="noopener">Money Talks News, Last call for student loan borrowers to lock in added discount</a> — applies only to loans in repayment status; returns to 0.25 point after June 2028.</li>
+      <li><a href="https://www.collegeave.com/articles/federal-student-loan-interest-rate-discount/" style="color:var(--indigo);" rel="noopener">College Ave, How to get a 1% discount on your federal student loan interest rate</a> — qualifying loan types disbursed on or after July 1, 2012.</li>
+      <li><a href="https://fsapartners.ed.gov/knowledge-center/library/electronic-announcements/2026-06-04/interest-rates-federal-direct-loans-first-disbursed-between-july-1-2026-and-june-30-2027" style="color:var(--indigo);" rel="noopener">Federal Student Aid, 2026–27 Direct Loan interest rates</a> — 6.52% undergraduate rate used in the table.</li>
+      <li><a href="https://www.everycrsreport.com/files/2025-07-31_IF13075_d08bd35bed70265ba5facbc55c4135b864a1f534.html" style="color:var(--indigo);" rel="noopener">Congressional Research Service, The Repayment Assistance Plan</a> — interest waiver and principal match under RAP.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <p><strong>What is the deadline for the 1% student loan autopay discount?</strong> December 31, 2026. The Education Department originally set September 30, 2026, then extended it. Borrowers enrolled by the deadline, or already enrolled, keep the 1-point reduction through June 30, 2028.</p>
+    <p><strong>How much does the 1% autopay discount save?</strong> Roughly 1% of your balance for each year it applies. On a $35,000 balance at 6.52% with the standard $398 payment, starting in December 2026 saves about $546 in interest by June 2028 compared with not using autopay.</p>
+    <p><strong>Do I get the discount if I'm already on autopay?</strong> Yes. Borrowers already enrolled kept their 0.25-point discount and their servicer added another 0.75 point automatically starting July 1, 2026. You don't need to re-enroll.</p>
+    <p><strong>Do Parent PLUS and consolidation loans qualify?</strong> Yes, if they are Direct Loans disbursed on or after July 1, 2012 and in repayment. Older FFEL loans and private loans don't get the extra point.</p>
+    <p><strong>Is the discount retroactive to July 1, 2026?</strong> No. It applies once you are enrolled, so the months before you sign up don't get the lower rate.</p>
+    <p><strong>What happens after June 30, 2028?</strong> The reduction is scheduled to return to the standard 0.25 point for borrowers who stay on autopay.</p>
+
+    <h2>Related tools and guides</h2>
+    <p>
+      <a href="../blog/how-to-lower-student-loan-interest-rate.html" style="color:var(--indigo);">How to Lower Your Student Loan Interest Rate</a> — autopay, refinancing and employer help compared.<br>
+      <a href="student-loan-calculator.html" style="color:var(--indigo);">Student Loan Calculator</a> — monthly payment and total interest for any loan.<br>
+      <a href="loan-repayment-calculator.html" style="color:var(--indigo);">Student Loan Repayment Calculator</a> — Standard, IBR and RAP side by side.<br>
+      <a href="interest-capitalization-calculator.html" style="color:var(--indigo);">Interest Capitalization Calculator</a> — what unpaid interest adds to your balance.
+    </p>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+function scrollToResult(){
+  try {
+    var b = document.getElementById('result');
+    if (b && typeof b.scrollIntoView === 'function') { b.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+  } catch (e) { /* cosmetic only */ }
+}
+function money(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+function num(id){ var v = document.getElementById(id).value; return v === '' ? NaN : parseFloat(v); }
+function row(a,b){ return '<tr><td style="padding:0.5rem;border-bottom:1px solid var(--border);">'+a+'</td><td style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:right;">'+b+'</td></tr>'; }
+// Simulate a fixed monthly payment. promoMonths = months at (rate - 1) before reverting to (rate - 0.25).
+function sim(bal, rate, pay, mode, promoMonths){
+  var promoInt = 0, life = 0, m = 0;
+  while (bal > 0.005 && m < 1200) {
+    var r = mode === 'none' ? rate : (mode === 'std' ? rate - 0.25 : (m < promoMonths ? rate - 1 : rate - 0.25));
+    if (r < 0) r = 0;
+    var it = bal * r / 1200;
+    if (m === 0 && pay <= it) return null;
+    var p = Math.min(pay, bal + it);
+    bal = bal + it - p; life += it;
+    if (m < promoMonths) promoInt += it;
+    m++;
+  }
+  if (m >= 1200) return null;
+  return {promo: promoInt, life: life, months: m};
+}
+function calculate(){
+  var bal = num('bal'), rate = num('rate'), pay = num('pay');
+  var sv = document.getElementById('start').value, already = sv.charAt(0) === 'a';
+  var n = parseInt(already ? sv.slice(1) : sv, 10);
+  var loan = document.getElementById('loan').value;
+  var main = document.getElementById('result-main'), label = document.getElementById('result-label'), detail = document.getElementById('result-detail');
+  var res = document.getElementById('result'); if (res) { res.classList.add('show'); }
+  var note = '<p style="font-size:0.88rem;color:var(--slate-mid);margin-top:0.75rem;">';
+  if (isNaN(bal) || isNaN(rate) || isNaN(pay) || bal <= 0 || pay <= 0 || rate < 0) {
+    main.textContent = '—'; label.textContent = 'Interest saved through June 2028';
+    detail.innerHTML = note + 'Enter your balance, interest rate and monthly payment to see your savings.</p>';
+    return;
+  }
+  if (rate > 20) {
+    main.textContent = '—'; label.textContent = 'Check the interest rate';
+    detail.innerHTML = note + 'Federal student loan rates are well under 20%. Enter the rate as a percentage, for example 6.52.</p>';
+    return;
+  }
+  var none = sim(bal, rate, pay, 'none', n);
+  if (!none) {
+    main.textContent = '—'; label.textContent = 'Payment doesn’t cover the monthly interest';
+    detail.innerHTML = note + 'At ' + rate + '%, one month of interest on ' + money(bal) + ' is about ' + money(bal * rate / 1200) + ', more than your ' + money(pay) + ' payment. This is common on income-driven plans and RAP, where the payment is set by income. The rate cut still slows how fast interest builds, but this fixed-payment estimate doesn’t apply — see the income-driven section below.</p>';
+    return;
+  }
+  var std = sim(bal, rate, pay, 'std', n);
+  var h = '<table style="width:100%;border-collapse:collapse;font-size:0.88rem;margin-top:0.75rem;">';
+  if (loan !== 'eligible') {
+    main.textContent = money(none.life - std.life);
+    label.textContent = 'Over the loan with a 0.25-point discount only';
+    h += row('Extra 0.75 point', 'Not eligible');
+    h += row('Interest,<br>no autopay', money(none.life));
+    h += row('Interest,<br>0.25 off', money(std.life));
+    h += row('Payoff months', none.months + ' → ' + std.months);
+    h += '</table>';
+    var why = loan === 'olddirect' ? 'The temporary 1-point reduction covers Direct Loans disbursed on or after July 1, 2012. Older Direct Loans still get the standard 0.25-point autopay discount, shown here.' : 'FFEL and private loans don’t get the temporary federal point. Many lenders offer their own autopay discount, often 0.25 point; this estimate assumes 0.25. Check your lender’s terms. Consolidating FFEL loans into a Direct Consolidation Loan creates a new Direct Loan, but it can change other benefits, so weigh it carefully.';
+    detail.innerHTML = h + note + why + '</p>';
+    return;
+  }
+  var promo = sim(bal, rate, pay, 'promo', n);
+  var saved = none.promo - promo.promo;
+  main.textContent = money(saved);
+  label.textContent = 'Interest saved through June 2028';
+  h += row(already ? 'Months left at<br>1 point off' : 'Months at<br>1 point off', n);
+  h += row('vs. 0.25 only,<br>to June 2028', money(std.promo - promo.promo));
+  h += row('Whole loan vs.<br>no autopay', money(none.life - promo.life));
+  h += row('Whole loan vs.<br>enrolling late', money(std.life - promo.life));
+  h += row('Payoff months', none.months + ' → ' + promo.months);
+  h += '</table>';
+  if (already) h += note + 'You have had the 1-point rate since July 2026; these figures count the ' + n + ' months from November 2026 through June 2028, starting from your current balance.</p>';
+  h += note + 'Rate drops from ' + rate.toFixed(2) + '% to ' + Math.max(0, rate - 1).toFixed(2) + '% for ' + n + ' months, then ' + Math.max(0, rate - 0.25).toFixed(2) + '% while you stay on autopay. Your payment is held at ' + money(pay) + ', so the savings appear as less interest and an earlier payoff. Federal interest accrues daily; this monthly estimate can differ from your servicer’s figures by a few dollars.</p>';
+  detail.innerHTML = h;
+}
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', calculate); } else { calculate(); }
+</script>
+</body>
+</html>
