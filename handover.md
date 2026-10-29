@@ -1,3 +1,56 @@
+# GPA Vault 인수인계 문서 v36 (2026-10-29 세션 — 신규 클러스터 2개: 재정지원 환불 / 대학원 입학 GPA)
+
+이전 v35 문서를 대체함. v35 이하 본문은 아래에 그대로 보존. 금지 원칙·연락처·push 절차·보류 규칙은 v34 "먼저 확인할 것" 그대로 유효.
+
+## 10-29 키워드 조사 (사용자 지시: 외부에서 넓게 → 경쟁 강도 → 강하면 롱테일, 가능하면 새 클러스터)
+판정 기준은 체크리스트 33(전용 도구 vs 포럼·.edu만 있는 SERP). 아래 기각 항목은 **재조사하지 말 것**.
+
+| 키워드군 | SERP 상위 | 판정 |
+|---|---|---|
+| **financial aid refund calculator / how much refund will I get / when will I get my refund** | .edu(FAU 추정기·Boise), 스팸 페이지, r/financialaid 질문, LegalClarity·Gerald 해설 | **채택** — 범용 계산기 없음 |
+| **last 60 credits GPA calculator / last 60 hours GPA** | .edu 안내(MTSU·Arizona·UH·South Univ·UCalgary), GradCafe·SDN 포럼, gradpilot 뉴스 | **채택** — 포럼만 있는 공백 |
+| upper division GPA calculator | everycalculators 프로그램형 스팸 수십 페이지 | 보류(경쟁은 약하나 스팸 밀집, last-60 페이지 FAQ로 일부 흡수) |
+| PLUS 거절 시 추가 Unsub 대출 | .edu 신청서·FSA Handbook만 | **다음 후보**(obbba-loan-limit 계산기와 일부 중복 — 블로그 형태 검토) |
+| quarter ↔ semester units 변환 | .edu 도구(CPP·CSUSB·Cal Poly) + 스팸 | 보류(수익성 낮음) |
+| 등록금 환불 일정(주차별 %) | .edu만 | 보류(학교별이라 범용 도구 성립 약함, 체크리스트 42) |
+| PSLF buyback 계산기 | Tate·StudentLoanPlanner·College Investor·teamzlab | 기각(포화) |
+| IDR 탕감 과세(tax bomb) 계산기 | College Investor·taxbracketcalc·ustax.tools 등 | 기각(포화) |
+| Teacher Loan Forgiveness + PSLF 동시 | StudentLoanPlanner·SoFi·studentaid | 기각(포화) |
+| CASPA/PA school GPA 계산기 | smartcgpa·gpacalculator.net·paschoolfinder + 스팸 | 기각(중간 경쟁, 차별점 약함) |
+| 홈스쿨 GPA 계산기 | homeschoolfox(도구+가이드)·num8ers | 기각 |
+| 한국 4.5 → 4.0 환산 | calcfyi(프로그램형)·smartcgpa·haniseoul | 기각(우리 독자층 아님) |
+- 네이버: 미국 학생 대상 사이트라 수요 판단에 쓰지 않음(한국어 4.5 환산만 해당, 위에서 기각).
+
+## 10-29 세션 작업 (커밋 `3dbc9c9`, Actions success)
+### 신규 클러스터 14: 재정지원 지급·환불 — `tools/financial-aid-refund-calculator.html`
+- 입력: 연간/학기 단위 선택(÷2·÷3), Pell·기타 장학금·Direct Loan·Parent PLUS·사설 대출, 학기 청구액(등록금·학교 기숙사/식비·기타), Title IV 승인서 여부, 첫 대출 1학년 여부.
+- 출력: 환불액(또는 미납액), **환불 중 대출 몫**, 수수료 차감액, 14일 규정·30일 지연·120일 반환 안내, Pell 연 최대 초과 경고.
+- 1차 출처: **FSA Handbook 2026–27 Vol.4 Ch.2**(14일, 승인 없이 낼 수 있는 항목 = 등록금·수수료·학교 제공 식비/숙소, 전년도 미납 $200 한도, 120일 반환 = 취소 처리, 첫 대출 30일 지연·코호트 연체율 15% 미만 면제, 7일차 교재), **GENERAL-26-28**(2026-10-01~2027-09-30 수수료 1.057%/4.228%), GEN-26-01(Pell $7,395).
+- 예시 표 3개(375px fit), FAQ 6(스키마 6:6), Sources 4.
+### 신규 클러스터 15: 대학원 입학 GPA — `tools/last-60-credits-gpa-calculator.html`
+- 학기 행 추가/삭제(최신 → 과거), 60 semester / 90 quarter / 30 선택, **경계 학기 처리 2방식**(학기 전체 포함 = MTSU / 필요한 학점만), 누적 GPA 비교, **다음 학기 추가 시 롤링 창 예측**.
+- 1차 출처: UW–Madison(3.00, last 60 semester hours, 4.00 환산 금지), ASU(경쟁 지원자 3.00, 60 semester/90 quarter), CSU(Title 5 — CSUN 카탈로그: 2.5, last 60/90 units attempted), MTSU(학기 전체 포함, 재수강·불인정 편입 과목 포함), U of Arizona(12 대학원 학점 미만이면 합산, 유학생 마지막 2년).
+- 예시: 누적 2.95 학생이 last-60 3.34(학기 전체)/3.47(정확히 60) → 3.00 컷 통과, 다음 학기 4.0이면 3.61.
+- 연결(두 페이지 공통): 헤더 드롭다운, tools 카드, sitemap 113 → **115**, llms.txt, Related 인터링크 5곳(financial-aid-calculator, r2t4, semester-gpa, grad-school-application-cost, how-does-financial-aid-work — 보류 중 페이지는 링크 1줄 예외, lastmod 미변경).
+### 검증
+- 두 계산기 경계값: 음수 입력, 빈칸, 미납 상황, 승인서 없음, 첫 대출 지연, Pell 과다 / 학점 60 미만, 빈 행, GPA 5 입력, 행 삭제·추가 — 전부 정상, 콘솔 에러 0.
+- 375/1280: 신규 2페이지 요소 넘침 0, 표 가로 스크롤 0. 감사: 115 URL, 헤더·카드·llms 누락 0, 깨진 링크 0, JSON-LD 오류 0, FAQ 불일치 0.
+
+## ★ 다음 세션이 확인/처리할 것
+1. 신규 2페이지 Bing 노출 확인(`financial aid refund`, `last 60 credits gpa`). 환불 계산기는 **1월(봄학기 지급)·8~9월(가을 지급)이 성수기** — 비수기 판정 금지(체크리스트 35).
+2. 클러스터 확장 후보: 환불 쪽 = PLUS 거절 추가 Unsub(블로그), "Pell 받고 수강 취소하면 환불을 돌려줘야 하나"; 대학원 GPA 쪽 = upper-division·major GPA(같은 페이지 확장 여부부터 판단, 짝 페이지 금지).
+3. v35 항목 유지: 구글 재크롤링 신호 확인, 자동이체 계산기 2027-01-01 만료 점검, 11-03/11-05 보류 해제 후 CTR 후보, study-abroad-financial-aid-guide 유학 대출 보강.
+
+## 2주 재작업 보류 현황 (10-29 기준)
+- 11-03까지: repayment-plans, loan-repayment-calculator, deans-list, nursing, workforce-pell / 11-05까지: 10-22 감사 페이지 전체 / 11-09까지: autopay 계산기, 이자율 가이드 / **11-12까지: financial-aid-refund-calculator, last-60-credits-gpa-calculator**
+
+## 체크리스트 추가분 (v35 90~93번에 이어서)
+94. **표 넘침은 표마다 `scrollWidth > clientWidth`로 잴 것.** 본문 표는 모바일에서 블록 스크롤 컨테이너라 페이지 폭 검사로는 안 잡힌다. 10-29 신규 표 4개가 412~444px로 밀려 셀 문구를 줄여 335px에 맞췄다.
+95. **`.form-group` 밖에 둔 입력칸은 스타일이 없다.** 행 추가형 입력(term-row)은 페이지 `<style>`에 입력칸 스타일을 직접 넣을 것(10-29 last-60 계산기에서 기본 브라우저 입력칸으로 나왔음).
+
+---
+
+## [보존] 이전 문서 v35 본문
 # GPA Vault 인수인계 문서 v35 (2026-10-26 세션 — 색인 재점검 / 신규 자동이체 할인 계산기 / 게시일 소급 정정)
 
 이전 v34 문서를 대체함. v34 이하 본문은 아래에 그대로 보존. ★ 금지 원칙·연락처·push 절차·보류 규칙은 v34 "먼저 확인할 것" 그대로 유효(색인 요청·IndexNow·유효성 검사 권유 금지, 패닉 재작성 금지, gpa-raise 손대지 말 것, 운영자 실명 금지, AI 문구 유지, Media.net 11월 중순 이후).
