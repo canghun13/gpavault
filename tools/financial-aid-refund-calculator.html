@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Aid Refund Calculator – How Much Will Your Refund Be? | GPA Vault</title>
+  <meta name="description" content="Estimate your financial aid refund (credit balance) for the term: aid credited after loan fees, minus what the school can charge, plus when federal rules say the money must reach you.">
+  <link rel="canonical" href="https://gpavault.com/tools/financial-aid-refund-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Financial Aid Refund Calculator",
+  "description": "Estimates a student's financial aid refund (Title IV credit balance) for one term: grants, scholarships and loans credited after federal loan fees, minus tuition, fees and school housing, with the federal 14-day payment rule and the 120-day loan return window.",
+  "url": "https://gpavault.com/tools/financial-aid-refund-calculator.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "provider": {"@type": "Organization", "name": "GPA Vault", "url": "https://gpavault.com"}
+}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How is my financial aid refund calculated?", "acceptedAnswer": {"@type": "Answer", "text": "Your school adds up the aid disbursed for the term — grants, scholarships, and loans after their fees — subtracts the tuition, fees, and school housing and meals it is allowed to charge, and pays you the difference. Other charges come out first only if you signed an authorization."}}, {"@type": "Question", "name": "When will I get my financial aid refund?", "acceptedAnswer": {"@type": "Answer", "text": "Federal rules require the school to pay a credit balance within 14 days of the first day of class, or within 14 days of the balance appearing if that's later. First-year students borrowing for the first time may wait about 30 days for their first loan disbursement."}}, {"@type": "Question", "name": "Why is my refund smaller than I expected?", "acceptedAnswer": {"@type": "Answer", "text": "Usually because the award letter shows a full year while the refund covers one term, because federal loans arrive minus a 1.057% fee (4.228% for PLUS), or because the school applied authorized charges like parking or health insurance first."}}, {"@type": "Question", "name": "Is my financial aid refund free money?", "acceptedAnswer": {"@type": "Answer", "text": "Only the part that comes from grants and scholarships. The part that comes from loans is borrowed and must be repaid with interest. This calculator shows how much of your refund is loan money."}}, {"@type": "Question", "name": "Can I give back loan money I don't need?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Direct Loan funds returned within 120 days of disbursement are treated as a cancellation, so the fee and interest are adjusted. After 120 days, the return counts as a regular payment."}}, {"@type": "Question", "name": "Does work-study count toward my refund?", "acceptedAnswer": {"@type": "Answer", "text": "No. Federal Work-Study is paid as a paycheck for hours worked, not credited to your student account."}}]}
+</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<noscript><nav style="padding:0.75rem 1rem;font-size:0.75rem;line-height:1.8;background:#f8fafc;border-bottom:1px solid #e2e8f0;"><a href="../tools/">Tools</a> | <a href="../blog/">Blog</a> | <a href="../glossary.html">Glossary</a> | <a href="../about.html">About</a></nav></noscript>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Tuition &amp; Loans</div>
+    <h1>Financial Aid Refund Calculator</h1>
+    <p>Your refund is whatever aid is left after the school pays your bill. Enter this term's charges and the aid on your award letter to see the refund, how much of it is borrowed money, and when federal rules say it has to reach you.</p>
+  </div>
+  <div class="calc-card">
+    <div class="form-group"><label for="period">Award amounts are for</label>
+      <select id="period" onchange="calculate()">
+        <option value="1">This term only</option>
+        <option value="2" selected>The full year (2 semesters)</option>
+        <option value="3">The full year (3 quarters)</option>
+      </select>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end;">
+      <div class="form-group"><label for="pell">Pell Grant ($)</label><input type="number" id="pell" oninput="calculate()" min="0" step="1" value="7395"></div>
+      <div class="form-group"><label for="grants">Other Grants &amp; Scholarships ($)</label><input type="number" id="grants" oninput="calculate()" min="0" step="1" value="2000"></div>
+      <div class="form-group"><label for="dl">Direct Sub + Unsub Loans ($)</label><input type="number" id="dl" oninput="calculate()" min="0" step="1" value="5500"></div>
+      <div class="form-group"><label for="plus">Parent PLUS Loan ($)</label><input type="number" id="plus" oninput="calculate()" min="0" step="1" value="0"></div>
+      <div class="form-group"><label for="priv">Private Loans ($)</label><input type="number" id="priv" oninput="calculate()" min="0" step="1" value="0"></div>
+    </div>
+    <p style="font-size:0.8rem;color:var(--slate-light);margin:0.25rem 0 1rem;">Charges below are for <strong>this term</strong>, as they appear on your bill.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end;">
+      <div class="form-group"><label for="tuition">Tuition &amp; Fees ($)</label><input type="number" id="tuition" oninput="calculate()" min="0" step="1" value="5975"></div>
+      <div class="form-group"><label for="housing">School Housing &amp; Meal Plan ($)</label><input type="number" id="housing" oninput="calculate()" min="0" step="1" value="0"></div>
+      <div class="form-group"><label for="other">Other School Charges ($)</label><input type="number" id="other" oninput="calculate()" min="0" step="1" value="150"></div>
+      <div class="form-group"><label for="auth">Title IV authorization signed?</label>
+        <select id="auth" onchange="calculate()">
+          <option value="yes" selected>Yes — aid can pay other charges</option>
+          <option value="no">No — other charges billed separately</option>
+        </select>
+      </div>
+      <div class="form-group" style="grid-column:1 / -1;"><label for="first">First-year student borrowing a Direct Loan for the first time?</label>
+        <select id="first" onchange="calculate()">
+          <option value="no" selected>No</option>
+          <option value="yes">Yes, and my school isn't exempt from the 30-day delay</option>
+        </select>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calculate();scrollToResult();">Estimate My Refund</button>
+    <div class="result-box show" id="result">
+      <div class="result-num" id="result-main">—</div>
+      <div class="result-label" id="result-label">Estimated refund this term</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>How a financial aid refund is calculated</h2>
+    <p>Schools don't hand you your aid and then bill you. They credit your aid to your student account, pay the charges they're allowed to pay, and send you whatever is left. That leftover amount is a <strong>credit balance</strong>, and it is what most students call their refund.</p>
+    <p>Three things decide the number:</p>
+    <ul>
+      <li><strong>Aid arrives one term at a time.</strong> A year's Pell Grant and federal loans are split across the terms — half each semester, or a third each quarter. Entering your full-year award against one semester's bill is the most common reason an estimate comes out too high.</li>
+      <li><strong>Federal loans arrive minus a fee.</strong> For loans first disbursed from October 1, 2026 through September 30, 2027, the fee is 1.057% on Direct Subsidized and Unsubsidized Loans and 4.228% on PLUS Loans. A $2,750 loan disbursement arrives as about $2,721.</li>
+      <li><strong>Only some charges come out automatically.</strong> Without asking you, a school may use federal aid for current tuition, fees, and housing and food it provides. Anything else — parking, a bookstore charge, a library fine — needs your written authorization. If you haven't signed one, those charges stay on your bill and the refund comes to you first.</li>
+    </ul>
+    <p>Work-study isn't part of the calculation. It is paid as wages for hours you work, not credited to your account.</p>
+
+    <h2>Three example terms</h2>
+    <p>Each example is one semester, with full-year aid split in half. Loan amounts are shown before the fee.</p>
+    <table>
+      <tr><th>Student</th><th>Aid in</th><th>Result</th></tr>
+      <tr><td>Commuter<br>$1,950 tuition<br>Pell only</td><td>$3,697.50</td><td>$1,747.50<br>refund</td></tr>
+      <tr><td>$5,975 tuition<br>Pell, $1,000 grant<br>$2,750 loans</td><td>$7,418.44</td><td>$1,443.44<br>refund, all<br>borrowed</td></tr>
+      <tr><td>$12,925 with housing<br>$2,000 grant<br>$2,750 loans<br>$6,000 PLUS</td><td>$10,467.27</td><td>$2,457.73<br>still owed</td></tr>
+    </table>
+    <p>The second student is the case worth noticing. The grants covered most of tuition, and the loan pushed the account into a credit balance — so the entire refund is borrowed money that will accrue interest.</p>
+
+    <h2>When the refund has to reach you</h2>
+    <ul>
+      <li><strong>The 14-day rule.</strong> Once a federal aid credit balance exists, the school must pay it no later than 14 days after the first day of class, or 14 days after the balance appears if that happens later in the term.</li>
+      <li><strong>First-year, first-time borrowers.</strong> A school can't release a first-time borrower's first Direct Loan disbursement until 30 days after the program begins, unless its cohort default rates are low enough (below 15%) to be exempt. If your refund depends on that loan, it comes about a month into the term.</li>
+      <li><strong>Books by day seven.</strong> If your aid would have created a credit balance and the school could have disbursed it 10 days before the term, it must give you a way to get books and supplies by the seventh day — often a bookstore credit or an early partial payment.</li>
+      <li><strong>You can tell the school to hold it.</strong> Schools may keep a credit balance on your account only with your written permission, and you can take that permission back.</li>
+    </ul>
+
+    <h2>If you don't need the loan money</h2>
+    <p>Federal Direct Loan money returned within 120 days of disbursement is treated as a cancellation: the loan fee and interest are adjusted as if you never borrowed that amount. After 120 days, the same return counts as an ordinary payment. If the calculator shows that most of your refund is borrowed and you don't need it for rent or food, returning it within that window is the cheapest money you'll ever save. Ask your financial aid office how; it's usually a form or a request to reduce the loan.</p>
+
+    <h2>Why your actual refund might be different</h2>
+    <ul>
+      <li>Dropping below the credits your aid was based on can lower Pell and other aid before disbursement, and dropping after you've been paid can mean money goes back. See the <a href="pell-enrollment-intensity-calculator.html" style="color:var(--indigo);">Pell Enrollment Intensity Calculator</a>.</li>
+      <li>Aid that's "pending" or "estimated" on your portal isn't paid until the school disburses it, so an early refund can be followed by a second one.</li>
+      <li>Withdrawing from all classes triggers a Return of Title IV Funds calculation, which can turn a refund you already spent into a balance you owe. The <a href="r2t4-calculator.html" style="color:var(--indigo);">R2T4 Calculator</a> shows how much.</li>
+      <li>Schools can use current-year aid for no more than $200 of prior-year charges, so an old unpaid balance can shrink a refund by up to $200.</li>
+    </ul>
+
+    <div class="cta-box" style="background:var(--indigo-faint);border:1px solid var(--indigo-light);border-radius:12px;padding:1.5rem;margin:2rem 0;text-align:center;">
+      <p style="margin-bottom:0.75rem;">Comparing award letters before you enroll? Separate grants from loans and see your real net cost.</p>
+      <a href="financial-aid-calculator.html" style="display:inline-block;background:var(--indigo);color:white;padding:0.625rem 1.5rem;border-radius:8px;text-decoration:none;font-size:0.85rem;font-weight:600;">Financial Aid Calculator →</a>
+    </div>
+
+    <h2>Sources</h2>
+    <ul>
+      <li><a href="https://fsapartners.ed.gov/knowledge-center/fsa-handbook/2026-2027/vol4/ch2-disbursing-title-iv-funds" style="color:var(--indigo);" rel="noopener">FSA Handbook 2026–27, Vol. 4 Ch. 2: Disbursing Title IV Funds</a> — 14-day credit balance rule, charges payable without authorization, $200 prior-year limit, 120-day loan return, first-year borrower 30-day delay, books by the seventh day.</li>
+      <li><a href="https://fsapartners.ed.gov/knowledge-center/library/electronic-announcements/2026-05-13/fy27-sequester-required-changes-title-iv-student-aid-programs" style="color:var(--indigo);" rel="noopener">Federal Student Aid, GENERAL-26-28: FY27 sequester-required changes</a> — 1.057% and 4.228% loan fees for loans first disbursed October 1, 2026 to September 30, 2027.</li>
+      <li><a href="https://fsapartners.ed.gov/knowledge-center/library/dear-colleague-letters/2026-01-30/2026-27-federal-pell-grant-maximum-and-minimum-award-amounts" style="color:var(--indigo);" rel="noopener">Federal Student Aid, GEN-26-01: 2026–27 Pell Grant awards</a> — $7,395 maximum used in the default values.</li>
+      <li><a href="https://www.fau.edu/finaid/other/estimator/" style="color:var(--indigo);" rel="noopener">Florida Atlantic University, Financial Aid Disbursement Estimator</a> — an example of a school's own refund estimate, for comparison with your school's figures.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <p><strong>How is my financial aid refund calculated?</strong> Your school adds up the aid disbursed for the term — grants, scholarships, and loans after their fees — subtracts the tuition, fees, and school housing and meals it is allowed to charge, and pays you the difference. Other charges come out first only if you signed an authorization.</p>
+    <p><strong>When will I get my financial aid refund?</strong> Federal rules require the school to pay a credit balance within 14 days of the first day of class, or within 14 days of the balance appearing if that's later. First-year students borrowing for the first time may wait about 30 days for their first loan disbursement.</p>
+    <p><strong>Why is my refund smaller than I expected?</strong> Usually because the award letter shows a full year while the refund covers one term, because federal loans arrive minus a 1.057% fee (4.228% for PLUS), or because the school applied authorized charges like parking or health insurance first.</p>
+    <p><strong>Is my financial aid refund free money?</strong> Only the part that comes from grants and scholarships. The part that comes from loans is borrowed and must be repaid with interest. This calculator shows how much of your refund is loan money.</p>
+    <p><strong>Can I give back loan money I don't need?</strong> Yes. Direct Loan funds returned within 120 days of disbursement are treated as a cancellation, so the fee and interest are adjusted. After 120 days, the return counts as a regular payment.</p>
+    <p><strong>Does work-study count toward my refund?</strong> No. Federal Work-Study is paid as a paycheck for hours worked, not credited to your student account.</p>
+
+    <h2>Related tools and guides</h2>
+    <p>
+      <a href="financial-aid-calculator.html" style="color:var(--indigo);">Financial Aid Calculator</a> — grants versus loans in an award letter.<br>
+      <a href="pell-enrollment-intensity-calculator.html" style="color:var(--indigo);">Pell Enrollment Intensity Calculator</a> — how your Pell changes with each credit.<br>
+      <a href="r2t4-calculator.html" style="color:var(--indigo);">R2T4 Calculator</a> — what you repay if you withdraw.<br>
+      <a href="../blog/how-does-financial-aid-work.html" style="color:var(--indigo);">How Does Financial Aid Work?</a> — from FAFSA to award letter.
+    </p>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+function scrollToResult(){
+  try {
+    var b = document.getElementById('result');
+    if (b && typeof b.scrollIntoView === 'function') { b.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+  } catch (e) { /* cosmetic only */ }
+}
+var FEE_DL = 0.01057, FEE_PLUS = 0.04228;
+function money(n){ return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2, maximumFractionDigits:2}); }
+function val(id){ var v = document.getElementById(id).value; if (v === '') return 0; var n = parseFloat(v); return isNaN(n) ? NaN : n; }
+function row(a,b){ return '<tr><td style="padding:0.5rem;border-bottom:1px solid var(--border);">'+a+'</td><td style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:right;">'+b+'</td></tr>'; }
+function netOf(g, f){ return g - Math.floor(g * f * 100) / 100; }
+function calculate(){
+  var k = parseInt(document.getElementById('period').value, 10);
+  var pell = val('pell'), grants = val('grants'), dl = val('dl'), plus = val('plus'), priv = val('priv');
+  var tuition = val('tuition'), housing = val('housing'), other = val('other');
+  var auth = document.getElementById('auth').value === 'yes', first = document.getElementById('first').value === 'yes';
+  var main = document.getElementById('result-main'), label = document.getElementById('result-label'), detail = document.getElementById('result-detail');
+  var res = document.getElementById('result'); if (res) { res.classList.add('show'); }
+  var all = [pell, grants, dl, plus, priv, tuition, housing, other];
+  for (var i = 0; i < all.length; i++) {
+    if (isNaN(all[i]) || all[i] < 0) {
+      main.textContent = '—'; label.textContent = 'Check your entries';
+      detail.innerHTML = '<p style="font-size:0.88rem;color:var(--slate-mid);margin-top:0.75rem;">Amounts can’t be negative. Leave a box blank or enter 0 if it doesn’t apply.</p>';
+      return;
+    }
+  }
+  var notes = [];
+  if (pell > 7395.01) notes.push('Your Pell entry is above the 2026–27 annual maximum of $7,395. Check whether the amount includes another year or summer, and whether it is for the year or the term.');
+  var tPell = pell / k, tGr = grants / k, tDl = dl / k, tPlus = plus / k, tPriv = priv / k;
+  var nDl = netOf(tDl, FEE_DL), nPlus = netOf(tPlus, FEE_PLUS);
+  var fees = (tDl - nDl) + (tPlus - nPlus);
+  var gift = tPell + tGr, loans = nDl + nPlus + tPriv;
+  var credited = gift + loans;
+  var charges = tuition + housing + (auth ? other : 0);
+  var bal = credited - charges;
+  if (credited === 0 && charges === 0) {
+    main.textContent = '—'; label.textContent = 'Estimated refund this term';
+    detail.innerHTML = '<p style="font-size:0.88rem;color:var(--slate-mid);margin-top:0.75rem;">Enter the aid on your award letter and this term’s charges to see your refund.</p>';
+    return;
+  }
+  var h = '<table style="width:100%;border-collapse:collapse;font-size:0.88rem;margin-top:0.75rem;">';
+  h += row('Grants &amp; scholarships', money(gift));
+  if (tDl > 0 || tPlus > 0 || tPriv > 0) h += row('Loans after fees', money(loans));
+  if (fees > 0) h += row('Loan fees withheld', money(fees));
+  h += row('Charges paid from aid', money(charges));
+  if (bal > 0) {
+    var borrowed = Math.min(bal, loans);
+    main.textContent = money(bal);
+    label.textContent = 'Estimated refund this term';
+    h += row('Refund from grants', money(bal - borrowed));
+    h += row('Refund from loans', money(borrowed));
+  } else if (bal < 0) {
+    main.textContent = money(-bal);
+    label.textContent = 'Still owed this term — no refund';
+  } else {
+    main.textContent = '$0.00';
+    label.textContent = 'Aid exactly covers the charges';
+  }
+  if (!auth && other > 0) h += row('Other charges to pay yourself', money(other));
+  h += '</table>';
+  var p = '<p style="margin-top:0.75rem;font-size:0.85rem;color:var(--slate-mid);">';
+  var txt = '';
+  if (k > 1) txt += 'Your full-year aid was divided by ' + k + ' to get this term’s share. ';
+  if (bal > 0) {
+    var borrowed2 = Math.min(bal, loans);
+    if (borrowed2 > 0.005) txt += money(borrowed2) + ' of the refund is loan money that accrues interest. If you won’t need it, returning it within 120 days of disbursement cancels that part of the loan, fee and interest included. ';
+    if (first && tDl > 0) txt += 'Because this is your first Direct Loan as a first-year student, the loan part may arrive about 30 days after classes start; any grant-funded refund can come sooner. ';
+    else txt += 'Federal rules require the school to pay a credit balance within 14 days of the first day of class, or of the date the balance appears if later. ';
+  } else if (bal < 0) {
+    txt += 'Your aid doesn’t cover this term’s bill, so expect to pay the difference by the school’s due date or through a payment plan. ';
+  }
+  if (!auth && other > 0) txt += 'Without a Title IV authorization, the school can’t use federal aid for other charges, so those stay on your bill even though you get a refund. ';
+  h += p + txt + 'Loan fees use the rates for loans first disbursed October 1, 2026 to September 30, 2027 (1.057% Direct, 4.228% PLUS). Your school’s figures are final.</p>';
+  if (notes.length) h += '<p style="margin-top:0.5rem;font-size:0.85rem;color:#b45309;">' + notes.join(' ') + '</p>';
+  detail.innerHTML = h;
+}
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', calculate); } else { calculate(); }
+</script>
+</body>
+</html>
