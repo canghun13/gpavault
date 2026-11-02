@@ -1,3 +1,42 @@
+# GPA Vault 인수인계 문서 v37 (2026-11-02 세션 — 주간: PLUS 거절 계산기 / 겨울학기 재정지원 블로그)
+
+이전 v36 문서를 대체함. v36 이하 본문은 아래에 그대로 보존. 금지 원칙·연락처·push 절차·보류 규칙은 v34 "먼저 확인할 것" 그대로 유효.
+
+## 11-02 데이터 요약
+- **구글 커버리지(10-23까지)**: 크롤링됨-미색인 88(변화 없음, 최신 크롤 10-09), 발견됨-미색인 17 → **15**(스텁 2개 빠짐, workforce-pell이 새로 들어감). **10-22 이후 재크롤링 흔적 아직 없음.** 구글 일별 노출 0~3. 대응 없음(요청·유효성 검사 금지 유지).
+- **Bing 페이지**(10-26 → 11-02): retake 4,502/42 → **5,094/48** · deans 2,674/10 → 2,881/10 · pell-lifetime 1,364/20 → 1,443/25 · ap-gpa 1,143/13 → 1,302/16 · unweighted 1,078/16 · nursing 1,075/11 · gpa-to-letter 913/4(0.44%) · good-gpa 792/2(0.25%) · graduate 789/1 · sap 635/24(3.78%) · pell-intensity 634/15 · weighted-ap 476/0 · ap-credit 417/6 · salary 411/14 · debt 384/15 · percentage-to-gpa 380/0.
+- Bing 신규 쿼리: `pell leu calculator` 3/3, `if i used 205% out of 600% pell grant how much is left`, `lifetime eligibility pell grant` 8.3위, `gpa vault sap calculator` 4/2(브랜드 검색 발생), `what is 67% of attempted credits if you attempted 12` 1클릭.
+- **GA4(10-05~11-01)**: 활성 571(싱가포르 269 봇 → 실사용자 약 300), direct 368, bing 132, duckduckgo 28, yahoo 18, ecosia 14, copilot 5, chatgpt 2. 10-29 신규 2개(refund, last-60) 각 2뷰.
+
+## 11-02 세션 작업 (커밋 `b338f26`, Actions success)
+### 신규: `tools/parent-plus-denied-loan-calculator.html` (학자금대출 클러스터)
+- 선정: v36 "다음 후보". SERP = 대학 신청서 PDF + Credible·SavingForCollege 해설뿐, 계산기 없음. 기존 파일 grep 0건.
+- ★ 1차 출처 **FSA 대출한도 FAQ(2026-05)**: 추가 Unsub 자격은 OBBBA로 **변경 없음**, 학부 한도 변경 없음, **부모가 Parent PLUS $65,000 총액에 도달하면 추가 Unsub 불가**, Parent PLUS $20,000/년·$65,000/학생(타 학교 포함), **2026-27부터 부분 등록 시 연간 한도 감액(schedule of reductions, §685.203(m))**. FSA Handbook 2025-26 Vol.8 Ch.4: +$4,000(1·2학년)/+$5,000(3학년+), 총 $57,500(보조 $23,000), 자격 사유 목록, **부모가 원치 않아서 안 빌리는 건 불가**, endorser 가능 여부 확인, 매년 재문서화. JMU: 감액 = 정규 한도 × 등록 비율, Parent PLUS는 감액 없음.
+- 기능: 상황 5가지(신용 거절/기타 예외/endorser 가능/본인 선택/$65k 도달), 학년, 기존 대출액(총액 한도 차감), 연간 학점 ÷ 정규 학점(반일제 미만이면 0). FAQ 6, Sources 4.
+- 주의: $20,000 **연간** 한도 도달이 추가 Unsub 자격을 주는지는 FAQ가 답하지 않음 → 페이지에서 "기대하지 말고 aid office에 확인"으로 서술.
+### 신규: `blog/does-financial-aid-cover-winter-session.html` (재정지원 지급·환불 클러스터 확장)
+- 선정: SERP가 **.edu만**(Stony Brook·UMass·Brooklyn·UKY·Morgan·DSU 등). 11~1월 시즌성. 짝 가이드 아님(독립 주제).
+- ★ 차별점: **학교마다 겨울학기를 가을에 붙이느냐(UMass·Stony Brook·UKY) 봄에 붙이느냐(Brooklyn)**가 Pell·대출·청구를 가른다는 점을 4개교 표로 정리. Pell 추가는 붙는 학기가 정규 미만일 때만, 겨울 대출은 대개 봄 대출을 당겨쓰는 것, 별도 청구, UKY 장학금 불가·SAP 평가 시점 이동.
+- 연결: blog 카드(Student Loans 섹션 맨 앞), sitemap 115 → **117**, llms.txt 2줄, 인터링크 4곳(pell-intensity·obbba-loan-limit·parent-plus-old-vs-new — 보류 중이라 링크 1줄 예외, lastmod 미변경 / refund 계산기).
+### 검증
+- PLUS 계산기 상황 5종·학년·부분등록(18/24 → $9,375)·반일제 미만·총액 초과($50k)·빈칸 정상. 375/360/1280 표 넘침 0(결과 라벨·블로그 표 셀 축약 후). 감사: 117 URL, 헤더·카드·블로그카드·llms 누락 0, 깨진 링크 0, JSON-LD 오류 0, FAQ 불일치 0.
+
+## ★ 다음 세션이 확인/처리할 것
+1. **11-05 보류 해제 후 Bing CTR 처방 후보(수익화 순)**: pell-lifetime(1,443/25 — `pell leu calculator`·`used 205% how much left` 롱테일, 이미 달러 환산 기능 있음 → 제목/설명에 "LEU calculator", "how much Pell is left" 반영 검토), weighted-gpa-calculator-ap-classes 476/0(6.5위), percentage-to-gpa 380/0(7.4위), gpa-to-letter 913/4, good-gpa 792/2. graduate-college는 제외 유지.
+2. 구글: 최종 크롤링 날짜가 10-22 이후인 URL이 생기는지 먼저 볼 것.
+3. 자동이체 계산기 2027-01-01 만료 점검(v35). 겨울학기 블로그는 **11~1월 성수기**라 2월 이후 판정.
+4. 클러스터 14(지급·환불) 다음 후보: "Pell 받고 수강 취소하면 돌려줘야 하나(post-withdrawal vs 등록 변경)", "환불이 안 들어올 때(hold·verification)". SERP 확인 필수.
+
+## 2주 재작업 보류 현황 (11-02 기준)
+- 11-03까지: repayment-plans, loan-repayment-calculator, deans-list, nursing, workforce-pell
+- 11-05까지: 10-22 감사 페이지 전체(pell-lifetime 포함)
+- 11-09까지: autopay 계산기, 이자율 가이드
+- 11-12까지: financial-aid-refund-calculator, last-60-credits-gpa-calculator
+- **11-16까지: parent-plus-denied-loan-calculator, does-financial-aid-cover-winter-session**
+
+---
+
+## [보존] 이전 문서 v36 본문
 # GPA Vault 인수인계 문서 v36 (2026-10-29 세션 — 신규 클러스터 2개: 재정지원 환불 / 대학원 입학 GPA)
 
 이전 v35 문서를 대체함. v35 이하 본문은 아래에 그대로 보존. 금지 원칙·연락처·push 절차·보류 규칙은 v34 "먼저 확인할 것" 그대로 유효.
