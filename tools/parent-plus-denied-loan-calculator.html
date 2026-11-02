@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parent PLUS Denied? Extra Student Loan Calculator (2026–27) | GPA Vault</title>
+  <meta name="description" content="If your parent is denied a Parent PLUS Loan, you may borrow $4,000 to $5,000 more in Direct Unsubsidized Loans. See your new limit by year, the 2026–27 part-time reduction, and when the extra amount doesn't apply.">
+  <link rel="canonical" href="https://gpavault.com/tools/parent-plus-denied-loan-calculator.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5592663499707350" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKGCVQQT7Z"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GKGCVQQT7Z');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Parent PLUS Denied Loan Calculator",
+  "description": "Calculates a dependent undergraduate's Direct Loan limit when a parent cannot obtain a Parent PLUS Loan: the additional $4,000 or $5,000 unsubsidized amount, the $57,500 aggregate limit, the 2026–27 less-than-full-time reduction, and the cases that do not qualify.",
+  "url": "https://gpavault.com/tools/parent-plus-denied-loan-calculator.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "provider": {"@type": "Organization", "name": "GPA Vault", "url": "https://gpavault.com"}
+}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much more can I borrow if my parent is denied a Parent PLUS Loan?", "acceptedAnswer": {"@type": "Answer", "text": "$4,000 more a year in your first and second years and $5,000 more from your third year on, all in Direct Unsubsidized Loans. That raises your annual limit to $9,500, $10,500 or $12,500 and your lifetime limit to $57,500."}}, {"@type": "Question", "name": "Does my parent have to be denied, or can they just decline?", "acceptedAnswer": {"@type": "Answer", "text": "They have to be unable to borrow. A parent who is eligible but chooses not to take a PLUS Loan doesn't make you eligible for the extra amount."}}, {"@type": "Question", "name": "What if my parent can get PLUS with an endorser?", "acceptedAnswer": {"@type": "Answer", "text": "Schools are expected to check whether the parent could borrow with an endorser before awarding the extra unsubsidized amount. If the parent can and does, you generally stay at the dependent limits."}}, {"@type": "Question", "name": "Did the 2026 student loan changes affect this?", "acceptedAnswer": {"@type": "Answer", "text": "The extra eligibility itself didn't change. What changed is the Parent PLUS cap — $20,000 a year and $65,000 total per student — and, starting in 2026–27, a reduction in annual limits for students enrolled less than full time."}}, {"@type": "Question", "name": "If my parent hits the $65,000 Parent PLUS limit, can I borrow more?", "acceptedAnswer": {"@type": "Answer", "text": "No. Federal guidance says students aren't eligible for the additional unsubsidized amount when their parents have reached the $65,000 aggregate limit."}}, {"@type": "Question", "name": "Do I have to ask again every year?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The school has to document that your parent still can't borrow each year, so expect to submit a new denial or request form."}}]}
+</script>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<noscript><nav style="padding:0.75rem 1rem;font-size:0.75rem;line-height:1.8;background:#f8fafc;border-bottom:1px solid #e2e8f0;"><a href="../tools/">Tools</a> | <a href="../blog/">Blog</a> | <a href="../glossary.html">Glossary</a> | <a href="../about.html">About</a></nav></noscript>
+<div class="tool-page">
+  <div class="tool-page-header">
+    <div class="section-label">Tuition &amp; Loans</div>
+    <h1>Parent PLUS Denied? Extra Student Loan Calculator</h1>
+    <p>When a parent can't get a Parent PLUS Loan, a dependent student can borrow at the higher independent-student limits — $4,000 or $5,000 more a year in Direct Unsubsidized Loans. Check your new limit, what's left under the lifetime cap, and whether your situation actually qualifies.</p>
+  </div>
+  <div class="calc-card">
+    <div class="form-group"><label for="sit">Your parent's PLUS situation</label>
+      <select id="sit" onchange="calculate()">
+        <option value="denied" selected>Denied for adverse credit, no endorser</option>
+        <option value="exceptional">Other exceptional circumstance the school documents</option>
+        <option value="endorser">Denied, but could borrow with an endorser</option>
+        <option value="chose">Could borrow PLUS but chooses not to</option>
+        <option value="capped">Parent has reached the $65,000 PLUS limit for me</option>
+      </select>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end;">
+      <div class="form-group"><label for="year">Your year in school</label>
+        <select id="year" onchange="calculate()">
+          <option value="1" selected>First year</option>
+          <option value="2">Second year</option>
+          <option value="3">Third year or later</option>
+        </select>
+      </div>
+      <div class="form-group"><label for="prior">Direct Loans already borrowed ($)</label><input type="number" id="prior" oninput="calculate()" min="0" step="100" value="0"></div>
+      <div class="form-group"><label for="cr">Credits this academic year</label><input type="number" id="cr" oninput="calculate()" min="0" step="1" value="24"></div>
+      <div class="form-group"><label for="ft">Full-time credits for a year</label><input type="number" id="ft" oninput="calculate()" min="1" step="1" value="24"></div>
+    </div>
+    <button class="calc-btn" onclick="calculate();scrollToResult();">Calculate My Loan Limit</button>
+    <div class="result-box show" id="result">
+      <div class="result-num" id="result-main">—</div>
+      <div class="result-label" id="result-label">Your Direct Loan limit this year</div>
+      <div class="result-detail" id="result-detail"></div>
+    </div>
+  </div>
+  <div class="explainer">
+    <h2>How much more you can borrow</h2>
+    <p>A dependent undergraduate normally borrows at the dependent limits. If a parent can't obtain a Parent PLUS Loan, the student may borrow at the independent limits instead. The subsidized portion doesn't change; the extra is all unsubsidized.</p>
+    <table>
+      <tr><th>Year</th><th>Normal limit<br>(subsidized)</th><th>PLUS denied</th></tr>
+      <tr><td>First</td><td>$5,500<br>($3,500)</td><td>$9,500<br>(+$4,000)</td></tr>
+      <tr><td>Second</td><td>$6,500<br>($4,500)</td><td>$10,500<br>(+$4,000)</td></tr>
+      <tr><td>Third or later</td><td>$7,500<br>($5,500)</td><td>$12,500<br>(+$5,000)</td></tr>
+      <tr><td>Lifetime</td><td>$31,000<br>($23,000)</td><td>$57,500<br>($23,000)</td></tr>
+    </table>
+    <p>The Education Department's 2026 loan-limit guidance says this extra eligibility is unchanged by the One Big Beautiful Bill Act, and the undergraduate annual and lifetime limits haven't changed either.</p>
+
+    <h2>Who qualifies — and who doesn't</h2>
+    <p>The extra amount is for parents who <strong>can't</strong> borrow, not parents who won't. Federal Student Aid lists these as qualifying:</p>
+    <ul>
+      <li>The parent is denied a PLUS Loan for adverse credit.</li>
+      <li>Other exceptional circumstances the school documents: the parent is incarcerated or their whereabouts are unknown; the parent is in bankruptcy and a court letter says they may not take on more debt; the parent's income is limited to public assistance or disability benefits and the school documents they couldn't repay; the school documents a likely inability to repay based on debt or income; or the parent lacks qualifying immigration status.</li>
+    </ul>
+    <p>These do <strong>not</strong> qualify:</p>
+    <ul>
+      <li>A parent who is eligible for PLUS but decides not to borrow.</li>
+      <li>A school that doesn't participate in PLUS, or an aid administrator's view that the parent shouldn't borrow.</li>
+      <li>A parent who has already borrowed the new $65,000 Parent PLUS maximum for you. The 2026 guidance says students aren't eligible for the extra unsubsidized amount in that case.</li>
+    </ul>
+    <p>Before awarding the extra amount, the school is expected to check whether the parent could borrow with an <strong>endorser</strong> — someone without adverse credit who agrees to repay if the parent doesn't. And it must document the reason every year; a denial last year doesn't carry over automatically.</p>
+
+    <h2>The 2026–27 part-time reduction</h2>
+    <p>Starting with the 2026–27 award year, annual Direct Loan limits are reduced for students enrolled less than full time. Schools apply a schedule of reductions; James Madison University explains it as multiplying the full-time annual limit by your share of a full-time load. A third-year student with a PLUS denial taking 18 of 24 credits would see a $12,500 limit become about $9,375. Parent PLUS isn't subject to this reduction. Your school's exact calculation can differ by a few dollars from this estimate.</p>
+
+    <h2>The new Parent PLUS limits</h2>
+    <p>For loans made on or after July 1, 2026, Parent PLUS is capped at $20,000 a year and $65,000 in total per dependent student, counting all past borrowing for that student, including at other schools. Before, parents could borrow up to the full cost of attendance. The federal guidance addresses the $65,000 total; it doesn't say that reaching the $20,000 annual cap makes the student eligible for the extra unsubsidized amount, and a parent who borrowed $20,000 has obtained a PLUS Loan. Plan for the gap above $20,000 to come from savings, grants, a payment plan or a private loan, and ask your aid office before counting on anything else.</p>
+
+    <h2>How to request it</h2>
+    <ul>
+      <li>Have the parent apply for the Parent PLUS Loan on StudentAid.gov so there is an official decision.</li>
+      <li>If denied, the parent can appeal with documentation, add an endorser, or stop there. The school will want to know which, because an approved appeal or endorser means the parent can borrow.</li>
+      <li>Submit your school's PLUS denial or additional unsubsidized loan request form. Most schools have one each award year.</li>
+      <li>Accept the increased Direct Unsubsidized amount in your student portal; first-time borrowers also need entrance counseling and a Master Promissory Note.</li>
+    </ul>
+
+    <div class="cta-box" style="background:var(--indigo-faint);border:1px solid var(--indigo-light);border-radius:12px;padding:1.5rem;margin:2rem 0;text-align:center;">
+      <p style="margin-bottom:0.75rem;">See what the extra loan does to your account balance and refund this term.</p>
+      <a href="financial-aid-refund-calculator.html" style="display:inline-block;background:var(--indigo);color:white;padding:0.625rem 1.5rem;border-radius:8px;text-decoration:none;font-size:0.85rem;font-weight:600;">Financial Aid Refund Calculator →</a>
+    </div>
+
+    <h2>Sources</h2>
+    <ul>
+      <li><a href="https://fsapartners.ed.gov/knowledge-center/fsa-handbook/2025-2026/vol8/ch4-annual-and-aggregate-loan-limits" style="color:var(--indigo);" rel="noopener">FSA Handbook 2025–26, Vol. 8 Ch. 4: Annual and aggregate loan limits</a> — additional unsubsidized amounts, $57,500 aggregate, qualifying and non-qualifying circumstances, endorser check, yearly documentation.</li>
+      <li><a href="https://fsapartners.ed.gov/sites/default/files/2026-05/FrequentlyAskedQuestionsLoanLimits.pdf" style="color:var(--indigo);" rel="noopener">Federal Student Aid, Loan limits FAQ (May 2026)</a> — extra eligibility unchanged; no extra when parents reach $65,000; $20,000/$65,000 Parent PLUS per dependent student; less-than-full-time reduction starting 2026–27.</li>
+      <li><a href="https://www.law.cornell.edu/cfr/text/34/685.203" style="color:var(--indigo);" rel="noopener">34 CFR 685.203 — Direct Loan limits</a> — $31,000 and $57,500 undergraduate aggregate limits.</li>
+      <li><a href="https://www.jmu.edu/financialaid/newsletters/federal_updates/obbba/part-time-adjustments.shtml" style="color:var(--indigo);" rel="noopener">James Madison University, Less-than-full-time loan adjustments</a> — how a school applies the part-time reduction, with examples; Parent PLUS not reduced.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <p><strong>How much more can I borrow if my parent is denied a Parent PLUS Loan?</strong> $4,000 more a year in your first and second years and $5,000 more from your third year on, all in Direct Unsubsidized Loans. That raises your annual limit to $9,500, $10,500 or $12,500 and your lifetime limit to $57,500.</p>
+    <p><strong>Does my parent have to be denied, or can they just decline?</strong> They have to be unable to borrow. A parent who is eligible but chooses not to take a PLUS Loan doesn't make you eligible for the extra amount.</p>
+    <p><strong>What if my parent can get PLUS with an endorser?</strong> Schools are expected to check whether the parent could borrow with an endorser before awarding the extra unsubsidized amount. If the parent can and does, you generally stay at the dependent limits.</p>
+    <p><strong>Did the 2026 student loan changes affect this?</strong> The extra eligibility itself didn't change. What changed is the Parent PLUS cap — $20,000 a year and $65,000 total per student — and, starting in 2026–27, a reduction in annual limits for students enrolled less than full time.</p>
+    <p><strong>If my parent hits the $65,000 Parent PLUS limit, can I borrow more?</strong> No. Federal guidance says students aren't eligible for the additional unsubsidized amount when their parents have reached the $65,000 aggregate limit.</p>
+    <p><strong>Do I have to ask again every year?</strong> Yes. The school has to document that your parent still can't borrow each year, so expect to submit a new denial or request form.</p>
+
+    <h2>Related tools and guides</h2>
+    <p>
+      <a href="obbba-loan-limit-calculator.html" style="color:var(--indigo);">Aggregate Student Loan Limit Calculator</a> — limits for every borrower type after July 1, 2026.<br>
+      <a href="../blog/parent-plus-old-vs-new-rules.html" style="color:var(--indigo);">Parent PLUS: Old Rules vs. New Rules</a> — what the 2026 caps change for parents.<br>
+      <a href="../blog/federal-vs-private-student-loans.html" style="color:var(--indigo);">Federal vs Private Student Loans</a> — what to borrow after federal limits.<br>
+      <a href="financial-aid-refund-calculator.html" style="color:var(--indigo);">Financial Aid Refund Calculator</a> — the extra loan on your account this term.
+    </p>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/js/components.js"></script>
+<script>
+function scrollToResult(){
+  try {
+    var b = document.getElementById('result');
+    if (b && typeof b.scrollIntoView === 'function') { b.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+  } catch (e) { /* cosmetic only */ }
+}
+var BASE = {1:[5500,3500], 2:[6500,4500], 3:[7500,5500]}, EXTRA = {1:4000, 2:4000, 3:5000};
+function money(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+function num(id){ var v = document.getElementById(id).value; return v === '' ? NaN : parseFloat(v); }
+function row(a,b){ return '<tr><td style="padding:0.5rem;border-bottom:1px solid var(--border);">'+a+'</td><td style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:right;">'+b+'</td></tr>'; }
+function calculate(){
+  var sit = document.getElementById('sit').value, y = parseInt(document.getElementById('year').value, 10);
+  var prior = num('prior'), cr = num('cr'), ft = num('ft');
+  var main = document.getElementById('result-main'), label = document.getElementById('result-label'), detail = document.getElementById('result-detail');
+  var res = document.getElementById('result'); if (res) { res.classList.add('show'); }
+  var p = '<p style="font-size:0.88rem;color:var(--slate-mid);margin-top:0.75rem;">';
+  if (isNaN(prior)) prior = 0;
+  if (isNaN(cr) || isNaN(ft) || ft <= 0 || cr < 0 || prior < 0) {
+    main.textContent = '—'; label.textContent = 'Your Direct Loan limit this year';
+    detail.innerHTML = p + 'Enter your credits for the year and your school’s full-time load (usually 24 semester credits). Amounts can’t be negative.</p>';
+    return;
+  }
+  var share = Math.min(1, cr / ft);
+  var qualifies = (sit === 'denied' || sit === 'exceptional');
+  var base = BASE[y][0], sub = BASE[y][1], extra = qualifies ? EXTRA[y] : 0;
+  var aggCap = qualifies ? 57500 : 31000;
+  var h = '<table style="width:100%;border-collapse:collapse;font-size:0.88rem;margin-top:0.75rem;">';
+  var notes = [];
+  if (share < 0.5) {
+    main.textContent = '$0'; label.textContent = 'Below half-time: no Direct Loan';
+    detail.innerHTML = p + cr + ' of ' + ft + ' credits is under half-time. Direct Loans require at least half-time enrollment.</p>';
+    return;
+  }
+  var annual = (base + extra) * share;
+  var room = Math.max(0, aggCap - prior);
+  var limit = Math.min(annual, room);
+  main.textContent = money(limit);
+  label.textContent = qualifies ? 'Your Direct Loan limit with the PLUS-denial increase' : 'Your Direct Loan limit (no increase)';
+  h += row('Subsidized (max)', money(Math.min(sub * share, limit)));
+  h += row('Unsubsidized', money(Math.max(0, limit - Math.min(sub * share, limit))));
+  if (qualifies) h += row('PLUS-denial extra', money(extra * share));
+  if (share < 1) h += row('Part-time share', Math.round(share * 1000) / 10 + '%');
+  h += row('Lifetime room left', money(room));
+  h += '</table>';
+  if (sit === 'endorser') notes.push('Schools are expected to check whether your parent could borrow with an endorser before awarding the extra $' + EXTRA[y].toLocaleString('en-US') + '. If an endorser is available, you generally stay at the dependent limit. If your parent declines both the endorser and an appeal, ask the aid office whether it will treat the PLUS as denied.');
+  if (sit === 'chose') notes.push('A parent who can borrow but chooses not to doesn’t make you eligible for the extra amount. Your limit stays at the dependent level; a private loan or a payment plan is the usual next step.');
+  if (sit === 'capped') notes.push('Federal guidance says students aren’t eligible for the additional unsubsidized amount once parents reach the $65,000 Parent PLUS limit.');
+  if (qualifies) notes.push('With the PLUS denial you borrow at the independent limits: $' + (base + extra).toLocaleString('en-US') + ' a year for your year in school, and up to $57,500 in total. Expect to resubmit your school’s denial form each year.');
+  if (share < 1) notes.push('Because ' + cr + ' of ' + ft + ' credits is less than full time, the 2026–27 reduction scales your annual limit to about ' + Math.round(share * 100) + '%. Your school’s schedule of reductions may round differently.');
+  if (annual > room) notes.push('Your remaining lifetime eligibility (' + money(room) + ') is lower than the annual limit, so it caps this year’s loan.');
+  detail.innerHTML = h + p + notes.join(' ') + '</p>';
+}
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', calculate); } else { calculate(); }
+</script>
+</body>
+</html>
