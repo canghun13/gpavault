@@ -1,3 +1,42 @@
+# GPA Vault 인수인계 문서 v38 (2026-11-09 세션 — 주간: 환불 미수령 블로그 / Pell·퍼센트 본문 보강)
+
+이전 v37 문서를 대체함. v37 이하 본문은 아래에 그대로 보존. 금지 원칙·연락처·push 절차·보류 규칙은 v34 "먼저 확인할 것" 그대로 유효. **저CTR 대응은 본문 보강만(v29 결론: 제목 처방 무효) — v37 1번의 "제목/설명 반영"은 본문 보강으로 대체해 처리함.**
+
+## 11-09 데이터 요약
+- **구글 커버리지**: 내보내기 기준일이 여전히 10-23(GSC 지연). 크롤링됨-미색인 88(최신 크롤 10-09), 발견됨-미색인 15. 실적 일별 노출 0~3. 재크롤링 신호 없음.
+- **Bing 페이지**(11-02 → 11-09): retake 5,094/48 → **5,625/49** · deans 2,881 → 3,052/10(0.33%) · pell-lifetime 1,443 → 1,505/25 · ap-gpa 1,302 → 1,445/18 · unweighted 1,212/18 · **good-gpa 792 → 1,146/3(0.26%)** · nursing 1,108/11 · gpa-to-letter 1,031/5 · graduate 854/1 · pell-intensity 750/19 · sap 731/26 · weighted-ap 572/0 · ap-credit 539/6 · salary 505/14 · percentage 428/0 · debt 418/16.
+- good-gpa 쿼리는 `is a 3.0 gpa good` 등 한 줄 답(본문에 이미 섹션 있음) → **zero-click 추정(체크리스트 68), 처방 보류**. gpa-to-letter `2.0 gpa letter grade` 등도 표에 답이 있어 동일 판단.
+- **GA4(10-12~11-08)**: 활성 562(싱가포르 247 → 실사용자 약 315), direct 389, bing 115, ddg 25, yahoo 17. 신규: PLUS 거절 계산기 3뷰, refund·last-60 각 2뷰, 겨울학기 1뷰.
+
+## 11-09 세션 작업 (커밋 `d09329d`, Actions success)
+### 신규: `blog/financial-aid-refund-not-received.html` (클러스터 14 지급·환불)
+- SERP = 학교 FAQ(PSU·ASU·UHD·NDSU)·레딧·edvisors뿐 → 정리된 트러블슈팅 문서 공백. 1월 봄학기 지급 시즌 대비.
+- 구성: 지급됐는지 먼저 확인 → 10가지 원인(verification, MPN·entrance counseling, 미수락, 등록 학점, SAP, 1학년 첫 대출 30일, 수업 10일 전 이전 지급 불가, hold, 기타 자격(연체·OBBBA 재패키징), 수표·계좌 오류) → 지급 후 14일 규정 → 담당 부서 표.
+- 1차 출처: **34 CFR 668.164**(14일 규정, 10일 전 최조 지급, 첫 대출 조기지급 금지), FSA Handbook 26-27 Vol.4 Ch.2(30일 지연), PSU 2곳, ASU KB, Fullerton 2026-27 PDF. FAQ 5.
+- 계산기와 짝 아님: "얼마"(계산기) vs "왜 안 오나"(블로그) 검색 의도가 다름.
+### 보강(본문, 보류 해제 페이지)
+- `tools/pell-lifetime-eligibility-calculator.html`: **"마지막 몇 % — 최종 학기 지급액"** 섹션+표(577%→$1,700, 583.474%→$1,222, 588% ¾-time→$887, 590% half-time→$739, 205%→395% 남음 7.9학기 $29,210). Bing 실제 쿼리(`583.474%`, `577%`, `588% at 3/4 time`, `used 205%`) 대응. 핵심: 500% 이후엔 남은 %가 상한이라 학점을 늘려도 지급액이 안 늘어남. FAQ 12개.
+- `tools/percentage-to-gpa-converter.html`(898단어, 428/0): **honors(+0.5)/AP·IB(+1.0) 가중 퍼센트표**(93/90 기준 12구간, D·F는 가중 없음 — UC 출처), 예시(AP 89 = B+ 3.3/4.3, 전부 honors·AP 90 평균, 60% = D−/D), FAQ 2개 추가, "가장 흔한 방법" 단정 표현 완화.
+- 표 모바일: Pell 신규표·기존 스케줄표 335px fit(기존 경고구간·복원 경로 표는 스크롤 패턴 유지).
+### 연결·검증
+- 블로그 카드(Student Loans 맨 앞), sitemap 117 → **118**, llms.txt, 인터링크 3곳(refund 계산기 — 보류 중 링크 예외, sap-calculator, how-does-financial-aid-work). Pell·퍼센트 lastmod 11-09.
+- 감사: 118 URL, 누락·깨진 링크·JSON-LD 오류·FAQ 불일치 0. 375/1280 신규 요소 넘침 0.
+
+## ★ 다음 세션이 확인/처리할 것
+1. 보강 효과 측정(2~3주 후, 체크리스트 61): pell-lifetime 기준선 1,505/25(1.66%), percentage-to-gpa 428/0.
+2. 다음 본문 보강 후보: weighted-gpa-calculator-ap-classes 572/0(2,611단어로 이미 큼 — 쿼리 `how much is a b+ worth weighted ap`·`what weighted gpa is b- average with an ap and 3 honors`가 본문에 이미 있으면 zero-click으로 분류), deans 3,052/10(10-20 보강 후 변화 미미 — 추가 처방 전 쿼리 재분석).
+3. 클러스터 14 다음: "Pell 받은 뒤 수강 취소 시 반환"은 기존 `does-withdrawing-a-class-affect-financial-aid`와 중복 가능 — 확인 후 판단. 대학원 GPA 클러스터: major GPA(num8ers·sourcetable 존재, 중간 경쟁) 보류.
+4. v35~37 항목 유지: 구글 재크롤링 신호, 자동이체 계산기 2027-01-01 만료 점검, 겨울학기·환불 블로그는 11~1월 성수기.
+
+## 2주 재작업 보류 현황 (11-09 기준)
+- 11-09까지: autopay 계산기, 이자율 가이드(오늘 해제)
+- 11-12까지: financial-aid-refund-calculator, last-60-credits-gpa-calculator
+- 11-16까지: parent-plus-denied-loan-calculator, does-financial-aid-cover-winter-session
+- **11-23까지: financial-aid-refund-not-received, pell-lifetime-eligibility-calculator, percentage-to-gpa-converter**
+
+---
+
+## [보존] 이전 문서 v37 본문
 # GPA Vault 인수인계 문서 v37 (2026-11-02 세션 — 주간: PLUS 거절 계산기 / 겨울학기 재정지원 블로그)
 
 이전 v36 문서를 대체함. v36 이하 본문은 아래에 그대로 보존. 금지 원칙·연락처·push 절차·보류 규칙은 v34 "먼저 확인할 것" 그대로 유효.
