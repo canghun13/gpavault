@@ -28,6 +28,11 @@
 3. 클러스터 14 다음: "Pell 받은 뒤 수강 취소 시 반환"은 기존 `does-withdrawing-a-class-affect-financial-aid`와 중복 가능 — 확인 후 판단. 대학원 GPA 클러스터: major GPA(num8ers·sourcetable 존재, 중간 경쟁) 보류.
 4. v35~37 항목 유지: 구글 재크롤링 신호, 자동이체 계산기 2027-01-01 만료 점검, 겨울학기·환불 블로그는 11~1월 성수기.
 
+## 11-09 추가 수정 (사용자 제보: Pell 계산기 모바일 결과표 깨짐)
+- 원인: 모바일 CSS가 모든 표를 `display:block`(가로 스크롤용)으로 바꾸면서 tbody가 내용 폭으로 줄어 표 테두리 안에 빈 띠가 생김. **사이트 전체 결과표·짧은 표 공통 문제**였음.
+- 수정: `style.css` 모바일 블록에 `table > tbody:only-child {display:table; width:100%}` 추가(thead 있는 표는 열 정렬 때문에 제외 — high-school-gpa 2개). 넓은 표의 가로 스크롤은 그대로 동작 확인.
+- 체크리스트 96. **표 검사 시 tbody 폭 = 표 폭인지도 볼 것**(scrollWidth 비교로는 '덜 차는' 문제를 못 잡음).
+
 ## 2주 재작업 보류 현황 (11-09 기준)
 - 11-09까지: autopay 계산기, 이자율 가이드(오늘 해제)
 - 11-12까지: financial-aid-refund-calculator, last-60-credits-gpa-calculator

@@ -685,6 +685,14 @@ footer {
     padding: 0.45rem 0.65rem !important;
     font-size: 0.78rem !important;
   }
+  /* With table{display:block}, the row group shrinks to its content and leaves an empty
+     strip inside the table border. Let a lone tbody fill the width (and still grow past it
+     when the content is wider, so horizontal scroll keeps working). Tables with a thead
+     are left alone so their columns stay aligned. */
+  table > tbody:only-child {
+    display: table !important;
+    width: 100% !important;
+  }
   /* Only show the "scroll for more" hint on narrow screens, right where
      table{} above actually goes scrollable — hidden by default on desktop. */
   .table-scroll-hint { display: block !important; }
